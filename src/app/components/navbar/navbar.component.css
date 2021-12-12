@@ -1,18 +1,46 @@
 .example-spacer {
-    flex: 1 1 auto;
+  flex: 1 1 auto;
 }
-.bg-black{
-    background:#303030 !important;
-    color:white;
+
+.bg-black {
+  background: white !important;
+  color: black;
 }
-.sidenav{
-    width: 200px;
-    height:100%;
-    background:#303030 !important;
+
+.sidenav {
+  width: 200px;
+  height: 100%;
+  background: white !important;
 }
-.sidenav-container{
-    height:100%;
+
+.sidenav-container {
+  height: 100%;
 }
-.text-white{
-    color:white !important;
+
+.text-white {
+  color: white !important;
+}
+.text-black{
+    color: black;
+}
+
+.logo {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 24px;
+  transition: all 0.1s ease;
+}
+
+@media only screen and (max-width: 768px) {
+    .logo {
+        font-weight: 600;
+        font-size: 22px;
+      }
+}
+
+@media only screen and (max-width: 320px) {
+    .logo {
+        font-weight: 600;
+        font-size: 20px;
+      }
 }
