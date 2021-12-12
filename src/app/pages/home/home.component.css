@@ -1,0 +1,24 @@
+.homepage-header{
+    position: relative;
+    margin: 0px;
+    padding: 0px;
+    height: 400px !important;
+    transition: all 0.3 ease;
+}
+.homepage-header img{
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover;
+    object-position:center center;
+    transition: all 0.3 ease;
+}
+@media only screen and (max-width: 320px) {
+    .homepage-header{
+        height: 300px !important;
+    }
+}
+@media only screen and (max-width: 768px) {
+    .homepage-header{
+        height: 350px !important;
+    }
+}
