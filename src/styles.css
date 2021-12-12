@@ -21,3 +21,55 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .accent{
     color:#E91E63 !important;
 }
+.mt-20{
+    margin-top:20px !important
+}
+.mt-10{
+    margin-top:10px !important;
+}
+.mt-5{
+    margin-top:5px !important;
+}
+.mb-5{
+    margin-bottom:5px !important;
+}
+.logo {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 24px;
+    transition: all 0.1s ease;
+  }
+  
+  @media only screen and (max-width: 768px) {
+      .logo {
+          font-weight: 600;
+          font-size: 22px;
+        }
+  }
+  
+  @media only screen and (max-width: 320px) {
+      .logo {
+          font-weight: 600;
+          font-size: 20px;
+        }
+  }
+.logo-sm {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    font-size: 18px;
+    transition: all 0.1s ease;
+}
+  
+@media only screen and (max-width: 768px) {
+    .logo-sm {
+        font-weight: 400;
+        font-size: 16px;
+    }
+}
+  
+@media only screen and (max-width: 320px) {
+    .logo-sm {
+        font-weight: 400;
+        font-size: 16px;
+    }
+}

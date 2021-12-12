@@ -33,7 +33,7 @@ export class NavbarComponent implements OnInit {
   openSignUpDialog(): void {
     const dialogRef = this.dialog.open(SignupDialogComponent, {
       width: '500px',
-      height: '600px'
+      height: '600px',
     });
   }
   

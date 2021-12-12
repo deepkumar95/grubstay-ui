@@ -1,38 +1,48 @@
 <div class="bootstrap-wrapper">
-    <div class="container">
+    <div style="margin:5px !important;">
       <div class="row">
-            <div class="col md-12 col-sm-12 col-xs-12 form-group text-center">
-                <div>
-                    <img src="../../../assets/loginicon.png" style="height:200px; width:200px;">
-                    <h2 class="accent">Login</h2>
+            <div class="col md-12 col-sm-12 col-xs-12 text-center">
+                <div class="col md-12 col-sm-12 col-xs-12 text-center">
+                    <h4>Login or Sign up</h4>
+                    <h3 class="mt-20">Welcome to <span class="logo-sm">GRUBSTAY</span></h3>
                 </div>
-                <div>
+                <div class="col md-12 col-sm-12 col-xs-12 text-center mt-20" style="line-height: 1.6;">
                     <form (ngSubmit)="login()">
                         <!-- username field -->
-                        <mat-form-field appearance="outline" class="full-width">
+                        <mat-form-field appearance="fill" class="full-width">
                             <mat-label>Username</mat-label>
                             <input 
                                 matInput
                                 type='text'
                                 name='username'
                                 [(ngModel)]="user.username"
-                                placeholder="Placeholder"
+                                placeholder="Name"
                                 required>
-                          </mat-form-field>
+                            </mat-form-field>
 
-                          <!-- password field -->
-                          <mat-form-field appearance="outline" class="full-width">
-                            <mat-label>Password</mat-label>
-                            <input 
-                                matInput
-                                type='text'
-                                name='password'
-                                [(ngModel)]="user.password"
-                                placeholder="Placeholder"
-                                required>
-                          </mat-form-field>
-                        <button type="submit" mat-raised-button color="accent">Login</button>
+                            <!-- password field -->
+                            <mat-form-field appearance="fill" class="full-width">
+                                <mat-label>Password</mat-label>
+                                <input 
+                                    matInput
+                                    type='password'
+                                    name='password'
+                                    [(ngModel)]="user.password"
+                                    placeholder="Password"
+                                    required>
+                                    <mat-hint class="mt-5 mb-5">We'll give you a call for when you choose any stay and added in the wishlist <u>Privacy Policy</u></mat-hint>
+                            </mat-form-field>
+                            <button type="submit" class="full-width mt-20" mat-raised-button color="accent">Login</button>
                     </form>
+                    <div class="full-width mt-10">
+                        <table>
+                            <tr>
+                                <td style="width:49%;"><hr style="border:1px solid black;"></td>
+                                <td style="vertical-align:middle; text-align: center">or</td>
+                                <td style="width:49%"><hr style="border:1px solid black;"></td>
+                            </tr>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
