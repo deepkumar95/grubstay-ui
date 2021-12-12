@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { MatDialog } from '@angular/material/dialog';
 import { LoginDialogComponent } from '../login-dialog/login-dialog.component';
+import { SignupDialogComponent } from '../signup-dialog/signup-dialog.component';
 
 @Component({
   selector: 'app-navbar',
@@ -24,7 +25,15 @@ export class NavbarComponent implements OnInit {
 
   openLoginDialog(): void {
     const dialogRef = this.dialog.open(LoginDialogComponent, {
-      width: '500px'
+      width: '500px',
+      height: '500px'
+    });
+  }
+
+  openSignUpDialog(): void {
+    const dialogRef = this.dialog.open(SignupDialogComponent, {
+      width: '500px',
+      height: '600px'
     });
   }
   

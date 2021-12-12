@@ -18,6 +18,8 @@ import {LayoutModule} from '@angular/cdk/layout';
 import {MatListModule} from '@angular/material/list';
 import { LoginDialogComponent } from './components/login-dialog/login-dialog.component';
 import {MatDialogModule} from '@angular/material/dialog';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { SignupDialogComponent } from './components/signup-dialog/signup-dialog.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +27,8 @@ import {MatDialogModule} from '@angular/material/dialog';
     NavbarComponent,
     FooterComponent,
     HomeComponent,
-    LoginDialogComponent
+    LoginDialogComponent,
+    SignupDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -40,7 +43,8 @@ import {MatDialogModule} from '@angular/material/dialog';
     MatIconModule,
     LayoutModule,
     MatListModule,
-    MatDialogModule
+    MatDialogModule,
+    MatSnackBarModule
   ],
   providers: [],
   bootstrap: [AppComponent]
