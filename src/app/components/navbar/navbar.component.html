@@ -1,17 +1,16 @@
-
 <mat-sidenav-container class="sidenav-container">
     <mat-sidenav #drawer class="sidenav" fixedInViewport="false"
         [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
         [mode]="(isHandset$ | async) ? 'over' : ''" >
       <mat-toolbar class="bg-black">Menu</mat-toolbar>
       <mat-list role="list">
-        <mat-list-item><a mat-button class="text-white" (click)="openLoginDialog()">Login</a></mat-list-item>
+        <mat-list-item><a mat-button class="text-black" (click)="openLoginDialog()">Login</a></mat-list-item>
         <mat-list-item><a mat-flat-button color="accent" (click)="openSignUpDialog()">Sign Up</a></mat-list-item>
       </mat-list>
     </mat-sidenav>
     <mat-sidenav-content>
       <mat-toolbar class="bg-black">
-          <span>GRUBSTAY</span>
+        <span class="logo">GRUBSTAY</span>
           <div class="example-spacer"></div>
         <div *ngIf="!(isHandset$ | async)">
             <a mat-button (click)="openLoginDialog()">Login</a>&nbsp;
@@ -27,5 +26,7 @@
         </button>
       </mat-toolbar>
       <!-- Add Content Here -->
+      <router-outlet></router-outlet>
+      <app-footer></app-footer>
     </mat-sidenav-content>
   </mat-sidenav-container>
