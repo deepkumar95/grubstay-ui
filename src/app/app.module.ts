@@ -20,6 +20,9 @@ import { LoginDialogComponent } from './components/login-dialog/login-dialog.com
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { SignupDialogComponent } from './components/signup-dialog/signup-dialog.component';
+import { LocationCarouselComponent } from './components/location-carousel/location-carousel.component';
+import { CarouselModule } from 'ngx-owl-carousel-o';
+import {MatCardModule} from '@angular/material/card';
 
 @NgModule({
   declarations: [
@@ -28,7 +31,8 @@ import { SignupDialogComponent } from './components/signup-dialog/signup-dialog.
     FooterComponent,
     HomeComponent,
     LoginDialogComponent,
-    SignupDialogComponent
+    SignupDialogComponent,
+    LocationCarouselComponent
   ],
   imports: [
     BrowserModule,
@@ -44,7 +48,9 @@ import { SignupDialogComponent } from './components/signup-dialog/signup-dialog.
     LayoutModule,
     MatListModule,
     MatDialogModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    CarouselModule,
+    MatCardModule
   ],
   providers: [],
   bootstrap: [AppComponent]
