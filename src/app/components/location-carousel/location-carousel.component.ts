@@ -36,12 +36,12 @@ export class LocationCarouselComponent implements OnInit {
   }
 
   slidesStore = [
-    {"id":"location1","alt":"location1","src":"../../../assets/imgs/banglore.png", "title":"Banglore",stayNo:3624},
-    {"id":"location1","alt":"location1","src":"../../../assets/imgs/banglore.png", "title":"Lucknow",stayNo:2456},
-    {"id":"location1","alt":"location1","src":"../../../assets/imgs/banglore.png", "title":"Delhi",stayNo:3500},
-    {"id":"location1","alt":"location1","src":"../../../assets/imgs/banglore.png", "title":"Gujrat",stayNo:1684},
-    {"id":"location1","alt":"location1","src":"../../../assets/imgs/banglore.png", "title":"Pune",stayNo:2486},
-    {"id":"location1","alt":"location1","src":"../../../assets/imgs/banglore.png", "title":"Kerla",stayNo:1426}
+    {"id":"location1","alt":"location1","src":"../../../assets/imgs/city/banglore.jpg", "title":"Banglore",stayNo:3624},
+    {"id":"location1","alt":"location1","src":"../../../assets/imgs/city/mumbai.jpg", "title":"Mumbai",stayNo:2456},
+    {"id":"location1","alt":"location1","src":"../../../assets/imgs/city/delhi.jpg", "title":"Delhi",stayNo:3500},
+    {"id":"location1","alt":"location1","src":"../../../assets/imgs/city/banglore.jpg", "title":"Gujrat",stayNo:1684},
+    {"id":"location1","alt":"location1","src":"../../../assets/imgs/city/pune.jpeg", "title":"Pune",stayNo:2486},
+    {"id":"location1","alt":"location1","src":"../../../assets/imgs/city/banglore.jpg", "title":"Kerla",stayNo:1426}
   ];
 
   constructor() { }
