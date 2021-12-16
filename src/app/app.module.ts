@@ -23,6 +23,7 @@ import { SignupDialogComponent } from './components/signup-dialog/signup-dialog.
 import { LocationCarouselComponent } from './components/location-carousel/location-carousel.component';
 import { CarouselModule } from 'ngx-owl-carousel-o';
 import {MatCardModule} from '@angular/material/card';
+import { StayCarouselComponent } from './components/stay-carousel/stay-carousel.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import {MatCardModule} from '@angular/material/card';
     HomeComponent,
     LoginDialogComponent,
     SignupDialogComponent,
-    LocationCarouselComponent
+    LocationCarouselComponent,
+    StayCarouselComponent
   ],
   imports: [
     BrowserModule,
