@@ -1,0 +1,24 @@
+.footer-section{
+    height:300px;
+}
+.wordspace5{
+    word-spacing: 2px;
+}
+.line{
+    height: 2px;
+    background:#E91E63;
+    width:50px;
+}
+.list-unstyled li{
+    margin: 0.3em 0em;
+}
+.list-unstyled li p{
+    color: gray;
+    font-size: 14px;
+}
+.suscribe-button{
+    background-color: #E91E63;
+}
+.blank-space{
+    height:100px;
+}
