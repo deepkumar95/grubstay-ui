@@ -3,7 +3,7 @@
   <img src="../../../assets/imgs/homepag-header.jpg" alt="homepage_header">
   <div class="overlay"></div>
   <div class="search-bar">
-    <input class="search-input" type="text" placeholder="Where you want to stay ?">
+    <input type="button" class="search-input" type="text" placeholder="Where you want to stay ?">
     <mat-icon class="search-icon">search</mat-icon>
   </div>
 </div>
@@ -39,24 +39,31 @@
 <div class="section-refrel">
   <div class="bootstrap-wrapper">
     <div class="container-fluid">
-        <div class="row">
-          <div class="col-md-12 col-sm-12 col-xs-12">
-            <div class="col-md-6 col-sm-6 col-xs-6">
-              <div class="refrel-content">
-                <h2 class="text-center">Refer A Friend</h2>
-                <h4 class="text-center">Earn upto 5000</h4>
-                <h6 class="text-center">Terms and Condition apply*</h6>
-              </div>
+      <mat-card class="refrel-part">
+        <div class="row ">
+          <div class="col-md-6 col-6 col-sm-6 col-xs-6">
+            <div class="refrel-content">
+              <h1 *ngIf="!(isHandset$ | async)"  class="text-center">Refer A Friend</h1>
+              <h3 *ngIf="isHandset$ | async">Refer A Friend</h3>
+              <h3 *ngIf="!(isHandset$ | async)" class="text-center">Earn upto 5000</h3>
+              <h4 *ngIf="(isHandset$ | async)" class="text-center">Earn upto 5000</h4>
+              <h4 *ngIf="!(isHandset$ | async)" class="text-center">Terms and Conditions apply*</h4>
+              <p *ngIf="(isHandset$ | async)" class="text-center">Terms and Conditions apply*</p>
             </div>
-            <div class="col-md-6 col-sm-6 col-xs-6">
-              <div class="refrel-img">
-                <img src="../../../assets/imgs/refer-a-friend.png" alt="refrel">
-              </div>
+          </div>
+          <div class="col-md-6 col-6 col-sm-6 col-xs-6">
+            <div class="refrel-img">
+              <img src="../../../assets/imgs/refer-a-friend.png" alt="refrel">
             </div>
           </div>
         </div>
+      </mat-card>
     </div>
   </div>
 </div>
 <!-- section-refrel-end -->
+<<<<<<< Updated upstream
 <app-footer></app-footer>
+=======
+<app-travel-nearby></app-travel-nearby>
+>>>>>>> Stashed changes

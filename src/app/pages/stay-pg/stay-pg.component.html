@@ -1,0 +1,146 @@
+<div *ngIf="isHandset$ | async">
+    <div class="bootstrap-wrapper">
+        <div class="container-fluid">
+            <div class="filter">
+                filters
+            </div>
+            <div class="location-heading">
+                <h3>Stays in HSR Layout</h3>
+                <p>1000 stays Available</p>
+            </div>
+        </div>
+        <mat-divider></mat-divider>
+        <div class="pg">
+            <div *ngFor="let pg of pgArray">
+                <div class="container-fluid">
+                    <div class="pg-card">
+                        <div class="row">
+                            <div class="col-4 col-md-4 col-sm-4 col-xs-4">
+                                <div class="pg-img">
+                                    <img src="{{pg.pgImg}}" alt="">
+                                </div>
+                            </div>
+                            <div class="col-6 col-md-6 col-sm-6 col-xs-6">
+                                <div class="pg-content">
+                                    <h4>{{pg.heading}}</h4>
+                                    <p>{{pg.location}}</p>
+                                </div>
+                                <div class="gender">
+                                    <div *ngIf="pg.gender=='male'" class="male"></div>
+                                    <div *ngIf="pg.gender=='female'" class="female"></div>
+                                    <div *ngIf="pg.gender=='both'" class="both">
+                                        <div class="male mr-10"><h5>Boys</h5></div>
+                                        <div class="female"><h5>Girls</h5></div>
+                                    </div>
+                                </div>
+                                <div class="distance">
+                                    <h5>Distance {{pg.distance}}</h5>
+                                </div>
+                                <div class="reviews">
+                                    <h5>Reviews {{pg.reviews}} <mat-icon style="color: #FFC83D;">star</mat-icon></h5>
+                                </div>
+                            </div>
+                            <div class="col-2 col-md-2 col-sm-2 col-xs-2">
+                                <div class="fav-icon">
+                                    <mat-icon [ngClass]="fav?'favorite':''">favorite</mat-icon>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="price-sec">
+                    <div class="price">
+                        <h5>Starting From*</h5>
+                        <h6>{{pg.price}} /monthly</h6>
+                    </div>
+                    <div class="contact">
+                        <button mat-raised-button>Contact</button>
+                    </div>
+                </div>
+                <mat-divider></mat-divider>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="!(isHandset$ | async)">
+    <div class="bootstrap-wrapper">
+        <div class="container">
+            <div style="margin-left:30px">
+                <div class="row">
+                    <div class="filter">
+                        filters
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="location-heading">
+                        <h3>Stays in HSR Layout</h3>
+                        <p>1000 stays Available</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <mat-divider></mat-divider>
+        <div class="pg-d">
+            <div class="container">
+                <div class="row">
+                    <div class="col-8">
+                        <div *ngFor="let pg of pgArray">
+                            <div class="container">
+                                <div class="pg-card-d">
+                                    <div class="row">
+                                        <div class="col-4 col-md-4 col-sm-4 col-xs-4">
+                                            <div class="pg-img-d">
+                                                <img src="{{pg.pgImg}}" alt="">
+                                            </div>
+                                        </div>
+                                        <div class="col-6 col-md-6 col-sm-6 col-xs-6">
+                                            <div class="pg-content-d">
+                                                <h3>{{pg.heading}}</h3>
+                                                <p>{{pg.location}}</p>
+                                            </div>
+                                            <div class="gender-d">
+                                                <div *ngIf="pg.gender=='male'" class="male-d"></div>
+                                                <div *ngIf="pg.gender=='female'" class="female-d"></div>
+                                                <div *ngIf="pg.gender=='both'" class="both-d">
+                                                    <div class="male-d mr-10"><h5>Boys</h5></div>
+                                                    <div class="female-d"><h5>Girls</h5></div>
+                                                </div>
+                                            </div>
+                                            <div class="distance-d">
+                                                <h4>Distance {{pg.distance}}</h4>
+                                            </div>
+                                            <div class="reviews-d">
+                                                <h4>Reviews {{pg.reviews}} <mat-icon style="color: #FFC83D;">star</mat-icon></h4>
+                                            </div>
+                                        </div>
+                                        <div class="col-2 col-md-2 col-sm-2 col-xs-2">
+                                            <div class="fav-icon-d" style="font-size: 40px;">
+                                                <mat-icon [ngClass]="fav?'favorite':''">favorite</mat-icon>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="container">
+                                <div class="price-sec-d">
+                                    <div class="price-d">
+                                        <h4>Starting From*</h4>
+                                        <h5>{{pg.price}} /monthly</h5>
+                                    </div>
+                                    <div class="contact-d">
+                                        <button mat-raised-button>Contact</button>
+                                    </div>
+                                </div>
+                                <mat-divider></mat-divider>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-4">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

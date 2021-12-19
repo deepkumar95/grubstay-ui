@@ -24,6 +24,10 @@ import { LocationCarouselComponent } from './components/location-carousel/locati
 import { CarouselModule } from 'ngx-owl-carousel-o';
 import {MatCardModule} from '@angular/material/card';
 import { StayCarouselComponent } from './components/stay-carousel/stay-carousel.component';
+import { TravelNearbyCarouselComponent } from './travel-nearby-carousel/travel-nearby-carousel.component';
+import { TravelNearbyComponent } from './components/travel-nearby/travel-nearby.component';
+import { StayPgComponent } from './pages/stay-pg/stay-pg.component';
+import {MatDividerModule} from '@angular/material/divider';
 
 @NgModule({
   declarations: [
@@ -34,7 +38,10 @@ import { StayCarouselComponent } from './components/stay-carousel/stay-carousel.
     LoginDialogComponent,
     SignupDialogComponent,
     LocationCarouselComponent,
-    StayCarouselComponent
+    StayCarouselComponent,
+    TravelNearbyCarouselComponent,
+    TravelNearbyComponent,
+    StayPgComponent
   ],
   imports: [
     BrowserModule,
@@ -52,7 +59,8 @@ import { StayCarouselComponent } from './components/stay-carousel/stay-carousel.
     MatDialogModule,
     MatSnackBarModule,
     CarouselModule,
-    MatCardModule
+    MatCardModule,
+    MatDividerModule
   ],
   providers: [],
   bootstrap: [AppComponent]

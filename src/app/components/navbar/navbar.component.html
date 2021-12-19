@@ -2,7 +2,7 @@
     <mat-sidenav #drawer class="sidenav" fixedInViewport="false"
         [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
         [mode]="(isHandset$ | async) ? 'over' : ''" >
-      <mat-toolbar>Menu</mat-toolbar>
+      <mat-toolbar><span class="logo">GRUBSTAY</span></mat-toolbar>
       <mat-list role="list">
         <mat-list-item><a mat-button class="text-black" (click)="openLoginDialog()">Login</a></mat-list-item>
         <mat-list-item><a mat-flat-button color="accent" (click)="openSignUpDialog()">Sign Up</a></mat-list-item>

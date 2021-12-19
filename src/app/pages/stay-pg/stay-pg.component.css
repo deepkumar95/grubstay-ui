@@ -1,0 +1,132 @@
+.filter{
+    height: 40px;
+    display: flex;
+    align-items:center;
+}
+.location-heading{
+    height: 60px;
+    line-height: 1.4;
+    margin-top: .5rem;
+    margin-bottom: 1px;
+}
+.stay-divider{
+    margin: 0px;
+    padding: 0px;
+}
+.pg-card{
+    margin: 1em 0em;
+}
+.pg-img{
+    position: relative;
+    align-items: center;
+}
+.pg-img img{
+    height: 150px;
+    width: 130px;
+}
+.pg-content{
+    margin-top: .5rem;
+    margin-left: 1.2rem;
+
+}
+.favorite{
+    color: red;
+}
+.gender{
+    margin-top: .5rem;
+    margin-left: 1.2rem;
+}
+.gender .both{
+    display: flex;
+}
+.male{
+    background-color: #03989E;
+    color: white;
+    border-radius: 3px;
+    padding: 5px 10px;
+}
+.female{
+    background-color: #EB4A95;
+    color: white;
+    border-radius: 3px;
+    padding: 5px 10px;
+}
+.distance{
+    margin-top: .5rem;
+    margin-left: 1.2rem;
+}
+.reviews{
+    margin-top: 5px;
+    margin-left: 1.2rem;
+}
+.price-sec{
+    display: flex;
+    background-color: black;
+    color: white;
+    padding: .5rem 1rem;
+    line-height: 1.4;
+    align-items: center;
+}
+.price-sec .price{
+    margin-right: auto;
+}
+
+/* for desktop */
+.pg-card-d{
+    margin: 1em 0em;
+}
+.pg-img-d{
+    position: relative;
+    align-items: center;
+}
+.pg-img-d img{
+    height: 200px;
+    width: 200px;
+}
+.pg-content-d{
+    margin-top: .5rem;
+    margin-left: 1.2rem;
+    line-height: 2;
+
+}
+.favorite-d{
+    color: red;
+}
+.gender-d{
+    margin-top: .5rem;
+    margin-left: 1.2rem;
+}
+.gender-d .both-d{
+    display: flex;
+}
+.male-d{
+    background-color: #03989E;
+    color: white;
+    border-radius: 3px;
+    padding: 5px 10px;
+}
+.female-d{
+    background-color: #EB4A95;
+    color: white;
+    border-radius: 3px;
+    padding: 5px 10px;
+}
+.distance-d{
+    margin-top: .5rem;
+    margin-left: 1.2rem;
+}
+.reviews-d{
+    margin-top: 5px;
+    margin-left: 1.2rem;
+}
+.price-sec-d{
+    display: flex;
+    background-color: black;
+    color: white;
+    padding: .5rem 1rem;
+    line-height: 2;
+    align-items: center;
+}
+.price-sec-d .price-d{
+    margin-right: auto;
+}

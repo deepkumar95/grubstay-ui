@@ -114,18 +114,39 @@
 /* section refrel */
 .section-refrel{
   margin-top: 2em;
-  height: 280px;
 } 
-.refrel-card{
-
+.refrel-part{
+  background-color: #9B4FE6;
+  border-radius: 4px;
+  color: white;
+  height: 285px;
+  padding: 2px;
 }
 .refrel-content{
-  line-height: 1.6;
-  background-color: red;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  line-height: 1.5;
 }
+
+/* .refrel-content h1{
+  font-size:2.4rem;
+} */
+
 .refrel-img{
-  background-color: green;
+  height:280px;
 }
 .refrel-img img{
-  height: 140px;
+  width:100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+@media screen and(max-width:400px){
+  .refrel-content h1{
+    font-size: 21px;
+    
+  }
 }

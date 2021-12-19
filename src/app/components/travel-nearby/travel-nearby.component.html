@@ -1,0 +1,17 @@
+<div class="bootstrap-wrapper">
+    <div class="container-fluid states-slider3">
+        <h2>Travel Nearby</h2>
+        <owl-carousel-o [options]="customOptions3">
+            <ng-container *ngFor="let slide of travelStore">
+              <ng-template [width]="100" carouselSlide [id]="slide.id">
+                <mat-card class="example-card3">
+                    <div class="img-sec3">
+                        <img [src]="slide.src" [alt]="slide.alt" [title]="slide.title">
+                    </div>
+                    <h4 class="text-center travel-nearby-name">{{slide.title}}</h4>
+                </mat-card>
+              </ng-template>
+            </ng-container>
+        </owl-carousel-o>
+    </div>
+</div>

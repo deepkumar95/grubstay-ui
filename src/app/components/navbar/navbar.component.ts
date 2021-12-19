@@ -13,6 +13,7 @@ import { SignupDialogComponent } from '../signup-dialog/signup-dialog.component'
 })
 export class NavbarComponent implements OnInit {
 
+
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
       map(result => result.matches)
