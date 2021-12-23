@@ -1,0 +1,74 @@
+<div *ngIf="isHandset$ | async">
+    <div class="bootsrap-wrapper">
+        <section class="pg-header">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="pg-slider">
+    
+                    </div>
+                </div>
+                <div class="row" style="padding: 8px;">
+                    <div class="pg-content">
+                        <div class="row"><h4>Prasthan PG</h4></div>
+                        <div class="row"><small>SRI SAI BALAJI PG FOR MEN'S, 18TH CROSS ROAD, NEAR UNION BANK ATM, SECTOR 6, HSR LAYOUT</small></div>
+                        <div class="row mt-2">
+                            <div class="col-5 d-flex align-items-center">
+                                <h4>5500/-</h4>
+                            </div>
+                            <div class="col-7 d-flex align-items-center">
+                                <span><button mat-icon-button (click)="toggleFav()"><mat-icon *ngIf="!fav">favorite_border</mat-icon><mat-icon class="favorite" *ngIf="fav">favorite</mat-icon></button>&nbsp;</span>Save &nbsp;&nbsp;
+                                <span><button mat-icon-button (click)="sharePg()"><mat-icon>share</mat-icon></button>&nbsp;</span>Share
+                            </div>
+                            <!-- <div class="col-4 d-flex align-items-center">
+                                <span><button mat-icon-button (click)="toggleFav()"><mat-icon *ngIf="!fav">favorite_border</mat-icon><mat-icon class="favorite" *ngIf="fav">favorite</mat-icon></button>&nbsp;</span>Save
+                            </div> -->
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <mat-divider></mat-divider>
+                </div>
+            </div>
+        </section>
+        <section class="pg-amenities" style="padding: 8px;">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <h5>Amenities & Services</h5>
+                </div>
+                <div class="row">
+                    <div *ngFor="let item of pgAmen" class="col-3 mb-2">
+                        <div class="row">
+                            <mat-card class="pg-fac mx-auto"></mat-card>
+                        </div>
+                        <div class="row">
+                            <small class="pg-fac-name mt-1">{{item.name}}</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <mat-divider></mat-divider>
+                </div>
+            </div>
+        </section>
+        <section class="pg-amenities" style="padding: 8px;">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <h5>Room Facilities</h5>
+                </div>
+                <div class="row">
+                    <div *ngFor="let item of pgRoomFac" class="col-3 mb-2">
+                        <div class="row">
+                            <mat-card class="pg-fac mx-auto"></mat-card>
+                        </div>
+                        <div class="row">
+                            <small class="pg-fac-name mt-1">{{item.name}}</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <mat-divider></mat-divider>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>

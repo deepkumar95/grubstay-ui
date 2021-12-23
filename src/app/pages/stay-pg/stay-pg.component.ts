@@ -2,6 +2,8 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { SharedService } from 'src/app/services/helper/shared.service';
+import { PgService } from 'src/app/services/pg.service';
 
 @Component({
   selector: 'app-stay-pg',
@@ -27,9 +29,25 @@ export class StayPgComponent implements OnInit {
       map(result => result.matches)
   );
 
-  constructor(private breakpointObserver:BreakpointObserver) { }
+  constructor(private breakpointObserver:BreakpointObserver, private _shared:SharedService, private _pgService:PgService) { }
 
   ngOnInit(): void {
+    var self = this;
+    self.loadPGData(self._shared.sharedData);  
+  } 
+
+  private loadPGData(obj:any){
+    var self = this;
+    // self._pgService.getPGData(obj).subscribe((response:any)=>{
+    //   console.log(response);
+    // },(error:any)=>{
+    //   console.log(error);
+    // })
+  }
+
+  public toggleFav(){
+    var self = this;
+    self.fav = self.fav ? false : true;
   }
 
 }

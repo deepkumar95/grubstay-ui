@@ -2,9 +2,11 @@
 
   <img src="../../../assets/imgs/homepag-header.jpg" alt="homepage_header">
   <div class="overlay"></div>
-  <div class="search-bar">
-    <input type="button" class="search-input" type="text" placeholder="Where you want to stay ?">
-    <mat-icon class="search-icon">search</mat-icon>
+  <div *ngIf="(isHandset$ | async)" class="search-bar">
+    <button [routerLink]="['/search-stay']" routerLinkActive="router-link-active"  mat-icon-button>Where you want to stay ? &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<mat-icon class="search-icon">search</mat-icon></button>
+  </div>
+  <div *ngIf="!(isHandset$ | async)" class="search-bar">
+    <button (click)="openSearchDialog()" routerLinkActive="router-link-active"  mat-icon-button>Where you want to stay ? &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<mat-icon class="search-icon">search</mat-icon></button>
   </div>
 </div>
 <app-location-carousel></app-location-carousel>
@@ -16,13 +18,13 @@
         <div class="col-md-12 col-sm-12 col-xs-12">
           <mat-card id="adv1-card" class="adv1-card">
             <div class="adv1-content">
-              <h4 class="text-center">Looking for Stay ?</h4>
-              <h5 class="text-center">Get the stay that are Affordabele with all
+              <h5 class="text-center">Looking for Stay ?</h5>
+              <h6 class="text-center">Get the stay that are Affordabele with all
                 <br>
                 the Amenities so that you can enjoy
                 <br>
                 your Comfort Zone.
-              </h5>
+              </h6>
             </div>
             <div class="adv1-img-sec">
               <img src="../../../assets/imgs/adv1.jpeg" alt="adv1_img">
@@ -62,8 +64,5 @@
   </div>
 </div>
 <!-- section-refrel-end -->
-<<<<<<< Updated upstream
-<app-footer></app-footer>
-=======
 <app-travel-nearby></app-travel-nearby>
->>>>>>> Stashed changes
+<app-footer></app-footer>

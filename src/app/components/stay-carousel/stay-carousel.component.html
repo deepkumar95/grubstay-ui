@@ -1,6 +1,6 @@
 <div class="bootstrap-wrapper">
     <div class="container-fluid states-slider2">
-        <h2>Explore Your Stay</h2>
+        <h4>Explore Your Stay</h4>
         <owl-carousel-o [options]="customOptions2">
             <ng-container *ngFor="let slide of stayStore">
               <ng-template [width]="100" carouselSlide [id]="slide.id">
@@ -8,7 +8,7 @@
                     <div class="img-sec2">
                         <img [src]="slide.src" [alt]="slide.alt" [title]="slide.title">
                     </div>
-                    <h4 class="text-center city-name2">{{slide.title}}</h4>
+                    <h6 class="text-center city-name2">{{slide.title}}</h6>
                 </mat-card>
               </ng-template>
             </ng-container>

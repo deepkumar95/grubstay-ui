@@ -5,7 +5,7 @@
                 filters
             </div>
             <div class="location-heading">
-                <h3>Stays in HSR Layout</h3>
+                <h5>Stays in HSR Layout</h5>
                 <p>1000 stays Available</p>
             </div>
         </div>
@@ -22,27 +22,27 @@
                             </div>
                             <div class="col-6 col-md-6 col-sm-6 col-xs-6">
                                 <div class="pg-content">
-                                    <h4>{{pg.heading}}</h4>
+                                    <h6>{{pg.heading}}</h6>
                                     <p>{{pg.location}}</p>
                                 </div>
                                 <div class="gender">
                                     <div *ngIf="pg.gender=='male'" class="male"></div>
                                     <div *ngIf="pg.gender=='female'" class="female"></div>
                                     <div *ngIf="pg.gender=='both'" class="both">
-                                        <div class="male mr-10"><h5>Boys</h5></div>
-                                        <div class="female"><h5>Girls</h5></div>
+                                        <div class="male mr-10"><h7>Boys</h7></div>
+                                        <div class="female"><h7>Girls</h7></div>
                                     </div>
                                 </div>
                                 <div class="distance">
-                                    <h5>Distance {{pg.distance}}</h5>
+                                    <h7>Distance {{pg.distance}}</h7>
                                 </div>
                                 <div class="reviews">
-                                    <h5>Reviews {{pg.reviews}} <mat-icon style="color: #FFC83D;">star</mat-icon></h5>
+                                    <h7>Reviews {{pg.reviews}} <mat-icon style="color: #FFC83D;">star</mat-icon></h7>
                                 </div>
                             </div>
                             <div class="col-2 col-md-2 col-sm-2 col-xs-2">
                                 <div class="fav-icon">
-                                    <mat-icon [ngClass]="fav?'favorite':''">favorite</mat-icon>
+                                    <button mat-icon-button (click)="toggleFav()"><mat-icon *ngIf="!fav">favorite_border</mat-icon><mat-icon class="favorite" *ngIf="fav">favorite</mat-icon></button>
                                 </div>
                             </div>
                         </div>
@@ -50,8 +50,8 @@
                 </div>
                 <div class="price-sec">
                     <div class="price">
-                        <h5>Starting From*</h5>
-                        <h6>{{pg.price}} /monthly</h6>
+                        <h6>Starting From*</h6>
+                        <h7>{{pg.price}} /monthly</h7>
                     </div>
                     <div class="contact">
                         <button mat-raised-button>Contact</button>
@@ -74,7 +74,7 @@
                 </div>
                 <div class="row">
                     <div class="location-heading">
-                        <h3>Stays in HSR Layout</h3>
+                        <h5>Stays in HSR Layout</h5>
                         <p>1000 stays Available</p>
                     </div>
                 </div>
@@ -96,7 +96,7 @@
                                         </div>
                                         <div class="col-6 col-md-6 col-sm-6 col-xs-6">
                                             <div class="pg-content-d">
-                                                <h3>{{pg.heading}}</h3>
+                                                <h5>{{pg.heading}}</h5>
                                                 <p>{{pg.location}}</p>
                                             </div>
                                             <div class="gender-d">
@@ -108,10 +108,10 @@
                                                 </div>
                                             </div>
                                             <div class="distance-d">
-                                                <h4>Distance {{pg.distance}}</h4>
+                                                <h7>Distance {{pg.distance}}</h7>
                                             </div>
                                             <div class="reviews-d">
-                                                <h4>Reviews {{pg.reviews}} <mat-icon style="color: #FFC83D;">star</mat-icon></h4>
+                                                <h7>Reviews {{pg.reviews}} <mat-icon style="color: #FFC83D;">star</mat-icon></h7>
                                             </div>
                                         </div>
                                         <div class="col-2 col-md-2 col-sm-2 col-xs-2">
@@ -125,8 +125,8 @@
                             <div class="container">
                                 <div class="price-sec-d">
                                     <div class="price-d">
-                                        <h4>Starting From*</h4>
-                                        <h5>{{pg.price}} /monthly</h5>
+                                        <h6>Starting From*</h6>
+                                        <h7>{{pg.price}} /monthly</h7>
                                     </div>
                                     <div class="contact-d">
                                         <button mat-raised-button>Contact</button>

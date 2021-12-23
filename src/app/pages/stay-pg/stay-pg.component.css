@@ -5,9 +5,7 @@
 }
 .location-heading{
     height: 60px;
-    line-height: 1.4;
-    margin-top: .5rem;
-    margin-bottom: 1px;
+    
 }
 .stay-divider{
     margin: 0px;
@@ -21,19 +19,16 @@
     align-items: center;
 }
 .pg-img img{
-    height: 150px;
-    width: 130px;
+    height: 170px;
+    width: 140px;
 }
 .pg-content{
-    margin-top: .5rem;
     margin-left: 1.2rem;
-
 }
 .favorite{
     color: red;
 }
 .gender{
-    margin-top: .5rem;
     margin-left: 1.2rem;
 }
 .gender .both{
@@ -52,11 +47,10 @@
     padding: 5px 10px;
 }
 .distance{
-    margin-top: .5rem;
+    margin-top: .2rem;
     margin-left: 1.2rem;
 }
 .reviews{
-    margin-top: 5px;
     margin-left: 1.2rem;
 }
 .price-sec{
@@ -84,16 +78,13 @@
     width: 200px;
 }
 .pg-content-d{
-    margin-top: .5rem;
     margin-left: 1.2rem;
     line-height: 2;
-
 }
 .favorite-d{
     color: red;
 }
 .gender-d{
-    margin-top: .5rem;
     margin-left: 1.2rem;
 }
 .gender-d .both-d{

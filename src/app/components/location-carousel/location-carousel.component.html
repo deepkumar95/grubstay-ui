@@ -1,6 +1,6 @@
 <div class="bootstrap-wrapper">
     <div class="container-fluid states-slider">
-        <h2>Cities Nearby</h2>
+        <h4>Cities Nearby</h4>
         <owl-carousel-o [options]="customOptions">
             <ng-container *ngFor="let slide of slidesStore">
               <ng-template [width]="100" carouselSlide [id]="slide.id">
@@ -8,8 +8,8 @@
                     <div class="img-sec">
                         <img [src]="slide.src" [alt]="slide.alt" [title]="slide.title">
                     </div>
-                    <h4 class="text-center city-name">{{slide.title}}</h4>
-                    <p class="text-center stays-no">{{slide.stayNo}}</p>
+                    <h6 class="text-center city-name">{{slide.title}}</h6>
+                    <p class="text-center stays-no">{{slide.stayNo}} Stays</p>
                 </mat-card>
               </ng-template>
             </ng-container>
