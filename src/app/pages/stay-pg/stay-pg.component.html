@@ -17,12 +17,12 @@
                         <div class="row">
                             <div class="col-4 col-md-4 col-sm-4 col-xs-4">
                                 <div class="pg-img">
-                                    <img src="{{pg.pgImg}}" alt="">
+                                    <img [routerLink]="['/pg/1']" routerLinkActive="router-link-active"  src="{{pg.pgImg}}" alt="">
                                 </div>
                             </div>
                             <div class="col-6 col-md-6 col-sm-6 col-xs-6">
                                 <div class="pg-content">
-                                    <h6>{{pg.heading}}</h6>
+                                    <h6 [routerLink]="['/pg/1']" routerLinkActive="router-link-active" >{{pg.heading}}</h6>
                                     <p>{{pg.location}}</p>
                                 </div>
                                 <div class="gender">
@@ -91,12 +91,12 @@
                                     <div class="row">
                                         <div class="col-4 col-md-4 col-sm-4 col-xs-4">
                                             <div class="pg-img-d">
-                                                <img src="{{pg.pgImg}}" alt="">
+                                                <img [routerLink]="['/pg/1']" routerLinkActive="router-link-active"  src="{{pg.pgImg}}" alt="">
                                             </div>
                                         </div>
                                         <div class="col-6 col-md-6 col-sm-6 col-xs-6">
                                             <div class="pg-content-d">
-                                                <h5>{{pg.heading}}</h5>
+                                                <h5 style="cursor: pointer;" [routerLink]="['/pg/1']" routerLinkActive="router-link-active" >{{pg.heading}}</h5>
                                                 <p>{{pg.location}}</p>
                                             </div>
                                             <div class="gender-d">
@@ -116,7 +116,7 @@
                                         </div>
                                         <div class="col-2 col-md-2 col-sm-2 col-xs-2">
                                             <div class="fav-icon-d" style="font-size: 40px;">
-                                                <mat-icon [ngClass]="fav?'favorite':''">favorite</mat-icon>
+                                                <button mat-icon-button (click)="toggleFav()"><mat-icon *ngIf="!fav">favorite_border</mat-icon><mat-icon class="favorite" *ngIf="fav">favorite</mat-icon></button>
                                             </div>
                                         </div>
                                     </div>
