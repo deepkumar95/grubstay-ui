@@ -34,6 +34,7 @@ import { PgComponent } from './pages/pg/pg.component';
 import { SearchDialogComponent } from './components/search-dialog/search-dialog.component';
 import { LazyLoadImageModule } from 'ng-lazyload-image';
 import { AdminDashboardComponent } from './pages/admin-dashboard/admin-dashboard.component';
+import { AdminSidebarComponent } from './pages/admin-dashboard/admin-components/admin-sidebar/admin-sidebar.component';
 
 @NgModule({
   declarations: [
@@ -51,6 +52,7 @@ import { AdminDashboardComponent } from './pages/admin-dashboard/admin-dashboard
     PgComponent,
     SearchDialogComponent,
     AdminDashboardComponent,
+    AdminSidebarComponent,
   ],
   imports: [
     BrowserModule,
