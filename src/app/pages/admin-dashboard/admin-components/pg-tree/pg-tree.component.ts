@@ -1,16 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 import {FlatTreeControl} from '@angular/cdk/tree';
 import {MatTreeFlatDataSource, MatTreeFlattener} from '@angular/material/tree';
+import { SharedService } from 'src/app/services/helper/shared.service';
+import { Router } from '@angular/router';
 
 interface PGNode {
   name: string;
+  icon: string;
   children?: PGNode[];
 }
 
 const TREE_DATA: PGNode[] = [
   {
     name: 'Paying Guest',
-    children: [{name: 'View PG'}, {name: 'Add PG'}],
+    icon:'',
+    children: [{name: 'View PG',icon:'remove_red_eye'}, {name: 'Add PG',icon:'add'}],
   }
 ];
 
@@ -32,6 +36,7 @@ export class PgTreeComponent implements OnInit {
     return {
       expandable: !!node.children && node.children.length > 0,
       name: node.name,
+      icon:node.icon,
       level: level,
     };
   };
@@ -50,12 +55,22 @@ export class PgTreeComponent implements OnInit {
 
   dataSource = new MatTreeFlatDataSource(this.treeControl, this.treeFlattener);
 
-  constructor() { 
+  constructor(private _shared:SharedService,private _route:Router) { 
     this.dataSource.data = TREE_DATA;
   }
   hasChild = (_: number, node: ExampleFlatNode) => node.expandable;
 
   ngOnInit(): void {
+  }
+
+  navigateTo(item:any){
+    this._shared.headerTitleSubject.next(item);
+    if(item === 'View PG'){
+      this._route.navigate(['/admin/view-pg']);
+    }
+    if(item === 'Add PG'){
+      this._route.navigate(['/admin/add-pg']);
+    }
   }
 
 }

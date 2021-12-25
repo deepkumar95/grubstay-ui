@@ -9,13 +9,14 @@ import { SharedService } from 'src/app/services/helper/shared.service';
 })
 export class AdminSidebarComponent implements OnInit {
 
-  constructor(private _shared:SharedService) { }
+  constructor(private _shared:SharedService,private _route:Router) { }
 
   ngOnInit(): void {
   }
 
   navigateTo(url:string, title:string){
     this._shared.headerTitleSubject.next(title);
+    this._route.navigate([url]);
   }
 
 }
