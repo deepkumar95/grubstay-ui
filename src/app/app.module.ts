@@ -33,6 +33,7 @@ import {HttpClientModule} from '@angular/common/http';
 import { PgComponent } from './pages/pg/pg.component';
 import { SearchDialogComponent } from './components/search-dialog/search-dialog.component';
 import { LazyLoadImageModule } from 'ng-lazyload-image';
+import { AdminDashboardComponent } from './pages/admin-dashboard/admin-dashboard.component';
 
 @NgModule({
   declarations: [
@@ -49,6 +50,7 @@ import { LazyLoadImageModule } from 'ng-lazyload-image';
     SearchStayComponent,
     PgComponent,
     SearchDialogComponent,
+    AdminDashboardComponent,
   ],
   imports: [
     BrowserModule,
