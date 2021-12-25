@@ -4,6 +4,10 @@
         <button (click)="navigateTo('/admin/','All Details')" mat-list-item >
             <mat-icon mat-list-icon>home</mat-icon> Home
         </button>
+        <app-location-tree></app-location-tree>
         <app-pg-tree></app-pg-tree>
+        <button (click)="logout()" mat-list-item >
+            <mat-icon mat-list-icon>logout</mat-icon> Logout
+        </button>
     </mat-action-list>
 </mat-card>

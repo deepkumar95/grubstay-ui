@@ -42,6 +42,18 @@ const routes: Routes = [
       {
         path:'view-pg',
         component:ViewPgComponent
+      },
+      {
+        path:'city',
+        component:ViewPgComponent
+      },
+      {
+        path:'location',
+        component:ViewPgComponent
+      },
+      {
+        path:'sub-location',
+        component:ViewPgComponent
       }
     ]
   },

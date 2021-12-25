@@ -40,6 +40,7 @@ import { AddPgComponent } from './pages/admin-dashboard/admin-components/add-pg/
 import {MatTreeModule} from '@angular/material/tree';
 import { PgTreeComponent } from './pages/admin-dashboard/admin-components/pg-tree/pg-tree.component';
 import { ViewPgComponent } from './pages/admin-dashboard/admin-components/view-pg/view-pg.component';
+import { LocationTreeComponent } from './pages/admin-dashboard/admin-components/location-tree/location-tree.component';
 
 @NgModule({
   declarations: [
@@ -62,6 +63,7 @@ import { ViewPgComponent } from './pages/admin-dashboard/admin-components/view-p
     AddPgComponent,
     PgTreeComponent,
     ViewPgComponent,
+    LocationTreeComponent,
   ],
   imports: [
     BrowserModule,

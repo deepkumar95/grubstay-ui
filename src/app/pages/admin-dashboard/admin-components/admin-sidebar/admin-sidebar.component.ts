@@ -18,5 +18,8 @@ export class AdminSidebarComponent implements OnInit {
     this._shared.headerTitleSubject.next(title);
     this._route.navigate([url]);
   }
+  logout(){
+    alert('logout')
+  }
 
 }

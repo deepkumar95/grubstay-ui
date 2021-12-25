@@ -2,7 +2,19 @@
     max-width: 400px;
 }
   
-  .example-header-image {
-    background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+  .example-header-image-location {
+    background-image: url('../../../../../assets/imgs/gps.png');
+    background-size: cover;
+  }
+  .example-header-image-pg {
+    background-image: url('../../../../../assets/imgs/pg.png');
+    background-size: cover;
+  }
+  .example-header-image-flat {
+    background-image: url('../../../../../assets/imgs/flat.png');
+    background-size: cover;
+  }
+  .example-header-image-room {
+    background-image: url('../../../../../assets/imgs/room.png');
     background-size: cover;
   }
