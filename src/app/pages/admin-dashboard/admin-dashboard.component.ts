@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SharedService } from 'src/app/services/helper/shared.service';
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -7,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminDashboardComponent implements OnInit {
 
-  constructor() { }
+  headerTitle:any = 'All Details';
+  
+  constructor(public _shared:SharedService) { }
 
   ngOnInit(): void {
+    this._shared.headerTitleSubject.asObservable().subscribe(data=>{
+      this.headerTitle = data;
+    })
   }
 
 }

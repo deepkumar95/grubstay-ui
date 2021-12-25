@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AddPgComponent } from './pages/admin-dashboard/admin-components/add-pg/add-pg.component';
+import { AdminMainComponent } from './pages/admin-dashboard/admin-components/admin-main/admin-main.component';
 import { AdminDashboardComponent } from './pages/admin-dashboard/admin-dashboard.component';
 import { HomeComponent } from './pages/home/home.component';
 import { PgComponent } from './pages/pg/pg.component';
@@ -27,7 +29,16 @@ const routes: Routes = [
   {
     path:"admin",
     component:AdminDashboardComponent,
-    pathMatch:'full'
+    children:[
+      {
+        path:'',
+        component:AdminMainComponent
+      },
+      {
+        path:'add-pg',
+        component:AddPgComponent
+      }
+    ]
   },
 ];
 

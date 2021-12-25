@@ -2,18 +2,13 @@
     <div class="container-fluid mt-20">
         <div class="row">
             <div class="col-3">
-                <mat-card style="overflow: scroll; height: 88vh; overflow-x: hidden;">
-                    <mat-action-list>
-                        <h1 matSubheader>Menu</h1>
-                        <!--<button mat-list-item >
-                            <mat-icon mat-list-icon>home</mat-icon> Home
-                        </button> -->
-                        <app-admin-sidebar></app-admin-sidebar>
-                    </mat-action-list>
-                </mat-card>
+                <app-admin-sidebar></app-admin-sidebar>
             </div>
             <div class="col-9">
-                main section
+                <h6 class="mt-10">{{headerTitle}}</h6>
+                <div style="height: 84vh; overflow: scroll; overflow-x: hidden;">
+                    <router-outlet></router-outlet>
+                </div>
             </div>
         </div>
     </div>

@@ -1,10 +1,12 @@
-<mat-nav-list>
-    <mat-list-item *ngFor="let link of links">
-        <div class="d-flex align-items-center">
-            <button mat-icon-button (click)="showInfo(link)">
-                <mat-icon>home</mat-icon>
-                <a href="...">{{link.link}}</a>
-             </button>
-        </div>
-    </mat-list-item>
-  </mat-nav-list>
+<mat-card style="overflow: scroll; height: 88vh; overflow-x: hidden;">
+    <mat-action-list>
+        <h1 matSubheader>Admin Dashboard</h1>
+        <button (click)="navigateTo('/admin/','All Details')" mat-list-item >
+            <mat-icon mat-list-icon>home</mat-icon> Home
+        </button>
+        <app-pg-tree></app-pg-tree>
+        <button (click)="navigateTo('/admin/add-pg/','Add PG')" mat-list-item >
+            <mat-icon mat-list-icon>add</mat-icon> Add PG
+        </button>
+    </mat-action-list>
+</mat-card>

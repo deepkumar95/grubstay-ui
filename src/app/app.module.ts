@@ -35,6 +35,10 @@ import { SearchDialogComponent } from './components/search-dialog/search-dialog.
 import { LazyLoadImageModule } from 'ng-lazyload-image';
 import { AdminDashboardComponent } from './pages/admin-dashboard/admin-dashboard.component';
 import { AdminSidebarComponent } from './pages/admin-dashboard/admin-components/admin-sidebar/admin-sidebar.component';
+import { AdminMainComponent } from './pages/admin-dashboard/admin-components/admin-main/admin-main.component';
+import { AddPgComponent } from './pages/admin-dashboard/admin-components/add-pg/add-pg.component';
+import {MatTreeModule} from '@angular/material/tree';
+import { PgTreeComponent } from './pages/admin-dashboard/admin-components/pg-tree/pg-tree.component';
 
 @NgModule({
   declarations: [
@@ -53,6 +57,9 @@ import { AdminSidebarComponent } from './pages/admin-dashboard/admin-components/
     SearchDialogComponent,
     AdminDashboardComponent,
     AdminSidebarComponent,
+    AdminMainComponent,
+    AddPgComponent,
+    PgTreeComponent,
   ],
   imports: [
     BrowserModule,
@@ -74,7 +81,8 @@ import { AdminSidebarComponent } from './pages/admin-dashboard/admin-components/
     MatDividerModule,
     MatSelectModule,
     HttpClientModule,
-    LazyLoadImageModule
+    LazyLoadImageModule,
+    MatTreeModule
   ],
   providers: [],
   bootstrap: [AppComponent]

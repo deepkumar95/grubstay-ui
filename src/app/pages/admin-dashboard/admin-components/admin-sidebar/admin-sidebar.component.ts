@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { SharedService } from 'src/app/services/helper/shared.service';
 
 @Component({
   selector: 'app-admin-sidebar',
@@ -7,17 +9,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminSidebarComponent implements OnInit {
 
-  links:any=[
-    {link:"Home"},
-    {link:"Link123"},
-    {link:"Link123"},
-    {link:"Link123"},
-    {link:"Link123"},
-    {link:"Link123"},
-  ];
-  constructor() { }
+  constructor(private _shared:SharedService) { }
 
   ngOnInit(): void {
+  }
+
+  navigateTo(url:string, title:string){
+    this._shared.headerTitleSubject.next(title);
   }
 
 }
