@@ -7,6 +7,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminSidebarComponent implements OnInit {
 
+  links:any=[
+    {link:"Home"},
+    {link:"Link123"},
+    {link:"Link123"},
+    {link:"Link123"},
+    {link:"Link123"},
+    {link:"Link123"},
+  ];
   constructor() { }
 
   ngOnInit(): void {
