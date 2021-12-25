@@ -12,6 +12,7 @@ import { SearchDialogComponent } from 'src/app/components/search-dialog/search-d
 })
 export class HomeComponent implements OnInit {
 
+
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
       map(result => result.matches)

@@ -32,6 +32,7 @@ import {MatSelectModule} from '@angular/material/select';
 import {HttpClientModule} from '@angular/common/http';
 import { PgComponent } from './pages/pg/pg.component';
 import { SearchDialogComponent } from './components/search-dialog/search-dialog.component';
+import { LazyLoadImageModule } from 'ng-lazyload-image';
 
 @NgModule({
   declarations: [
@@ -68,7 +69,8 @@ import { SearchDialogComponent } from './components/search-dialog/search-dialog.
     MatCardModule,
     MatDividerModule,
     MatSelectModule,
-    HttpClientModule
+    HttpClientModule,
+    LazyLoadImageModule
   ],
   providers: [],
   bootstrap: [AppComponent]
