@@ -66,7 +66,7 @@ export class LocationTreeComponent implements OnInit {
   }
 
   navigateTo(item:any){
-    this._shared.headerTitleSubject.next(item+' Details');
+    this._shared.headerTitleSubject.next(item);
     if(item === 'City'){
       this._route.navigate(['/admin/city']);
     }

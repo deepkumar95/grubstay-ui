@@ -1,0 +1,39 @@
+<div class="bootstrap-wrapper">
+    <div class="container-fluid">
+        <div class="row dialog-header">
+            <h4 style="margin-top:30px;">Add City</h4>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div style="padding:20px;">
+                    <form (ngSubmit)="addCity()">
+                        <!-- cityname field -->
+                        <mat-form-field appearance="standard" class="full-width" autocomplete="off">
+                            <mat-label>City Name</mat-label>
+                            <input matInput autocomplete="new_name" type='text' name='city_name' [(ngModel)]="city.city_name" placeholder="Enter city name">
+                        </mat-form-field>
+
+                        <!-- citydesc field -->
+                        <mat-form-field appearance="standard" class="full-width">
+                            <mat-label>City Description</mat-label>
+                            <input matInput autocomplete="new_desc" type='text' name='city_desc' [(ngModel)]="city.city_desc" placeholder="Enter description">
+                        </mat-form-field>
+
+                        <!-- cityname field -->
+                        <mat-form-field appearance="standard" class="full-width">
+                            <mat-label>City Icon</mat-label>
+                            <input matInput autocomplete="new_image" type='text' name='city_image' [(ngModel)]="city.city_image" placeholder="Choose Image">
+                        </mat-form-field>
+                        <div class="container text-center mt-10">
+                            <div class="row">
+                                <button type="submit" mat-raised-button color="accent" style="align-content:center;">Add
+                                    City</button>&nbsp;
+                                    <span class="logo">GRUBSTAY</span>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

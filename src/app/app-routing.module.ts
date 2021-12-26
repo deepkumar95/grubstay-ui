@@ -8,6 +8,9 @@ import { HomeComponent } from './pages/home/home.component';
 import { PgComponent } from './pages/pg/pg.component';
 import { SearchStayComponent } from './pages/search-stay/search-stay.component';
 import { StayPgComponent } from './pages/stay-pg/stay-pg.component';
+import { LocationComponent } from './pages/admin-dashboard/admin-components/location/location.component';
+import { CityComponent } from './pages/admin-dashboard/admin-components/city/city.component';
+import { SublocationComponent } from './pages/admin-dashboard/admin-components/sublocation/sublocation.component';
 
 const routes: Routes = [
   {
@@ -45,15 +48,15 @@ const routes: Routes = [
       },
       {
         path:'city',
-        component:ViewPgComponent
+        component:CityComponent
       },
       {
         path:'location',
-        component:ViewPgComponent
+        component:LocationComponent
       },
       {
         path:'sub-location',
-        component:ViewPgComponent
+        component:SublocationComponent
       }
     ]
   },

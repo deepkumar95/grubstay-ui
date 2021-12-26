@@ -1,0 +1,15 @@
+.citylogo{
+    align-content: center;
+    text-align:center;
+    width:100%;
+    margin-left:85px;
+}
+.logocard{
+    height: 100px;
+    width: 100px;
+    border-radius: 50px;
+}
+.mat-form-field {
+    font-size: 12px;
+    width: 100%;
+}

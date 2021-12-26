@@ -1,0 +1,56 @@
+<div class="bootstrap-wrapper">
+        <button mat-raised-button color="primary" (click)="openLocationDialog()">
+            <mat-icon>add</mat-icon>
+            Add Location
+        </button><br>
+        <mat-form-field appearance="standard" class="full-width">
+            <mat-label>Search Location</mat-label>
+            <input matInput name="filter" autocomplete="off" (keyup)="filterLocation($event)" placeholder="Search Location..." #input>
+        </mat-form-field>
+        <div class="container-fluid">
+            <div class="row mt-2" style="max-height: 62vh; overflow: scroll; overflow-x: hidden">
+                <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+    
+                    <!--- Note that these columns can be defined in any order.
+                                          The actual rendered columns are set as a property on the row definition" -->
+                    <ng-container matColumnDef="actions">
+                        <th mat-header-cell *matHeaderCellDef> Actions </th>
+                        <td mat-cell *matCellDef="let location">
+                            <button mat-icon-button (click)="editItem(location.location_id)">
+                                <mat-icon mat-fav-icon>edit</mat-icon>
+                            </button>
+                            <button mat-icon-button (click)="deleteItem(location.location_id)">
+                                <mat-icon mat-fav-icon>delete</mat-icon>
+                            </button>
+                        </td>
+                    </ng-container>
+    
+                    <!-- Position Column -->
+                    <ng-container matColumnDef="position">
+                        <th mat-header-cell *matHeaderCellDef> No. </th>
+                        <td mat-cell *matCellDef="let location"> {{location.position}} </td>
+                    </ng-container>
+    
+                    <!-- Name Column -->
+                    <ng-container matColumnDef="location_name">
+                        <th mat-header-cell *matHeaderCellDef> Name </th>
+                        <td mat-cell *matCellDef="let location"> {{location.location_name}} </td>
+                    </ng-container>
+    
+                    <!-- Symbol Column -->
+                    <ng-container matColumnDef="location_pic">
+                        <th mat-header-cell *matHeaderCellDef> Picture </th>
+                        <td mat-cell *matCellDef="let location"> {{location.location_pic}} </td>
+                    </ng-container>
+    
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns;sticky:true"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    
+                    <!-- message shown when no record found -->
+                    <tr class="mat-row" *matNoDataRow>
+                        <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>

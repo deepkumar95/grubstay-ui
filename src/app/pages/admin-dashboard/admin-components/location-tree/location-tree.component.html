@@ -5,7 +5,7 @@
       <!-- <button mat-icon-button disabled></button>
       {{node.name}} -->
       <button (click)="navigateTo(node.name)" mat-list-item >
-        <mat-icon mat-list-icon>{{node.icon}}</mat-icon> {{node.name}}
+        <mat-icon mat-list-icon>{{node.icon}}</mat-icon> <span class="sidebar-label">{{node.name}}</span>
         </button>
     </mat-tree-node>
     <!-- This is the tree node template for expandable nodes -->
@@ -19,6 +19,6 @@
           {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
         </mat-icon>
       </button>
-      {{node.name}}
+      <span class="sidebar-label">{{node.name}}</span>
     </mat-tree-node>
 </mat-tree>

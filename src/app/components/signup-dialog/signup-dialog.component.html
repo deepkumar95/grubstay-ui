@@ -1,89 +1,147 @@
 <div class="bootstrap-wrapper">
-    <div class="container">
-      <div class="row">
-            <div class="col md-12 col-sm-12 col-xs-12 form-group text-center">
-                <div>
-                    <img src="../../../assets/loginicon.png" style="height:50px; width:50px;">
-                    <h2 class="accent">Register</h2>
-                </div>
-                <div>
-                    <form (ngSubmit)="register()">
-                        <!-- username field -->
-                        <mat-form-field appearance="outline" class="full-width">
-                            <mat-label>Username</mat-label>
-                            <input 
-                                matInput
-                                type='text'
-                                name='username'
-                                [(ngModel)]="user.username"
-                                placeholder="Placeholder"
-                                required>
-                          </mat-form-field>
+    <div class="container-fluid">
+        <div class="row dialog-header">
+            <h4 style="margin-top:30px;">Register</h4>
+        </div>
+        <div class="container mt-10">
+            <div class="row">
+                <div class="col md-12 col-sm-12 col-xs-12 form-group text-center">
+                    <!-- <div>
+                        <img src="../../../assets/loginicon.png" style="height:50px; width:50px;">
+                        <h2 class="accent">Register</h2>
+                    </div> -->
+                    <div>
+                        <form (ngSubmit)="register()">
+                            <!-- username field -->
+                            <mat-form-field appearance="standard" class="full-width">
+                                <mat-label>First name</mat-label>
+                                <input matInput type='text' autocomplete="new_first_name" name='first_name' [(ngModel)]="user.username"
+                                    placeholder="Placeholder">
+                            </mat-form-field>
+                            <!-- password field -->
+                            <mat-form-field appearance="standard" class="full-width">
+                                <mat-label>Last name</mat-label>
+                                <input matInput type='text' autocomplete="new_last_name" name='last_name' [(ngModel)]="user.password"
+                                    placeholder="Placeholder">
+                                <mat-hint>Make sure your name matches to your government ID card.</mat-hint>
+                            </mat-form-field><br>
 
-                          <!-- password field -->
-                          <mat-form-field appearance="outline" class="full-width">
-                            <mat-label>Password</mat-label>
-                            <input 
-                                matInput
-                                type='text'
-                                name='password'
-                                [(ngModel)]="user.password"
-                                placeholder="Placeholder"
-                                required>
-                          </mat-form-field>
+                            <!-- First name field -->
+                            <mat-form-field appearance="standard" class="full-width" style="margin-top:12px;">
+                                <mat-label>Contact number</mat-label>
+                                <input matInput type='text' autocomplete="new_contact_number" name='contact_number'
+                                    [(ngModel)]="user.first_name" placeholder="Placeholder">
+                            </mat-form-field>
 
-                          <!-- First name field -->
-                          <mat-form-field appearance="outline" class="full-width">
-                            <mat-label>First name</mat-label>
-                            <input 
-                                matInput
-                                type='text'
-                                name='first_name'
-                                [(ngModel)]="user.first_name"
-                                placeholder="Placeholder"
-                                required>
-                          </mat-form-field>
+                            <!-- last name field -->
+                            <mat-form-field appearance="standard" class="full-width">
+                                <mat-label>Whatsapp number</mat-label>
+                                <input matInput type='text' autocomplete="new_whatsapp_number" name='whatsapp_number'
+                                    [(ngModel)]="user.last_name" placeholder="Placeholder">
+                                <mat-hint>Make sure you are putting correct number to receive updates via call or text
+                                    or WhatsApp</mat-hint>
+                            </mat-form-field>
 
-                          <!-- last name field -->
-                          <mat-form-field appearance="outline" class="full-width">
-                            <mat-label>Last name</mat-label>
-                            <input 
-                                matInput
-                                type='text'
-                                name='last_name'
-                                [(ngModel)]="user.last_name"
-                                placeholder="Placeholder"
-                                required>
-                          </mat-form-field>
+                            <!-- email field -->
+                            <mat-form-field appearance="standard" class="full-width" style="margin-top:16px;">
+                                <mat-label>Password</mat-label>
+                                <input matInput type='password' autocomplete="new_password" name='password' [(ngModel)]="user.email"
+                                    placeholder="Placeholder">
+                                <mat-hint>*put personal number as a password for easy to recall</mat-hint>
+                            </mat-form-field>
 
-                          <!-- email field -->
-                          <mat-form-field appearance="outline" class="full-width">
-                            <mat-label>Email</mat-label>
-                            <input 
-                                matInput
-                                type='email'
-                                name='email'
-                                [(ngModel)]="user.email"
-                                placeholder="Placeholder"
-                                required>
-                          </mat-form-field>
+                            <!-- First name field -->
+                            <mat-form-field appearance="standard" class="full-width" style="margin-top:12px;">
+                                <mat-label>Phone number</mat-label>
+                                <input matInput type='text' autocomplete="new_phone" name='phone' [(ngModel)]="user.phone"
+                                    placeholder="Placeholder">
+                                <mat-hint *ngIf="false">Invalid Phone number!</mat-hint>
+                            </mat-form-field>
 
-                          <!-- First name field -->
-                          <mat-form-field appearance="outline" class="full-width">
-                            <mat-label>Phone</mat-label>
-                            <input 
-                                matInput
-                                type='number'
-                                name='phone'
-                                [(ngModel)]="user.phone"
-                                placeholder="Placeholder"
-                                required>
-                          </mat-form-field>
-                        <button type="submit" mat-raised-button color="accent">Login</button>&nbsp;
-                    </form>
+                            <!-- date of birth field -->
+                            <div class="row">
+                                <div class="col-4">
+                                    <mat-form-field appearance="standard">
+                                        <mat-label>Date</mat-label>
+                                        <mat-select>
+                                            <mat-option value="one">First option</mat-option>
+                                            <mat-option value="two">Second option</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-4">
+                                    <mat-form-field appearance="standard">
+                                        <mat-label>Month</mat-label>
+                                        <mat-select>
+                                            <mat-option value="1">1</mat-option>
+                                            <mat-option value="2">2</mat-option>
+                                            <mat-option value="3">3</mat-option>
+                                            <mat-option value="4">4</mat-option>
+                                            <mat-option value="5">5</mat-option>
+                                            <mat-option value="6">6</mat-option>
+                                            <mat-option value="7">7</mat-option>
+                                            <mat-option value="8">8</mat-option>
+                                            <mat-option value="9">9</mat-option>
+                                            <mat-option value="10">10</mat-option>
+                                            <mat-option value="11">11</mat-option>
+                                            <mat-option value="12">12</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-4">
+                                    <mat-form-field appearance="standard">
+                                        <mat-label>Select</mat-label>
+                                        <mat-select>
+                                            <mat-option value="1">1</mat-option>
+                                            <mat-option value="2">2</mat-option>
+                                            <mat-option value="3">3</mat-option>
+                                            <mat-option value="4">4</mat-option>
+                                            <mat-option value="5">5</mat-option>
+                                            <mat-option value="6">6</mat-option>
+                                            <mat-option value="7">7</mat-option>
+                                            <mat-option value="8">8</mat-option>
+                                            <mat-option value="9">9</mat-option>
+                                            <mat-option value="10">10</mat-option>
+                                            <mat-option value="11">11</mat-option>
+                                            <mat-option value="12">12</mat-option>
+                                            <mat-option value="13">13</mat-option>
+                                            <mat-option value="14">14</mat-option>
+                                            <mat-option value="15">15</mat-option>
+                                            <mat-option value="16">16</mat-option>
+                                            <mat-option value="17">17</mat-option>
+                                            <mat-option value="18">18</mat-option>
+                                            <mat-option value="19">19</mat-option>
+                                            <mat-option value="20">20</mat-option>
+                                            <mat-option value="21">21</mat-option>
+                                            <mat-option value="22">22</mat-option>
+                                            <mat-option value="23">23</mat-option>
+                                            <mat-option value="24">24</mat-option>
+                                            <mat-option value="25">25</mat-option>
+                                            <mat-option value="26">26</mat-option>
+                                            <mat-option value="27">27</mat-option>
+                                            <mat-option value="28">28</mat-option>
+                                            <mat-option value="29">29</mat-option>
+                                            <mat-option value="30">30</mat-option>
+                                            <mat-option value="31">31</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <!-- email id field -->
+                            <!-- First name field -->
+                            <mat-form-field appearance="standard" class="full-width">
+                                <mat-label>Email</mat-label>
+                                <input matInput type='text' autocomplete="new_user-email" name='email' [(ngModel)]="user.email"
+                                    placeholder="Placeholder">
+                            </mat-form-field>
+                            <h6 class="text-center" style="margin-top:8px; font-size:12px;">You will receive updates and offer's on your mail</h6>
+                            <button type="submit" mat-raised-button color="accent">Agree and Continue</button>
+                            <h6 class="text-center" style="margin-top:8px; font-size:12px;">By selecting agree and continue, I agree the terms and conditions of
+                                    <span class="logo-sm">GRUBSTAY</span>.</h6>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-  </div>
-  
+</div>

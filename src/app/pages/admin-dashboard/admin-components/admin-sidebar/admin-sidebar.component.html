@@ -2,12 +2,12 @@
     <mat-action-list>
         <h1 matSubheader>Admin Dashboard</h1>
         <button (click)="navigateTo('/admin/','All Details')" mat-list-item >
-            <mat-icon mat-list-icon>home</mat-icon> Home
+            <mat-icon mat-list-icon>home</mat-icon> <span class="sidebar-label">Home</span>
         </button>
         <app-location-tree></app-location-tree>
         <app-pg-tree></app-pg-tree>
         <button (click)="logout()" mat-list-item >
-            <mat-icon mat-list-icon>logout</mat-icon> Logout
+            <mat-icon mat-list-icon>logout</mat-icon> <span class="sidebar-label">Logout</span>
         </button>
     </mat-action-list>
 </mat-card>

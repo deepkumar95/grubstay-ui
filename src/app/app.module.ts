@@ -41,6 +41,13 @@ import {MatTreeModule} from '@angular/material/tree';
 import { PgTreeComponent } from './pages/admin-dashboard/admin-components/pg-tree/pg-tree.component';
 import { ViewPgComponent } from './pages/admin-dashboard/admin-components/view-pg/view-pg.component';
 import { LocationTreeComponent } from './pages/admin-dashboard/admin-components/location-tree/location-tree.component';
+import { CityComponent } from './pages/admin-dashboard/admin-components/city/city.component';
+import { LocationComponent } from './pages/admin-dashboard/admin-components/location/location.component';
+import { SublocationComponent } from './pages/admin-dashboard/admin-components/sublocation/sublocation.component';
+import {MatTableModule} from '@angular/material/table';
+import { CityDialogComponent } from './pages/admin-dashboard/admin-components/city/city-components/city-dialog/city-dialog.component';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import { LocationDialogComponent } from './pages/admin-dashboard/admin-components/location/location-components/location-dialog/location-dialog.component';
 
 @NgModule({
   declarations: [
@@ -64,6 +71,11 @@ import { LocationTreeComponent } from './pages/admin-dashboard/admin-components/
     PgTreeComponent,
     ViewPgComponent,
     LocationTreeComponent,
+    CityComponent,
+    LocationComponent,
+    SublocationComponent,
+    CityDialogComponent,
+    LocationDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -86,7 +98,9 @@ import { LocationTreeComponent } from './pages/admin-dashboard/admin-components/
     MatSelectModule,
     HttpClientModule,
     LazyLoadImageModule,
-    MatTreeModule
+    MatTreeModule,
+    MatTableModule,
+    MatDatepickerModule
   ],
   providers: [],
   bootstrap: [AppComponent]
