@@ -17,10 +17,10 @@
                 <ng-container matColumnDef="actions">
                     <th mat-header-cell *matHeaderCellDef> Actions </th>
                     <td mat-cell *matCellDef="let city">
-                        <button mat-icon-button (click)="editItem(city.city_id)">
+                        <button mat-icon-button (click)="editItem(city.cityId)">
                             <mat-icon mat-fav-icon>edit</mat-icon>
                         </button>
-                        <button mat-icon-button (click)="deleteItem(city.city_id)">
+                        <button mat-icon-button (click)="deleteItem(city.cityId)">
                             <mat-icon mat-fav-icon>delete</mat-icon>
                         </button>
                     </td>
@@ -29,11 +29,11 @@
                 <!-- Position Column -->
                 <ng-container matColumnDef="position">
                     <th mat-header-cell *matHeaderCellDef> No. </th>
-                    <td mat-cell *matCellDef="let city"> {{city.position}} </td>
+                    <td mat-cell *matCellDef="let city"> {{city.cityId}} </td>
                 </ng-container>
 
                 <!-- Symbol Column -->
-                <ng-container matColumnDef="city_pic">
+                <ng-container matColumnDef="cityImage">
                     <th mat-header-cell *matHeaderCellDef> Picture </th>
                     <td mat-cell *matCellDef="let city">
                         <div mat-card-avatar>
@@ -43,9 +43,9 @@
                 </ng-container>
 
                 <!-- Name Column -->
-                <ng-container matColumnDef="city_name">
+                <ng-container matColumnDef="cityName">
                     <th mat-header-cell *matHeaderCellDef> Name </th>
-                    <td mat-cell *matCellDef="let city"> {{city.city_name}} </td>
+                    <td mat-cell *matCellDef="let city"> {{city.cityName}} </td>
                 </ng-container>
 
                 <tr mat-header-row *matHeaderRowDef="displayedColumns;sticky:true"></tr>
