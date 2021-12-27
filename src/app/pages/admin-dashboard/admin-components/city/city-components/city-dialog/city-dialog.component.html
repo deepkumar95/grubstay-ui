@@ -7,23 +7,39 @@
             <div class="row">
                 <div style="padding:20px;">
                     <form (ngSubmit)="addCity()">
-                        <!-- cityname field -->
-                        <mat-form-field appearance="standard" class="full-width" autocomplete="off">
-                            <mat-label>City Name</mat-label>
-                            <input matInput autocomplete="new_name" type='text' name='city_name' [(ngModel)]="city.city_name" placeholder="Enter city name">
-                        </mat-form-field>
 
-                        <!-- citydesc field -->
-                        <mat-form-field appearance="standard" class="full-width">
-                            <mat-label>City Description</mat-label>
-                            <input matInput autocomplete="new_desc" type='text' name='city_desc' [(ngModel)]="city.city_desc" placeholder="Enter description">
-                        </mat-form-field>
-
+                        <div class="row">
+                            <div class="col-8">
+                                <mat-form-field appearance="standard" class="full-width" autocomplete="off">
+                                    <mat-label>City Name</mat-label>
+                                    <input textToUpperCase matInput autocomplete="new_name" type='text' name='city_name' [(ngModel)]="city.city_name" placeholder="Enter city name">
+                                </mat-form-field>
+                            </div>
+                            <div class="col-4">
+                                <mat-slide-toggle
+                                    [(ngModel)]="city.city_status"
+                                    name="active"
+                                    class="mt-2">
+                                    Status
+                                </mat-slide-toggle>
+                            </div>
+                        </div>
                         <!-- cityname field -->
-                        <mat-form-field appearance="standard" class="full-width">
-                            <mat-label>City Icon</mat-label>
-                            <input matInput autocomplete="new_image" type='text' name='city_image' [(ngModel)]="city.city_image" placeholder="Choose Image">
-                        </mat-form-field>
+
+                        <!-- city select file-->
+                        <div class="row">
+                            <div class="col-8">
+                                <label for="formFileSm" class="form-label">City Image</label>
+                                <input (change)="onSelectImage($event)" class="form-control form-control-sm" id="city_image" type="file">
+                            </div>
+                            <div class="col-4">
+                                <div *ngIf="imageUrl" class="image-preview mt-2">
+                                    <img [src]="imageUrl">
+                                </div>
+                            </div>
+                        </div>
+
+                        
                         <div class="container text-center mt-10">
                             <div class="row">
                                 <button type="submit" mat-raised-button color="accent" style="align-content:center;">Add

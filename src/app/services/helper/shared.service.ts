@@ -6,7 +6,7 @@ import { Subject } from 'rxjs';
 })
 export class SharedService {
 
-  public headerTitleSubject = new Subject<String>();
+  public headerTitleSubject:any = new Subject<String>();
 
   public sharedData:any = {}
 

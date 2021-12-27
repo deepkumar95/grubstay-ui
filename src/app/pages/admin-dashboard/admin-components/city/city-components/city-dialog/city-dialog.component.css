@@ -13,3 +13,12 @@
     font-size: 12px;
     width: 100%;
 }
+.image-preview{
+    width: 120px;
+    height: 100px;
+}
+.image-preview img{
+    width: 120px;
+    height: 100px;
+    object-fit: cover;
+}

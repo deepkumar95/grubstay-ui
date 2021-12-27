@@ -48,6 +48,8 @@ import {MatTableModule} from '@angular/material/table';
 import { CityDialogComponent } from './pages/admin-dashboard/admin-components/city/city-components/city-dialog/city-dialog.component';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { LocationDialogComponent } from './pages/admin-dashboard/admin-components/location/location-components/location-dialog/location-dialog.component';
+import { TextUpperCaseDirective } from './text-upper-case.directive';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 
 @NgModule({
   declarations: [
@@ -76,6 +78,7 @@ import { LocationDialogComponent } from './pages/admin-dashboard/admin-component
     SublocationComponent,
     CityDialogComponent,
     LocationDialogComponent,
+    TextUpperCaseDirective,
   ],
   imports: [
     BrowserModule,
@@ -100,7 +103,8 @@ import { LocationDialogComponent } from './pages/admin-dashboard/admin-component
     LazyLoadImageModule,
     MatTreeModule,
     MatTableModule,
-    MatDatepickerModule
+    MatDatepickerModule,
+    MatSlideToggleModule
   ],
   providers: [],
   bootstrap: [AppComponent]
