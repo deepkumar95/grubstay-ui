@@ -1,8 +1,11 @@
 import { E } from '@angular/cdk/keycodes';
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
+import { CityServiceService } from 'src/app/services/city-service.service';
 import { CustomSnackBarService } from '../../../../../../services/helper/custom-snack-bar.service';
+import { City } from '../../city.component';
 
 @Component({
   selector: 'app-city-dialog',
@@ -15,14 +18,18 @@ export class CityDialogComponent implements OnInit {
   selectedImage:any='';
 
   city:any={
-    city_name:'',
-    city_image:'',
-    city_status:''
-  }
+    cityName:'',
+    cityImage:'',
+    status:''
+  };
 
-  constructor(private _snackBar:CustomSnackBarService,private _http:HttpClient) { }
+  constructor(private _snackBar:CustomSnackBarService,private _http:HttpClient,private _cityService: CityServiceService,
+    @Inject(MAT_DIALOG_DATA) public data: City) { }
 
   ngOnInit(): void {
+    if(this.data){
+      this.city = this.data;
+    }
   }
 
   upload(file:any){
@@ -30,21 +37,29 @@ export class CityDialogComponent implements OnInit {
   }
   addCity(){
     let self=this;
-    if(!self.city.city_name && self.city.city_name==''){
+    if(!self.city.cityName && self.city.cityName==''){
       this._snackBar.errorSnackBar("City name is required!");
       return;
     }
-    if(!self.city.city_image && self.city.city_image==''){
+    if(!self.city.cityImage && self.city.cityImage==''){
       this._snackBar.errorSnackBar("Please choose city image!");
       return;
     }
-    self.city.city_status = self.city.city_status=='true' ? 'active' : 'inactive';
-    alert(self.city.city_status)
     const fd = new FormData();
     fd.append('image', this.selectedImage, this.selectedImage.name);
-    
-
-    this._snackBar.successSnackBar("City Added Successfully!");
+    fd.append('cityName',this.city.cityName);
+    fd.append('status',this.city.status);
+    fd.append('cityImage',this.selectedImage.name);
+    this._cityService.addCity(fd).subscribe((response:any)=>{
+      if (response.erorr && response.error != '') {
+        this._snackBar.errorSnackBar("Something went wrong!...Please Try Again");
+        return;
+      } else  {
+        this._snackBar.successSnackBar("saved successflly!");
+      }
+    },(error)=>{
+      this._snackBar.errorSnackBar("Something went wrong!...Please Try Again");
+    })
 
   }
   onSelectImage(event){
@@ -53,7 +68,7 @@ export class CityDialogComponent implements OnInit {
       reader.readAsDataURL(event.target.files[0]);
       reader.onload = (events:any)=>{
         this.imageUrl = events.target.result;
-        this.city.city_image = event.target.files[0].name;
+        this.city.cityImage = event.target.files[0].name;
         this.selectedImage = event.target.files[0];
       }
     }

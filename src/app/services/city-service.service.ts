@@ -12,4 +12,8 @@ export class CityServiceService {
   public loadAllCity(){
     return this._http.get(baseUrl+"city/");
   }
+
+  public addCity(data:any){
+    return this._http.post(baseUrl+"city/",data);
+  }
 }
