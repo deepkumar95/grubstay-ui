@@ -51,9 +51,9 @@ export class CityDialogComponent implements OnInit {
     fd.append('status',this.city.status);
     fd.append('cityImage',this.selectedImage.name);
     this._cityService.addCity(fd).subscribe((response:any)=>{
-      if (response.erorr && response.error != '') {
-        this._snackBar.errorSnackBar("Something went wrong!...Please Try Again");
-        return;
+      if (response.error && response.error !='') {
+          this._snackBar.errorSnackBar("Something went wrong!...Please Try Again");
+          return;
       } else  {
         this._snackBar.successSnackBar("saved successflly!");
       }

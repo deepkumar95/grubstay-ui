@@ -37,7 +37,7 @@
                     <th mat-header-cell *matHeaderCellDef> Picture </th>
                     <td mat-cell *matCellDef="let city">
                         <div mat-card-avatar>
-                            <img class="example-header-image-location" src="../../../../../assets/imgs/city/banglore.jpg" alt="">
+                            <img class="example-header-image-location" [src]="city.cityImage" alt="">
                         </div>
                     </td>
                 </ng-container>
