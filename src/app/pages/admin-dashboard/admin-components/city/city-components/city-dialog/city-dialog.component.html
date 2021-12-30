@@ -31,20 +31,26 @@
                             <div class="col-8">
                                 <label for="formFileSm" class="form-label">City Image</label>
                                 <input (change)="onSelectImage($event)" class="form-control form-control-sm" id="city_image" type="file">
+                                <h6 class="text-center" style="margin-top:8px; font-size:12px;">{{imageName}}</h6>
                             </div>
                             <div class="col-4">
                                 <div *ngIf="imageUrl" class="image-preview mt-2">
                                     <img [src]="imageUrl">
                                 </div>
+                                <!-- <div class="image-preview mt-2" *ngIf="city.operation=='edit' && imageUrl==''">
+                                    <img [src]="sanitizer.bypassSecurityTrustUrl(city.cityImage)" alt="">
+                                </div> -->
                             </div>
                         </div>
 
                         
                         <div class="container text-center mt-10">
                             <div class="row">
-                                <button type="submit" mat-raised-button color="accent" style="align-content:center;">Add
+                                <button type="submit" mat-raised-button color="accent" style="align-content:center;" *ngIf="city.operation!='edit'">Add
                                     City</button>&nbsp;
-                                    <span class="logo">GRUBSTAY</span>
+                                    <button type="submit" mat-raised-button color="accent" style="align-content:center;" *ngIf="city.operation=='edit'">Update
+                                        City</button>&nbsp;
+                                    <span class="logo">GRUBSTAY</span>  
                             </div>
                         </div>
                     </form>

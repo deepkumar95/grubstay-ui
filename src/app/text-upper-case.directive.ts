@@ -1,6 +1,7 @@
 import {
   A,
   Z,
+  ENTER,
 } from '@angular/cdk/keycodes';
 import {
   Directive,
@@ -39,7 +40,7 @@ export class TextUpperCaseDirective implements ControlValueAccessor {
     const keyCode = evt.keyCode;
     const key = evt.key;
     console.log(evt)
-    if (keyCode >= A && keyCode <= Z) {
+    if (keyCode >= A && keyCode <= Z || keyCode >=48 && keyCode <=57) {
       const value = this._el.nativeElement.value.toUpperCase();
       this._renderer.setProperty(this._el.nativeElement, 'value', value);
       this._onChange(value);

@@ -6,12 +6,16 @@ import { CityServiceService } from '../../../../services/city-service.service';
 import { CustomSnackBarService } from '../../../../services/helper/custom-snack-bar.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import * as _ from 'lodash'; 
+import { DomSanitizer } from '@angular/platform-browser';
+import { SharedService } from '../../../../services/helper/shared.service';
 
 export interface City {
   cityId: number;
   cityName: string;
-  cityImage: string;
+  cityImageName: string;
+  cityImage:string;
   status: string;
+  operation:string;
 }
 
 
@@ -26,8 +30,11 @@ export class CityComponent implements OnInit {
   CITY_DATA:City[]=[];
   displayedColumns: string[] = ['actions', 'position', 'cityImage', 'cityName'];
   dataSource = new MatTableDataSource(this.CITY_DATA);
+  public sanitizer;
 
-  constructor(private dialog: MatDialog, private _cityService: CityServiceService, private _snackbarService: CustomSnackBarService, private snackBar: MatSnackBar) { }
+  constructor(private dialog: MatDialog, private _cityService: CityServiceService, private _snackbarService: CustomSnackBarService, private snackBar: MatSnackBar, private domSanitier:DomSanitizer, private _sharedService:SharedService) {
+    this.sanitizer=domSanitier;
+  }
 
   ngOnInit(): void {
     this.loadCityData();
@@ -37,6 +44,7 @@ export class CityComponent implements OnInit {
     let cityData=_.find(this.CITY_DATA,(item:any)=>{
       return (item.cityId==cityId);
     });
+    cityData.operation='edit';
     const dialogRef = this.dialog.open(CityDialogComponent, {
       width: '500px',
       height: '500px',
@@ -45,8 +53,25 @@ export class CityComponent implements OnInit {
     console.log(cityData);
   }
 
-  public deleteItem(position) {
-    alert(position + " Clicked");
+  public deleteItem(cityId) {
+    let self=this;
+    if(cityId){
+      self._cityService.deleteCity(cityId).subscribe((response:any)=>{
+        if(response.error && response.error!=''){
+          this._snackbarService.errorSnackBar("Deletion Failed...Try Again!");
+          return;
+        }else{
+          let deleteStatus=response.success;
+          if(deleteStatus=='deleted'){
+            this._snackbarService.successSnackBar("City Deleted Successfully!");
+            this._sharedService.redirectTo('/admin/city');
+          }
+        }
+      },(error)=>{
+        this._snackbarService.errorSnackBar("Deletion Failed...Try Again!");
+        return;
+      })
+    }
   }
   openCityDialog() {
     const dialogRef = this.dialog.open(CityDialogComponent, {
