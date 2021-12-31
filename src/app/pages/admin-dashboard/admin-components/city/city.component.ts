@@ -15,6 +15,7 @@ export interface City {
   cityImageName: string;
   cityImage:string;
   status: string;
+  service:string;
   operation:string;
 }
 
@@ -28,7 +29,7 @@ export interface City {
 
 export class CityComponent implements OnInit {
   CITY_DATA:City[]=[];
-  displayedColumns: string[] = ['actions', 'position', 'cityImage', 'cityName'];
+  displayedColumns: string[] = ['actions', 'position', 'cityImage', 'cityName', 'service'];
   dataSource = new MatTableDataSource(this.CITY_DATA);
   public sanitizer;
 
@@ -91,8 +92,16 @@ export class CityComponent implements OnInit {
           this._snackbarService.errorSnackBar("Something went wrong!...Please Try Again");
           return;
         } else {
-          let responseData = response.data;
+          let responseData:any = response.data;
           if (responseData) {
+            responseData.forEach(element => {
+              if(element.status==true){
+                element.service='Active';
+              }
+              if(element.status==false){
+                element.service='Inactive'
+              }
+            });
             this.CITY_DATA = responseData;
             this.dataSource = new MatTableDataSource(this.CITY_DATA);
           }

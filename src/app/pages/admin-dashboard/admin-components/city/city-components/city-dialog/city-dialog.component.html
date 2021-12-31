@@ -12,7 +12,7 @@
                             <div class="col-8">
                                 <mat-form-field appearance="standard" class="full-width" autocomplete="off">
                                     <mat-label>City Name</mat-label>
-                                    <input textToUpperCase matInput autocomplete="new_name" type='text' name='city_name' [(ngModel)]="city.cityName" placeholder="Enter city name">
+                                    <input textToUpperCase matInput autocomplete="new_name" type='text' name='city_name' [(ngModel)]="city.cityName" placeholder="Enter city name" [disabled]="city.operation=='edit'">
                                 </mat-form-field>
                             </div>
                             <div class="col-4">
@@ -31,7 +31,7 @@
                             <div class="col-8">
                                 <label for="formFileSm" class="form-label">City Image</label>
                                 <input (change)="onSelectImage($event)" class="form-control form-control-sm" id="city_image" type="file">
-                                <h6 class="text-center" style="margin-top:8px; font-size:12px;">{{imageName}}</h6>
+                                <h6 style="margin-top:8px; font-size:12px;">{{imageName}}</h6>
                             </div>
                             <div class="col-4">
                                 <div *ngIf="imageUrl" class="image-preview mt-2">

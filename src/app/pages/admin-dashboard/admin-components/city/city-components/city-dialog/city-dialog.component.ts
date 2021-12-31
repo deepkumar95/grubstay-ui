@@ -63,15 +63,20 @@ export class CityDialogComponent implements OnInit {
       fd.append('cityImageName', this.selectedImage.name);
       this._cityService.addCity(fd).subscribe((response: any) => {
         if (response.error && response.error != '') {
-          this._snackBar.errorSnackBar("Something went wrong!...Please Try Again");
-          return;
+          if (response.error.includes('Duplicate')) {
+              this._snackBar.errorSnackBar('City Already Present!');
+              return
+          } else {
+            this._snackBar.errorSnackBar(response.error);
+            return;
+          }
         } else {
           this.dialogRef.close();
           this._snackBar.successSnackBar("saved successflly!");
           this._sharedService.redirectTo('/admin/city');
         }
       }, (error) => {
-        this._snackBar.errorSnackBar("Something went wrong!...Please Try Again");
+        this._snackBar.errorSnackBar(error);
         return;
       })
       if (self.city.operation != 'edit') {
@@ -103,7 +108,7 @@ export class CityDialogComponent implements OnInit {
             let updateStatus = response.success;
             if (updateStatus == 'success') {
               this.dialogRef.close();
-              this._snackBar.errorSnackBar('Updated Successfully!');
+              this._snackBar.successSnackBar('Updated Successfully!');
               this._sharedService.redirectTo('/admin/city');
             }
             else {
@@ -116,7 +121,7 @@ export class CityDialogComponent implements OnInit {
           return;
         });
       }
-      else{
+      else {
         this._cityService.updateCityWithoutImage(fd).subscribe((response: any) => {
           if (response.error && response.error != '') {
             this._snackBar.errorSnackBar("Something went wrong!...Please Try Again");
@@ -126,7 +131,7 @@ export class CityDialogComponent implements OnInit {
             let updateStatus = response.success;
             if (updateStatus == 'success') {
               this.dialogRef.close();
-              this._snackBar.errorSnackBar('Updated Successfully!');
+              this._snackBar.successSnackBar('Updated Successfully!');
               this._sharedService.redirectTo('/admin/city');
             }
             else {

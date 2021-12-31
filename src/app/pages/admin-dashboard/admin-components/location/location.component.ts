@@ -2,32 +2,21 @@ import { Component, OnInit } from '@angular/core';
 import {MatTableDataSource} from '@angular/material/table';
 import {MatDialog} from '@angular/material/dialog';
 import { LocationDialogComponent } from './location-components/location-dialog/location-dialog.component';
+import { LocationService } from '../../../../services/location.service';
+import { CustomSnackBarService } from '../../../../services/helper/custom-snack-bar.service';
+import * as _ from 'lodash'; 
 
 export interface Location {
-  location_id:number;
-  location_name: string;
-  location_pic: string;
-  position: number;
+  locationId:number;
+  locationName:string;
+  cityId:number;
+  cityName: string;
+  operation:string;
+  status:string;
+  service:string;
+  selected:string;
 }
 
-const LOCATION_DATA: Location[] = [
-  {location_id: 1, location_name: 'Hydrogen',location_pic:'test', position:1},
-  {location_id: 2, location_name: 'Hydrogen',location_pic:'test', position:2},
-  {location_id: 3, location_name: 'Hydrogen',location_pic:'test', position:3},
-  {location_id: 4, location_name: 'Hydrogen',location_pic:'test', position:4},
-  {location_id: 5, location_name: 'Hydrogen',location_pic:'test', position:5},
-  {location_id: 6, location_name: 'Hydrogen',location_pic:'test', position:6},
-  {location_id: 7, location_name: 'Hydrogen',location_pic:'test', position:7},
-  {location_id: 8, location_name: 'Hydrogen',location_pic:'test', position:8},
-  {location_id: 9, location_name: 'Hydrogen',location_pic:'test', position:9},
-  {location_id: 10, location_name: 'Hydrogen',location_pic:'test', position:10},
-  {location_id: 11, location_name: 'Hydrogen',location_pic:'test', position:11},
-  {location_id: 12, location_name: 'Hydrogen',location_pic:'test', position:12},
-  {location_id: 13, location_name: 'Hydrogen',location_pic:'test', position:13},
-  {location_id: 14, location_name: 'Hydrogen',location_pic:'test', position:14},
-  {location_id: 15, location_name: 'Hydrogen',location_pic:'test', position:15},
-  {location_id: 16, location_name: 'Hydrogen',location_pic:'test', position:16}
-];
 
 @Component({
   selector: 'app-location',
@@ -37,16 +26,27 @@ const LOCATION_DATA: Location[] = [
 
 
 export class LocationComponent implements OnInit {
+  LOCATION_DATA:Location[] = [];
+  displayedColumns: string[] = ['actions', 'position', 'cityName','locationName','service'];
+  dataSource = new MatTableDataSource(this.LOCATION_DATA);
 
-  displayedColumns: string[] = ['actions','position', 'location_name', 'location_pic'];
-  dataSource = new MatTableDataSource(LOCATION_DATA);
-
-  constructor(private matDialog:MatDialog) { }
+  constructor(private matDialog:MatDialog, private _locationService:LocationService, private _snackbarService:CustomSnackBarService) { }
 
   ngOnInit(): void {
+    this.loadLocationsData();
   }
-  public editItem(position){
-    alert(position+" Clicked");
+  public editItem(locationId){
+    let self=this;
+    let locationData=_.find(self.LOCATION_DATA, (item)=>{
+      return item.locationId==locationId;
+    });
+    locationData.operation='edit';
+    locationData.selected=locationData.cityName;
+    this.matDialog.open(LocationDialogComponent, {
+      width: '500px',
+      height: '500px',
+      data:locationData
+    });
   }
 
   public deleteItem(position){
@@ -58,10 +58,49 @@ export class LocationComponent implements OnInit {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
-  openLocationDialog(){
+  addLocation(){
     const dialogRef = this.matDialog.open(LocationDialogComponent, {
       width: '500px',
       height: '500px'
+    });
+  }
+  public loadLocationsData(){
+    let self=this;
+    this._locationService.loadAllCity().subscribe((response:any)=>{
+      if(response.error && response.error!=''){
+        this._snackbarService.errorSnackBar('Something went wrong!');
+        return;
+      }
+      else{
+        let responseData:any=response.data[0];
+        if(responseData.length > 0){
+          responseData.forEach(element => {
+            let city=element.city;
+            if(city && city.status==true){
+              let location:any={};
+              location.locationId=element.locationId;
+              location.locationName=element.locationName;
+              location.cityName=city.cityName;
+              location.status=element.status;
+              if(element.status==true){
+                location.service='Active';
+              }
+              if(element.status==false){
+                location.service='Inactive'
+              }
+              self.LOCATION_DATA.push(location);
+            }
+          });
+          self.dataSource = new MatTableDataSource(self.LOCATION_DATA);
+          this._snackbarService.successSnackBar('Successfully Fetched!');
+        }
+        else{
+          this._snackbarService.successSnackBar('No Record Found!');
+        }
+      }
+    },
+    (error:any)=>{
+
     });
   }
 

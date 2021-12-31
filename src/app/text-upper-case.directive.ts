@@ -40,7 +40,7 @@ export class TextUpperCaseDirective implements ControlValueAccessor {
     const keyCode = evt.keyCode;
     const key = evt.key;
     console.log(evt)
-    if (keyCode >= A && keyCode <= Z || keyCode >=48 && keyCode <=57) {
+    if (keyCode >= A && keyCode <= Z || keyCode >=48 && keyCode <=57 || keyCode==8) {
       const value = this._el.nativeElement.value.toUpperCase();
       this._renderer.setProperty(this._el.nativeElement, 'value', value);
       this._onChange(value);

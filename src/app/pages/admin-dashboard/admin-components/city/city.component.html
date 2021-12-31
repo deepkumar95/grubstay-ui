@@ -48,6 +48,12 @@
                     <td mat-cell *matCellDef="let city"> {{city.cityName}} </td>
                 </ng-container>
 
+                <!-- Name Column -->
+                <ng-container matColumnDef="service">
+                    <th mat-header-cell *matHeaderCellDef> Service </th>
+                    <td mat-cell *matCellDef="let city"> {{city.status?'Active':'Inactive'}} </td>
+                </ng-container>
+
                 <tr mat-header-row *matHeaderRowDef="displayedColumns;sticky:true"></tr>
                 <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 

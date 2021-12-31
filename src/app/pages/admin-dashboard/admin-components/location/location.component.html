@@ -1,5 +1,5 @@
 <div class="bootstrap-wrapper">
-        <button mat-raised-button color="primary" (click)="openLocationDialog()">
+        <button mat-raised-button color="primary" (click)="addLocation()">
             <mat-icon>add</mat-icon>
             Add Location
         </button><br>
@@ -16,10 +16,10 @@
                     <ng-container matColumnDef="actions">
                         <th mat-header-cell *matHeaderCellDef> Actions </th>
                         <td mat-cell *matCellDef="let location">
-                            <button mat-icon-button (click)="editItem(location.location_id)">
+                            <button mat-icon-button (click)="editItem(location.locationId)">
                                 <mat-icon mat-fav-icon>edit</mat-icon>
                             </button>
-                            <button mat-icon-button (click)="deleteItem(location.location_id)">
+                            <button mat-icon-button (click)="deleteItem(location.locationId)">
                                 <mat-icon mat-fav-icon>delete</mat-icon>
                             </button>
                         </td>
@@ -28,19 +28,25 @@
                     <!-- Position Column -->
                     <ng-container matColumnDef="position">
                         <th mat-header-cell *matHeaderCellDef> No. </th>
-                        <td mat-cell *matCellDef="let location"> {{location.position}} </td>
+                        <td mat-cell *matCellDef="let location"> {{location.locationId}} </td>
                     </ng-container>
-    
-                    <!-- Name Column -->
-                    <ng-container matColumnDef="location_name">
-                        <th mat-header-cell *matHeaderCellDef> Name </th>
-                        <td mat-cell *matCellDef="let location"> {{location.location_name}} </td>
+
+                     <!-- city name column -->
+                     <ng-container matColumnDef="cityName">
+                        <th mat-header-cell *matHeaderCellDef> City </th>
+                        <td mat-cell *matCellDef="let location"> {{location.cityName}} </td>
                     </ng-container>
-    
-                    <!-- Symbol Column -->
-                    <ng-container matColumnDef="location_pic">
-                        <th mat-header-cell *matHeaderCellDef> Picture </th>
-                        <td mat-cell *matCellDef="let location"> {{location.location_pic}} </td>
+
+                    <!-- location name column -->
+                    <ng-container matColumnDef="locationName">
+                        <th mat-header-cell *matHeaderCellDef>Location </th>
+                        <td mat-cell *matCellDef="let location"> {{location.locationName}} </td>
+                    </ng-container>
+
+                    <!-- location service column -->
+                    <ng-container matColumnDef="service">
+                        <th mat-header-cell *matHeaderCellDef>Location </th>
+                        <td mat-cell *matCellDef="let location"> {{location.status?'Active':'Inactive'}} </td>
                     </ng-container>
     
                     <tr mat-header-row *matHeaderRowDef="displayedColumns;sticky:true"></tr>
