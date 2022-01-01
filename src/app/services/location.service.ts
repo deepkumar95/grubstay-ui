@@ -20,4 +20,7 @@ export class LocationService {
   public updateLocation(data:any){
     return this.http.put(baseUrl+"location/",data);
   }
+  public deleteLocation(locationId){
+    return this.http.delete(baseUrl+"location/"+locationId);
+  }
 }

@@ -1,1 +1,67 @@
-<p>sublocation works!</p>
+<div class="bootstrap-wrapper">
+    <button mat-raised-button color="primary" (click)="addSubLocation()">
+        <mat-icon>add</mat-icon>
+        Add Location
+    </button><br>
+    <mat-form-field appearance="standard" class="full-width">
+        <mat-label>Search Location</mat-label>
+        <input matInput name="filter" autocomplete="off" (keyup)="filterSubLocation($event)" placeholder="Search Location..." #input>
+    </mat-form-field>
+    <div class="container-fluid">
+        <div class="row mt-2" style="max-height: 62vh; overflow: scroll; overflow-x: hidden">
+            <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+                <!--- Note that these columns can be defined in any order.
+                                      The actual rendered columns are set as a property on the row definition" -->
+                <ng-container matColumnDef="actions">
+                    <th mat-header-cell *matHeaderCellDef> Actions </th>
+                    <td mat-cell *matCellDef="let subLocation">
+                        <button mat-icon-button (click)="editItem(subLocation.subLocationId)">
+                            <mat-icon mat-fav-icon>edit</mat-icon>
+                        </button>
+                        <button mat-icon-button (click)="deleteLocation(subLocation.subLocationId)">
+                            <mat-icon mat-fav-icon>delete</mat-icon>
+                        </button>
+                    </td>
+                </ng-container>
+
+                <!-- Position Column -->
+                <ng-container matColumnDef="position">
+                    <th mat-header-cell *matHeaderCellDef> No. </th>
+                    <td mat-cell *matCellDef="let subLocation"> {{subLocation.subLocationId}} </td>
+                </ng-container>
+
+                 <!-- city name column -->
+                 <ng-container matColumnDef="cityName">
+                    <th mat-header-cell *matHeaderCellDef> City </th>
+                    <td mat-cell *matCellDef="let subLocation"> {{subLocation.cityName}} </td>
+                </ng-container>
+
+                <!-- location name column -->
+                <ng-container matColumnDef="locationName">
+                    <th mat-header-cell *matHeaderCellDef>Location </th>
+                    <td mat-cell *matCellDef="let subLocation"> {{subLocation.locationName}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="subLocationName">
+                    <th mat-header-cell *matHeaderCellDef>Sub Location </th>
+                    <td mat-cell *matCellDef="let subLocation"> {{subLocation.subLocationName}} </td>
+                </ng-container>
+
+                <!-- location service column -->
+                <ng-container matColumnDef="service">
+                    <th mat-header-cell *matHeaderCellDef>Service </th>
+                    <td mat-cell *matCellDef="let subLocation"> {{subLocation.status?'Active':'Inactive'}} </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="columns;sticky:true"></tr>
+                <tr mat-row *matRowDef="let row; columns: columns;"></tr>
+
+                <!-- message shown when no record found -->
+                <tr class="mat-row" *matNoDataRow>
+                    <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>

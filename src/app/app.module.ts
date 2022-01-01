@@ -50,6 +50,8 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import { LocationDialogComponent } from './pages/admin-dashboard/admin-components/location/location-components/location-dialog/location-dialog.component';
 import { TextUpperCaseDirective } from './text-upper-case.directive';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { SublocationDialogComponent } from './pages/admin-dashboard/admin-components/sublocation/sublocation-components/sublocation-dialog/sublocation-dialog.component';
 
 @NgModule({
   declarations: [
@@ -79,6 +81,7 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
     CityDialogComponent,
     LocationDialogComponent,
     TextUpperCaseDirective,
+    SublocationDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -104,7 +107,8 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
     MatTreeModule,
     MatTableModule,
     MatDatepickerModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    MatProgressSpinnerModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -39,7 +39,9 @@
               "./node_modules/bootstrap/dist/css/bootstrap-reboot.min.css",
               "./node_modules/bootstrap/dist/css/bootstrap-utilities.min.css"
             ],
-            "scripts": [] 
+            "scripts": [
+              "./node_modules/sweetalert/dist/sweetalert.min.js"
+            ] 
           },
           "configurations": {
             "production": {
