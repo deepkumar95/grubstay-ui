@@ -96,7 +96,7 @@ export class LocationComponent implements OnInit {
   }
   public loadLocationsData() {
     let self = this;
-    this._locationService.loadAllLocation().subscribe((response: any) => {
+    this._locationService.loadAllCity().subscribe((response: any) => {
       if (response.error && response.error != '') {
         this._snackbarService.errorSnackBar('Something went wrong!');
         return;
