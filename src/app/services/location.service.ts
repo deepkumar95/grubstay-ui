@@ -9,7 +9,7 @@ export class LocationService {
 
   constructor(private http:HttpClient) { }
 
-  public loadAllCity(){
+  public loadAllLocation(){
     return this.http.get(baseUrl+"location/");
   }
 

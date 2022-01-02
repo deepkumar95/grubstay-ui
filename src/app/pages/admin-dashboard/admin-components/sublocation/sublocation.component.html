@@ -1,7 +1,7 @@
 <div class="bootstrap-wrapper">
     <button mat-raised-button color="primary" (click)="addSubLocation()">
         <mat-icon>add</mat-icon>
-        Add Location
+        Add SubLocation
     </button><br>
     <mat-form-field appearance="standard" class="full-width">
         <mat-label>Search Location</mat-label>
@@ -16,7 +16,7 @@
                 <ng-container matColumnDef="actions">
                     <th mat-header-cell *matHeaderCellDef> Actions </th>
                     <td mat-cell *matCellDef="let subLocation">
-                        <button mat-icon-button (click)="editItem(subLocation.subLocationId)">
+                        <button mat-icon-button (click)="editSubLocation(subLocation.subLocationId)">
                             <mat-icon mat-fav-icon>edit</mat-icon>
                         </button>
                         <button mat-icon-button (click)="deleteLocation(subLocation.subLocationId)">
