@@ -52,6 +52,39 @@ import { TextUpperCaseDirective } from './text-upper-case.directive';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { SublocationDialogComponent } from './pages/admin-dashboard/admin-components/sublocation/sublocation-components/sublocation-dialog/sublocation-dialog.component';
+import { NgxUiLoaderModule, NgxUiLoaderConfig,NgxUiLoaderRouterModule} from "ngx-ui-loader";
+
+const ngxUiLoaderConfig:NgxUiLoaderConfig =
+{
+  "bgsColor": "rgb(187, 6, 66)",
+  "bgsOpacity": 0.5,
+  "bgsPosition": "bottom-right",
+  "bgsSize": 60,
+  "bgsType": "ball-spin-clockwise",
+  "blur": 5,
+  "delay": 0,
+  "fastFadeOut": true,
+  "fgsColor": "rgb(187, 6, 66)",
+  "fgsPosition": "center-center",
+  "fgsSize": 60,
+  "fgsType": "ball-spin-clockwise",
+  "gap": 24,
+  "logoPosition": "center-center",
+  "logoSize": 120,
+  "logoUrl": "",
+  "masterLoaderId": "master",
+  "overlayBorderRadius": "0",
+  "overlayColor": "rgba(40, 40, 40, 0.8)",
+  "pbColor": "rgb(187, 6, 66)",
+  "pbDirection": "ltr",
+  "pbThickness": 3,
+  "hasProgressBar": true,
+  "text": "Please Wait",
+  "textColor": "white",
+  "textPosition": "center-center",
+  "maxTime": -1,
+  "minTime": 300
+}
 
 @NgModule({
   declarations: [
@@ -108,7 +141,10 @@ import { SublocationDialogComponent } from './pages/admin-dashboard/admin-compon
     MatTableModule,
     MatDatepickerModule,
     MatSlideToggleModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    NgxUiLoaderModule,
+    NgxUiLoaderModule.forRoot(ngxUiLoaderConfig),
+    NgxUiLoaderRouterModule
   ],
   providers: [],
   bootstrap: [AppComponent]
