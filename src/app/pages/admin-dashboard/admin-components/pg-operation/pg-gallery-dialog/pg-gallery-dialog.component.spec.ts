@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AddPgComponent } from './add-pg.component';
+import { PgGalleryDialogComponent } from './pg-gallery-dialog.component';
 
-describe('AddPgComponent', () => {
-  let component: AddPgComponent;
-  let fixture: ComponentFixture<AddPgComponent>;
+describe('PgGalleryDialogComponent', () => {
+  let component: PgGalleryDialogComponent;
+  let fixture: ComponentFixture<PgGalleryDialogComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AddPgComponent ]
+      declarations: [ PgGalleryDialogComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AddPgComponent);
+    fixture = TestBed.createComponent(PgGalleryDialogComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

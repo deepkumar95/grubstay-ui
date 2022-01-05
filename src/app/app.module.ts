@@ -36,10 +36,8 @@ import { LazyLoadImageModule } from 'ng-lazyload-image';
 import { AdminDashboardComponent } from './pages/admin-dashboard/admin-dashboard.component';
 import { AdminSidebarComponent } from './pages/admin-dashboard/admin-components/admin-sidebar/admin-sidebar.component';
 import { AdminMainComponent } from './pages/admin-dashboard/admin-components/admin-main/admin-main.component';
-import { AddPgComponent } from './pages/admin-dashboard/admin-components/add-pg/add-pg.component';
 import {MatTreeModule} from '@angular/material/tree';
 import { PgTreeComponent } from './pages/admin-dashboard/admin-components/pg-tree/pg-tree.component';
-import { ViewPgComponent } from './pages/admin-dashboard/admin-components/view-pg/view-pg.component';
 import { LocationTreeComponent } from './pages/admin-dashboard/admin-components/location-tree/location-tree.component';
 import { CityComponent } from './pages/admin-dashboard/admin-components/city/city.component';
 import { LocationComponent } from './pages/admin-dashboard/admin-components/location/location.component';
@@ -52,39 +50,44 @@ import { TextUpperCaseDirective } from './text-upper-case.directive';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { SublocationDialogComponent } from './pages/admin-dashboard/admin-components/sublocation/sublocation-components/sublocation-dialog/sublocation-dialog.component';
+import { PgOperationComponent } from './pages/admin-dashboard/admin-components/pg-operation/pg-operation.component';
+import { PgOpDialogComponent } from './pages/admin-dashboard/admin-components/pg-operation/pg-op-dialog/pg-op-dialog.component';
+import {MatRadioModule} from '@angular/material/radio';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 import { NgxUiLoaderModule, NgxUiLoaderConfig,NgxUiLoaderRouterModule} from "ngx-ui-loader";
+import { PgGalleryDialogComponent } from './pages/admin-dashboard/admin-components/pg-operation/pg-gallery-dialog/pg-gallery-dialog.component';
 
 const ngxUiLoaderConfig:NgxUiLoaderConfig =
-{
-  "bgsColor": "rgb(187, 6, 66)",
-  "bgsOpacity": 0.5,
-  "bgsPosition": "bottom-right",
-  "bgsSize": 60,
-  "bgsType": "ball-spin-clockwise",
-  "blur": 5,
-  "delay": 0,
-  "fastFadeOut": true,
-  "fgsColor": "rgb(187, 6, 66)",
-  "fgsPosition": "center-center",
-  "fgsSize": 60,
-  "fgsType": "ball-spin-clockwise",
-  "gap": 24,
-  "logoPosition": "center-center",
-  "logoSize": 120,
-  "logoUrl": "",
-  "masterLoaderId": "master",
-  "overlayBorderRadius": "0",
-  "overlayColor": "rgba(40, 40, 40, 0.8)",
-  "pbColor": "rgb(187, 6, 66)",
-  "pbDirection": "ltr",
-  "pbThickness": 3,
-  "hasProgressBar": true,
-  "text": "Please Wait",
-  "textColor": "white",
-  "textPosition": "center-center",
-  "maxTime": -1,
-  "minTime": 300
-}
+  {
+    "bgsColor": "rgb(187, 6, 66)",
+    "bgsOpacity": 0.5,
+    "bgsPosition": "bottom-right",
+    "bgsSize": 60,
+    "bgsType": "ball-spin-clockwise",
+    "blur": 5,
+    "delay": 0,
+    "fastFadeOut": true,
+    "fgsColor": "rgb(187, 6, 66)",
+    "fgsPosition": "center-center",
+    "fgsSize": 60,
+    "fgsType": "ball-spin-clockwise",
+    "gap": 24,
+    "logoPosition": "center-center",
+    "logoSize": 120,
+    "logoUrl": "",
+    "masterLoaderId": "master",
+    "overlayBorderRadius": "0",
+    "overlayColor": "rgba(40, 40, 40, 0.8)",
+    "pbColor": "rgb(187, 6, 66)",
+    "pbDirection": "ltr",
+    "pbThickness": 3,
+    "hasProgressBar": true,
+    "text": "Please Wait",
+    "textColor": "white",
+    "textPosition": "center-center",
+    "maxTime": -1,
+    "minTime": 300
+  }
 
 @NgModule({
   declarations: [
@@ -104,9 +107,7 @@ const ngxUiLoaderConfig:NgxUiLoaderConfig =
     AdminDashboardComponent,
     AdminSidebarComponent,
     AdminMainComponent,
-    AddPgComponent,
     PgTreeComponent,
-    ViewPgComponent,
     LocationTreeComponent,
     CityComponent,
     LocationComponent,
@@ -115,6 +116,9 @@ const ngxUiLoaderConfig:NgxUiLoaderConfig =
     LocationDialogComponent,
     TextUpperCaseDirective,
     SublocationDialogComponent,
+    PgOperationComponent,
+    PgOpDialogComponent,
+    PgGalleryDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -142,6 +146,8 @@ const ngxUiLoaderConfig:NgxUiLoaderConfig =
     MatDatepickerModule,
     MatSlideToggleModule,
     MatProgressSpinnerModule,
+    MatRadioModule,
+    MatCheckboxModule,
     NgxUiLoaderModule,
     NgxUiLoaderModule.forRoot(ngxUiLoaderConfig),
     NgxUiLoaderRouterModule

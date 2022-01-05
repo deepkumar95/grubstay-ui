@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ViewPgComponent } from './view-pg.component';
+import { PgOperationComponent } from './pg-operation.component';
 
-describe('ViewPgComponent', () => {
-  let component: ViewPgComponent;
-  let fixture: ComponentFixture<ViewPgComponent>;
+describe('PgOperationComponent', () => {
+  let component: PgOperationComponent;
+  let fixture: ComponentFixture<PgOperationComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ViewPgComponent ]
+      declarations: [ PgOperationComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ViewPgComponent);
+    fixture = TestBed.createComponent(PgOperationComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

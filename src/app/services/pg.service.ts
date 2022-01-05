@@ -14,4 +14,20 @@ export class PgService {
   public getPGData(obj:any){
     return this._http.post(this.pgBaseUrl, obj, {});
   }
+
+  public savePgData(data){
+    return this._http.post(this.pgBaseUrl,data);
+  }
+
+  public loadAllPGData(){
+    return this._http.get(this.pgBaseUrl);
+  }
+  
+  public getGalleryByPgId(pgId){
+    return this._http.get(this.pgBaseUrl+"pgGallery/"+pgId);
+  }
+
+  public updatePgData(data){
+    return this._http.put(this.pgBaseUrl,data);
+  }
 }

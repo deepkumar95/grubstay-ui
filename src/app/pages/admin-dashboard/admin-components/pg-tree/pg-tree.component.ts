@@ -14,7 +14,7 @@ const TREE_DATA: PGNode[] = [
   {
     name: 'Paying Guest',
     icon:'',
-    children: [{name: 'View PG',icon:'remove_red_eye'}, {name: 'Add PG',icon:'add'}],
+    children: [{name: 'PG Operation',icon:'edit_location_alt'}, {name: 'Travel Nearby',icon:'edit_location_alt'}],
   }
 ];
 
@@ -65,10 +65,10 @@ export class PgTreeComponent implements OnInit {
 
   navigateTo(item:any){
     this._shared.headerTitleSubject.next(item);
-    if(item === 'View PG'){
-      this._route.navigate(['/admin/view-pg']);
+    if(item === 'PG Operation'){
+      this._route.navigate(['/admin/pg']);
     }
-    if(item === 'Add PG'){
+    if(item === 'Travel Nearby'){
       this._route.navigate(['/admin/add-pg']);
     }
   }
