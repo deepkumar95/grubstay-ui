@@ -1,61 +1,72 @@
 <div class="bootstrap-wrapper">
     <div class="container-fluid">
         <div class="row dialog-header">
-            <h4 style="margin-top:10px;">Login to Sign Up</h4>
-            <h3>Welcome to <span class="logo">GRUBSTAY</span></h3>
+            <div class="col-12 mt-1">
+                <mat-icon mat-dialog-close class="class_button  " style="float:right;">close</mat-icon>
+                <h4 style="margin-top:10px;">Login to Sign Up</h4>
+                <h3>Welcome to <span class="logo">GRUBSTAY</span></h3>
+            </div>
+        <!-- <div class="col-1" style="margin-top:7px;">
+            <mat-icon mat-dialog-close class="class_button  " style="float:right;">close</mat-icon>
         </div>
-        <div class="container mt-10">
-            <div class="row">
-                <div class="col md-12 col-sm-12 col-xs-12 form-group">
-                    <form (ngSubmit)="login()">
-                        <!-- username field -->
-                        <mat-form-field appearance="standard" class="full-width">
-                            <mat-label>Username</mat-label>
-                            <input matInput type='text' autocomplete="new_username" name='username' [(ngModel)]="user.username"
-                                placeholder="Placefolder">
-                        </mat-form-field>
+        <div class="col-12 mt-1">
+            <mat-icon mat-dialog-close class="class_button" style="float:right;">close</mat-icon>
+            <h4 style="margin-top:10px;">Login to Sign Up</h4>
+            <h3>Welcome to <span class="logo">Register</span></h3>
+        </div> -->
+    </div>
+    <div class="container mt-10">
+        <div class="row">
+            <div class="col md-12 col-sm-12 col-xs-12 form-group">
+                <form (ngSubmit)="login()">
+                    <!-- username field -->
+                    <mat-form-field appearance="standard" class="full-width">
+                        <mat-label>Username</mat-label>
+                        <input matInput type='text' autocomplete="new_username" name='username' [(ngModel)]="user.username"
+                            placeholder="Placefolder">
+                    </mat-form-field>
 
-                        <mat-form-field appearance="standard" class="full-width">
-                            <mat-label>Password</mat-label>
-                            <input matInput type='password' name='password' [(ngModel)]="user.password" placeholder="Password">
-                        </mat-form-field>
-                        <div class="container">
-                            <div class="row">
-                                <button type="submit" mat-raised-button color="accent">Login</button>
-                            </div>
+                    <mat-form-field appearance="standard" class="full-width">
+                        <mat-label>Password</mat-label>
+                        <input matInput type='password' name='password' [(ngModel)]="user.password" placeholder="Password">
+                    </mat-form-field>
+                    <div class="container">
+                        <div class="row">
+                            <button type="submit" mat-raised-button color="accent">Login</button>
                         </div>
-                        <h6 class="text-center" style="margin-top:8px; font-size:12px;">We'll give you a call for when
-                            you choose any stay and added in the wishlist <u>Privacy Policy</u></h6>
-                        <div class="full-width">
-                            <table>
-                                <tr>
-                                    <td style="width:49%;">
-                                        <hr style="border:1px solid black;">
-                                    </td>
-                                    <td style="vertical-align:middle; text-align: center; padding:0px 15px;">or</td>
-                                    <td style="width:49%">
-                                        <hr style="border:1px solid black;">
-                                    </td>
-                                </tr>
-                            </table>
+                    </div>
+                    <h6 class="text-center" style="margin-top:8px; font-size:12px;">We'll give you a call for when
+                        you choose any stay and added in the wishlist <u>Privacy Policy</u></h6>
+                    <div class="full-width">
+                        <table>
+                            <tr>
+                                <td style="width:49%;">
+                                    <hr style="border:1px solid black;">
+                                </td>
+                                <td style="vertical-align:middle; text-align: center; padding:0px 15px;">or</td>
+                                <td style="width:49%">
+                                    <hr style="border:1px solid black;">
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="container">
+                        <div class="row">
+                            <button type="submit" mat-raised-button color="primary">Facebook</button>
                         </div>
-                        <div class="container">
-                            <div class="row">
-                                <button type="submit" mat-raised-button color="primary">Facebook</button>
-                            </div>
-                            <div class="row mt-2">
-                                <button type="submit" mat-raised-button color="warn">Google</button>
-                            </div>
-                            <div class="row mt-2">
-                                <button type="submit" mat-raised-button color="accent">Twitter</button>
-                            </div>
+                        <div class="row mt-2">
+                            <button type="submit" mat-raised-button color="warn">Google</button>
                         </div>
-                    </form>
-                </div>
+                        <div class="row mt-2">
+                            <button type="submit" mat-raised-button color="accent">Twitter</button>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
-        <!-- <div class="row"> -->
-        <!-- <div class="col md-12 col-sm-12 col-xs-12 text-center">
+    </div>
+    <!-- <div class="row"> -->
+    <!-- <div class="col md-12 col-sm-12 col-xs-12 text-center">
                 <div class="col md-12 col-sm-12 col-xs-12 text-center">
                     <form (ngSubmit)="login()">
 
@@ -90,5 +101,5 @@
                 </div>
             </div>
         </div> -->
-    </div>
+</div>
 </div>

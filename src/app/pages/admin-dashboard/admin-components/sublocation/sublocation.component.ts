@@ -41,7 +41,8 @@ export class SublocationComponent implements OnInit {
   addSubLocation() {
     this.matDialog.open(SublocationDialogComponent, {
       height:'500px',
-      width:'500px'
+      width:'500px',
+      disableClose: true
     });
   }
   editSubLocation(subLocationId) {
@@ -53,6 +54,7 @@ export class SublocationComponent implements OnInit {
     this.matDialog.open(SublocationDialogComponent, {
       height: '500px',
       width: '500px',
+      disableClose: true,
       data: subLocationData
     });
   }

@@ -1,7 +1,12 @@
 <div class="bootstrap-wrapper">
     <div class="container-fluid">
         <div class="row dialog-header">
-            <h4 style="margin-top:30px;">Add Location</h4>
+            <div class="col-11" style="margin-top:30px;">
+                <h3 style="margin-left:25px">Add Location</h3>
+            </div>
+            <div class="col-1" style="margin-top:7px;">
+                <mat-icon mat-dialog-close class="class_button  " style="float:right;">close</mat-icon>
+            </div>
         </div>
         <div class="container">
             <div class="row">
@@ -11,26 +16,25 @@
                             <div class="col-12">
                                 <mat-form-field appearance="fill">
                                     <mat-label>Select City</mat-label>
-                                    <mat-select [(value)]="selected"  [disabled]="location.operation=='edit'">
-                                      <mat-option *ngFor="let city of cities" [(value)]='city.cityName' (click)="selectCity(city)">
-                                        {{city.cityName}}
-                                      </mat-option>
+                                    <mat-select [(value)]="selected" [disabled]="location.operation=='edit'">
+                                        <mat-option *ngFor="let city of cities" [(value)]='city.cityName' (click)="selectCity(city)">
+                                            {{city.cityName}}
+                                        </mat-option>
                                     </mat-select>
-                                  </mat-form-field>
+                                </mat-form-field>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-8">
                                 <mat-form-field appearance="standard" class="full-width" autocomplete="off">
                                     <mat-label>Location Name</mat-label>
-                                    <input textToUpperCase matInput autocomplete="new_name" type='text' name='location_name' [(ngModel)]="location.locationName" placeholder="Enter Location name" [disabled]="location.operation=='edit'">
+                                    <input textToUpperCase matInput autocomplete="new_name" type='text' name='location_name'
+                                        [(ngModel)]="location.locationName" placeholder="Enter Location name"
+                                        [disabled]="location.operation=='edit'">
                                 </mat-form-field>
                             </div>
                             <div class="col-4">
-                                <mat-slide-toggle
-                                    [(ngModel)]="location.status"
-                                    name="active"
-                                    class="mt-2">
+                                <mat-slide-toggle [(ngModel)]="location.status" name="active" class="mt-2">
                                     Status
                                 </mat-slide-toggle>
                             </div>
@@ -54,12 +58,14 @@
                             </div>
                         </div> -->
 
-                        
+
                         <div class="container text-center mt-10">
                             <div class="row">
-                                <button type="submit" mat-raised-button color="accent" style="align-content:center;" *ngIf="location.operation!='edit'">Add Location</button>&nbsp;
-                                    <button type="submit" mat-raised-button color="accent" style="align-content:center;" *ngIf="location.operation=='edit'">Update Location</button>&nbsp;
-                                    <span class="logo">GRUBSTAY</span>  
+                                <button type="submit" mat-raised-button color="accent" style="align-content:center;"
+                                    *ngIf="location.operation!='edit'">Add Location</button>&nbsp;
+                                <button type="submit" mat-raised-button color="accent" style="align-content:center;"
+                                    *ngIf="location.operation=='edit'">Update Location</button>&nbsp;
+                                <span class="logo">GRUBSTAY</span>
                             </div>
                         </div>
                     </form>

@@ -51,6 +51,7 @@ export class PgOperationComponent implements OnInit {
     });
     pgData.operation='edit';
     const dialogRef = this.dialog.open(PgOpDialogComponent, {
+      disableClose: true,
       data:pgData
     });
     console.log(pgData);
@@ -61,6 +62,7 @@ export class PgOperationComponent implements OnInit {
       return (item.pgId==pgId);
     });
     const dialogRef = this.dialog.open(PgGalleryDialogComponent, {
+      disableClose: true,
       data:pgData
     });
   }
@@ -70,7 +72,9 @@ export class PgOperationComponent implements OnInit {
     
   }
   openPgDialog() {
-    const dialogRef = this.dialog.open(PgOpDialogComponent);
+    const dialogRef = this.dialog.open(PgOpDialogComponent,{
+      disableClose: true
+    });
   }
 
   filterPg(event: Event) {

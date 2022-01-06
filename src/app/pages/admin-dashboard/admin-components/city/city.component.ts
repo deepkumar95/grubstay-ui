@@ -5,7 +5,7 @@ import { CityDialogComponent } from '../../admin-components/city/city-components
 import { CityServiceService } from '../../../../services/city-service.service';
 import { CustomSnackBarService } from '../../../../services/helper/custom-snack-bar.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import * as _ from 'lodash'; 
+import * as _ from 'lodash';
 import { DomSanitizer } from '@angular/platform-browser';
 import { SharedService } from '../../../../services/helper/shared.service';
 
@@ -49,6 +49,7 @@ export class CityComponent implements OnInit {
     const dialogRef = this.dialog.open(CityDialogComponent, {
       width: '500px',
       height: '500px',
+      disableClose: true,
       data:cityData
     });
     console.log(cityData);
@@ -77,7 +78,8 @@ export class CityComponent implements OnInit {
   openCityDialog() {
     const dialogRef = this.dialog.open(CityDialogComponent, {
       width: '500px',
-      height: '500px'
+      height: '500px',
+      disableClose: true
     });
   }
 

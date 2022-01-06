@@ -1,7 +1,11 @@
 <div class="bootstrap-wrapper">
     <div class="container-fluid">
         <div class="row dialog-header">
-            <h4 style="margin-top:30px;">Register</h4>
+            <div class="col-12 mt-1">
+                <mat-icon mat-dialog-close class="class_button" style="float:right;">close</mat-icon>
+                <h4 style="margin-top:10px;">Login to Sign Up</h4>
+                <h3>Welcome to <span class="logo">Register</span></h3>
+            </div>
         </div>
         <div class="container mt-10">
             <div class="row">
@@ -134,10 +138,12 @@
                                 <input matInput type='text' autocomplete="new_user-email" name='email' [(ngModel)]="user.email"
                                     placeholder="Placeholder">
                             </mat-form-field>
-                            <h6 class="text-center" style="margin-top:8px; font-size:12px;">You will receive updates and offer's on your mail</h6>
+                            <h6 class="text-center" style="margin-top:8px; font-size:12px;">You will receive updates
+                                and offer's on your mail</h6>
                             <button type="submit" mat-raised-button color="accent">Agree and Continue</button>
-                            <h6 class="text-center" style="margin-top:8px; font-size:12px;">By selecting agree and continue, I agree the terms and conditions of
-                                    <span class="logo-sm">GRUBSTAY</span>.</h6>
+                            <h6 class="text-center" style="margin-top:8px; font-size:12px;">By selecting agree and
+                                continue, I agree the terms and conditions of
+                                <span class="logo-sm">GRUBSTAY</span>.</h6>
                         </form>
                     </div>
                 </div>

@@ -39,7 +39,7 @@
                 <mat-form-field appearance="standard" class="full-width">
                   <mat-label>Select Sub-Location</mat-label>
                   <mat-select *ngIf="pg.operation!='edit'" name="subLocation" [(ngModel)]="pg.subLocationId">
-                    <mat-option *ngFor="let subLocation of " [(value)]="subLocation.subLocationId">{{subLocation.subLocationName}}</mat-option>
+                    <mat-option *ngFor="let subLocation of subLocations" [(value)]="subLocation.subLocationId">{{subLocation.subLocationName}}</mat-option>
                   </mat-select>
                   <mat-select [(value)]="subLocationSelected" *ngIf="pg.operation=='edit'" [disabled]="true" name="subLocationName">
                     <mat-option *ngFor="let subLocation of subLocations" [(value)]='subLocation.subLocationName'>

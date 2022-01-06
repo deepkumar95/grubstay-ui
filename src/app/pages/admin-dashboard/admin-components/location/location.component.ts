@@ -46,6 +46,7 @@ export class LocationComponent implements OnInit {
     this.matDialog.open(LocationDialogComponent, {
       width: '500px',
       height: '500px',
+      disableClose: true,
       data: locationData
     });
   }
@@ -91,7 +92,8 @@ export class LocationComponent implements OnInit {
   addLocation() {
     const dialogRef = this.matDialog.open(LocationDialogComponent, {
       width: '500px',
-      height: '500px'
+      height: '500px',
+      disableClose: true
     });
   }
   public loadLocationsData() {

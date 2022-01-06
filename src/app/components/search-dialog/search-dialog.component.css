@@ -12,3 +12,13 @@
 .result-content p{
     margin-top: 15px;
 }
+.dialog-header{
+    height: 70px;
+    color: white;
+    background:#3F51B5;
+    text-align: center;
+}
+.mat-form-field {
+    font-size: 12px;
+    width: 100%;
+}

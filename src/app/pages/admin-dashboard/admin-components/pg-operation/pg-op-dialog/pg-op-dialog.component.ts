@@ -85,10 +85,10 @@ export class PgOpDialogComponent implements OnInit {
         self.subLocationSelected = self.pg.subLocation.subLocationName;
         self.loadAmenAndRoomFacs(self.pg);
       }
-      else {
-        self.amenities = this.amenitiesList;
-        self.roomFacilities = this.roomFacilitiesList;
-      }
+    }
+    else {
+      self.amenities = this.amenitiesList;
+      self.roomFacilities = this.roomFacilitiesList;
     }
   }
   addPg() {
@@ -126,6 +126,8 @@ export class PgOpDialogComponent implements OnInit {
         this._snackBar.errorSnackBar('Atleast one image is required for PG !');
         return;
       }
+      self.pg.amenitiesServices={};
+      self.pg.roomFacility={};
       self.amenities.forEach(element => {
         self.pg.amenitiesServices[element.code] = true;
       })
@@ -211,7 +213,7 @@ export class PgOpDialogComponent implements OnInit {
           }
           else {
             let savedStaus = response.success;
-            if (savedStaus == 'saved') {
+            if (savedStaus == 'success') {
               self._snackBar.successSnackBar("PG updated successfully");
               self.dialogRef.close();
             }
@@ -393,6 +395,7 @@ export class PgOpDialogComponent implements OnInit {
     roomKeys.forEach(e1 => {
       self.roomFacilitiesList.forEach(element => {
         if (e1 == element.code) {
+          self.pg.roomFacility[element.code]=true;
           self.roomFacilities.push(element);
         }
       })

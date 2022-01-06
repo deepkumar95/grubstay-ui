@@ -27,6 +27,7 @@ export class HomeComponent implements OnInit {
     const dialogRef = this.dialog.open(SearchDialogComponent,{
       height: '600px',
       width: '500px',
+      disableClose: true 
     });
 
     dialogRef.afterClosed().subscribe(result => {
