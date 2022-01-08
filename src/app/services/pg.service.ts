@@ -30,4 +30,8 @@ export class PgService {
   public updatePgData(data){
     return this._http.put(this.pgBaseUrl,data);
   }
+
+  public deletePgData(pgId){
+    return this._http.delete(this.pgBaseUrl+pgId);
+  }
 }

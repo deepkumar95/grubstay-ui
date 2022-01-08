@@ -67,9 +67,28 @@ export class PgOperationComponent implements OnInit {
     });
   }
 
-  public deleteItem(pgId) {
+  public deletePg(pgId) {
     let self=this;
-    
+    if(pgId){
+      let confirm = window.confirm("Are you sure..You want to delete this Record");
+      if(confirm){
+        self._pgService.deletePgData(pgId).subscribe((response:any)=>{
+          if(response.error && response.error != ''){
+            self._snackbarService.errorSnackBar("deletion failed...try again!");
+            return;
+          }else{
+            self._snackbarService.successSnackBar("Delted Successfully...");
+            self._sharedService.redirectTo("/admin/pg");
+          }
+        },(error:any)=>{
+          self._snackbarService.errorSnackBar("deletion failed...try again!");
+          return;
+        })
+      }else{
+        self._snackbarService.errorSnackBar("deletion failed...try again!");
+          return;
+      }
+    }
   }
   openPgDialog() {
     const dialogRef = this.dialog.open(PgOpDialogComponent,{

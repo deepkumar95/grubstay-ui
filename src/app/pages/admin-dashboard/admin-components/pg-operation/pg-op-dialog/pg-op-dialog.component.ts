@@ -3,6 +3,7 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dial
 import { element } from 'protractor';
 import { CityServiceService } from 'src/app/services/city-service.service';
 import { CustomSnackBarService } from 'src/app/services/helper/custom-snack-bar.service';
+import { SharedService } from 'src/app/services/helper/shared.service';
 import { LocationService } from 'src/app/services/location.service';
 import { PgService } from 'src/app/services/pg.service';
 import { SubLocationService } from 'src/app/services/sub-location.service';
@@ -70,7 +71,7 @@ export class PgOpDialogComponent implements OnInit {
   ];
 
   constructor(private _cityService: CityServiceService, private _locationService: LocationService, private _snackBarService: CustomSnackBarService, private _snackBar: CustomSnackBarService, private _pg: PgService, private _subLocationService: SubLocationService,
-    private dialogRef: MatDialogRef<PgOpDialogComponent>, @Inject(MAT_DIALOG_DATA) public data: PG) { }
+    private dialogRef: MatDialogRef<PgOpDialogComponent>, @Inject(MAT_DIALOG_DATA) public data: PG,private _shared:SharedService) { }
 
   ngOnInit(): void {
     var self = this; 
@@ -155,6 +156,7 @@ export class PgOpDialogComponent implements OnInit {
       pgForm.append('weekly', self.pg.weekly);
       pgForm.append('monthly', self.pg.monthly);
       pgForm.append('daily', self.pg.daily);
+      pgForm.append('status',self.pg.status);
       pgForm.append('singleMemPgPrc', self.pg.singleMemPgPrc ? self.pg.singleMemPgPrc : 0);
       pgForm.append('doubleMemPgPrc', self.pg.doubleMemPgPrc ? self.pg.doubleMemPgPrc : 0);
       pgForm.append('tripleMemPgPrc', self.pg.tripleMemPgPrc ? self.pg.tripleMemPgPrc : 0);
@@ -191,6 +193,7 @@ export class PgOpDialogComponent implements OnInit {
             if (savedStaus == 'saved') {
               self._snackBar.successSnackBar("PG saved successfully");
               self.dialogRef.close();
+              self._shared.redirectTo("/admin/pg");
             } else if (savedStaus == 'duplicate') {
               self._snackBar.errorSnackBar("PG already exist...!");
               return;
@@ -216,6 +219,7 @@ export class PgOpDialogComponent implements OnInit {
             if (savedStaus == 'success') {
               self._snackBar.successSnackBar("PG updated successfully");
               self.dialogRef.close();
+              self._shared.redirectTo("/admin/pg");
             }
             else {
               self._snackBar.errorSnackBar("PG updation failed...try again !");
@@ -401,4 +405,5 @@ export class PgOpDialogComponent implements OnInit {
       })
     })
   }
+
 }

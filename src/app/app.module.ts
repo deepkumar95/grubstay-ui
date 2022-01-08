@@ -56,6 +56,7 @@ import {MatRadioModule} from '@angular/material/radio';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { NgxUiLoaderModule, NgxUiLoaderConfig,NgxUiLoaderRouterModule} from "ngx-ui-loader";
 import { PgGalleryDialogComponent } from './pages/admin-dashboard/admin-components/pg-operation/pg-gallery-dialog/pg-gallery-dialog.component';
+import {MatNativeDateModule} from '@angular/material/core';
 
 const ngxUiLoaderConfig:NgxUiLoaderConfig =
   {
@@ -150,7 +151,8 @@ const ngxUiLoaderConfig:NgxUiLoaderConfig =
     MatCheckboxModule,
     NgxUiLoaderModule,
     NgxUiLoaderModule.forRoot(ngxUiLoaderConfig),
-    NgxUiLoaderRouterModule
+    NgxUiLoaderRouterModule,
+    MatNativeDateModule
   ],
   providers: [],
   bootstrap: [AppComponent]

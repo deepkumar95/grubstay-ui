@@ -23,7 +23,7 @@ export class LocationDialogComponent implements OnInit {
     locationId: '',
     locationName: '',
     position: 0,
-    status: ''
+    status: false
   }
 
   city: any = {
