@@ -6,6 +6,8 @@ import { LocationService } from '../../services/location.service';
 import { CustomSnackBarService } from '../../services/helper/custom-snack-bar.service';
 import { DomSanitizer } from '@angular/platform-browser';
 import * as _ from 'lodash';
+import { HomeService } from '../../services/home.service';
+import { LocationDialogComponent } from '../../pages/admin-dashboard/admin-components/location/location-components/location-dialog/location-dialog.component';
 
 export interface Data {
   city:string,
@@ -34,26 +36,9 @@ export class SearchDialogComponent implements OnInit {
     nearby:'',
     stayPlan:''
   }
-  // searchResult = [
-  //   {city:'Banglore', location:'HSR Layout', cityPic:'../../../assets/imgs/city/banglore.jpg'},
-  //   {city:'Banglore', location:'HSR Layout', cityPic:'../../../assets/imgs/city/banglore.jpg'},
-  //   {city:'Banglore', location:'HSR Layout', cityPic:'../../../assets/imgs/city/banglore.jpg'},
-  //   {city:'Banglore', location:'HSR Layout', cityPic:'../../../assets/imgs/city/banglore.jpg'},
-  //   {city:'Banglore', location:'HSR Layout', cityPic:'../../../assets/imgs/city/banglore.jpg'},
-  //   {city:'Banglore', location:'HSR Layout', cityPic:'../../../assets/imgs/city/banglore.jpg'},
-  //   {city:'Banglore', location:'HSR Layout', cityPic:'../../../assets/imgs/city/banglore.jpg'},
-  //   {city:'Banglore', location:'HSR Layout', cityPic:'../../../assets/imgs/city/banglore.jpg'},
-  //   {city:'Banglore', location:'HSR Layout', cityPic:'../../../assets/imgs/city/banglore.jpg'},
-  //   {city:'Banglore', location:'HSR Layout', cityPic:'../../../assets/imgs/city/banglore.jpg'},
-  //   {city:'Banglore', location:'HSR Layout', cityPic:'../../../assets/imgs/city/banglore.jpg'},
-  //   {city:'Banglore', location:'HSR Layout', cityPic:'../../../assets/imgs/city/banglore.jpg'},
-  //   {city:'Banglore', location:'HSR Layout', cityPic:'../../../assets/imgs/city/banglore.jpg'},
-  //   {city:'Banglore', location:'HSR Layout', cityPic:'../../../assets/imgs/city/banglore.jpg'},
-  //   {city:'Banglore', location:'HSR Layout', cityPic:'../../../assets/imgs/city/banglore.jpg'}
-  // ]
 
   constructor(private _shared:SharedService, private router:Router,private dialogRef:MatDialogRef<SearchDialogComponent>, private _locationService:LocationService,
-    private _snackBarService:CustomSnackBarService, public domSanitizer:DomSanitizer) { }
+    private _snackBarService:CustomSnackBarService, public domSanitizer:DomSanitizer, public _homeService:HomeService) { }
 
   ngOnInit(): void {
     this.loadDataForSearch();
@@ -62,12 +47,35 @@ export class SearchDialogComponent implements OnInit {
 
   public selectItem(item:any){
     this.search.name = item.location;
+    if(item.location && item.location!='' && item.city && item.city!=''){
+      this.loadNearByLocation(item.location, item.city);
+    }
     this.itemSelected = true;
   }
 
   public searchNameChange(filterString){
     this.filterData(filterString);
     this.itemSelected = false;
+  }
+  loadNearByLocation(location, city){
+    let data:any={};
+    data.locationName=location;
+    data.cityName=city;
+    this._homeService.loadNearByLocations(data).subscribe((response:any)=>{
+      if(response.error && response.error!=''){
+        this._snackBarService.errorSnackBar("Something went wrong!");
+        return;
+      }else{
+        let responseData=response.data;
+        if(responseData){
+          console.log(responseData);
+        }
+      }
+    },
+    (error)=>{
+      this._snackBarService.errorSnackBar("Something went wrong!");
+      return;
+    });
   }
   public filterData(filterString){
     let self=this;
@@ -93,7 +101,7 @@ export class SearchDialogComponent implements OnInit {
   public searchSubmit(){
     var self = this;
     self.dialogRef.close();
-    if(self.search.name && self.search.stayType && self.search.gender && self.search.stayPlan){
+    if(self.search.name){
       let filterData:any = {};
       filterData.location = self.search.name;
       filterData.stayType = self.search.stayType;
