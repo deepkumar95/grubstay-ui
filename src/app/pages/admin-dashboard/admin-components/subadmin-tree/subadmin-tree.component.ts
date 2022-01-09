@@ -1,20 +1,21 @@
 import { Component, OnInit } from '@angular/core';
-import {FlatTreeControl} from '@angular/cdk/tree';
-import {MatTreeFlatDataSource, MatTreeFlattener} from '@angular/material/tree';
-import { SharedService } from 'src/app/services/helper/shared.service';
+import { FlatTreeControl } from '@angular/cdk/tree';
+import { MatTreeFlattener, MatTreeFlatDataSource } from '@angular/material/tree';
+import { SharedService } from '../../../../services/helper/shared.service';
 import { Router } from '@angular/router';
+import {Location} from '@angular/common'; 
 
-interface PGNode {
+interface SubAdminNode {
   name: string;
   icon: string;
-  children?: PGNode[];
+  children?: SubAdminNode[];
 }
 
-const TREE_DATA: PGNode[] = [
+const TREE_DATA: SubAdminNode[] = [
   {
-    name: 'Paying Guest',
+    name: 'Sub Admin',
     icon:'',
-    children: [{name: 'PG Operation',icon:'edit_location_alt'}, {name: 'Travel Nearby',icon:'edit_location_alt'}],
+    children: [{name: 'Sub-Admin Operation',icon:'edit_location_alt'}],
   }
 ];
 
@@ -26,13 +27,13 @@ interface ExampleFlatNode {
 }
 
 @Component({
-  selector: 'app-pg-tree',
-  templateUrl: './pg-tree.component.html',
-  styleUrls: ['./pg-tree.component.css']
+  selector: 'app-subadmin-tree',
+  templateUrl: './subadmin-tree.component.html',
+  styleUrls: ['./subadmin-tree.component.css']
 })
-export class PgTreeComponent implements OnInit {
+export class SubadminTreeComponent implements OnInit {
 
-  private _transformer = (node: PGNode, level: number) => {
+  private _transformer = (node: SubAdminNode, level: number) => {
     return {
       expandable: !!node.children && node.children.length > 0,
       name: node.name,
@@ -55,7 +56,7 @@ export class PgTreeComponent implements OnInit {
 
   dataSource = new MatTreeFlatDataSource(this.treeControl, this.treeFlattener);
 
-  constructor(private _shared:SharedService,private _route:Router) { 
+  constructor(private _shared:SharedService,private _route:Router, private location:Location) { 
     this.dataSource.data = TREE_DATA;
   }
   hasChild = (_: number, node: ExampleFlatNode) => node.expandable;
@@ -65,11 +66,8 @@ export class PgTreeComponent implements OnInit {
 
   navigateTo(item:any){
     this._shared.headerTitleSubject.next(item);
-    if(item === 'PG Operation'){
-      this._route.navigate(['/admin/pg']);
-    }
-    if(item === 'Travel Nearby'){
-      this._route.navigate(['/admin/traverl-nearby']);
+    if(item === 'Sub-Admin Operation'){
+      this._route.navigate(['/admin/sub-admin']);
     }
   }
 

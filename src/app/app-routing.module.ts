@@ -10,6 +10,8 @@ import { LocationComponent } from './pages/admin-dashboard/admin-components/loca
 import { CityComponent } from './pages/admin-dashboard/admin-components/city/city.component';
 import { SublocationComponent } from './pages/admin-dashboard/admin-components/sublocation/sublocation.component';
 import { PgOperationComponent } from './pages/admin-dashboard/admin-components/pg-operation/pg-operation.component';
+import { SubAdminComponent } from './pages/admin-dashboard/admin-components/sub-admin/sub-admin.component';
+import { TraverlNearByComponent } from './pages/admin-dashboard/admin-components/traverl-near-by/traverl-near-by.component';
 
 const routes: Routes = [
   {
@@ -56,6 +58,14 @@ const routes: Routes = [
       {
         path:'sub-location',
         component:SublocationComponent
+      },
+      {
+        path:'sub-admin',
+        component:SubAdminComponent
+      },
+      {
+        path:'traverl-nearby',
+        component:TraverlNearByComponent
       }
     ]
   },

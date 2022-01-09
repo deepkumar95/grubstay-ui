@@ -1,0 +1,136 @@
+<div class="bootstrap-wrapper">
+    <div class="container-fluid">
+        <div class="row dialog-header">
+            <div class="col-11" style="margin-top:30px;">
+                <h3 style="margin-left:25px">Add LandMark</h3>
+            </div>
+            <div class="col-1" style="margin-top:7px;">
+                <mat-icon mat-dialog-close class="class_button  " style="float:right;">close</mat-icon>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div style="padding:20px;">
+                    <form (ngSubmit)="addTravelNearBy()">
+                        <div class="row">
+                            <div class="col-6">
+                              <mat-form-field appearance="standard" class="full-width">
+                                <mat-label>Select City</mat-label>
+                                <mat-select *ngIf="travelNearBy.operation!='edit'" name="cityName" [(ngModel)]="travelNearBy.cityId">
+                                  <mat-option *ngFor="let city of cities" (click)="loadLocationsData(city.cityId)" [(value)]='city.cityId'>
+                                    {{city.cityName}}
+                                  </mat-option>
+                                </mat-select>
+                                <mat-select [(value)]="citySelected" *ngIf="travelNearBy.operation=='edit'" [disabled]="true" name="cityName">
+                                  <mat-option *ngFor="let city of cities" [(value)]='city.cityName'>
+                                    {{city.cityName}}
+                                  </mat-option>
+                                </mat-select>
+                              </mat-form-field>
+                            </div>
+                            <div class="col-6">
+                              <mat-form-field appearance="standard" class="full-width">
+                                <mat-label>Select Location</mat-label>
+                                <mat-select *ngIf="travelNearBy.operation!='edit'" name="locationName" [(ngModel)]="travelNearBy.locationId">
+                                    <mat-option *ngFor="let location of locations" (click)="loadSubLocationData(location.locationId);" [(value)]='location.locationId'>
+                                      {{location.locationName}}
+                                    </mat-option>
+                                  </mat-select>
+                                  <mat-select [(value)]="locationSelected" *ngIf="travelNearBy.operation=='edit'" [disabled]="true" name="locationName">
+                                      <mat-option *ngFor="let location of locations" [(value)]='location.locationName'>
+                                        {{location.locationName}}
+                                      </mat-option>
+                                    </mat-select>
+                              </mat-form-field>
+                            </div>
+                            <div class="col-6">
+                              <mat-form-field appearance="standard" class="full-width">
+                                <mat-label>Select Sub-Location</mat-label>
+                                <mat-select *ngIf="travelNearBy.operation!='edit'" name="subLocation" [(ngModel)]="travelNearBy.subLocationId">
+                                  <mat-option *ngFor="let subLocation of subLocations" (click)="loadStayData(subLocation.subLocationId);" [(value)]="subLocation.subLocationId">{{subLocation.subLocationName}}</mat-option>
+                                </mat-select>
+                                <mat-select [(value)]="subLocationSelected" *ngIf="travelNearBy.operation=='edit'" [disabled]="true" name="subLocationName">
+                                  <mat-option *ngFor="let subLocation of subLocations" [(value)]='subLocation.subLocationName'>
+                                    {{subLocation.subLocationName}}
+                                  </mat-option>
+                                </mat-select>
+                              </mat-form-field>
+                            </div>
+                            <div class="col-6">
+                                <mat-form-field appearance="standard" class="full-width">
+                                  <mat-label>Select Stay</mat-label>
+                                  <mat-select *ngIf="travelNearBy.operation!='edit'" name="stayName" [(ngModel)]="travelNearBy.stayId">
+                                      <mat-option *ngFor="let stay of stays" [(value)]='stay.stayId'>
+                                        {{stay.stayName}}
+                                      </mat-option>
+                                    </mat-select>
+                                    <mat-select [(value)]="staySelected" *ngIf="travelNearBy.operation=='edit'" [disabled]="true" name="locationName">
+                                        <mat-option *ngFor="let stay of stays" [(value)]='stay.stayName'>
+                                          {{stay.stayName}}
+                                        </mat-option>
+                                      </mat-select>
+                                </mat-form-field>
+                              </div>
+                          </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <mat-form-field appearance="standard" class="full-width" autocomplete="off">
+                                    <mat-label>Landmark Name</mat-label>
+                                    <input textToUpperCase matInput autocomplete="new_name" type='text' name='landMarkName'
+                                        [(ngModel)]="travelNearBy.landMarkName" placeholder="Enter Landmark name"
+                                        [disabled]="travelNearBy.operation=='edit'">
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <!-- cityname field -->
+
+                        <!-- city select file-->
+                        <!-- <div class="row">
+                            <div class="col-8">
+                                <label for="formFileSm" class="form-label">City Image</label>
+                                <input (change)="onSelectImage($event)" class="form-control form-control-sm" id="city_image" type="file">
+                                <h6 style="margin-top:8px; font-size:12px;">{{imageName}}</h6>
+                            </div>
+                            <div class="col-4">
+                                <div *ngIf="imageUrl" class="image-preview mt-2">
+                                    <img [src]="imageUrl">
+                                </div>
+                                <div class="image-preview mt-2" *ngIf="city.operation=='edit' && imageUrl==''">
+                                    <img [src]="sanitizer.bypassSecurityTrustUrl(city.cityImage)" alt="">
+                                </div>
+                            </div>
+                        </div> -->
+                        <!-- city select file-->
+                        <div class="row">
+                            <div class="col-8">
+                                <label for="formFileSm" class="form-label">City Image</label>
+                                <input (change)="onSelectImage($event)" class="form-control form-control-sm" id="city_image" type="file">
+                                <h6 style="margin-top:8px; font-size:12px;">{{travelNearBy.landMarkImageName}}</h6>
+                            </div>
+                            <div class="col-4">
+                                <div *ngIf="imageUrl" class="image-preview mt-2">
+                                    <img [src]="imageUrl">
+                                </div>
+                                <!-- <div class="image-preview mt-2" *ngIf="city.operation=='edit' && imageUrl==''">
+                                    <img [src]="sanitizer.bypassSecurityTrustUrl(city.cityImage)" alt="">
+                                </div> -->
+                            </div>
+                        </div>
+
+
+
+                        <div class="container text-center mt-10">
+                            <div class="row">
+                                <button type="submit" mat-raised-button color="accent" style="align-content:center;"
+                                    *ngIf="travelNearBy.operation!='edit'">Add LandMark</button>&nbsp;
+                                <button type="submit" mat-raised-button color="accent" style="align-content:center;"
+                                    *ngIf="travelNearBy.operation=='edit'">Update LandMark</button>&nbsp;
+                                <span class="logo">GRUBSTAY</span>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

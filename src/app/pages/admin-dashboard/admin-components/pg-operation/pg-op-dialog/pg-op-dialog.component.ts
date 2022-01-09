@@ -161,6 +161,7 @@ export class PgOpDialogComponent implements OnInit {
       pgForm.append('doubleMemPgPrc', self.pg.doubleMemPgPrc ? self.pg.doubleMemPgPrc : 0);
       pgForm.append('tripleMemPgPrc', self.pg.tripleMemPgPrc ? self.pg.tripleMemPgPrc : 0);
       pgForm.append('distFromSubLoc', self.pg.distFromSubLoc ? self.pg.distFromSubLoc : 0);
+      pgForm.append('status', self.pg.status);
       if(self.pg.operation == 'edit'){
         pgForm.append('subLocationId', self.pg.subLocation.subLocationId);
       }else{

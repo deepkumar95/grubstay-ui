@@ -57,6 +57,10 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import { NgxUiLoaderModule, NgxUiLoaderConfig,NgxUiLoaderRouterModule} from "ngx-ui-loader";
 import { PgGalleryDialogComponent } from './pages/admin-dashboard/admin-components/pg-operation/pg-gallery-dialog/pg-gallery-dialog.component';
 import {MatNativeDateModule} from '@angular/material/core';
+import { SubadminTreeComponent } from './pages/admin-dashboard/admin-components/subadmin-tree/subadmin-tree.component';
+import { SubAdminComponent } from './pages/admin-dashboard/admin-components/sub-admin/sub-admin.component';
+import { TraverlNearByComponent } from './pages/admin-dashboard/admin-components/traverl-near-by/traverl-near-by.component';
+import { TravelNearByDialogComponent } from './pages/admin-dashboard/admin-components/traverl-near-by/travel-near-by-components/travel-near-by-dialog/travel-near-by-dialog.component';
 
 const ngxUiLoaderConfig:NgxUiLoaderConfig =
   {
@@ -120,6 +124,10 @@ const ngxUiLoaderConfig:NgxUiLoaderConfig =
     PgOperationComponent,
     PgOpDialogComponent,
     PgGalleryDialogComponent,
+    SubadminTreeComponent,
+    SubAdminComponent,
+    TraverlNearByComponent,
+    TravelNearByDialogComponent
   ],
   imports: [
     BrowserModule,
