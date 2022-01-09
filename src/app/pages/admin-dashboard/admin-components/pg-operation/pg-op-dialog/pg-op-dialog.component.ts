@@ -347,6 +347,7 @@ export class PgOpDialogComponent implements OnInit {
         this._snackBar.errorSnackBar('Only 4 or less than 4 files are allowed..');
         let fileInput: any = document.getElementById(event.target.id);
         fileInput.value = '';
+        this.pgGallery = [];
         return;
       }
       for (let i = 0; i < files.length; i++) {
@@ -355,6 +356,7 @@ export class PgOpDialogComponent implements OnInit {
           this._snackBar.errorSnackBar(files[i].name + ': File type should be JPEG/PNG/JPG');
           let fileInput: any = document.getElementById(event.target.id);
           fileInput.value = '';
+          this.pgGallery = [];
           fileIsValid = false;
           return;
         }
@@ -363,6 +365,7 @@ export class PgOpDialogComponent implements OnInit {
           this._snackBar.errorSnackBar(files[i].name + ': File is too large...Please change the image!');
           let fileInput: any = document.getElementById(event.target.id);
           fileInput.value = '';
+          this.pgGallery = [];
           fileIsValid = false;
           return;
         }

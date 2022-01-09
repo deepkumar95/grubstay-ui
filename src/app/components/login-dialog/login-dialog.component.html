@@ -50,18 +50,18 @@
                             </tr>
                         </table>
                     </div>
-                    <div class="container">
-                        <div class="row">
-                            <button type="submit" mat-raised-button color="primary">Facebook</button>
-                        </div>
-                        <div class="row mt-2">
-                            <button type="submit" mat-raised-button color="warn">Google</button>
-                        </div>
-                        <div class="row mt-2">
-                            <button type="submit" mat-raised-button color="accent">Twitter</button>
-                        </div>
-                    </div>
                 </form>
+                <div class="container">
+                    <div class="row">
+                        <button (click)="openSignupDialog()" mat-flat-button color="basic">Signup Manually</button>
+                    </div>
+                    <!-- <div class="row mt-2">
+                        <button type="submit" mat-raised-button color="warn">Google</button>
+                    </div>
+                    <div class="row mt-2">
+                        <button type="submit" mat-raised-button color="accent">Twitter</button>
+                    </div> -->
+                </div>
             </div>
         </div>
     </div>

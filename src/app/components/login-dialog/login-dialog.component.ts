@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { MatDialog, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { SignupDialogComponent } from '../signup-dialog/signup-dialog.component';
 
 @Component({
   selector: 'app-login-dialog',
@@ -13,7 +14,7 @@ export class LoginDialogComponent implements OnInit {
     username: '',
     password:''
   };
-  constructor(public dialogRef: MatDialogRef<LoginDialogComponent>, private snackBar:MatSnackBar) { }
+  constructor(public dialogRef: MatDialogRef<LoginDialogComponent>, private snackBar:MatSnackBar,private dialog:MatDialog) { }
 
   ngOnInit(): void {
   }
@@ -34,6 +35,15 @@ export class LoginDialogComponent implements OnInit {
       return;
     }
     alert("Registration Successfully Done!");
+  }
+
+  openSignupDialog(){
+    this.dialogRef.close();
+    const dialogRef = this.dialog.open(SignupDialogComponent, {
+      width: '500px',
+      height: '600px',
+      disableClose: true 
+    });
   }
 
 }
