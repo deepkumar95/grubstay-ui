@@ -6,7 +6,7 @@
               <ng-template [width]="100" carouselSlide [id]="slide.id">
                 <mat-card class="example-card">
                     <div class="img-sec">
-                        <img [src]="slide.src" [alt]="slide.alt" [title]="slide.title">
+                        <img [src]="sanitizer.bypassSecurityTrustUrl(slide.src)" [alt]="slide.alt" [title]="slide.title">
                     </div>
                     <h6 class="text-center city-name">{{slide.title}}</h6>
                     <p class="text-center stays-no">{{slide.stayNo}} Stays</p>

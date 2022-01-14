@@ -1,5 +1,5 @@
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { SharedService } from 'src/app/services/helper/shared.service';
@@ -7,6 +7,7 @@ import { PgService } from 'src/app/services/pg.service';
 import { CustomSnackBarService } from '../../services/helper/custom-snack-bar.service';
 import { ActivatedRoute } from '@angular/router';
 import { DomSanitizer } from '@angular/platform-browser';
+import {MatMenuTrigger} from '@angular/material/menu';
 
 export interface PG{
   pgId:number,
@@ -28,6 +29,7 @@ export interface PG{
   styleUrls: ['./stay-pg.component.css']
 })
 export class StayPgComponent implements OnInit {
+  @ViewChild('menuTrigger') menuTrigger: MatMenuTrigger;
 
   fav: boolean = true;
   _sanitizer:any;

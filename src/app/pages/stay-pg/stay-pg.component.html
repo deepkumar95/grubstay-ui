@@ -1,146 +1,189 @@
 <div *ngIf="isHandset$ | async">
-    <div class="bootstrap-wrapper">
+  <div class="bootstrap-wrapper">
+    <div class="container-fluid">
+      <div class="filter">
+        filters
+      </div>
+      <div class="location-heading">
+        <h5>Stays in HSR Layout</h5>
+        <p>1000 stays Available</p>
+      </div>
+    </div>
+    <mat-divider></mat-divider>
+    <div class="pg">
+      <div *ngFor="let pg of pgArray">
         <div class="container-fluid">
-            <div class="filter">
-                filters
+          <div class="pg-card">
+            <div class="row">
+              <div class="col-4 col-md-4 col-sm-4 col-xs-4">
+                <div class="pg-img">
+                    <img [routerLink]="['/pg/1']" routerLinkActive="router-link-active"
+                    [src]="_sanitizer.bypassSecurityTrustUrl(pg.pgImage)" [alt]="pg.pgImageName">
+                </div>
+              </div>
+              <div class="col-6 col-md-6 col-sm-6 col-xs-6">
+                <div class="pg-content">
+                  <h6 [routerLink]="['/pg/1']" routerLinkActive="router-link-active">{{pg.heading}}</h6>
+                  <p>{{pg.location}}</p>
+                </div>
+                <div class="gender">
+                  <div *ngIf="pg.gender=='male'" class="both">
+                    <div class="male mr-10">Boys</div>
+                  </div>
+                  <div *ngIf="pg.gender=='female'" class="both">
+                    <div class="female">Girls</div>
+                  </div>
+                  <div *ngIf="pg.gender=='both'" class="both">
+                    <div class="male mr-10">Boys</div>
+                    <div class="female">Girls</div>
+                  </div>
+                </div>
+                <div class="distance">
+                  <h7>Distance {{pg.distance}}</h7>
+                </div>
+                <div class="reviews">
+                  <h7>Reviews {{pg.reviews}} <mat-icon style="color: #FFC83D;">star</mat-icon>
+                  </h7>
+                </div>
+              </div>
+              <div class="col-2 col-md-2 col-sm-2 col-xs-2">
+                <div class="fav-icon" *ngIf="false">
+                  <button mat-icon-button (click)="toggleFav()">
+                    <mat-icon *ngIf="!fav">favorite_border</mat-icon>
+                    <mat-icon class="favorite" *ngIf="fav">favorite</mat-icon>
+                  </button>
+                </div>
+              </div>
             </div>
-            <div class="location-heading">
-                <h5>Stays in HSR Layout</h5>
-                <p>1000 stays Available</p>
-            </div>
+          </div>
+        </div>
+        <div class="price-sec">
+          <div class="price">
+            <h6>Starting From*</h6>
+            <h7>{{pg.price}} /monthly</h7>
+          </div>
+          <div class="contact">
+            <button [matMenuTriggerFor]="menu" #menuTrigger mat-raised-button>Contact</button>
+            <mat-menu #menu="matMenu" yPosition="above" xPosition="before">
+              <a href="" mat-button>
+                <mat-icon>whatsapp</mat-icon>
+              </a>
+              <a href="" mat-button>
+                <mat-icon>textsms</mat-icon>
+              </a>
+            </mat-menu>
+          </div>
         </div>
         <mat-divider></mat-divider>
-        <div class="pg">
-            <div *ngFor="let pg of pgArray">
-                <div class="container-fluid">
-                    <div class="pg-card">
-                        <div class="row">
-                            <div class="col-4 col-md-4 col-sm-4 col-xs-4">
-                                <div class="pg-img">
-                                    <img [routerLink]="['/pg/1']" routerLinkActive="router-link-active"  src="{{pg.pgImg}}" alt="">
-                                </div>
-                            </div>
-                            <div class="col-6 col-md-6 col-sm-6 col-xs-6">
-                                <div class="pg-content">
-                                    <h6 [routerLink]="['/pg/1']" routerLinkActive="router-link-active" >{{pg.heading}}</h6>
-                                    <p>{{pg.location}}</p>
-                                </div>
-                                <div class="gender">
-                                    <div *ngIf="pg.gender=='male'" class="both"><div class="male mr-10">Boys</div></div>
-                                    <div *ngIf="pg.gender=='female'" class="both"><div class="female">Girls</div></div>
-                                    <div *ngIf="pg.gender=='both'" class="both">
-                                        <div class="male mr-10">Boys</div>
-                                        <div class="female">Girls</div>
-                                    </div>
-                                </div>
-                                <div class="distance">
-                                    <h7>Distance {{pg.distance}}</h7>
-                                </div>
-                                <div class="reviews">
-                                    <h7>Reviews {{pg.reviews}} <mat-icon style="color: #FFC83D;">star</mat-icon></h7>
-                                </div>
-                            </div>
-                            <div class="col-2 col-md-2 col-sm-2 col-xs-2">
-                                <div class="fav-icon" *ngIf="false">
-                                    <button mat-icon-button (click)="toggleFav()"><mat-icon *ngIf="!fav">favorite_border</mat-icon><mat-icon class="favorite" *ngIf="fav">favorite</mat-icon></button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="price-sec">
-                    <div class="price">
-                        <h6>Starting From*</h6>
-                        <h7>{{pg.pgPrice}} /monthly</h7>
-                    </div>
-                    <div class="contact">
-                        <button mat-raised-button>Contact</button>
-                    </div>
-                </div>
-                <mat-divider></mat-divider>
-            </div>
-        </div>
+      </div>
     </div>
+  </div>
 </div>
 
 <div *ngIf="!(isHandset$ | async)">
-    <div class="bootstrap-wrapper">
-        <div class="container">
-            <div style="margin-left:30px">
-                <div class="row">
-                    <div class="filter">
-                        filters
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="location-heading">
-                        <h5>Stays in HSR Layout</h5>
-                        <p>1000 stays Available</p>
-                    </div>
-                </div>
-            </div>
+  <div class="bootstrap-wrapper">
+    <div class="container">
+      <div style="margin-left:30px">
+        <div class="row">
+          <div class="filter">
+            filters
+          </div>
         </div>
-        <mat-divider></mat-divider>
-        <div class="pg-d">
-            <div class="container">
-                <div class="row">
-                    <div class="col-8">
-                        <div *ngFor="let pg of pgArray">
-                            <div class="container">
-                                <div class="pg-card-d">
-                                    <div class="row">
-                                        <div class="col-4 col-md-4 col-sm-4 col-xs-4">
-                                            <div class="pg-img-d">
-                                                <img [routerLink]="['/pg/1']" routerLinkActive="router-link-active"  [src]="_sanitizer.bypassSecurityTrustUrl(pg.pgImage)" [alt]="pg.pgImageName">
-                                            </div>
-                                        </div>
-                                        <div class="col-6 col-md-6 col-sm-6 col-xs-6">
-                                            <div class="pg-content-d">
-                                                <h5 style="cursor: pointer;" [routerLink]="['/pg/'+pg.pgId+'/'+pg.pgName]" routerLinkActive="router-link-active" >{{pg.pgName}}</h5>
-                                                <p>{{pg.locationName}}</p>
-                                            </div>
-                                            <div class="gender-d">
-                                                <div *ngIf="pg.gender=='male'" class="both-d"><div class="male-d mr-10"><h5>Boys</h5></div></div>
-                                                <div *ngIf="pg.gender=='female'" class="both-d"><div class="female-d"><h5>Girls</h5></div></div>
-                                                <div *ngIf="pg.gender=='both'" class="both-d">
-                                                    <div class="male-d mr-10"><h5>Boys</h5></div>
-                                                    <div class="female-d"><h5>Girls</h5></div>
-                                                </div>
-                                            </div>
-                                            <div class="distance-d">
-                                                <h7>Distance {{pg.distance}}</h7>
-                                            </div>
-                                            <div class="reviews-d">
-                                                <h7>Reviews {{pg.reviews}} <mat-icon style="color: #FFC83D;">star</mat-icon></h7>
-                                            </div>
-                                        </div>
-                                        <div class="col-2 col-md-2 col-sm-2 col-xs-2">
-                                            <div class="fav-icon-d" *ngIf="false" style="font-size: 40px;">
-                                                <button mat-icon-button (click)="toggleFav()"><mat-icon *ngIf="!fav">favorite_border</mat-icon><mat-icon class="favorite" *ngIf="fav">favorite</mat-icon></button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="container">
-                                <div class="price-sec-d">
-                                    <div class="price-d">
-                                        <h6>Starting From*</h6>
-                                        <h7>{{pg.price}} /monthly</h7>
-                                    </div>
-                                    <div class="contact-d">
-                                        <button mat-raised-button>Contact</button>
-                                    </div>
-                                </div>
-                                <mat-divider></mat-divider>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-4">
-
-                    </div>
-                </div>
-            </div>
+        <div class="row">
+          <div class="location-heading">
+            <h5>Stays in HSR Layout</h5>
+            <p>1000 stays Available</p>
+          </div>
         </div>
+      </div>
     </div>
+    <mat-divider></mat-divider>
+    <div class="pg-d">
+      <div class="container">
+        <div class="row">
+          <div class="col-8">
+            <div *ngFor="let pg of pgArray">
+              <div class="container">
+                <div class="pg-card-d">
+                  <div class="row">
+                    <div class="col-4 col-md-4 col-sm-4 col-xs-4">
+                      <div class="pg-img-d">
+                        <img [routerLink]="['/pg/1']" routerLinkActive="router-link-active"
+                          [src]="_sanitizer.bypassSecurityTrustUrl(pg.pgImage)" [alt]="pg.pgImageName">
+                      </div>
+                    </div>
+                    <div class="col-6 col-md-6 col-sm-6 col-xs-6">
+                      <div class="pg-content-d">
+                        <h5 style="cursor: pointer;" [routerLink]="['/pg/'+pg.pgId+'/'+pg.pgName]"
+                          routerLinkActive="router-link-active">{{pg.pgName}}</h5>
+                        <p>{{pg.locationName}}</p>
+                      </div>
+                      <div class="gender-d">
+                        <div *ngIf="pg.gender=='male'" class="both-d">
+                          <div class="male-d mr-10">
+                            <h5>Boys</h5>
+                          </div>
+                        </div>
+                        <div *ngIf="pg.gender=='female'" class="both-d">
+                          <div class="female-d">
+                            <h5>Girls</h5>
+                          </div>
+                        </div>
+                        <div *ngIf="pg.gender=='both'" class="both-d">
+                          <div class="male-d mr-10">
+                            <h5>Boys</h5>
+                          </div>
+                          <div class="female-d">
+                            <h5>Girls</h5>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="distance-d">
+                        <h7>Distance {{pg.distance}}</h7>
+                      </div>
+                      <div class="reviews-d">
+                        <h7>Reviews {{pg.reviews}} <mat-icon style="color: #FFC83D;">star</mat-icon>
+                        </h7>
+                      </div>
+                    </div>
+                    <div class="col-2 col-md-2 col-sm-2 col-xs-2">
+                      <div class="fav-icon-d" *ngIf="false" style="font-size: 40px;">
+                        <button mat-icon-button (click)="toggleFav()">
+                          <mat-icon *ngIf="!fav">favorite_border</mat-icon>
+                          <mat-icon class="favorite" *ngIf="fav">favorite</mat-icon>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="container">
+                <div class="price-sec-d">
+                  <div class="price-d">
+                    <h6>Starting From*</h6>
+                    <h7>{{pg.price}} /monthly</h7>
+                  </div>
+                  <div class="contact-d">
+                    <button [matMenuTriggerFor]="menu" #menuTrigger mat-raised-button>Contact</button>
+                    <mat-menu id="matMenu" #menu="matMenu" yPosition="above" xPosition="before">
+                      <a href="" mat-icon-button>
+                        <mat-icon>whatsapp</mat-icon>
+                      </a>
+                      <a href="" mat-icon-button>
+                        <mat-icon>textsms</mat-icon>
+                      </a>
+                    </mat-menu>
+                  </div>
+                </div>
+                <mat-divider></mat-divider>
+              </div>
+            </div>
+          </div>
+          <div class="col-4">
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

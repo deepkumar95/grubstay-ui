@@ -20,9 +20,9 @@ export class PgOpDialogComponent implements OnInit {
   locations: any = [];
   subLocations: any = [];
   pgGallery: any = [];
-  citySelected:any;
-  locationSelected:any;
-  subLocationSelected:any;
+  citySelected: any;
+  locationSelected: any;
+  subLocationSelected: any;
 
   pg: any = {
     subLocationId: '',
@@ -38,8 +38,8 @@ export class PgOpDialogComponent implements OnInit {
     tripleMemPgPrc: '',
     distFromSubLoc: '',
     operation: '',
-    cityId:'',
-    locationId:'',
+    cityId: '',
+    locationId: '',
     amenitiesServices: {},
     roomFacility: {},
     status: false
@@ -71,12 +71,12 @@ export class PgOpDialogComponent implements OnInit {
   ];
 
   constructor(private _cityService: CityServiceService, private _locationService: LocationService, private _snackBarService: CustomSnackBarService, private _snackBar: CustomSnackBarService, private _pg: PgService, private _subLocationService: SubLocationService,
-    private dialogRef: MatDialogRef<PgOpDialogComponent>, @Inject(MAT_DIALOG_DATA) public data: PG,private _shared:SharedService) { }
+    private dialogRef: MatDialogRef<PgOpDialogComponent>, @Inject(MAT_DIALOG_DATA) public data: PG, private _shared: SharedService) { }
 
   ngOnInit(): void {
-    var self = this; 
+    var self = this;
     self.loadAllCity();
-    if(self.data){
+    if (self.data) {
       self.pg = self.data;
       if (self.pg.operation == 'edit') {
         self.citySelected = self.pg.subLocation.location.city.cityName;
@@ -95,143 +95,158 @@ export class PgOpDialogComponent implements OnInit {
   addPg() {
     var self = this;
     const pgForm = new FormData();
-      if (self.pg.subLocationId == '' && !self.pg.subLocationId) {
-        this._snackBar.errorSnackBar('PG Sub-Location is required !');
-        return;
-      }
-      if (self.pg.pgName == '' && !self.pg.pgName) {
-        this._snackBar.errorSnackBar('PG name is required !');
-        return;
-      }
-      if (self.pg.pgGender == '' && !self.pg.pgGender) {
-        this._snackBar.errorSnackBar('PG gender is required !');
-        return;
-      }
-      if (self.pg.weekly == false && self.pg.daily == false && self.pg.monthly == false) {
-        this._snackBar.errorSnackBar('Atleast one stay plan should be selected !');
-        return;
-      }
-      if (self.pg.singleMemPgPrc == '' && self.pg.doubleMemPgPrc == '' && self.pg.tripleMemPgPrc == '') {
-        this._snackBar.errorSnackBar('Atleast one occupency should given!');
-        return;
-      }
-      if (self.pg.pgAddress == '' && !self.pg.pgAddress) {
-        this._snackBar.errorSnackBar('PG Address is required !');
-        return;
-      }
-      if (self.pg.pgDesc == '' && !self.pg.pgDesc) {
-        this._snackBar.errorSnackBar('PG Description is required !');
-        return;
-      }
-      if (self.pgGallery.length == 0 && self.pg.operation != 'edit') {
-        this._snackBar.errorSnackBar('Atleast one image is required for PG !');
-        return;
-      }
-      self.pg.amenitiesServices={};
-      self.pg.roomFacility={};
-      self.amenities.forEach(element => {
-        self.pg.amenitiesServices[element.code] = true;
-      })
-      self.amenitiesList.forEach(element => {
-        if (!(element.code in self.pg.amenitiesServices)) {
-          self.pg.amenitiesServices[element.code] = false;
+    if (self.pg.subLocationId == '' && !self.pg.subLocationId) {
+      this._snackBar.errorSnackBar('PG Sub-Location is required !');
+      return;
+    }
+    if (self.pg.pgName == '' && !self.pg.pgName) {
+      this._snackBar.errorSnackBar('PG name is required !');
+      return;
+    }
+    if (self.pg.pgGender == '' && !self.pg.pgGender) {
+      this._snackBar.errorSnackBar('PG gender is required !');
+      return;
+    }
+    if (self.pg.weekly == false && self.pg.daily == false && self.pg.monthly == false) {
+      this._snackBar.errorSnackBar('Atleast one stay plan should be selected !');
+      return;
+    }
+    if (self.pg.singleMemPgPrc == '' && self.pg.doubleMemPgPrc == '' && self.pg.tripleMemPgPrc == '') {
+      this._snackBar.errorSnackBar('Atleast one occupency should given!');
+      return;
+    }
+    if (self.pg.pgAddress == '' && !self.pg.pgAddress) {
+      this._snackBar.errorSnackBar('PG Address is required !');
+      return;
+    }
+    if (self.pg.pgDesc == '' && !self.pg.pgDesc) {
+      this._snackBar.errorSnackBar('PG Description is required !');
+      return;
+    }
+    if (self.pgGallery.length == 0 && self.pg.operation != 'edit') {
+      this._snackBar.errorSnackBar('Atleast one image is required for PG !');
+      return;
+    }
+    if (this.pgGallery.length > 0) {
+      let valid = false;
+      this.pgGallery.forEach(image => {
+        if (image.imageName.includes("pgmain")) {
+          valid = true;
         }
-      })
-      self.roomFacilities.forEach(element => {
-        self.pg.roomFacility[element.code] = true;
-      })
-      self.roomFacilitiesList.forEach(element => {
-        if (!(element.code in self.pg.roomFacility)) {
-          self.pg.roomFacility[element.code] = false;
-        }
-      })
-      console.log(self.pg);
-      if(self.pg.operation == 'edit'){
-        pgForm.append('pgId',self.pg.pgId);
+      });
+      if (!valid) {
+        this._snackBar.errorSnackBar('PG main image(like _pgmain) is missing..!');
+        let fileInput: any = document.getElementById('pg_gallery');
+        fileInput.value = '';
+        this.pgGallery = [];
+        return;
       }
-      pgForm.append('pgName', self.pg.pgName);
-      pgForm.append('pgDesc', self.pg.pgDesc);
-      pgForm.append('pgAddress', self.pg.pgAddress);
-      pgForm.append('pgGender', self.pg.pgGender);
-      pgForm.append('weekly', self.pg.weekly);
-      pgForm.append('monthly', self.pg.monthly);
-      pgForm.append('daily', self.pg.daily);
-      pgForm.append('status',self.pg.status);
-      pgForm.append('singleMemPgPrc', self.pg.singleMemPgPrc ? self.pg.singleMemPgPrc : 0);
-      pgForm.append('doubleMemPgPrc', self.pg.doubleMemPgPrc ? self.pg.doubleMemPgPrc : 0);
-      pgForm.append('tripleMemPgPrc', self.pg.tripleMemPgPrc ? self.pg.tripleMemPgPrc : 0);
-      pgForm.append('distFromSubLoc', self.pg.distFromSubLoc ? self.pg.distFromSubLoc : 0);
-      pgForm.append('status', self.pg.status);
-      if(self.pg.operation == 'edit'){
-        pgForm.append('subLocationId', self.pg.subLocation.subLocationId);
-      }else{
-        pgForm.append('subLocationId', self.pg.subLocationId);
+    }
+    self.pg.amenitiesServices = {};
+    self.pg.roomFacility = {};
+    self.amenities.forEach(element => {
+      self.pg.amenitiesServices[element.code] = true;
+    })
+    self.amenitiesList.forEach(element => {
+      if (!(element.code in self.pg.amenitiesServices)) {
+        self.pg.amenitiesServices[element.code] = false;
       }
-      pgForm.append('amens', JSON.stringify(self.pg.amenitiesServices));
-      pgForm.append('roomFacs', JSON.stringify(self.pg.roomFacility));
-      if(self.pg.operation!='edit'){
+    })
+    self.roomFacilities.forEach(element => {
+      self.pg.roomFacility[element.code] = true;
+    })
+    self.roomFacilitiesList.forEach(element => {
+      if (!(element.code in self.pg.roomFacility)) {
+        self.pg.roomFacility[element.code] = false;
+      }
+    })
+    console.log(self.pg);
+    if (self.pg.operation == 'edit') {
+      pgForm.append('pgId', self.pg.pgId);
+    }
+    pgForm.append('pgName', self.pg.pgName);
+    pgForm.append('pgDesc', self.pg.pgDesc);
+    pgForm.append('pgAddress', self.pg.pgAddress);
+    pgForm.append('pgGender', self.pg.pgGender);
+    pgForm.append('weekly', self.pg.weekly);
+    pgForm.append('monthly', self.pg.monthly);
+    pgForm.append('daily', self.pg.daily);
+    pgForm.append('status', self.pg.status);
+    pgForm.append('singleMemPgPrc', self.pg.singleMemPgPrc ? self.pg.singleMemPgPrc : 0);
+    pgForm.append('doubleMemPgPrc', self.pg.doubleMemPgPrc ? self.pg.doubleMemPgPrc : 0);
+    pgForm.append('tripleMemPgPrc', self.pg.tripleMemPgPrc ? self.pg.tripleMemPgPrc : 0);
+    pgForm.append('distFromSubLoc', self.pg.distFromSubLoc ? self.pg.distFromSubLoc : 0);
+    pgForm.append('status', self.pg.status);
+    if (self.pg.operation == 'edit') {
+      pgForm.append('subLocationId', self.pg.subLocation.subLocationId);
+    } else {
+      pgForm.append('subLocationId', self.pg.subLocationId);
+    }
+    pgForm.append('amens', JSON.stringify(self.pg.amenitiesServices));
+    pgForm.append('roomFacs', JSON.stringify(self.pg.roomFacility));
+    if (self.pg.operation != 'edit') {
+      self.pgGallery.forEach(element => {
+        pgForm.append('pgImages[]', element.selectedImage, element.name)
+      });
+    } else {
+      if (self.pgGallery.length > 0) {
         self.pgGallery.forEach(element => {
           pgForm.append('pgImages[]', element.selectedImage, element.name)
         });
-      }else{
-        if(self.pgGallery.length > 0){
-          self.pgGallery.forEach(element => {
-            pgForm.append('pgImages[]', element.selectedImage, element.name)
-          });
-        }
-        else{
-          pgForm.append('pgImages[]', new Blob(), 'noImage');
-        }
       }
-      if(self.pg.operation != 'edit'){
-        self._pg.savePgData(pgForm).subscribe((response: any) => {
-          if (response.error && response.error != '') {
+      else {
+        pgForm.append('pgImages[]', new Blob(), 'noImage');
+      }
+    }
+    if (self.pg.operation != 'edit') {
+      self._pg.savePgData(pgForm).subscribe((response: any) => {
+        if (response.error && response.error != '') {
+          self._snackBar.errorSnackBar("PG creation failed...try again !");
+          return;
+        }
+        else {
+          let savedStaus = response.success;
+          if (savedStaus == 'saved') {
+            self._snackBar.successSnackBar("PG saved successfully");
+            self.dialogRef.close();
+            self._shared.redirectTo("/admin/pg");
+          } else if (savedStaus == 'duplicate') {
+            self._snackBar.errorSnackBar("PG already exist...!");
+            return;
+          }
+          else {
             self._snackBar.errorSnackBar("PG creation failed...try again !");
             return;
           }
-          else {
-            let savedStaus = response.success;
-            if (savedStaus == 'saved') {
-              self._snackBar.successSnackBar("PG saved successfully");
-              self.dialogRef.close();
-              self._shared.redirectTo("/admin/pg");
-            } else if (savedStaus == 'duplicate') {
-              self._snackBar.errorSnackBar("PG already exist...!");
-              return;
-            }
-            else {
-              self._snackBar.errorSnackBar("PG creation failed...try again !");
-              return;
-            }
-          }
-        }, (error: any) => {
-          self._snackBar.errorSnackBar("PG creation failed...try again !");
+        }
+      }, (error: any) => {
+        self._snackBar.errorSnackBar("PG creation failed...try again !");
+        return;
+      })
+    }
+    else {
+      self._pg.updatePgData(pgForm).subscribe((response: any) => {
+        if (response.error && response.error != '') {
+          self._snackBar.errorSnackBar("PG updation failed...try again !");
           return;
-        })
-      }
-      else{
-        self._pg.updatePgData(pgForm).subscribe((response: any) => {
-          if (response.error && response.error != '') {
+        }
+        else {
+          let savedStaus = response.success;
+          if (savedStaus == 'success') {
+            self._snackBar.successSnackBar("PG updated successfully");
+            self.dialogRef.close();
+            self._shared.redirectTo("/admin/pg");
+          }
+          else {
             self._snackBar.errorSnackBar("PG updation failed...try again !");
             return;
           }
-          else {
-            let savedStaus = response.success;
-            if (savedStaus == 'success') {
-              self._snackBar.successSnackBar("PG updated successfully");
-              self.dialogRef.close();
-              self._shared.redirectTo("/admin/pg");
-            }
-            else {
-              self._snackBar.errorSnackBar("PG updation failed...try again !");
-              return;
-            }
-          }
-        }, (error: any) => {
-          self._snackBar.errorSnackBar("PG updation failed...try again !");
-          return;
-        })
-      }
+        }
+      }, (error: any) => {
+        self._snackBar.errorSnackBar("PG updation failed...try again !");
+        return;
+      })
+    }
   }
 
   loadAllCity() {
@@ -403,7 +418,7 @@ export class PgOpDialogComponent implements OnInit {
     roomKeys.forEach(e1 => {
       self.roomFacilitiesList.forEach(element => {
         if (e1 == element.code) {
-          self.pg.roomFacility[element.code]=true;
+          self.pg.roomFacility[element.code] = true;
           self.roomFacilities.push(element);
         }
       })

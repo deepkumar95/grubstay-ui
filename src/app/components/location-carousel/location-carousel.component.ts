@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
 import { OwlOptions } from 'ngx-owl-carousel-o';
+import { CityServiceService } from 'src/app/services/city-service.service';
 
 @Component({
   selector: 'app-location-carousel',
@@ -7,7 +9,7 @@ import { OwlOptions } from 'ngx-owl-carousel-o';
   styleUrls: ['./location-carousel.component.css']
 })
 export class LocationCarouselComponent implements OnInit {
-
+  public sanitizer;
   customOptions: OwlOptions = {
     loop: false,
     margin:20,
@@ -35,7 +37,7 @@ export class LocationCarouselComponent implements OnInit {
     nav: false
   }
 
-  slidesStore = [
+  slidesStore2 = [
     {"id":"location1","alt":"location1","src":"../../../assets/imgs/city/banglore.jpg", "title":"Banglore",stayNo:3624},
     {"id":"location1","alt":"location1","src":"../../../assets/imgs/city/mumbai.jpg", "title":"Mumbai",stayNo:2456},
     {"id":"location1","alt":"location1","src":"../../../assets/imgs/city/delhi.jpg", "title":"Delhi",stayNo:3500},
@@ -44,9 +46,43 @@ export class LocationCarouselComponent implements OnInit {
     {"id":"location1","alt":"location1","src":"../../../assets/imgs/city/banglore.jpg", "title":"Kerla",stayNo:1426}
   ];
 
-  constructor() { }
+  slidesStore = [];
+
+  constructor(private _city:CityServiceService,private domSanitier:DomSanitizer) {
+    this.sanitizer=domSanitier;
+   }
 
   ngOnInit(): void {
+    this.loadAllCity();
+  }
+
+  loadAllCity(){
+    this._city.loadAllCity().subscribe((response:any)=>{
+      if(response.error && response.error!=''){
+        console.log(response.error);
+      }else{
+        console.log(response);
+        let cities = response.data;
+        if(cities.length >= 5){
+          cities.forEach(element => {
+            let city:any = {};
+            city.id = element.cityId;
+            city.alt = element.cityImageName;
+            city.src = element.cityImage;
+            city.title = element.cityName;
+            city.status = element.status;
+            city.stayNo = element.totalStays;
+            if(city.status == true){
+              this.slidesStore.push(city);
+            }
+          });
+        }else{
+          this.slidesStore = this.slidesStore2;
+        }
+      }
+    },(error:any)=>{
+      console.log(error);
+    })
   }
 
 }

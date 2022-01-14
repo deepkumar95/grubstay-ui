@@ -61,6 +61,8 @@ import { SubadminTreeComponent } from './pages/admin-dashboard/admin-components/
 import { SubAdminComponent } from './pages/admin-dashboard/admin-components/sub-admin/sub-admin.component';
 import { TraverlNearByComponent } from './pages/admin-dashboard/admin-components/traverl-near-by/traverl-near-by.component';
 import { TravelNearByDialogComponent } from './pages/admin-dashboard/admin-components/traverl-near-by/travel-near-by-components/travel-near-by-dialog/travel-near-by-dialog.component';
+import {MatMenuModule} from '@angular/material/menu';
+
 
 const ngxUiLoaderConfig:NgxUiLoaderConfig =
   {
@@ -160,7 +162,8 @@ const ngxUiLoaderConfig:NgxUiLoaderConfig =
     NgxUiLoaderModule,
     NgxUiLoaderModule.forRoot(ngxUiLoaderConfig),
     NgxUiLoaderRouterModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatMenuModule
   ],
   providers: [],
   bootstrap: [AppComponent]
