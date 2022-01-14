@@ -3,23 +3,23 @@
         <section class="pg-header">
                     <div class="pg-slider">
                         <owl-carousel-o [width]="100" [options]="pgCarousel">
-                            <ng-container *ngFor="let slide of pgGallery">
-                              <ng-template carouselSlide [id]="slide.id">
-                                <img class="w-100" src="{{slide.src}}" alt="{{slide.alt}}">
-                              </ng-template>
-                            </ng-container>
+                            <ng-container *ngFor="let slide of pgGallery; let i=index">
+                                <ng-template carouselSlide [id]="i">
+                                  <img [src]="sanitizer.bypassSecurityTrustUrl(slide)" alt="pgImage">
+                                </ng-template>
+                              </ng-container>
                         </owl-carousel-o>
                     </div>
             <div class="container-fluid">
                 <div class="row" style="padding: 8px;">
                     <div class="pg-content">
-                        <div class="row"><h4>Prasthan PG</h4></div>
-                        <div class="row"><small>SRI SAI BALAJI PG FOR MEN'S, 18TH CROSS ROAD, NEAR UNION BANK ATM, SECTOR 6, HSR LAYOUT</small></div>
+                        <div class="row"><h4>{{pgDetails.pgName}}</h4></div>
+                        <div class="row"><small>{{pgDetails.pgAddress}}</small></div>
                         <div class="row mt-2">
                             <div class="col-5 d-flex align-items-center">
-                                <h4>5500/-</h4>
+                                <h4>{{pgDetails.pgSingleMemberPrice}}</h4>
                             </div>
-                            <div class="col-7 d-flex align-items-center">
+                            <div class="col-7 d-flex align-items-center" *ngIf="false">
                                 <span><button mat-icon-button (click)="toggleFav()"><mat-icon *ngIf="!fav">favorite_border</mat-icon><mat-icon class="favorite" *ngIf="fav">favorite</mat-icon></button>&nbsp;</span>Save &nbsp;&nbsp;
                                 <span><button mat-icon-button (click)="sharePg()"><mat-icon>share</mat-icon></button>&nbsp;</span>Share
                             </div>
@@ -100,7 +100,7 @@
                 </div>
             </div>
         </section>
-        <section class="pg-nearby" style="padding: 8px;">
+        <section class="pg-nearby" style="padding: 8px;" *ngIf="nearbyLandmarks.length > 0">
             <div class="container-fluid">
                 <div class="row mb-2">
                     <h5>Nearby Popular Landmarks</h5>
@@ -110,10 +110,10 @@
                         <ng-container *ngFor="let slide of nearbyLandmarks">
                           <ng-template [width]="100" carouselSlide [id]="slide.id">
                             <mat-card class="nearby-card">
-                                <div class="nearby-img-sec">
-                                    <img [src]="slide.src" [alt]="slide.alt" [title]="slide.title">
+                                <div class="nearby-img-sec-m">
+                                    <img [src]="sanitizer.bypassSecurityTrustUrl(slide.src)" [alt]="slide.alt" [title]="slide.title">
                                 </div>
-                                <h6 class="text-center travel-nearby-name">{{slide.title}}</h6>
+                                <h6 class="text-center travel-nearby-name-m">{{slide.title}}</h6>
                             </mat-card>
                           </ng-template>
                         </ng-container>
@@ -130,7 +130,7 @@
                     <h5>About the property</h5>
                 </div>
                 <div class="row">
-                   <small>{{pgAbout}}</small>
+                   <small>{{pgDetails.pgAbout}}</small>
                 </div>
             </div>
         </section>
@@ -144,9 +144,9 @@
             <section class="pg-header">
                 <div class="pg-slider-d">
                     <owl-carousel-o [options]="pgCarousel">
-                        <ng-container *ngFor="let slide of pgGallery">
-                          <ng-template carouselSlide [id]="slide.id">
-                            <img src="{{slide.src}}" alt="{{slide.alt}}">
+                        <ng-container *ngFor="let slide of pgGallery; let i=index">
+                          <ng-template carouselSlide [id]="i">
+                            <img [src]="sanitizer.bypassSecurityTrustUrl(slide)" alt="pgImage">
                           </ng-template>
                         </ng-container>
                     </owl-carousel-o>
@@ -154,13 +154,13 @@
         <div class="container-fluid">
             <div class="row" style="padding: 8px;">
                 <div class="pg-content">
-                    <div class="row"><h4>Prasthan PG</h4></div>
-                    <div class="row"><small>SRI SAI BALAJI PG FOR MEN'S, 18TH CROSS ROAD, NEAR UNION BANK ATM, SECTOR 6, HSR LAYOUT</small></div>
+                    <div class="row"><h4>{{pgDetails.pgName}}</h4></div>
+                    <div class="row"><small>{{pgDetails.pgAddress}}</small></div>
                     <div class="row mt-2">
                         <div class="col-9 d-flex align-items-center">
-                            <h4>5500/-</h4>
+                            <h4>{{pgDetails.pgPrice}}/-</h4>
                         </div>
-                        <div class="col-3 d-flex align-items-center">
+                        <div class="col-3 d-flex align-items-center" *ngIf="false">
                             <span><button mat-icon-button (click)="toggleFav()"><mat-icon *ngIf="!fav">favorite_border</mat-icon><mat-icon class="favorite" *ngIf="fav">favorite</mat-icon></button>&nbsp;</span>Save &nbsp;&nbsp;
                             <span><button mat-icon-button (click)="sharePg()"><mat-icon>share</mat-icon></button>&nbsp;</span>Share
                         </div>
@@ -182,14 +182,14 @@
             </div>
             <div class="row">
                 <div *ngFor="let item of pgAmen" class="col-3 mb-2">
-                    <div class="row">
-                        <mat-card class="pg-fac mx-auto">
-                            <img mat-card-image src="{{item.src}}" alt="{{item.name}}">
-                        </mat-card>
-                    </div>
-                    <div class="row">
-                        <small class="pg-fac-name mt-1">{{item.name}}</small>
-                    </div>
+                            <div class="row">
+                                <mat-card class="pg-fac mx-auto">
+                                    <img mat-card-image src="{{item.src}}" alt="{{item.name}}">
+                                </mat-card>
+                            </div>
+                            <div class="row">
+                                <small class="pg-fac-name mt-1">{{item.name}}</small>
+                            </div>
                 </div>
             </div>
             <div class="row">
@@ -225,23 +225,43 @@
                 <h5>Pricing</h5>
             </div>
             <div class="row">
-                <div *ngFor="let item of pgPrices" class="col-3 mb-2">
+                <div *ngIf="pgDetails.pgTriplePriceAvail" class="col-3 mb-2">
                     <mat-card class="pg-price-card">
                         <div class="row">
-                            <small class="pg-fac-name mx-auto" style="color: orangered;">{{item.name}}</small>
+                            <small class="pg-fac-name mx-auto" style="color: orangered;">Triple Occupency</small>
                         </div>
                         <div class="row mt-1">
-                            <small class="pg-fac-name mx-auto">&#8377;{{item.price}}</small>
+                            <small class="pg-fac-name mx-auto">&#8377;{{pgDetails.pgTripleMemberPrice}}</small>
                         </div>
                     </mat-card>
                 </div>
+                <div *ngIf="pgDetails.pgDoublePriceAvail" class="col-3 mb-2">
+                        <mat-card class="pg-price-card">
+                            <div class="row">
+                                <small class="pg-fac-name mx-auto" style="color: orangered;">Double Occupency</small>
+                            </div>
+                            <div class="row mt-1">
+                                <small class="pg-fac-name mx-auto">&#8377;{{pgDetails.pgDoubleMemberPrice}}</small>
+                            </div>
+                        </mat-card>
+                    </div>
+                    <div *ngIf="pgDetails.pgSinglePriceAvail" class="col-3 mb-2">
+                            <mat-card class="pg-price-card">
+                                <div class="row">
+                                    <small class="pg-fac-name mx-auto" style="color: orangered;">Single Occupency</small>
+                                </div>
+                                <div class="row mt-1">
+                                    <small class="pg-fac-name mx-auto">&#8377;{{pgDetails.pgSingleMemberPrice}}</small>
+                                </div>
+                            </mat-card>
+                        </div>
             </div>
             <div class="row">
                 <mat-divider></mat-divider>
             </div>
         </div>
     </section>
-    <section class="pg-nearby" style="padding: 8px;">
+    <section class="pg-nearby" style="padding: 8px;" *ngIf="nearbyLandmarks.length > 0">
         <div class="container-fluid">
             <div class="row mb-2">
                 <h5>Nearby Popular Landmarks</h5>
@@ -252,7 +272,7 @@
                       <ng-template [width]="100" carouselSlide [id]="slide.id">
                         <mat-card class="nearby-card">
                             <div class="nearby-img-sec">
-                                <img [src]="slide.src" [alt]="slide.alt" [title]="slide.title">
+                                <img [src]="sanitizer.bypassSecurityTrustUrl(slide.src)" [alt]="slide.alt" [title]="slide.title">
                             </div>
                             <h6 class="text-center travel-nearby-name">{{slide.title}}</h6>
                         </mat-card>
@@ -271,7 +291,7 @@
                 <h5>About the property</h5>
             </div>
             <div class="row">
-               <small>{{pgAbout}}</small>
+               <small>{{pgDetails.pgAbout}}</small>
             </div>
         </div>
     </section>.

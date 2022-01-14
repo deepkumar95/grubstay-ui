@@ -41,13 +41,29 @@
     margin-top: .5em;
     white-space: nowrap;
 }
+.travel-nearby-name-m{
+    margin-top: .5em;
+    white-space: nowrap;
+    font-size:10px; 
+}
 .nearby-img-sec{
-    /* height: 250px; */
+    height: 200px;
     width: 100%;
     overflow: hidden;
     border-radius: 3px;
 }
 .nearby-img-sec img{
+    height: 100% !important;
+    width: 100% !important;
+    object-fit: cover;
+}
+.nearby-img-sec-m{
+    height: 70px;
+    width: 100%;
+    overflow: hidden;
+    border-radius: 3px;
+}
+.nearby-img-sec-m img{
     height: 100% !important;
     width: 100% !important;
     object-fit: cover;

@@ -27,7 +27,7 @@ export class CityDialogComponent implements OnInit {
     cityName: '',
     cityImage: '',
     cityImageName: '',
-    status: ''
+    status: false
   };
 
   constructor(private _snackBar: CustomSnackBarService, private _http: HttpClient, private _cityService: CityServiceService,

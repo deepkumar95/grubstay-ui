@@ -23,8 +23,12 @@ const routes: Routes = [
     component:StayPgComponent
   },
   {
-    path:"pg/:pgId",
+    path:"pg/:pgId/:pgName",
     component:PgComponent
+  },
+  {
+    path:"stay-pg/:locationId/:locationName",
+    component:StayPgComponent
   },
   {
     path:"search-stay",
@@ -65,7 +69,7 @@ const routes: Routes = [
       },
       {
         path:'traverl-nearby',
-        component:TraverlNearByComponent
+        component:TraverlNearByComponent 
       }
     ]
   },

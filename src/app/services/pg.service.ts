@@ -34,4 +34,13 @@ export class PgService {
   public deletePgData(pgId){
     return this._http.delete(this.pgBaseUrl+pgId);
   }
+  public getPGDataWithFilter(data:any){
+    return this._http.post(this.pgBaseUrl+"pgfilterData", data);
+  }
+  public loadPgData(pgId){
+    return this._http.get(this.pgBaseUrl+pgId);
+  }
+  public loadLandMark(pgId){
+    return this._http.get(this.pgBaseUrl+"landmarks/"+pgId)
+  }
 }

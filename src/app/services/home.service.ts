@@ -9,7 +9,7 @@ export class HomeService {
 
   constructor(private _httpService:HttpClient) { }
 
-  public loadNearByLocations(data:any){
-    return this._httpService.post(baseUrl+'landmark/',data);
+  public loadNearByLocations(){
+    return this._httpService.get(baseUrl+'landmark/');
   }
 }

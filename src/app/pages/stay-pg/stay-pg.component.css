@@ -95,12 +95,14 @@
     color: white;
     border-radius: 3px;
     padding: 5px 10px;
+    width:90px;
 }
 .female-d{
     background-color: #EB4A95;
     color: white;
     border-radius: 3px;
     padding: 5px 10px;
+    width:90px;
 }
 .distance-d{
     margin-top: .5rem;
