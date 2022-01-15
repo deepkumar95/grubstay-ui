@@ -12,3 +12,7 @@
 .result-content p{
     margin-top: 15px;
 }
+.mat-form-field {
+    font-size: 12px;
+    width: 100%;
+}

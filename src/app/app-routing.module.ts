@@ -27,7 +27,7 @@ const routes: Routes = [
     component:PgComponent
   },
   {
-    path:"stay-pg/:locationId/:locationName",
+    path:"stay-pg/:cityId/:cityName/:locationId/:locationName",
     component:StayPgComponent
   },
   {

@@ -43,4 +43,7 @@ export class PgService {
   public loadLandMark(pgId){
     return this._http.get(this.pgBaseUrl+"landmarks/"+pgId)
   }
+  public loadAllPGDataInCity(pgId){
+    return this._http.get(this.pgBaseUrl+"loadAllPG/"+pgId);
+  }
 }

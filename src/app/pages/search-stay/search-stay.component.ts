@@ -167,7 +167,11 @@ export class SearchStayComponent implements OnInit {
       filterData.nearby = self.search.nearby;
       filterData.stayPlan = self.search.stayPlan;
       self._shared.sharedData = filterData;
-      let navigateUrl="/stay-pg/"+this.cityAndLocationSelected.locationId+"/"+this.cityAndLocationSelected.locationName;
+      let cityId=this.cityAndLocationSelected.cityId;
+      let cityName=this.cityAndLocationSelected.cityName;
+      let locationId=this.cityAndLocationSelected.locationId;
+      let locationName=this.cityAndLocationSelected.locationName;
+      let navigateUrl="/stay-pg/"+cityId+"/"+cityName+"/"+locationId+"/"+locationName;
       self.router.navigate([navigateUrl]);
     }
   }
