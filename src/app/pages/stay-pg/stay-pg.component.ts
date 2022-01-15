@@ -50,6 +50,7 @@ export class StayPgComponent implements OnInit {
     .pipe(
       map(result => result.matches)
   );
+  currentLocation:any;
 
   constructor(private breakpointObserver: BreakpointObserver, private _shared: SharedService, private _pgService: PgService, private _snackBarService: CustomSnackBarService,private _path:ActivatedRoute, private sanitizer:DomSanitizer) { 
     this._sanitizer=sanitizer;
@@ -61,6 +62,7 @@ export class StayPgComponent implements OnInit {
       let data: any = self._shared.sharedData;
       let locationId = data.locationId;
       let locationName = data.location;
+      this.currentLocation = data.location;
       if (locationId && locationId != 0 && locationName && locationName != '') {
         this.loadPGData(data);
       }
@@ -68,6 +70,7 @@ export class StayPgComponent implements OnInit {
       let data:any={};
       data.locationId=this._path.snapshot.params.locationId;
       data.locationName=this._path.snapshot.params.locationName;
+      this.currentLocation = this._path.snapshot.params.locationName;
       this.loadPGData(data);
     }
   } 
