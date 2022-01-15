@@ -12,4 +12,12 @@ export class HomeService {
   public loadNearByLocations(){
     return this._httpService.get(baseUrl+'landmark/');
   }
+
+  public loadAllCounts(){
+    return this._httpService.get(baseUrl+'admin/');
+  }
+
+  public login(user:any){
+    return this._httpService.post(baseUrl+'login/',user);
+  }
 }

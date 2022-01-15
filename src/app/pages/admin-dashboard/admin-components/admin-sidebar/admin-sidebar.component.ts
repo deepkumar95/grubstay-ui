@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { SharedService } from 'src/app/services/helper/shared.service';
+import { LoginService } from 'src/app/services/login.service';
 
 @Component({
   selector: 'app-admin-sidebar',
@@ -9,7 +10,7 @@ import { SharedService } from 'src/app/services/helper/shared.service';
 })
 export class AdminSidebarComponent implements OnInit {
 
-  constructor(private _shared:SharedService,private _route:Router) { }
+  constructor(private _shared:SharedService,private _route:Router,private _login:LoginService) { }
 
   ngOnInit(): void {
   }
@@ -19,7 +20,12 @@ export class AdminSidebarComponent implements OnInit {
     this._route.navigate([url]);
   }
   logout(){
-    alert('logout')
+    this._login.logout();
+    window.location.reload();
+  }
+
+  newTabHome(){
+    window.open('http://localhost:4200/','_blank');
   }
 
 }

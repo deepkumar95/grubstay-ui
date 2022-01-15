@@ -62,6 +62,7 @@ import { SubAdminComponent } from './pages/admin-dashboard/admin-components/sub-
 import { TraverlNearByComponent } from './pages/admin-dashboard/admin-components/traverl-near-by/traverl-near-by.component';
 import { TravelNearByDialogComponent } from './pages/admin-dashboard/admin-components/traverl-near-by/travel-near-by-components/travel-near-by-dialog/travel-near-by-dialog.component';
 import {MatMenuModule} from '@angular/material/menu';
+import { AdminDialogComponent } from './pages/admin-dashboard/admin-components/sub-admin/admin-dialog/admin-dialog.component';
 
 
 const ngxUiLoaderConfig:NgxUiLoaderConfig =
@@ -129,7 +130,8 @@ const ngxUiLoaderConfig:NgxUiLoaderConfig =
     SubadminTreeComponent,
     SubAdminComponent,
     TraverlNearByComponent,
-    TravelNearByDialogComponent
+    TravelNearByDialogComponent,
+    AdminDialogComponent
   ],
   imports: [
     BrowserModule,

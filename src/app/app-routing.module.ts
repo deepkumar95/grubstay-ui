@@ -12,6 +12,7 @@ import { SublocationComponent } from './pages/admin-dashboard/admin-components/s
 import { PgOperationComponent } from './pages/admin-dashboard/admin-components/pg-operation/pg-operation.component';
 import { SubAdminComponent } from './pages/admin-dashboard/admin-components/sub-admin/sub-admin.component';
 import { TraverlNearByComponent } from './pages/admin-dashboard/admin-components/traverl-near-by/traverl-near-by.component';
+import { AdminGuard } from './admin.guard';
 
 const routes: Routes = [
   {
@@ -38,6 +39,7 @@ const routes: Routes = [
   {
     path:"admin",
     component:AdminDashboardComponent,
+    canActivate:[AdminGuard],
     children:[
       {
         path:'',

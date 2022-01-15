@@ -4,8 +4,14 @@
         [mode]="(isHandset$ | async) ? 'over' : ''" >
       <mat-toolbar><span [routerLink]="['']" class="logo">GRUBSTAY</span></mat-toolbar>
       <mat-list role="list">
-        <mat-list-item><a mat-button class="text-black" (click)="openLoginDialog()">Login</a></mat-list-item>
-        <mat-list-item><a mat-flat-button color="accent" (click)="openSignUpDialog()">Sign Up</a></mat-list-item>
+        <div *ngIf="isLoggedIn && user">
+          <mat-list-item><a mat-button class="text-black">{{user.username}}</a></mat-list-item>
+          <mat-list-item><a mat-flat-button color="accent" (click)="logout()">Logout</a></mat-list-item>
+        </div>
+        <div *ngIf="!isLoggedIn && !user">
+          <mat-list-item><a mat-button class="text-black" (click)="openLoginDialog()">Login</a></mat-list-item>
+          <mat-list-item><a mat-flat-button color="accent" (click)="openSignUpDialog()">Sign Up</a></mat-list-item>
+        </div>
       </mat-list>
     </mat-sidenav>
     <mat-sidenav-content>
@@ -13,8 +19,14 @@
         <span [routerLink]="['']" routerLinkActive="router-link-active"  class="logo">GRUBSTAY</span>
           <div class="example-spacer"></div>
         <div *ngIf="!(isHandset$ | async)">
+          <div *ngIf="isLoggedIn && user">
+            <a mat-button>{{user.username}}</a>&nbsp;
+            <a mat-flat-button color="accent" (click)="logout()">Logout</a>
+          </div>
+          <div *ngIf="!isLoggedIn && !user">
             <a mat-button (click)="openLoginDialog()">Login</a>&nbsp;
             <a mat-flat-button color="accent" (click)="openSignUpDialog()">Sign Up</a>
+          </div>
         </div>
         <button
           type="button"

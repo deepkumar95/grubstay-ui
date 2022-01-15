@@ -5,6 +5,8 @@ import { map } from 'rxjs/operators';
 import { MatDialog } from '@angular/material/dialog';
 import { LoginDialogComponent } from '../login-dialog/login-dialog.component';
 import { SignupDialogComponent } from '../signup-dialog/signup-dialog.component';
+import { SharedService } from 'src/app/services/helper/shared.service';
+import { LoginService } from 'src/app/services/login.service';
 
 @Component({
   selector: 'app-navbar',
@@ -13,15 +15,24 @@ import { SignupDialogComponent } from '../signup-dialog/signup-dialog.component'
 })
 export class NavbarComponent implements OnInit {
 
+  isLoggedIn = false;
+  user:any = {};
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
       map(result => result.matches)
   );
 
-  constructor(private breakpointObserver:BreakpointObserver, private dialog:MatDialog) { }
+  constructor(private breakpointObserver:BreakpointObserver, private dialog:MatDialog,private _shared:SharedService,private _login:LoginService) { 
+  }
 
   ngOnInit(): void {
+    this.isLoggedIn = this._login.isLoggedIn();
+    this.user = this._login.getUser();
+    this._login.loginStatusSubject.asObservable().subscribe(data=>{
+      this.isLoggedIn = this._login.isLoggedIn();
+      this.user = this._login.getUser();
+    })
   }
 
   openLoginDialog(): void {
@@ -40,5 +51,9 @@ export class NavbarComponent implements OnInit {
     });
   }
   
+  logout(){
+    this._login.logout();
+    window.location.reload();
+  }
 
 }
