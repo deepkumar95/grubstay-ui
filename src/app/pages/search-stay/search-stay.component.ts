@@ -1,6 +1,18 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { SharedService } from 'src/app/services/helper/shared.service';
+import { CustomSnackBarService } from '../../services/helper/custom-snack-bar.service';
+import { DomSanitizer } from '@angular/platform-browser';
+import { SearchDialogComponent } from '../../components/search-dialog/search-dialog.component';
+import { HomeService } from '../../services/home.service';
+import { LocationService } from '../../services/location.service';
+
+export interface Data {
+  city: string,
+  location: string,
+  citypic: string
+}
+
 
 @Component({
   selector: 'app-search-stay',
@@ -8,9 +20,13 @@ import { SharedService } from 'src/app/services/helper/shared.service';
   styleUrls: ['./search-stay.component.css']
 })
 export class SearchStayComponent implements OnInit {
+  searchResult: Data[] = [];
+  totalData: Data[] = [];
+  public sanitizer;
 
-  itemSelected:boolean = false;
-  stayTypes:any = ['Paying Guest','Flats','Rooms','Weekend Stay']
+  itemSelected: boolean = false;
+  nearbySelected: boolean = false;
+  stayTypes:any = ['Paying Guest'];
 
   search = {
     name : '',
@@ -19,48 +35,174 @@ export class SearchStayComponent implements OnInit {
     nearby:'',
     stayPlan:''
   }
-  searchResult = [
-    {city:'Banglore', location:'HSR Layout', cityPic:'../../../assets/imgs/city/banglore.jpg'},
-    {city:'Banglore', location:'HSR Layout', cityPic:'../../../assets/imgs/city/banglore.jpg'},
-    {city:'Banglore', location:'HSR Layout', cityPic:'../../../assets/imgs/city/banglore.jpg'},
-    {city:'Banglore', location:'HSR Layout', cityPic:'../../../assets/imgs/city/banglore.jpg'},
-    {city:'Banglore', location:'HSR Layout', cityPic:'../../../assets/imgs/city/banglore.jpg'},
-    {city:'Banglore', location:'HSR Layout', cityPic:'../../../assets/imgs/city/banglore.jpg'},
-    {city:'Banglore', location:'HSR Layout', cityPic:'../../../assets/imgs/city/banglore.jpg'},
-    {city:'Banglore', location:'HSR Layout', cityPic:'../../../assets/imgs/city/banglore.jpg'},
-    {city:'Banglore', location:'HSR Layout', cityPic:'../../../assets/imgs/city/banglore.jpg'},
-    {city:'Banglore', location:'HSR Layout', cityPic:'../../../assets/imgs/city/banglore.jpg'},
-    {city:'Banglore', location:'HSR Layout', cityPic:'../../../assets/imgs/city/banglore.jpg'},
-    {city:'Banglore', location:'HSR Layout', cityPic:'../../../assets/imgs/city/banglore.jpg'},
-    {city:'Banglore', location:'HSR Layout', cityPic:'../../../assets/imgs/city/banglore.jpg'},
-    {city:'Banglore', location:'HSR Layout', cityPic:'../../../assets/imgs/city/banglore.jpg'},
-    {city:'Banglore', location:'HSR Layout', cityPic:'../../../assets/imgs/city/banglore.jpg'}
-  ]
+  cityAndLocationSelected: any = {};
 
-  constructor(private _shared:SharedService, private router:Router) { }
+  landMarkData: any = [];
+  landMarkTotalData:any = [];
+
+
+  constructor(private _shared: SharedService, private router: Router, private _locationService: LocationService,
+    private _snackBarService: CustomSnackBarService, public domSanitizer: DomSanitizer, public _homeService: HomeService
+    ) { }
 
   ngOnInit(): void {
+    this.loadDataForSearch();
+    this.sanitizer = this.domSanitizer;
   }
 
-  public selectItem(item:any){
-    this.search.name = item.location;
+  public selectItem(item: any) {
+    this.search.name = item.locationName;
+    if (item.locationName && item.locationName != '' && item.cityName && item.cityName != '' && item.cityId && item.cityId != 0 && item.locationId && item.locationId != 0) {
+      this.cityAndLocationSelected.cityId = item.cityId;
+      this.cityAndLocationSelected.cityName = item.cityName;
+      this.cityAndLocationSelected.locationId = item.locationId;
+      this.cityAndLocationSelected.locationName = item.locationName;
+      this.loadNearByLocation(item.locationName, item.cityName, item.cityId, item.locationId);
+    }
     this.itemSelected = true;
   }
+  public selectLandMark(item: any) {
+    this.search.nearby = item.landMarkName;
+    // if (item.locationName && item.locationName != '' && item.cityName && item.cityName != '' && item.cityId && item.cityId != 0 && item.locationId && item.locationId != 0) {
+    //   this.cityAndLocationSelected.cityId = item.cityId;
+    //   this.cityAndLocationSelected.cityName = item.cityName;
+    //   this.cityAndLocationSelected.locationId = item.locationId;
+    //   this.cityAndLocationSelected.locationName = item.locationName;
+    // }
+    this.nearbySelected = true;
+  }
 
-  public searchNameChange(){
+  public searchNameChange(filterString) {
+    this.filterData(filterString);
     this.itemSelected = false;
   }
-  public searchSubmit(){
+  public searchNearBy(filterString) {
+    this.filterNearBy(filterString);
+    this.nearbySelected = false;
+  }
+  loadNearByLocation(location, city, city_id, location_id) {
+    this.landMarkTotalData=[];
+    this._homeService.loadNearByLocations().subscribe((response: any) => {
+      if (response.error && response.error != '') {
+        this._snackBarService.errorSnackBar("Something went wrong!");
+        return;
+      } else {
+        let responseData: any = response.data;
+        if (responseData) {
+          responseData.forEach(element => {
+            let data: any = element;
+            let cityName = data.pgStayId.subLocation.location.city.cityName;
+            let cityId = data.pgStayId.subLocation.location.city.cityId;
+            let locationName = data.pgStayId.subLocation.location.locationName;
+            let locationId = data.pgStayId.subLocation.location.locationId;
+            if (cityName == city && locationName == location && cityId == city_id && locationId == location_id) {
+              let landMark: any = {};
+              landMark.landMarkName = data.landMarkName;
+              landMark.landMarkId = data.landMarkId;
+              landMark.pgName=data.pgStayId.pgName;
+              landMark.pgId=data.pgStayId.pgId;
+              landMark.landMarkImage=data.landMarkImage;
+              landMark.landMarkImageName=data.landMarkImageName;
+              this.landMarkTotalData.push(landMark);
+            }
+          });
+        }
+      }
+    },
+      (error) => {
+        this._snackBarService.errorSnackBar("Something went wrong!");
+        return;
+      });
+  }
+  public filterData(filterString) {
+    let self = this;
+    // let filteredData=_.filter(self.searchResult, (item)=>{
+    //   let locationName:string=item.location;
+    //   let cityName:string=item.city;
+    //   if(cityName.includes(filterString) || locationName.includes(filterString)){
+    //     return item;
+    //   }
+    // });
+    let filteredData: any = [];
+    for (let i = 0; i < this.totalData.length; i++) {
+      let obj:any = this.totalData[i];
+      if (obj.cityName.includes(filterString.toUpperCase()) || obj.locationName.includes(filterString.toUpperCase())) {
+        filteredData.push(obj);
+      }
+    }
+    // _.result(_.find(this.searchResult, function(item) {
+    //                   return item.city.includes(filterString) || item.location.includes(filterString);
+    //               }), 'item');
+    this.searchResult = filteredData;
+  }
+  public filterNearBy(filterString) {
+    let self = this;
+    // let filteredData=_.filter(self.searchResult, (item)=>{
+    //   let locationName:string=item.location;
+    //   let cityName:string=item.city;
+    //   if(cityName.includes(filterString) || locationName.includes(filterString)){
+    //     return item;
+    //   }
+    // });
+    let filteredData: any = [];
+    for (let i = 0; i < this.landMarkTotalData.length; i++) {
+      let obj:any = this.landMarkTotalData[i];
+      if (obj.landMarkName.includes(filterString.toUpperCase())) {
+        filteredData.push(obj);
+      }
+    }
+    // _.result(_.find(this.searchResult, function(item) {
+    //                   return item.city.includes(filterString) || item.location.includes(filterString);
+    //               }), 'item');
+    this.landMarkData = filteredData;
+  }
+  public searchSubmit() {
     var self = this;
-    if(self.search.name && self.search.stayType && self.search.gender && self.search.stayPlan){
-      let filterData:any = {};
+    if (self.search.name) {
+      let filterData: any = {};
       filterData.location = self.search.name;
+      filterData.locationId=this.cityAndLocationSelected.locationId;
       filterData.stayType = self.search.stayType;
       filterData.gender = self.search.gender;
       filterData.nearby = self.search.nearby;
       filterData.stayPlan = self.search.stayPlan;
       self._shared.sharedData = filterData;
-      self.router.navigate(["/stay-pg"]);
+      let navigateUrl="/stay-pg/"+this.cityAndLocationSelected.locationId+"/"+this.cityAndLocationSelected.locationName;
+      self.router.navigate([navigateUrl]);
     }
+  }
+  loadDataForSearch() {
+    let self = this;
+    this._locationService.loadAllLocation().subscribe((response: any) => {
+      if (response.error && response.error != '') {
+        this._snackBarService.errorSnackBar('Something went wrong!');
+        return;
+      }
+      else {
+        let responseData: any = response.data[0];
+        if (responseData.length > 0) {
+          responseData.forEach(element => {
+            let city = element.city;
+            if (city && city.status == true) {
+              let data: any = {};
+              data.locationName = element.locationName;
+              data.locationId = element.locationId;
+              data.cityName = city.cityName;
+              data.cityId = city.cityId;
+              data.citypic = city.cityImage;
+              self.searchResult.push(data);
+              self.totalData.push(data);
+            }
+          });
+          this._snackBarService.successSnackBar('Successfully Fetched!');
+        }
+        else {
+          this._snackBarService.successSnackBar('No Record Found!');
+        }
+      }
+    },
+      (error: any) => {
+
+      });
   }
 }

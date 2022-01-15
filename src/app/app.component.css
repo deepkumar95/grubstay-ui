@@ -66,6 +66,17 @@
   .minifabIcon {
     margin-top: 12px;
   }
+  input:checked + .fab-btn {
+    box-shadow: 0 0 2px 40px #811bff;
+  }
+  
+  input:checked + .fab-btn img {
+    transform: rotate(315deg);
+  }
+  
+  input:checked ~ .card-content {
+    opacity: 0.1;
+  }
   /* .op1 {
     background-color: #dd5145;
   }
