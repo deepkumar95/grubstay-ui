@@ -13,7 +13,22 @@ export class UserServiceService {
     return this._http.post(baseUrl+"user/",user);
   }
 
+  public createAdmin(user){
+    return this._http.post(baseUrl+"admin/",user);
+  }
+
+  public updateAdmin(user){
+    return this._http.put(baseUrl+"admin/",user);
+  }
+
+  public deleteAdmin(userId){
+    return this._http.delete(baseUrl+"admin/"+userId);
+  }
+
   public checkUser(username){
     return this._http.get(baseUrl+"user/checkUser/"+username);
+  }
+  public loadAllAdmin(){
+    return this._http.get(baseUrl+"admin/all");
   }
 }

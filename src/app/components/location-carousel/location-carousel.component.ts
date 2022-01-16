@@ -55,7 +55,6 @@ export class LocationCarouselComponent implements OnInit {
   ngOnInit(): void {
     this.loadAllCity();
   }
-
   loadAllCity(){
     this._city.loadAllCity().subscribe((response:any)=>{
       if(response.error && response.error!=''){

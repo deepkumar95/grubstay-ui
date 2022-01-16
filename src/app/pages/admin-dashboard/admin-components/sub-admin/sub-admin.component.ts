@@ -4,20 +4,23 @@ import { MatTableDataSource } from '@angular/material/table';
 import * as _ from 'lodash';
 import { CustomSnackBarService } from 'src/app/services/helper/custom-snack-bar.service';
 import { AdminDialogComponent } from './admin-dialog/admin-dialog.component';
+import { UserServiceService } from '../../../../services/user-service.service';
+import { SharedService } from '../../../../services/helper/shared.service';
 
 
 
 export interface User {
-  userId:string;
+  userId: string;
   username: string;
   email: string;
   firstName: string;
-  lastName:string;
+  lastName: string;
   gender: string;
   phone: string;
-  whatsapp:string;
-  dob:string;
-  role:string;
+  whatsapp: string;
+  dob: string;
+  roles: string;
+  operation: string;
 }
 
 @Component({
@@ -27,11 +30,11 @@ export interface User {
 })
 export class SubAdminComponent implements OnInit {
 
-  USER_DATA:User[]=[];
-  displayedColumns: string[] = ['actions', 'username', 'email', 'phone','gender','firstName','lastName','dob','role'];
+  USER_DATA: User[] = [];
+  displayedColumns: string[] = ['actions', 'username', 'email', 'phone', 'gender', 'firstName', 'lastName', 'dob', 'roles'];
   dataSource = new MatTableDataSource(this.USER_DATA);
 
-  constructor(private _snackBar:CustomSnackBarService, private dialog:MatDialog) { }
+  constructor(private _snackBar: CustomSnackBarService, private dialog: MatDialog, private userService: UserServiceService, private _sharedService:SharedService) { }
 
   ngOnInit(): void {
     var self = this;
@@ -39,31 +42,54 @@ export class SubAdminComponent implements OnInit {
   }
 
   public editItem(userId) {
-    let userData=_.find(this.USER_DATA,(item:any)=>{
-      return (item.userId==userId);
+    let userData = _.find(this.USER_DATA, (item: any) => {
+      return (item.userId == userId);
     });
-    userData.operation='edit';
+    userData.operation = 'edit';
     const dialogRef = this.dialog.open(AdminDialogComponent, {
       disableClose: true,
-      data:userData
+      height: "600px",
+      width: "520px",
+      data: userData
     });
     console.log(userData);
   }
 
   public deletePg(userId) {
-    let self=this;
-    if(userId){
+    let self = this;
+    if (userId) {
       let confirm = window.confirm("Are you sure..You want to delete this Record");
-      if(confirm){
-        
-      }else{
+      if (confirm) {
+        this.userService.deleteAdmin(userId).subscribe((response: any) => {
+          if (response.error && response.error != '') {
+            this._snackBar.errorSnackBar("Somethign went wrong");
+            return;
+          }
+          else{
+            let deleteStatus=response.success;
+            if(deleteStatus=='Deleted'){
+              this._snackBar.successSnackBar("User Deleted Successfully!");
+              this._sharedService.redirectTo("/admin/sub-admin");
+            }else{
+              this._snackBar.errorSnackBar("Deletion Failed!");
+              return;
+            }
+          }
+        },
+          (error: any) => {
+            this._snackBar.errorSnackBar("Somethign went wrong");
+            return;
+          })
+      } else {
         self._snackBar.errorSnackBar("deletion failed...try again!");
-          return;
+        return;
       }
     }
   }
   openPgDialog() {
-    const dialogRef = this.dialog.open(AdminDialogComponent,{
+    const dialogRef = this.dialog.open(AdminDialogComponent, {
+      height: "600px",
+      width: "520px",
       disableClose: true
     });
   }
@@ -73,7 +99,30 @@ export class SubAdminComponent implements OnInit {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
-  loadAllAdmins(){
+  loadAllAdmins() {
     var self = this;
+    self.userService.loadAllAdmin().subscribe((response: any) => {
+      if (response.error && response.error != '') {
+        this._snackBar.errorSnackBar("Something went wrong!");
+        return;
+      }
+      else {
+        let fetchStatus = response.success;
+        if (fetchStatus == 'fetched') {
+          let responseData: any = response.data;
+          responseData.forEach(element => {
+            this.USER_DATA.push(element);
+          });
+          this.dataSource = new MatTableDataSource(this.USER_DATA);
+        }
+        else {
+          this._snackBar.errorSnackBar("No Record Found!");
+          return;
+        }
+      }
+    },
+      (error: any) => {
+        this._snackBar.errorSnackBar("Something went wrong!");
+      });
   }
 }
