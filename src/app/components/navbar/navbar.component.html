@@ -20,7 +20,7 @@
           <div class="example-spacer"></div>
         <div *ngIf="!(isHandset$ | async)">
           <div *ngIf="isLoggedIn && user">
-            <a mat-button>{{user.username}}</a>&nbsp;
+            <a mat-button (click)="redirectTo()">{{user.username}}</a>&nbsp;
             <a mat-flat-button color="accent" (click)="logout()">Logout</a>
           </div>
           <div *ngIf="!isLoggedIn && !user">

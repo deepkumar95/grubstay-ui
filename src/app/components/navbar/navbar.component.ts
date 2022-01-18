@@ -7,6 +7,7 @@ import { LoginDialogComponent } from '../login-dialog/login-dialog.component';
 import { SignupDialogComponent } from '../signup-dialog/signup-dialog.component';
 import { SharedService } from 'src/app/services/helper/shared.service';
 import { LoginService } from 'src/app/services/login.service';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'app-navbar',
@@ -54,6 +55,14 @@ export class NavbarComponent implements OnInit {
   logout(){
     this._login.logout();
     window.location.reload();
+  }
+
+  redirectTo(){
+    if(this._login.getUserRole() == 'ADMIN' || this._login.getUserRole() == 'SUB-ADMIN'){
+      this._shared.redirectTo('/admin');
+    }else{
+      this._shared.redirectTo('/');
+    }
   }
 
 }

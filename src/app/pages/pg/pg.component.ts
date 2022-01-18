@@ -90,7 +90,7 @@ export class PgComponent implements OnInit {
     { dbName: 'attachedWashroom', name: 'Attached Bathroom', src: '../../../assets/imgs/room-facility/bath.png' },
     { dbName: 'bedWithMattress', name: 'Bed With Matress', src: '../../../assets/imgs/room-facility/bed.png' },
     { dbName: 'ceilingFan', name: 'Ceiling Fan', src: '../../../assets/imgs/room-facility/fans.png' },
-    { dbName: 'hotWatersupply', name: 'Hot Water Supply', src: '../../../assets/imgs/room-facility/fans.png' },
+    { dbName: 'hotWatersupply', name: 'Hot Water Supply', src: '../../../assets/imgs/room-facility/hotwater.png' },
     { dbName: 'tvDth', name: 'TV with DTH', src: '../../../assets/imgs/room-facility/tv.png' },
     { dbName: 'wardrobe', name: 'Wardrobes', src: '../../../assets/imgs/room-facility/wardrobe.png' },
     { dbName: 'safetyLocker', name: 'Saftey Lockers', src: '../../../assets/imgs/room-facility/locker.png' },
@@ -110,7 +110,7 @@ export class PgComponent implements OnInit {
   pgGallery: any = [];
 
   carouselOptions: OwlOptions = {
-    loop: false,
+    loop: true,
     margin: 20,
     // autoWidth:true,
     mouseDrag: true,
@@ -140,6 +140,8 @@ export class PgComponent implements OnInit {
     dots: false,
     nav: false,
     loop: true,
+    autoplay:true,
+    navSpeed: 700,
   }
   sanitizer;
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)

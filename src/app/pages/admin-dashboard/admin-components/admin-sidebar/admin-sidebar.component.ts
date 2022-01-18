@@ -25,7 +25,7 @@ export class AdminSidebarComponent implements OnInit {
   }
 
   newTabHome(){
-    window.open('http://localhost:4200/','_blank');
+    window.open('https://grubstay.com/','_blank');
   }
 
 }

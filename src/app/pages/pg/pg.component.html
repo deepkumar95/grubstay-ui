@@ -84,16 +84,36 @@
                     <h5>Pricing</h5>
                 </div>
                 <div class="row">
-                    <div *ngFor="let item of pgPrices" class="col-3 mb-2">
+                    <div *ngIf="pgDetails.pgTriplePriceAvail" class="col-3 mb-2">
                         <mat-card class="pg-price-card mx-auto">
                             <div class="row">
-                                <small class="pg-fac-name mx-auto" style="color: orangered;">{{item.name}}</small>
+                                <small class="pg-fac-name mx-auto" style="color: orangered;">Triple Occupency</small>
                             </div>
                             <div class="row mt-1">
-                                <small class="pg-fac-name mx-auto">&#8377;{{item.price}}</small>
+                                <small class="pg-fac-name mx-auto">&#8377;{{pgDetails.pgTripleMemberPrice}}</small>
                             </div>
                         </mat-card>
                     </div>
+                    <div *ngIf="pgDetails.pgDoublePriceAvail" class="col-3 mb-2">
+                            <mat-card class="pg-price-card mx-auto">
+                                <div class="row">
+                                    <small class="pg-fac-name mx-auto" style="color: orangered;">Double Occupency</small>
+                                </div>
+                                <div class="row mt-1">
+                                    <small class="pg-fac-name mx-auto">&#8377;{{pgDetails.pgDoubleMemberPrice}}</small>
+                                </div>
+                            </mat-card>
+                        </div>
+                        <div *ngIf="pgDetails.pgSinglePriceAvail" class="col-3 mb-2">
+                                <mat-card class="pg-price-card mx-auto">
+                                    <div class="row">
+                                        <small class="pg-fac-name mx-auto" style="color: orangered;">Single Occupency</small>
+                                    </div>
+                                    <div class="row mt-1">
+                                        <small class="pg-fac-name mx-auto">&#8377;{{pgDetails.pgSingleMemberPrice}}</small>
+                                    </div>
+                                </mat-card>
+                            </div>
                 </div>
                 <div class="row">
                     <mat-divider></mat-divider>
@@ -226,7 +246,7 @@
             </div>
             <div class="row">
                 <div *ngIf="pgDetails.pgTriplePriceAvail" class="col-3 mb-2">
-                    <mat-card class="pg-price-card">
+                    <mat-card class="pg-price-card mx-auto">
                         <div class="row">
                             <small class="pg-fac-name mx-auto" style="color: orangered;">Triple Occupency</small>
                         </div>
@@ -236,7 +256,7 @@
                     </mat-card>
                 </div>
                 <div *ngIf="pgDetails.pgDoublePriceAvail" class="col-3 mb-2">
-                        <mat-card class="pg-price-card">
+                        <mat-card class="pg-price-card mx-auto">
                             <div class="row">
                                 <small class="pg-fac-name mx-auto" style="color: orangered;">Double Occupency</small>
                             </div>
