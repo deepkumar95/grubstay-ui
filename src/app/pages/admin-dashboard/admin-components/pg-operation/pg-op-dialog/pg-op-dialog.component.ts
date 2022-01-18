@@ -267,7 +267,6 @@ export class PgOpDialogComponent implements OnInit {
               }
             });
           }
-          this._snackBarService.successSnackBar("Successfully Fetched!");
         }
       },
       (error: any) => {

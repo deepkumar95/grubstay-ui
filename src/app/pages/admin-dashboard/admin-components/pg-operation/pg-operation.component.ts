@@ -121,7 +121,6 @@ export class PgOperationComponent implements OnInit {
           }
           self.PG_DATA = responseData;
           self.dataSource = new MatTableDataSource(this.PG_DATA);
-          this._snackbarService.successSnackBar("Successfully Fetched!");
       }
     },(error:any)=>{
       self._snackbarService.errorSnackBar("Couldn't fetch pg datas !");

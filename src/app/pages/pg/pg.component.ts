@@ -192,7 +192,6 @@ export class PgComponent implements OnInit {
               this.pgDetails.pgTriplePriceAvail = true;
             }
           }
-          this._snackBarService.successSnackBar("Successfully Fetched!");
           if (amenitiesData) {
             let tempAmen = [];
             let amenKeys = Object.entries(amenitiesData).filter(([, v]) => v == true).map(([k]) => k);

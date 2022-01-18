@@ -137,7 +137,6 @@ export class LocationDialogComponent implements OnInit {
               }
             });
           }
-          this._snackBarService.successSnackBar("Successfully Fetched!");
         }
       },
       (error: any) => {

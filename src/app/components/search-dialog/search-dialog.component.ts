@@ -202,7 +202,6 @@ export class SearchDialogComponent implements OnInit {
               self.totalData.push(data);
             }
           });
-          this._snackBarService.successSnackBar('Successfully Fetched!');
         }
         else {
           this._snackBarService.successSnackBar('No Record Found!');
