@@ -63,7 +63,7 @@ import { TraverlNearByComponent } from './pages/admin-dashboard/admin-components
 import { TravelNearByDialogComponent } from './pages/admin-dashboard/admin-components/traverl-near-by/travel-near-by-components/travel-near-by-dialog/travel-near-by-dialog.component';
 import {MatMenuModule} from '@angular/material/menu';
 import { AdminDialogComponent } from './pages/admin-dashboard/admin-components/sub-admin/admin-dialog/admin-dialog.component';
-
+import {MatTooltipModule} from '@angular/material/tooltip';
 
 const ngxUiLoaderConfig:NgxUiLoaderConfig =
   {
@@ -165,7 +165,8 @@ const ngxUiLoaderConfig:NgxUiLoaderConfig =
     NgxUiLoaderModule.forRoot(ngxUiLoaderConfig),
     NgxUiLoaderRouterModule,
     MatNativeDateModule,
-    MatMenuModule
+    MatMenuModule,
+    MatTooltipModule
   ],
   providers: [],
   bootstrap: [AppComponent]

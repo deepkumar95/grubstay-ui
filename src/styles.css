@@ -237,3 +237,6 @@ i{
 .mat-menu-content{
     margin-bottom: 10px;
 }
+.mat-tooltip{
+    background: #282727;
+}

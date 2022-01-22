@@ -99,6 +99,7 @@ export class SublocationDialogComponent implements OnInit {
       formData.append("subLocationName", self.subLocation.subLocationName);
       formData.append("locationId", self.subLocation.locationId);
       formData.append("cityId", self.subLocation.cityId);
+      formData.append("status", self.subLocation.status);
       self._subLocationService.addSubLocation(formData).subscribe((response: any) => {
         if (response.error && response.error != '') {
           self._snackBarService.errorSnackBar("Something went wrong!");
