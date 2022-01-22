@@ -1,5 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { NgxUiLoaderService } from 'ngx-ui-loader';
 import { element } from 'protractor';
 import { CityServiceService } from 'src/app/services/city-service.service';
 import { CustomSnackBarService } from 'src/app/services/helper/custom-snack-bar.service';
@@ -70,8 +71,10 @@ export class PgOpDialogComponent implements OnInit {
     { name: 'Table & Chairs', code: 'tableChair' }
   ];
 
-  constructor(private _cityService: CityServiceService, private _locationService: LocationService, private _snackBarService: CustomSnackBarService, private _snackBar: CustomSnackBarService, private _pg: PgService, private _subLocationService: SubLocationService,
-    private dialogRef: MatDialogRef<PgOpDialogComponent>, @Inject(MAT_DIALOG_DATA) public data: PG, private _shared: SharedService) { }
+  constructor(private _cityService: CityServiceService, private _locationService: LocationService, private _snackBarService: CustomSnackBarService, private _snackBar: CustomSnackBarService, 
+    private _pg: PgService, private _subLocationService: SubLocationService,
+    private dialogRef: MatDialogRef<PgOpDialogComponent>, 
+    @Inject(MAT_DIALOG_DATA) public data: PG, private _shared: SharedService,private loader:NgxUiLoaderService) { }
 
   ngOnInit(): void {
     var self = this;
@@ -199,61 +202,75 @@ export class PgOpDialogComponent implements OnInit {
       }
     }
     if (self.pg.operation != 'edit') {
+      self.loader.start();
       self._pg.savePgData(pgForm).subscribe((response: any) => {
         if (response.error && response.error != '') {
           self._snackBar.errorSnackBar("PG creation failed...try again !");
+          self.loader.stop();
           return;
         }
         else {
           let savedStaus = response.success;
           if (savedStaus == 'saved') {
-            self._snackBar.successSnackBar("PG saved successfully");
+            //self._snackBar.successSnackBar("PG saved successfully");
             self.dialogRef.close();
             self._shared.redirectTo("/admin/pg");
           } else if (savedStaus == 'duplicate') {
             self._snackBar.errorSnackBar("PG already exist...!");
+            self.loader.stop();
             return;
           }
           else {
             self._snackBar.errorSnackBar("PG creation failed...try again !");
+            self.loader.stop();
             return;
           }
+          self.loader.stop();
         }
       }, (error: any) => {
         self._snackBar.errorSnackBar("PG creation failed...try again !");
+        self.loader.stop();
         return;
       })
     }
     else {
+      self.loader.start();
       self._pg.updatePgData(pgForm).subscribe((response: any) => {
         if (response.error && response.error != '') {
           self._snackBar.errorSnackBar("PG updation failed...try again !");
+          self.loader.stop();
           return;
         }
         else {
           let savedStaus = response.success;
           if (savedStaus == 'success') {
-            self._snackBar.successSnackBar("PG updated successfully");
+            //self._snackBar.successSnackBar("PG updated successfully");
             self.dialogRef.close();
             self._shared.redirectTo("/admin/pg");
           }
           else {
             self._snackBar.errorSnackBar("PG updation failed...try again !");
+            self.loader.stop();
             return;
           }
+          self.loader.stop();
         }
       }, (error: any) => {
         self._snackBar.errorSnackBar("PG updation failed...try again !");
+        self.loader.stop();
         return;
       })
     }
   }
 
   loadAllCity() {
+    let self = this;
+    self.loader.start();
     this._cityService.loadAllCity().subscribe(
       (response: any) => {
         if (response.erorr && response.error != '') {
           this._snackBarService.errorSnackBar("Something went wrong!...Please Try Again");
+          self.loader.stop();
           return;
         } else {
           let responseData: any = response.data;
@@ -267,10 +284,12 @@ export class PgOpDialogComponent implements OnInit {
               }
             });
           }
+          self.loader.stop();
         }
       },
       (error: any) => {
         this._snackBarService.errorSnackBar("Something went wrong!...Please Try Again");
+        self.loader.stop();
         return;
       });
   }
@@ -278,9 +297,11 @@ export class PgOpDialogComponent implements OnInit {
   public loadLocationsData(cityId) {
     let self = this;
     self.locations = [];
+    self.loader.start();
     this._locationService.loadAllLocation().subscribe((response: any) => {
       if (response.error && response.error != '') {
         this._snackBarService.errorSnackBar('Something went wrong!');
+        self.loader.stop();
       }
       else {
         let responseData = response.data[0];
@@ -304,23 +325,27 @@ export class PgOpDialogComponent implements OnInit {
               }
             }
           });
+          self.loader.stop();
         }
         else {
           this._snackBarService.errorSnackBar("No Location Found");
+          self.loader.stop();
         }
       }
     },
       (error) => {
-
+        self.loader.stop();
       });
   }
 
   loadSubLocationData(locationId) {
     var self = this;
     self.subLocations = [];
+    self.loader.start();
     this._subLocationService.loadAllSubLocation().subscribe((response: any) => {
       if (response.error && response.error != '') {
         this._snackBarService.errorSnackBar('Something went wrong!');
+        self.loader.stop();
       }
       else {
         let responseData = response.data[0];
@@ -344,14 +369,16 @@ export class PgOpDialogComponent implements OnInit {
               }
             }
           });
+          self.loader.stop();
         }
         else {
           this._snackBarService.errorSnackBar("No Location Found");
+          self.loader.stop();
         }
       }
     },
       (error) => {
-
+        self.loader.stop();
       });
   }
 

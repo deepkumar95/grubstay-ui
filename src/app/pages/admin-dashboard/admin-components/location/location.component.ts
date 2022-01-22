@@ -6,6 +6,7 @@ import { LocationService } from '../../../../services/location.service';
 import { CustomSnackBarService } from '../../../../services/helper/custom-snack-bar.service';
 import * as _ from 'lodash';
 import { SharedService } from '../../../../services/helper/shared.service';
+import { NgxUiLoaderService } from 'ngx-ui-loader';
 
 export interface Location {
   locationId: number;
@@ -31,7 +32,9 @@ export class LocationComponent implements OnInit {
   displayedColumns: string[] = ['actions', 'position', 'cityName', 'locationName', 'service'];
   dataSource = new MatTableDataSource(this.LOCATION_DATA);
 
-  constructor(private matDialog: MatDialog, private _locationService: LocationService, private _snackbarService: CustomSnackBarService, private _sharedService: SharedService) { }
+  constructor(private matDialog: MatDialog, private _locationService: LocationService, 
+    private _snackbarService: CustomSnackBarService, 
+    private _sharedService: SharedService,private laoder:NgxUiLoaderService) { }
 
   ngOnInit(): void {
     this.loadLocationsData();
@@ -56,29 +59,33 @@ export class LocationComponent implements OnInit {
     if (locationId) {
       let confirm = window.confirm("Are you sure..You want to delete this Record");
       if (confirm) {
+        this.laoder.start();
         self._locationService.deleteLocation(locationId).subscribe((response: any) => {
           if (response.error && response.error != '') {
             self._snackbarService.errorSnackBar("Something went wrong!");
+            this.laoder.stop();
             return;
           }
           else {
             let deleteStatus = response.success;
             if (deleteStatus == 'Deleted') {
-              self._snackbarService.successSnackBar("Location Deleted Successfully!");
+              //self._snackbarService.successSnackBar("Location Deleted Successfully!");
               this._sharedService.redirectTo("/admin/location");
             }
             else {
               self._snackbarService.errorSnackBar("Location Deletion Failed!");
+              this.laoder.stop();
               return;
             }
           }
         },
           (error) => {
-
+              this.laoder.stop();
           });
       }
       else {
         self._snackbarService.errorSnackBar("Location Deletion Failed!");
+        this.laoder.stop();
         return;
       }
     }
@@ -98,9 +105,11 @@ export class LocationComponent implements OnInit {
   }
   public loadLocationsData() {
     let self = this;
+    self.laoder.start();
     this._locationService.loadAllLocation().subscribe((response: any) => {
       if (response.error && response.error != '') {
         this._snackbarService.errorSnackBar('Something went wrong!');
+        self.laoder.stop();
         return;
       }
       else {
@@ -124,15 +133,18 @@ export class LocationComponent implements OnInit {
             }
           });
           self.dataSource = new MatTableDataSource(self.LOCATION_DATA);
-          this._snackbarService.successSnackBar('Successfully Fetched!');
+          //this._snackbarService.successSnackBar('Successfully Fetched!');
+          self.laoder.stop();
         }
         else {
           this._snackbarService.successSnackBar('No Record Found!');
+          self.laoder.stop();
         }
       }
     },
       (error: any) => {
-
+        self._snackbarService.errorSnackBar("something went wrong ...");
+        self.laoder.stop();
       });
   }
 

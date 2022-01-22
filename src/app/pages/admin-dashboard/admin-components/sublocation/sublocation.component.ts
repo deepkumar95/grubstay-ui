@@ -6,6 +6,7 @@ import { SubLocationService } from '../../../../services/sub-location.service';
 import { CustomSnackBarService } from '../../../../services/helper/custom-snack-bar.service';
 import * as _ from 'lodash';
 import { SharedService } from '../../../../services/helper/shared.service';
+import { NgxUiLoaderService } from 'ngx-ui-loader';
 
 export interface SubLocation {
   subLocationId: number;
@@ -33,7 +34,7 @@ export class SublocationComponent implements OnInit {
   dataSource=new MatTableDataSource(this.SUBLOCATION_DATA);
 
   constructor(private matDialog:MatDialog, private _subLocationService:SubLocationService, private _snackBarService:CustomSnackBarService,
-    private _sharedService:SharedService) { }
+    private _sharedService:SharedService,private loader:NgxUiLoaderService) { }
 
   ngOnInit(): void {
     this.loadAllSubLocationData();
@@ -62,30 +63,36 @@ export class SublocationComponent implements OnInit {
     let self = this;
     let deleteConfirm = window.confirm("Are you sure..you want to delete it?");
     if (deleteConfirm) {
+      self.loader.start();
       self._subLocationService.deleteSubLocation(subLocationId).subscribe((response: any) => {
         if (response.error && response.error != '') {
           this._snackBarService.errorSnackBar("Something went wrong!");
+          self.loader.stop();
           return;
         }
         else {
           let deleteStatus = response.success;
           if (deleteStatus == 'deleted') {
-            this._snackBarService.successSnackBar("SubLocation deleted successfully!");
+            //this._snackBarService.successSnackBar("SubLocation deleted successfully!");
             this._sharedService.redirectTo("/admin/sub-location");
           }
           else {
             this._snackBarService.errorSnackBar("SubLocation deletion failed");
+            self.loader.stop();
             return;
           }
+          self.loader.stop();
         }
       },
         (error) => {
           this._snackBarService.errorSnackBar("Something went wrong!");
+          self.loader.stop();
           return;
         });
     }
     else{
       this._snackBarService.errorSnackBar("SubLocation deletion cancelled!");
+      self.loader.stop();
       return;
     }
   }
@@ -96,9 +103,11 @@ export class SublocationComponent implements OnInit {
 
   loadAllSubLocationData() {
     let self = this;
+    self.loader.start();
     self._subLocationService.loadAllSubLocation().subscribe((response: any) => {
       if (response.error && response.error == '') {
         this._snackBarService.errorSnackBar('Something went wrong');
+        self.loader.stop();
         return;
       }
       else {
@@ -124,15 +133,19 @@ export class SublocationComponent implements OnInit {
             }
           });
           this.dataSource = new MatTableDataSource(this.SUBLOCATION_DATA);
+          self.loader.stop();
 }
         else {
           this._snackBarService.successSnackBar('No Record Found!');
+          self.loader.stop();
           return;
         }
+        self.loader.stop();
       }
     },
       (error) => {
         this._snackBarService.errorSnackBar('Something went wrong');
+        self.loader.stop();
         return;
       });
   }

@@ -53,7 +53,7 @@
               <div class="col-md-6">
                 <mat-form-field appearance="standard" class="full-width" autocomplete="off">
                   <mat-label>PG Name</mat-label>
-                  <input textToUpperCase matInput autocomplete="new_name" type='text' name='pg_name'
+                  <input textToUpperCase matInput autocomplete="off" type='text' name='pg_name'
                     placeholder="Enter PG name" [(ngModel)]="pg.pgName" [disabled]="pg.operation == 'edit'">
                 </mat-form-field>
               </div>

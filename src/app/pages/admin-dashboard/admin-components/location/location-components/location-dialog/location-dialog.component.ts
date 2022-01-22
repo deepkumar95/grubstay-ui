@@ -5,6 +5,7 @@ import { LocationService } from '../../../../../../services/location.service';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { SharedService } from '../../../../../../services/helper/shared.service';
 import { Location } from '../../location.component'
+import { NgxUiLoaderService } from 'ngx-ui-loader';
 
 
 @Component({
@@ -34,7 +35,8 @@ export class LocationDialogComponent implements OnInit {
   cities: any = [];
 
   constructor(private _cityService: CityServiceService, private _snackBarService: CustomSnackBarService, private _locationService: LocationService, private dialogRef: MatDialogRef<LocationDialogComponent>,
-    private _sharedService: SharedService, @Inject(MAT_DIALOG_DATA) public data: Location) { }
+    private _sharedService: SharedService, 
+    @Inject(MAT_DIALOG_DATA) public data: Location,private loader:NgxUiLoaderService) { }
 
   ngOnInit(): void {
     this.loadAllCity();
@@ -61,25 +63,30 @@ export class LocationDialogComponent implements OnInit {
       locationData.append('status', self.location.status);
       locationData.append('cityId', self.city.cityId);
       if (locationData) {
+        this.loader.start();
         self._locationService.addLocation(locationData).subscribe((response: any) => {
           if (response.error && response.error != '') {
             this._snackBarService.errorSnackBar('Something went wrong...Try Again!');
+            this.loader.stop();
             return;
           } else {
             let addStatus = response.success;
             if (addStatus == 'saved') {
-              this._snackBarService.successSnackBar('Location Added Successfully!');
+              //this._snackBarService.successSnackBar('Location Added Successfully!');
               this.dialogRef.close();
               this._sharedService.redirectTo('admin/location');
             }
             else {
               this._snackBarService.errorSnackBar('Something went wrong...Try Again!');
+              this.loader.stop();
               return;
             }
+            this.loader.stop();
           }
         },
           (error) => {
             this._snackBarService.errorSnackBar('Something went wrong...Try Again!');
+            this.loader.stop();
             return;
           });
       }
@@ -93,24 +100,29 @@ export class LocationDialogComponent implements OnInit {
     formData.append('locationName', self.location.locationName);
     formData.append('status',self.location.status);
     formData.append('locationId', self.location.locationId);
+    this.loader.start();
     this._locationService.updateLocation(formData).subscribe((response: any) => {
       if (response.error && response.error != '') {
         this._snackBarService.errorSnackBar("Something went wrong!");
+        this.loader.stop();
         return;
       } else {
         let updatedStatus = response.success;
         if (updatedStatus == 'updated') {
-          this._snackBarService.successSnackBar("Location updated Successfully!");
+          //this._snackBarService.successSnackBar("Location updated Successfully!");
           this.dialogRef.close();
           this._sharedService.redirectTo("/admin/location")
         } else {
           this._snackBarService.errorSnackBar("Location updation Failed!");
+          this.loader.stop();
           return;
         }
+        this.loader.stop();
       }
     },
     (error) => {
       this._snackBarService.errorSnackBar(error);
+      this.loader.stop();
       return;
     });
   }
@@ -120,10 +132,12 @@ export class LocationDialogComponent implements OnInit {
     self.city.cityName = city.cityName;
   }
   loadAllCity() {
+    this.loader.start();
     this._cityService.loadAllCity().subscribe(
       (response: any) => {
         if (response.erorr && response.error != '') {
           this._snackBarService.errorSnackBar("Something went wrong!...Please Try Again");
+          this.loader.stop();
           return;
         } else {
           let responseData: any = response.data;
@@ -137,10 +151,12 @@ export class LocationDialogComponent implements OnInit {
               }
             });
           }
+          this.loader.stop();
         }
       },
       (error: any) => {
         this._snackBarService.errorSnackBar("Something went wrong!...Please Try Again");
+        this.loader.stop();
         return;
       });
   }

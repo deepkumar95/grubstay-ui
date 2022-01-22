@@ -6,6 +6,7 @@ import { SubLocationService } from '../../../../../../services/sub-location.serv
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { SharedService } from '../../../../../../services/helper/shared.service';
 import { SubLocation } from '../../sublocation.component';
+import { NgxUiLoaderService } from 'ngx-ui-loader';
 
 @Component({
   selector: 'app-sublocation-dialog',
@@ -42,7 +43,8 @@ export class SublocationDialogComponent implements OnInit {
   locations: any = [];
 
   constructor(private _cityService: CityServiceService, private _snackBarService: CustomSnackBarService, private _locationService: LocationService, private _subLocationService: SubLocationService, private dialogRef: MatDialogRef<SublocationDialogComponent>,
-    private _sharedService: SharedService, @Inject(MAT_DIALOG_DATA) public data: SubLocation) { }
+    private _sharedService: SharedService
+    , @Inject(MAT_DIALOG_DATA) public data: SubLocation,private loader:NgxUiLoaderService) { }
 
   ngOnInit(): void {
     if (this.data) {
@@ -100,24 +102,29 @@ export class SublocationDialogComponent implements OnInit {
       formData.append("locationId", self.subLocation.locationId);
       formData.append("cityId", self.subLocation.cityId);
       formData.append("status", self.subLocation.status);
+      self.loader.start();
       self._subLocationService.addSubLocation(formData).subscribe((response: any) => {
         if (response.error && response.error != '') {
           self._snackBarService.errorSnackBar("Something went wrong!");
+          self.loader.stop();
           return;
         } else {
           let addStatus = response.success;
           if (addStatus == 'success') {
-            self._snackBarService.successSnackBar("SubLocation Added Successfully!");
+            //self._snackBarService.successSnackBar("SubLocation Added Successfully!");
             self.dialogRef.close();
             self._sharedService.redirectTo("/admin/sub-location");
           } else {
             self._snackBarService.errorSnackBar("Something went wrong!");
+            self.loader.stop();
             return;
           }
+          self.loader.stop();
         }
       },
         (error) => {
           self._snackBarService.errorSnackBar("Something went wrong!");
+          self.loader.stop();
           return;
         });
       }
@@ -132,26 +139,31 @@ export class SublocationDialogComponent implements OnInit {
     formData.append("subLocationName", self.subLocation.subLocationName);
     formData.append("subLocationId", self.subLocation.subLocationId);
     formData.append("status", self.subLocation.status);
+    self.loader.start();
     self._subLocationService.updateSubLocation(formData).subscribe((response: any) => {
       if (response.error && response.error != '') {
         this._snackBarService.errorSnackBar("Something went wrong!");
+        self.loader.stop();
         return;
       }
       else {
         let updateStatus = response.success;
         if (updateStatus == 'update') {
-          this._snackBarService.successSnackBar("SubLocation updated successfully!");
+          //this._snackBarService.successSnackBar("SubLocation updated successfully!");
           this.dialogRef.close();
           this._sharedService.redirectTo("/admin/sub-location");
         }
         else {
           this._snackBarService.errorSnackBar("SubLocation updation failed!");
+          self.loader.stop();
           return;
         }
+        self.loader.stop();
       }
     },
       (error) => {
         this._snackBarService.errorSnackBar("Something went wrong!");
+        self.loader.stop();
         return;
       });
   }
@@ -159,9 +171,11 @@ export class SublocationDialogComponent implements OnInit {
   public loadLocationsData() {
     let self = this;
     self.locations = [];
+    self.loader.start();
     this._locationService.loadAllLocation().subscribe((response: any) => {
       if (response.error && response.error != '') {
         this._snackBarService.errorSnackBar('Something went wrong!');
+        self.loader.stop();
       }
       else {
         let responseData = response.data[0];
@@ -184,24 +198,30 @@ export class SublocationDialogComponent implements OnInit {
                 }
               }
             }
+            self.loader.stop();
           });
+          self.loader.stop();
         }
         else {
           this._snackBarService.errorSnackBar("No Location Found");
+          self.loader.stop();
         }
       }
     },
       (error) => {
-
+        self.loader.stop();
       });
 
   }
 
   loadAllCity() {
+    let self = this;
+    self.loader.start();
     this._cityService.loadAllCity().subscribe(
       (response: any) => {
         if (response.erorr && response.error != '') {
           this._snackBarService.errorSnackBar("Something went wrong!...Please Try Again");
+          self.loader.stop();
           return;
         } else {
           let responseData: any = response.data;
@@ -215,11 +235,13 @@ export class SublocationDialogComponent implements OnInit {
               }
             });
           }
-          this._snackBarService.successSnackBar("Successfully Fetched!");
+         // this._snackBarService.successSnackBar("Successfully Fetched!");
+          self.loader.stop();
         }
       },
       (error: any) => {
         this._snackBarService.errorSnackBar("Something went wrong!...Please Try Again");
+        self.loader.stop();
         return;
       });
   }

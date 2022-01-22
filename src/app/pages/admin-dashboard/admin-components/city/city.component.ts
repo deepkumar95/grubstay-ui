@@ -61,25 +61,30 @@ export class CityComponent implements OnInit {
     let confirmStatus:boolean = window.confirm('Are you sure, You want to delete this City!');
     if (confirmStatus == true) {
       if (cityId) {
+        this.loader.start();
         self._cityService.deleteCity(cityId).subscribe((response: any) => {
           if (response.error && response.error != '') {
             this._snackbarService.errorSnackBar("Deletion Failed...Try Again!");
+            this.loader.stop();
             return;
           } else {
             let deleteStatus = response.success;
             if (deleteStatus == 'deleted') {
-              this._snackbarService.successSnackBar("City Deleted Successfully!");
+              //this._snackbarService.successSnackBar("City Deleted Successfully!");
               this._sharedService.redirectTo('/admin/city');
             }
           }
+          this.loader.stop();
         }, (error) => {
           this._snackbarService.errorSnackBar("Deletion Failed...Try Again!");
+          this.loader.stop();
           return;
         })
       }
     }
     else{
       this._snackbarService.successSnackBar('City Deletion Cancelled!');
+      this.loader.stop();
       return;
     }
   }
@@ -118,7 +123,7 @@ export class CityComponent implements OnInit {
             this.dataSource = new MatTableDataSource(this.CITY_DATA);
           }
           this.loader.stop();
-          this._snackbarService.successSnackBar("Successfully Fetched!");
+          //this._snackbarService.successSnackBar("Successfully Fetched!");
         }
       },
       (error: any) => {
