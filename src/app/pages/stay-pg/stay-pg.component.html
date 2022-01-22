@@ -17,8 +17,8 @@
             <div class="row">
               <div class="col-4 col-md-4 col-sm-4 col-xs-4">
                 <div class="pg-img">
-                    <img [routerLink]="['/pg/'+pg.pgId+'/'+pg.pgName]" routerLinkActive="router-link-active"
-                    [src]="_sanitizer.bypassSecurityTrustUrl(pg.pgImage)" [alt]="pg.pgImageName">
+                  <img [routerLink]="['/pg/'+pg.pgId+'/'+pg.pgName]" routerLinkActive="router-link-active" [src]="_sanitizer.bypassSecurityTrustUrl(pg.pgImage)"
+                    [alt]="pg.pgImageName">
                 </div>
               </div>
               <div class="col-6 col-md-6 col-sm-6 col-xs-6">
@@ -65,12 +65,14 @@
           <div class="contact">
             <button [matMenuTriggerFor]="menu" #menuTrigger mat-raised-button>Contact</button>
             <mat-menu #menu="matMenu" yPosition="above" xPosition="before">
-                <a href="{{'https://wa.me/+918050163861/?text=Hi, I am looking for PG : '+'https://grubstay.com/pg/'+pg.pgId+'/'+pg.pgName}}" mat-icon-button>
-                    <mat-icon>whatsapp</mat-icon>
-                  </a>
-                  <a href="{{'sms:+918050163861?body='+'Hi, I am looking for PG : '+'https://grubstay.com/pg/'+pg.pgId+'/'+pg.pgName}}" mat-icon-button>
-                    <mat-icon>textsms</mat-icon>
-                  </a>
+              <a href="{{'https://wa.me/+918050163861/?text=Hi, I am looking for PG : '+'http://localhost:4200/pg/'+pg.pgId+'/'+pg.pgName}}"
+                mat-icon-button>
+                <mat-icon>whatsapp</mat-icon>
+              </a>
+              <a href="{{'sms:+918050163861&body='+'Hi, I am looking for PG : '+'http://localhost:4200/pg/'+pg.pgId+'/'+pg.pgName}}"
+                mat-icon-button>
+                <mat-icon>textsms</mat-icon>
+              </a>
             </mat-menu>
           </div>
         </div>
@@ -99,23 +101,25 @@
     </div>
     <mat-divider></mat-divider>
     <div class="pg-d">
-      <div class="container">
+      <div class="container-fluid">
         <div class="row">
-          <div class="col-8">
+          <div class="col-3 mt-2">
+              <filter-sidebar></filter-sidebar>
+          </div>
+          <div class="col-9">
             <div *ngFor="let pg of pgArray">
               <div class="container">
                 <div class="pg-card-d">
                   <div class="row">
                     <div class="col-4 col-md-4 col-sm-4 col-xs-4">
                       <div class="pg-img-d">
-                        <img [routerLink]="['/pg/'+pg.pgId+'/'+pg.pgName]" routerLinkActive="router-link-active"
-                          [src]="_sanitizer.bypassSecurityTrustUrl(pg.pgImage)" [alt]="pg.pgImageName">
+                        <img [routerLink]="['/pg/'+pg.pgId+'/'+pg.pgName]" routerLinkActive="router-link-active" [src]="_sanitizer.bypassSecurityTrustUrl(pg.pgImage)"
+                          [alt]="pg.pgImageName">
                       </div>
                     </div>
                     <div class="col-6 col-md-6 col-sm-6 col-xs-6">
                       <div class="pg-content-d">
-                        <h5 style="cursor: pointer;" [routerLink]="['/pg/'+pg.pgId+'/'+pg.pgName]"
-                          routerLinkActive="router-link-active">{{pg.pgName}}</h5>
+                        <h5 style="cursor: pointer;" [routerLink]="['/pg/'+pg.pgId+'/'+pg.pgName]" routerLinkActive="router-link-active">{{pg.pgName}}</h5>
                         <p>{{pg.locationName}}</p>
                       </div>
                       <div class="gender-d">
@@ -166,10 +170,12 @@
                   <div class="contact-d">
                     <button [matMenuTriggerFor]="menu" #menuTrigger mat-raised-button>Contact</button>
                     <mat-menu id="matMenu" #menu="matMenu" yPosition="above" xPosition="before">
-                      <a href="{{'https://wa.me/+918050163861/?text=Hi, I am looking for PG : '+'https://grubstay.com/pg/'+pg.pgId+'/'+pg.pgName}}" mat-icon-button>
+                      <a href="{{'https://wa.me/+918050163861/?text=Hi, I am looking for PG : '+'http://localhost:4200/pg/'+pg.pgId+'/'+pg.pgName}}"
+                        mat-icon-button>
                         <mat-icon>whatsapp</mat-icon>
                       </a>
-                      <a href="{{'sms:+918050163861?body='+'Hi, I am looking for PG : '+'https://grubstay.com/pg/'+pg.pgId+'/'+pg.pgName}}" mat-icon-button>
+                      <a href="{{'sms:+918050163861?body='+'Hi, I am looking for PG : '+'http://localhost:4200/pg/'+pg.pgId+'/'+pg.pgName}}"
+                        mat-icon-button>
                         <mat-icon>textsms</mat-icon>
                       </a>
                     </mat-menu>

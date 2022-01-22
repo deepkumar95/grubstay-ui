@@ -64,6 +64,8 @@ import { TravelNearByDialogComponent } from './pages/admin-dashboard/admin-compo
 import {MatMenuModule} from '@angular/material/menu';
 import { AdminDialogComponent } from './pages/admin-dashboard/admin-components/sub-admin/admin-dialog/admin-dialog.component';
 import {MatTooltipModule} from '@angular/material/tooltip';
+import { FilterSidebarComponent } from './pages/stay-pg/stay-pg-components/filter-sidebar/filter-sidebar.component';
+
 
 const ngxUiLoaderConfig:NgxUiLoaderConfig =
   {
@@ -131,7 +133,8 @@ const ngxUiLoaderConfig:NgxUiLoaderConfig =
     SubAdminComponent,
     TraverlNearByComponent,
     TravelNearByDialogComponent,
-    AdminDialogComponent
+    AdminDialogComponent,
+    FilterSidebarComponent
   ],
   imports: [
     BrowserModule,

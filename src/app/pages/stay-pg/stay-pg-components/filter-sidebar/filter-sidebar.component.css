@@ -1,0 +1,12 @@
+.filterOptions{
+    margin-left:20px;
+}
+.mat-list-base .mat-list-item .mat-list-item-content, .mat-list-base .mat-list-option .mat-list-item-content{
+    height:20px !important;
+}
+.mat-list-base .mat-subheader{
+    height: 20px !important;
+}
+.mat-list-base .mat-list-item, .mat-list-base .mat-list-option{
+    height: 28px !important;
+}
