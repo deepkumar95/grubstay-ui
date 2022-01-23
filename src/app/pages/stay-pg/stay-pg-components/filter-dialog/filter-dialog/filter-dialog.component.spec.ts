@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FilterSidebarComponent } from './filter-sidebar.component';
+import { FilterDialogComponent } from './filter-dialog.component';
 
-describe('FilterSidebarComponent', () => {
-  let component: FilterSidebarComponent;
-  let fixture: ComponentFixture<FilterSidebarComponent>;
+describe('FilterDialogComponent', () => {
+  let component: FilterDialogComponent;
+  let fixture: ComponentFixture<FilterDialogComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ FilterSidebarComponent ]
+      declarations: [ FilterDialogComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(FilterSidebarComponent);
+    fixture = TestBed.createComponent(FilterDialogComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
