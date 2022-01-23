@@ -57,7 +57,10 @@ export class StayPgComponent implements OnInit {
     max_price: '',
     gender: '',
     review: '',
-    for: ''
+    for: '',
+    cityId: '',
+    locationId: '',
+    locationName: ''
   }
 
   occupencyArray: any = [
@@ -100,10 +103,10 @@ export class StayPgComponent implements OnInit {
 
   ngOnInit(): void {
     var self = this;
-    if(self._shared.sharedData){
-      if(self._shared.sharedData.filter==true){
-        this.filteringData=self._shared.sharedData;
-        self.filterData();
+    if (self._shared.sharedData) {
+      if (self._shared.sharedData.filter == true) {
+        this.filteringData = self._shared.sharedData;
+        self.filterDataforMobile();
       }
     }
     if (self._shared.sharedData.locationId) {
@@ -245,9 +248,9 @@ export class StayPgComponent implements OnInit {
           element.checkedStatus = true;
           this.filterData();
         }
-        else{
-          this.filteringData.occupeny='';
-          element.checkedStatus=false;
+        else {
+          this.filteringData.occupeny = '';
+          element.checkedStatus = false;
           this.filterData();
         }
       } else {
@@ -259,13 +262,13 @@ export class StayPgComponent implements OnInit {
     this.budgetArray.forEach(element => {
       if (element.id == id && element.name == name) {
         let button: any = document.getElementById('' + id);
-        if(button.checked==true){
+        if (button.checked == true) {
           this.filteringData.min_price = element.min_price;
           this.filteringData.max_price = element.max_price;
           element.checkedStatus = true;
           this.filterData()
         }
-        else{
+        else {
           this.filteringData.min_price = '';
           this.filteringData.max_price = '';
           element.checkedStatus = false;
@@ -280,12 +283,12 @@ export class StayPgComponent implements OnInit {
     this.genderArray.forEach(element => {
       if (element.id == id && element.name == name) {
         let button: any = document.getElementById('' + id);
-        if(button.checked==true){
+        if (button.checked == true) {
           this.filteringData.gender = element.value;
           element.checkedStatus = true;
           this.filterData();
         }
-        else{
+        else {
           this.filteringData.gender = '';
           element.checkedStatus = false;
           this.filterData();
@@ -352,15 +355,71 @@ export class StayPgComponent implements OnInit {
     });
     self.filteringData.rating = '';
   }
+  filterDataforMobile(){
+    let self=this;
+    if (self.filteringData.for == 'city') {
+      let cityId=this.filteringData.cityId;
+      self.pgArray=[];
+      this._pgService.loadAllPGDataInCity(cityId).subscribe((response: any) => {
+        if (response.error && response.error != '') {
+          this._snackBarService.successSnackBar("Something went wrong!");
+          return;
+        }
+        else {
+          let totalPg = response.total;
+          if (totalPg > 0) {
+            let fetchStatus = response.success;
+            if (fetchStatus == 'success') {
+              let responseData: any = response.data;
+              if (responseData) {
+                responseData.forEach(element => {
+                  let pgData = element;
+                  let data: any = {};
+                  data.pgId = pgData.pgId;
+                  data.pgName = pgData.pgName;
+                  data.locationName = pgData.subLocation.location.locationName;
+                  data.gender = pgData.pgGender;
+                  data.distance = pgData.distFromSubLoc;
+                  data.weekly = pgData.weekly;
+                  data.monthly = pgData.monthly;
+                  data.daily = pgData.daily;
+                  data.singleMemPgPrc = pgData.singleMemPgPrc;
+                  data.doubleMemPgPrc = pgData.doubleMemPgPrc;
+                  data.tripleMemPgPrc = pgData.tripleMemPgPrc;
+                  data.price = (pgData.singleMemPgPrc && pgData.singleMemPgPrc != 0) ? pgData.singleMemPgPrc : (pgData.doubleMemPgPrc && pgData.doubleMemPgPrc != 0) ? pgData.doubleMemPgPrc : pgData.tripleMemPgPrc;
+                  data.pgImage = pgData.pgImage;
+                  data.pgImageName = pgData.pgImageName;
+                  this.pgArray.push(data);
+                  this.pgData.push(data);
+                });
+                self.filterData();
+              }
+  
+            }
+            else {
+              this._snackBarService.errorSnackBar("No Record Found!")
+            }
+          }
+          else {
+            this._snackBarService.errorSnackBar("No Record Found!");
+          }
+        }
+      },
+        (error) => {
+          this._snackBarService.errorSnackBar("Something went wrong!");
+        });
+    }
+    if (self.filteringData.for == 'location') {
+      let data: any = {};
+      data.locationId = this.filteringData.locationId;
+      data.locationName = this.filteringData.locationName;
+      this.currentLocation = this.filteringData.locationName;
+      this.loadPGData(data);
+    };
+  }
   filterData() {
     let self = this;
     self.loader.start();
-    if(self.filteringData.for=='city'){
-
-    }
-    if(self.filteringData.for=='location'){
-
-    };
     self.pgArray = JSON.parse(JSON.stringify(self.pgData));
     if (self.filteringData.occupeny && self.filteringData.occupeny != '') {
       if (self.filteringData.occupeny == 'Single') {

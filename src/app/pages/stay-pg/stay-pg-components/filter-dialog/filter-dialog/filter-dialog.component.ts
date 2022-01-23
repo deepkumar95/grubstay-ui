@@ -10,14 +10,18 @@ import { ActivatedRoute, RouterStateSnapshot } from '@angular/router';
 })
 export class FilterDialogComponent implements OnInit {
 
-  constructor(private _sharedService: SharedService, private dialogRef: MatDialogRef<FilterDialogComponent>, private activatedRoute:ActivatedRoute) { }
+  constructor(private _sharedService: SharedService, private dialogRef: MatDialogRef<FilterDialogComponent>, private activatedRoute: ActivatedRoute) { }
   filteringData: any = {
     occupeny: '',
     min_price: '',
     max_price: '',
     gender: '',
     review: '',
-    filter: false
+    filter: false,
+    for: '',
+    cityId:'',
+    locationId:'',
+    locationName:''
   }
 
   occupencyArray: any = [
@@ -126,10 +130,30 @@ export class FilterDialogComponent implements OnInit {
     self.filteringData.gender = '';
   }
   filterData() {
-    this.filteringData.filter = true;
-    this._sharedService.sharedData = this.filteringData;
-    this.dialogRef.close();
-    let currentRouter:any=this.activatedRoute.snapshot;
-    this._sharedService.redirectTo(currentRouter._routerState.url);
+    let currentRouter: any = this.activatedRoute.snapshot;
+    let finalPath = currentRouter._routerState.url;
+    if (finalPath.includes('All')) {
+      this.filteringData.for = 'city';
+      this.filteringData.filter = true;
+      let array:any=finalPath.toString().split('/');
+      if(array[3]=='CITY'){
+        this.filteringData.cityId=array[2];
+      }
+      this._sharedService.sharedData = this.filteringData;
+      this.dialogRef.close();
+      this._sharedService.redirectTo(currentRouter._routerState.url);
+    }
+    else {
+      this.filteringData.filter = true;
+      this.filteringData.for='location';
+      let array:any=finalPath.toString().split('/');
+      if(array[4]!='' && array[5]!=''){
+      this.filteringData.locationId=array[4];
+      this.filteringData.locationName=array[5];
+      }
+      this._sharedService.sharedData = this.filteringData;
+      this.dialogRef.close();
+      this._sharedService.redirectTo(currentRouter._routerState.url);
+    }
   }
 }
