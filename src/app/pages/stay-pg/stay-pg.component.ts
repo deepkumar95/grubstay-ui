@@ -425,7 +425,7 @@ export class StayPgComponent implements OnInit {
       if(a.price < b.price)
         return -1;
       if(a.price == b.price)
-        return 1;
+        return 0;
     })
     console.log("Ascending Order");
     console.log(pgArray);
@@ -437,7 +437,7 @@ export class StayPgComponent implements OnInit {
       if(a.price > b.price)
         return -1;
       if(a.price == b.price)
-        return 1;
+        return 0;
     })
   }
 }
