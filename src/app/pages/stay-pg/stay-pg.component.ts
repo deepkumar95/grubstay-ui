@@ -60,7 +60,8 @@ export class StayPgComponent implements OnInit {
     for: '',
     cityId: '',
     locationId: '',
-    locationName: ''
+    locationName: '',
+    sorting:''
   }
 
   occupencyArray: any = [
@@ -90,6 +91,11 @@ export class StayPgComponent implements OnInit {
     { id: 'rt2', name: 'Double Star', checkedStatus: false, numberOfStar: 2 },
     { id: 'rt1', name: 'Single Star', checkedStatus: false, numberOfStar: 1 },
   ]
+  
+  sortingArray:any = [
+    { id: 'st1', name: 'High to Low', value: 'desc', checkedStatus: false },
+    { id: 'st2', name: 'Low to High', value: 'asc', checkedStatus: false },
+  ]
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
@@ -103,12 +109,6 @@ export class StayPgComponent implements OnInit {
 
   ngOnInit(): void {
     var self = this;
-    if (self._shared.sharedData) {
-      if (self._shared.sharedData.filter == true) {
-        this.filteringData = self._shared.sharedData;
-        self.filterDataforMobile();
-      }
-    }
     if (self._shared.sharedData.locationId) {
       let data: any = self._shared.sharedData;
       let locationId = data.locationId;
@@ -172,7 +172,7 @@ export class StayPgComponent implements OnInit {
         }
         else {
           this._snackBarService.errorSnackBar("No Record Found!");
-        }
+        } 
       }
     },
       (error) => {
@@ -258,6 +258,25 @@ export class StayPgComponent implements OnInit {
       }
     });
   }
+  setSortingfilter(id, name) {
+    this.sortingArray.forEach(element => {
+      if (element.id == id && element.name == name) {
+        let button: any = document.getElementById('' + id);
+        if (button.checked == true) {
+          this.filteringData.sorting = element.value;
+          element.checkedStatus = true;
+          this.filterData();
+        }
+        else {
+          this.filteringData.sorting = '';
+          element.checkedStatus = false;
+          this.filterData();
+        }
+      } else {
+        element.checkedStatus = false;
+      }
+    });
+  }
   setBudgetfilter(id, name) {
     this.budgetArray.forEach(element => {
       if (element.id == id && element.name == name) {
@@ -331,6 +350,14 @@ export class StayPgComponent implements OnInit {
     self.filteringData.occupeny = '';
     self.filterData();
   }
+  clearSortingFilter() {
+    let self = this;
+    self.sortingArray.forEach((item) => {
+      item.checkedStatus = false;
+    });
+    self.filteringData.sorting = '';
+    self.filterData();
+  }
   clearBudgetFilter() {
     let self = this;
     self.budgetArray.forEach((item) => {
@@ -347,75 +374,6 @@ export class StayPgComponent implements OnInit {
     });
     self.filteringData.gender = '';
     self.filterData();
-  }
-  clickRatingFilter() {
-    let self = this;
-    self.ratingArray.forEach((item) => {
-      item.checkedStatus = false;
-    });
-    self.filteringData.rating = '';
-  }
-  filterDataforMobile(){
-    let self=this;
-    if (self.filteringData.for == 'city') {
-      let cityId=this.filteringData.cityId;
-      self.pgArray=[];
-      this._pgService.loadAllPGDataInCity(cityId).subscribe((response: any) => {
-        if (response.error && response.error != '') {
-          this._snackBarService.successSnackBar("Something went wrong!");
-          return;
-        }
-        else {
-          let totalPg = response.total;
-          if (totalPg > 0) {
-            let fetchStatus = response.success;
-            if (fetchStatus == 'success') {
-              let responseData: any = response.data;
-              if (responseData) {
-                responseData.forEach(element => {
-                  let pgData = element;
-                  let data: any = {};
-                  data.pgId = pgData.pgId;
-                  data.pgName = pgData.pgName;
-                  data.locationName = pgData.subLocation.location.locationName;
-                  data.gender = pgData.pgGender;
-                  data.distance = pgData.distFromSubLoc;
-                  data.weekly = pgData.weekly;
-                  data.monthly = pgData.monthly;
-                  data.daily = pgData.daily;
-                  data.singleMemPgPrc = pgData.singleMemPgPrc;
-                  data.doubleMemPgPrc = pgData.doubleMemPgPrc;
-                  data.tripleMemPgPrc = pgData.tripleMemPgPrc;
-                  data.price = (pgData.singleMemPgPrc && pgData.singleMemPgPrc != 0) ? pgData.singleMemPgPrc : (pgData.doubleMemPgPrc && pgData.doubleMemPgPrc != 0) ? pgData.doubleMemPgPrc : pgData.tripleMemPgPrc;
-                  data.pgImage = pgData.pgImage;
-                  data.pgImageName = pgData.pgImageName;
-                  this.pgArray.push(data);
-                  this.pgData.push(data);
-                });
-                self.filterData();
-              }
-  
-            }
-            else {
-              this._snackBarService.errorSnackBar("No Record Found!")
-            }
-          }
-          else {
-            this._snackBarService.errorSnackBar("No Record Found!");
-          }
-        }
-      },
-        (error) => {
-          this._snackBarService.errorSnackBar("Something went wrong!");
-        });
-    }
-    if (self.filteringData.for == 'location') {
-      let data: any = {};
-      data.locationId = this.filteringData.locationId;
-      data.locationName = this.filteringData.locationName;
-      this.currentLocation = this.filteringData.locationName;
-      this.loadPGData(data);
-    };
   }
   filterData() {
     let self = this;
@@ -450,6 +408,36 @@ export class StayPgComponent implements OnInit {
         return item.gender != this.filteringData.gender;
       });
     }
+    if(self.filteringData.sorting && self.filteringData.sorting!=''){
+      if(self.filteringData.sorting=='asc'){
+        this.sortArrayInAscendingOrder(self.pgArray);
+      }
+      if(self.filteringData.sorting=='desc'){
+        this.sortArrayInDescendingOrder(self.pgArray);
+      }
+    }
     self.loader.stop();
+  }
+  sortArrayInAscendingOrder(pgArray:any){
+    pgArray.sort((a:any, b:any)=>{
+      if(a.price > b.price)
+        return 1;
+      if(a.price < b.price)
+        return -1;
+      if(a.price == b.price)
+        return 1;
+    })
+    console.log("Ascending Order");
+    console.log(pgArray);
+  }
+  sortArrayInDescendingOrder(pgArray:any){
+    pgArray.sort((a:any, b:any)=>{
+      if(a.price < b.price)
+        return 1;
+      if(a.price > b.price)
+        return -1;
+      if(a.price == b.price)
+        return 1;
+    })
   }
 }
