@@ -156,7 +156,7 @@ export class StayPgComponent implements OnInit {
                 data.singleMemPgPrc = pgData.singleMemPgPrc;
                 data.doubleMemPgPrc = pgData.doubleMemPgPrc;
                 data.tripleMemPgPrc = pgData.tripleMemPgPrc;
-                data.price = (pgData.singleMemPgPrc && pgData.singleMemPgPrc != 0) ? pgData.singleMemPgPrc : (pgData.doubleMemPgPrc && pgData.doubleMemPgPrc != 0) ? pgData.doubleMemPgPrc : pgData.tripleMemPgPrc;
+                data.price = (pgData.tripleMemPgPrc && pgData.tripleMemPgPrc != 0) ? pgData.tripleMemPgPrc : (pgData.doubleMemPgPrc && pgData.doubleMemPgPrc != 0) ? pgData.doubleMemPgPrc : pgData.singleMemPgPrc;
                 data.pgImage = pgData.pgImage;
                 data.pgImageName = pgData.pgImageName;
                 this.pgArray.push(data);
@@ -206,7 +206,7 @@ export class StayPgComponent implements OnInit {
               data.singleMemPgPrc = pgData.singleMemPgPrc;
               data.doubleMemPgPrc = pgData.doubleMemPgPrc;
               data.tripleMemPgPrc = pgData.tripleMemPgPrc;
-              data.price = (pgData.singleMemPgPrc && pgData.singleMemPgPrc != 0) ? pgData.singleMemPgPrc : (pgData.doubleMemPgPrc && pgData.doubleMemPgPrc != 0) ? pgData.doubleMemPgPrc : pgData.tripleMemPgPrc;
+              data.price = (pgData.tripleMemPgPrc && pgData.tripleMemPgPrc != 0) ? pgData.tripleMemPgPrc : (pgData.doubleMemPgPrc && pgData.doubleMemPgPrc != 0) ? pgData.doubleMemPgPrc : pgData.singleMemPgPrc;
               // if(pgData.singleMemPgPrc && pgData.singleMemPgPrc!=0){
               //   data.price=pgData.singleMemPgPrc;
               // }
