@@ -4,8 +4,7 @@
     align-items:center;
 }
 .location-heading{
-    height: 60px;
-    
+    height: 30px;
 }
 .stay-divider{
     margin: 0px;
@@ -89,18 +88,13 @@
     display: flex;
 }
 .male-d{
-    background-color: #03989E;
-    color: white;
+    color: #03989E;
     border-radius: 3px;
     width:30px;
-    padding:2px;
 }
 .female-d{
-    background-color: #EB4A95;
-    color: white;
+    color: #EB4A95;
     border-radius: 3px;
-    font-size:10px; 
-    padding:2px;
 }
 .distance-d{
     margin-top: .5rem;

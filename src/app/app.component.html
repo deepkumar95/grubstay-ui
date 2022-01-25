@@ -4,19 +4,18 @@
 <ngx-ui-loader></ngx-ui-loader>
 <app-navbar></app-navbar>
 <div *ngIf="floatButton==true">
-    <div class="mainopShadow"></div>
-    <div class="fab" id="fab">
-        <div class="mainop">
-            <input type="checkbox" id="inputCheck" hidden />
-            <i class="fab-btn" id="addIcon"><img src="../assets/imgs/phone.png" alt="phone" height="40px" width="40px" style="margin-top:7px;"></i>
-        </div>
-        <div id="contactMaint">
+    <a *ngIf="!(isHandset$ | async)" href="https://wa.me/+918050163861/?text=Hi, I am looking for PG" class="float" target="_blank">
+        <i class="fa fa-whatsapp my-float"></i>
+    </a>
+    <a *ngIf="(isHandset$ | async)" href="https://wa.me/+918050163861/?text=Hi, I am looking for PG" class="float">
+        <i class="fa fa-whatsapp my-float"></i>
+    </a>
+        <!-- <div id="contactMaint">
             <div id="forms" class="minifab">
                 <a href="https://wa.me/+918050163861/?text=Hi, I am looking for PG" ><img class="minifabIcon" src="https://img.icons8.com/color/48/000000/whatsapp--v2.png"></a>
             </div>
             <div id="drawings" class="minifab">
                 <a href="tel:+918050163861"><img class="minifabIcon" src="../assets/imgs/call.svg"></a>
             </div>
-        </div>
-    </div>
+        </div> -->
 </div>

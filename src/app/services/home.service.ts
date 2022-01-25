@@ -17,6 +17,17 @@ export class HomeService {
     return this._httpService.get(baseUrl+'admin/');
   }
 
+  public loadAllRequests(){
+    return this._httpService.get(baseUrl+'admin/callRequests/');
+  }
+
+  public sendCallRequest(data:any){
+    return this._httpService.post(baseUrl+'admin/sendRequest/',data);
+  }
+  public updateCallStatus(data:any){
+    return this._httpService.put(baseUrl+'admin/updateRequest/',data);
+  }
+
   public login(user:any){
     return this._httpService.post(baseUrl+'login/',user);
   }

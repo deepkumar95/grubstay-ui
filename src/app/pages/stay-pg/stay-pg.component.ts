@@ -9,8 +9,6 @@ import { ActivatedRoute } from '@angular/router';
 import { DomSanitizer } from '@angular/platform-browser';
 import { MatMenuTrigger } from '@angular/material/menu';
 import { MatDialog } from '@angular/material/dialog';
-import { FilterDialogComponent } from './stay-pg-components/filter-dialog/filter-dialog/filter-dialog.component';
-import { SortDialogComponent } from './stay-pg-components/filter-dialog/sort-dialog/sort-dialog.component';
 import * as _ from 'lodash';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
 
@@ -51,6 +49,7 @@ export class StayPgComponent implements OnInit {
 
   pgArray: PG[] = [];
   pgData: PG[] = [];
+  ready = '';
   filteringData: any = {
     occupeny: '',
     min_price: '',
@@ -163,6 +162,7 @@ export class StayPgComponent implements OnInit {
                 this.pgArray.push(data);
                 this.pgData.push(data);
               });
+              this.ready = responseData.length > 0 ? 'hide' : 'show';
             }
 
           }
@@ -221,6 +221,7 @@ export class StayPgComponent implements OnInit {
               this.pgArray.push(data);
               this.pgData.push(data);
             });
+            this.ready = responseData.length > 0 ? 'hide' : 'show';
           }
         }
         else {
@@ -328,20 +329,6 @@ export class StayPgComponent implements OnInit {
       }
     });
   }
-  openFilterDialog() {
-    this.dialog.open(FilterDialogComponent, {
-      height: "515px",
-      width: "400px",
-      disableClose: true
-    });
-  }
-  openSortDialog() {
-    this.dialog.open(SortDialogComponent, {
-      height: "300px",
-      width: "400px",
-      disableClose: true
-    });
-  }
   clearOccupancyFilter() {
     let self = this;
     self.occupencyArray.forEach((item) => {
@@ -374,6 +361,76 @@ export class StayPgComponent implements OnInit {
     });
     self.filteringData.gender = '';
     self.filterData();
+  }
+  clickRatingFilter() {
+    let self = this;
+    self.ratingArray.forEach((item) => {
+      item.checkedStatus = false;
+    });
+    self.filteringData.rating = '';
+  }
+  filterDataforMobile(){
+    let self=this;
+    if (self.filteringData.for == 'city') {
+      let cityId=this.filteringData.cityId;
+      self.pgArray=[];
+      this._pgService.loadAllPGDataInCity(cityId).subscribe((response: any) => {
+        if (response.error && response.error != '') {
+          this._snackBarService.successSnackBar("Something went wrong!");
+          return;
+        }
+        else {
+          let totalPg = response.total;
+          if (totalPg > 0) {
+            let fetchStatus = response.success;
+            if (fetchStatus == 'success') {
+              let responseData: any = response.data;
+              if (responseData) {
+                responseData.forEach(element => {
+                  let pgData = element;
+                  let data: any = {};
+                  data.pgId = pgData.pgId;
+                  data.pgName = pgData.pgName;
+                  data.locationName = pgData.subLocation.location.locationName;
+                  data.gender = pgData.pgGender;
+                  data.distance = pgData.distFromSubLoc;
+                  data.weekly = pgData.weekly;
+                  data.monthly = pgData.monthly;
+                  data.daily = pgData.daily;
+                  data.singleMemPgPrc = pgData.singleMemPgPrc;
+                  data.doubleMemPgPrc = pgData.doubleMemPgPrc;
+                  data.tripleMemPgPrc = pgData.tripleMemPgPrc;
+                  data.price = (pgData.singleMemPgPrc && pgData.singleMemPgPrc != 0) ? pgData.singleMemPgPrc : (pgData.doubleMemPgPrc && pgData.doubleMemPgPrc != 0) ? pgData.doubleMemPgPrc : pgData.tripleMemPgPrc;
+                  data.pgImage = pgData.pgImage;
+                  data.pgImageName = pgData.pgImageName;
+                  this.pgArray.push(data);
+                  this.pgData.push(data);
+                });
+                this.ready = responseData.length > 0 ? 'hide' : 'show';
+                self.filterData();
+              }
+
+            }
+            else {
+              this._snackBarService.errorSnackBar("No Record Found!")
+            }
+          }
+          else {
+            this._snackBarService.errorSnackBar("No Record Found!");
+          }
+        }
+      },
+        (error) => {
+          this._snackBarService.errorSnackBar("Something went wrong!");
+        });
+    }
+    if (self.filteringData.for == 'location') {
+      let data: any = {};
+      data.locationId = this.filteringData.locationId;
+      data.locationName = this.filteringData.locationName;
+      this.currentLocation = this.filteringData.locationName;
+      this.loadPGData(data);
+    };
   }
   filterData() {
     let self = this;
@@ -416,6 +473,7 @@ export class StayPgComponent implements OnInit {
         this.sortArrayInDescendingOrder(self.pgArray);
       }
     }
+    self.ready = self.pgArray.length > 0 ? 'hide' : 'show';
     self.loader.stop();
   }
   sortArrayInAscendingOrder(pgArray:any){

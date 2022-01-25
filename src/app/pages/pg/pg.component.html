@@ -13,16 +13,35 @@
             <div class="container-fluid">
                 <div class="row" style="padding: 8px;">
                     <div class="pg-content">
-                        <div class="row"><h4>{{pgDetails.pgName}}</h4></div>
-                        <div class="row"><small>{{pgDetails.pgAddress}}</small></div>
-                        <div class="row mt-2">
-                            <div class="col-5 d-flex align-items-center">
-                                <h4>{{pgDetails.pgSingleMemberPrice}}</h4>
+                        <div class="row">
+                            <div class="col-8">
+                                <div class="row"><h6>{{pgDetails.pgName}}</h6></div>
+                                <div class="row"><small>{{pgDetails.pgAddress}}</small></div>
                             </div>
-                            <div class="col-7 d-flex align-items-center" *ngIf="false">
+                            <div class="col-4">
+                                <div *ngIf="pgDetails.pgGender == 'both'">
+                                    <div class="container text-center"><i style="color: #03989E; font-size: 24px;" class="fa fa-male"></i>&nbsp;&nbsp;<i style="color: #EB4A95; font-size: 24px;" class="fa fa-female"></i></div>
+                                    <div class="container text-center mt-1"><h6 style="font-size: 12px;">PG FOR ALL</h6></div>
+                                </div>
+                                <div *ngIf="pgDetails.pgGender == 'male'">
+                                    <div class="container text-center"><i style="color: #03989E; font-size: 24px;" class="fa fa-male"></i></div>
+                                    <div class="container text-center mt-1"><h6 style="font-size: 12px;">ONLY FOR MEN</h6></div>
+                                </div>
+                                <div *ngIf="pgDetails.pgGender == 'female'">
+                                    <div class="container text-center"><i style="color: #EB4A95; font-size: 24px;" class="fa fa-female"></i></div>
+                                    <div class="container text-center mt-1"><h6 style="font-size: 12px;">ONLY FOR GIRLS</h6></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col-12 d-flex align-items-start">
+                                <a href="{{'https://wa.me/+918050163861/?text=Hi, I am looking for PG : '+'grubstay.com/pg/'+pgDetails.pgId+'/'+pgDetails.pgName}}" target="_blank" class="btn mr-10" style="background-color: #25D366; color: white;"><i class="fa fa-whatsapp"></i>&nbsp;&nbsp;WhatsApp</a>
+                                <a href="tel:+918050163861" class="btn" style="background-color: #2D9CD7; color: white;"><i class="fa fa-phone"></i>&nbsp;&nbsp;Call us</a>
+                            </div>
+                            <!-- <div class="col-7 d-flex align-items-center" *ngIf="false">
                                 <span><button mat-icon-button (click)="toggleFav()"><mat-icon *ngIf="!fav">favorite_border</mat-icon><mat-icon class="favorite" *ngIf="fav">favorite</mat-icon></button>&nbsp;</span>Save &nbsp;&nbsp;
                                 <span><button mat-icon-button (click)="sharePg()"><mat-icon>share</mat-icon></button>&nbsp;</span>Share
-                            </div>
+                            </div> -->
                             <!-- <div class="col-4 d-flex align-items-center">
                                 <span><button mat-icon-button (click)="toggleFav()"><mat-icon *ngIf="!fav">favorite_border</mat-icon><mat-icon class="favorite" *ngIf="fav">favorite</mat-icon></button>&nbsp;</span>Save
                             </div> -->
@@ -174,16 +193,35 @@
         <div class="container-fluid">
             <div class="row" style="padding: 8px;">
                 <div class="pg-content">
-                    <div class="row"><h4>{{pgDetails.pgName}}</h4></div>
-                    <div class="row"><small>{{pgDetails.pgAddress}}</small></div>
-                    <div class="row mt-2">
-                        <div class="col-9 d-flex align-items-center">
-                            <h4>{{pgDetails.pgPrice}}/-</h4>
+                    <div class="row">
+                        <div class="col-10">
+                            <div class="row"><h4>{{pgDetails.pgName}}</h4></div>
+                            <div class="row"><small>{{pgDetails.pgAddress}}</small></div>
                         </div>
-                        <div class="col-3 d-flex align-items-center" *ngIf="false">
+                        <div class="col-2">
+                            <div *ngIf="pgDetails.pgGender == 'both'">
+                                <div class="container text-center"><i style="color: #03989E; font-size: 48px;" class="fa fa-male"></i>&nbsp;&nbsp;<i style="color: #EB4A95; font-size: 48px;" class="fa fa-female"></i></div>
+                                <div class="container text-center mt-1"><h6 style="font-size: 12px;">PG FOR ALL</h6></div>
+                            </div>
+                            <div *ngIf="pgDetails.pgGender == 'male'">
+                                <div class="container text-center"><i style="color: #03989E; font-size: 48px;" class="fa fa-male"></i></div>
+                                <div class="container text-center mt-1"><h6 style="font-size: 12px;">ONLY FOR MEN</h6></div>
+                            </div>
+                            <div *ngIf="pgDetails.pgGender == 'female'">
+                                <div class="container text-center"><i style="color: #EB4A95; font-size: 48px;" class="fa fa-female"></i></div>
+                                <div class="container text-center mt-1"><h6 style="font-size: 12px;">ONLY FOR GIRLS</h6></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-1">
+                        <div class="col-9 d-flex align-items-center">
+                            <a href="{{'https://wa.me/+918050163861/?text=Hi, I am looking for PG : '+'grubstay.com/pg/'+pgDetails.pgId+'/'+pgDetails.pgName}}" target="_blank" class="btn mr-10" style="background-color: #25D366; color: white;"><i class="fa fa-whatsapp"></i>&nbsp;&nbsp;WhatsApp</a>
+                            <a href="tel:+918050163861" class="btn" style="background-color: #2D9CD7; color: white;"><i class="fa fa-phone"></i>&nbsp;&nbsp;Call us</a>
+                        </div>
+                        <!-- <div class="col-3 d-flex align-items-center" *ngIf="false">
                             <span><button mat-icon-button (click)="toggleFav()"><mat-icon *ngIf="!fav">favorite_border</mat-icon><mat-icon class="favorite" *ngIf="fav">favorite</mat-icon></button>&nbsp;</span>Save &nbsp;&nbsp;
                             <span><button mat-icon-button (click)="sharePg()"><mat-icon>share</mat-icon></button>&nbsp;</span>Share
-                        </div>
+                        </div> -->
                         <!-- <div class="col-4 d-flex align-items-center">
                             <span><button mat-icon-button (click)="toggleFav()"><mat-icon *ngIf="!fav">favorite_border</mat-icon><mat-icon class="favorite" *ngIf="fav">favorite</mat-icon></button>&nbsp;</span>Save
                         </div> -->
@@ -318,3 +356,4 @@
         </div>
     </div>
 </div>
+<app-footer></app-footer>

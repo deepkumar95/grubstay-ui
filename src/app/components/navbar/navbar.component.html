@@ -2,7 +2,9 @@
     <mat-sidenav #drawer class="sidenav" fixedInViewport="false"
         [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
         [mode]="(isHandset$ | async) ? 'over' : ''" >
-      <mat-toolbar><span [routerLink]="['']" class="logo">GRUBSTAY</span></mat-toolbar>
+      <mat-toolbar>
+        <span [routerLink]="['']" class="logo">GRUBSTAY</span>
+      </mat-toolbar>
       <mat-list role="list">
         <div *ngIf="isLoggedIn && user">
           <mat-list-item><a mat-button class="text-black">{{user.username}}</a></mat-list-item>
@@ -18,6 +20,7 @@
       <mat-toolbar class="toolbar">
         <span [routerLink]="['']" routerLinkActive="router-link-active"  class="logo">GRUBSTAY</span>
           <div class="example-spacer"></div>
+          <span style="user-select: none;"><a class="call d-inline-flex align-items-center theme-color" href="tel:+918050163861"><i class="fa fa-phone" aria-hidden="true"></i>&nbsp;<small>+91-8050163861</small></a></span>
         <div *ngIf="!(isHandset$ | async)">
           <div *ngIf="isLoggedIn && user">
             <a mat-button (click)="redirectTo()">{{user.username}}</a>&nbsp;

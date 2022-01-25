@@ -4,9 +4,8 @@
       <!-- <div class="filter">
         filters
       </div> -->
-      <div class="location-heading">
+      <div class="location-heading mt-1">
         <h5>Stays in {{currentLocation}}</h5>
-        <p>Stays Available</p>
       </div>
     </div>
     <mat-divider> </mat-divider>
@@ -118,25 +117,6 @@
               </div>
             </mat-list>
           </div>
-          <!-- <div>
-            <mat-action-list>
-              <h1 matSubheader>Sort PG</h1>
-            </mat-action-list>
-            <div class="row">
-              <div class="col-sm-6 col-xs-6">
-                <mat-list role="list">
-                  <h1 matSubheader>Price |&nbsp; <span (click)="clearSortingFilter()"> <kbd style="font-size:8px; border-radius:5px;">clear
-                        filter x</kbd></span></h1>
-                  <div class="filterOptions">
-                    <mat-list-item *ngFor="let item of sortingArray" role="listitem">
-                      <input type="checkbox" class="example-margin" [checked]="item.checkedStatus" [id]="item.id"
-                        (click)="setSortingfilter(item.id, item.name)" />&nbsp;&nbsp;<small>{{item.name}}</small>
-                    </mat-list-item>
-                  </div>
-                </mat-list>
-              </div>
-            </div>
-          </div> -->
         </mat-expansion-panel>
       </mat-accordion>
     </div>
@@ -149,34 +129,39 @@
               [src]="_sanitizer.bypassSecurityTrustUrl(pg.pgImage)" [alt]="pg.pgImageName">
             <div class="col-md-12 col-sm-12 col-xs-12 card_content-m">
               <div class="pg-content-d">
-                <h6 style="cursor: pointer;height:5px; " [routerLink]="['/pg/'+pg.pgId+'/'+pg.pgName]" routerLinkActive="router-link-active">{{pg.pgName}}</h6>
+                <h6 style="cursor: pointer;height:5px; " [routerLink]="['/pg/'+pg.pgId+'/'+pg.pgName]"
+                  routerLinkActive="router-link-active">{{pg.pgName}}</h6>
                 <small style="font-size:11px;">{{pg.locationName}}</small>
               </div>
             </div>
             <div class="row">
-              <div class="col-3">
+              <div class="col-3 d-flex justify-content-start">
                 <div class="gender-d">
                   <div *ngIf="pg.gender=='male'" class="both-d">
                     <div class="male-d mr-10">
-                      <h6 style="font-size:11px;margin-top:5px;">Boys</h6>
+                      <h6 style="font-size:14px;margin-top:5px;"><i class="fa fa-male"
+                          style="font-size:16px">&nbsp;Boys</i></h6>
                     </div>
                   </div>
                   <div *ngIf="pg.gender=='female'" class="both-d">
                     <div class="female-d">
-                      <h6 style="font-size:11px;margin-top:5px;">Girls</h6>
+                      <h6 style="font-size:14px;margin-top:5px;"><i class="fa fa-female"
+                          style="font-size:16px">&nbsp;Girls</i></h6>
                     </div>
                   </div>
                   <div *ngIf="pg.gender=='both'" class="both-d">
                     <div class="male-d mr-10">
-                      <h6 style="font-size:11px;margin-top:5px;">Boys</h6>
+                      <h6 style="font-size:14px;margin-top:5px;"><i class="fa fa-male"
+                          style="font-size:16px">&nbsp;Boys</i></h6>
                     </div>
-                    <div class="female-d">
-                      <h6 style="font-size:11px;margin-top:5px;">Girls</h6>
+                    <div style="margin-left: 10px;" class="female-d">
+                      <h6 style="font-size:14px;margin-top:5px;"><i class="fa fa-female"
+                          style="font-size:16px">&nbsp;Girls</i></h6>
                     </div>
                   </div>
                 </div>
               </div>
-              <div class="col-9" style="text-align:right; display: flex;">
+              <div class="col-9 d-flex justify-content-end pr-5">
                 <mat-icon aria-hidden="false" aria-label="Example home icon">star</mat-icon>
                 <mat-icon aria-hidden="false" aria-label="Example home icon">star</mat-icon>
                 <mat-icon aria-hidden="false" aria-label="Example home icon">star</mat-icon>
@@ -198,13 +183,14 @@
                     Whatsapp
                   </a>
                   &nbsp;
-                  <button style="font-size:11px; background:white; color: black; text-decoration:none;  border-radius:2px; width:70px; border:1px solid grey;"
+                  <button
+                    style="font-size:11px; background:white; color: black; text-decoration:none;  border-radius:2px; width:70px; border:1px solid grey;"
                     [routerLink]="['/pg/'+pg.pgId+'/'+pg.pgName]" routerLinkActive="router-link-active">
                     More info
                   </button>
                   <!-- <button [matMenuTriggerFor]="menu" #menuTrigger mat-raised-button>Contact</button>
                         <mat-menu id="matMenu" #menu="matMenu" yPosition="above" xPosition="before">
-                          
+
                           <a href="{{'sms:+918050163861?body='+'Hi, I am looking for PG : '+'http://localhost:4200/pg/'+pg.pgId+'/'+pg.pgName}}"
                             mat-icon-button>
                             <mat-icon>textsms</mat-icon>
@@ -280,6 +266,17 @@
           </div>
         </div> -->
       </div>
+      <div *ngIf="ready == 'show'">
+        <div class="row">
+          <div class="col-12">
+            <img style="height: 80%; width: 100%; object-fit: cover; object-position: center center;" src="../../../assets/noData.png" alt="noData">
+            <div style="background: #F7F7F7;" class="container text-center mb-10">
+              <h6 style="color: #979797;">no stays found !!</h6>
+              <h6 style="color:#979797;">try to search with a different location or options</h6>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
@@ -295,11 +292,13 @@
                 <h1 matSubheader>Filter PG</h1>
               </mat-action-list>
               <mat-list role="list">
-                <h1 matSubheader>OCCUPANCY |&nbsp; <span (click)="clearOccupancyFilter()"> <kbd style="font-size:8px; border-radius:5px;">clear
+                <h1 matSubheader>OCCUPANCY |&nbsp; <span (click)="clearOccupancyFilter()"> <kbd
+                      style="font-size:8px; border-radius:5px;">clear
                       filter x</kbd></span></h1>
                 <div class="filterOptions">
                   <mat-list-item *ngFor="let item of occupencyArray" role="listitem">
-                    <input type="checkbox" class="example-margin" [checked]="item.checkedStatus" [id]="item.id" (click)="setOccupancyfilter(item.id, item.name)" />&nbsp;&nbsp;<small>{{item.name}}</small>
+                    <input type="checkbox" class="example-margin" [checked]="item.checkedStatus" [id]="item.id"
+                      (click)="setOccupancyfilter(item.id, item.name)" />&nbsp;&nbsp;<small>{{item.name}}</small>
                   </mat-list-item>
                 </div>
               </mat-list>
@@ -308,7 +307,8 @@
                       filter x</kbd></span></h1>
                 <div class="filterOptions">
                   <mat-list-item *ngFor="let item of budgetArray" role="listitem">
-                    <input type="checkbox" class="example-margin" [checked]="item.checkedStatus" [id]="item.id" (click)="setBudgetfilter(item.id, item.name)" />&nbsp;&nbsp;<small>{{item.name}}</small>
+                    <input type="checkbox" class="example-margin" [checked]="item.checkedStatus" [id]="item.id"
+                      (click)="setBudgetfilter(item.id, item.name)" />&nbsp;&nbsp;<small>{{item.name}}</small>
                   </mat-list-item>
                 </div>
               </mat-list>
@@ -318,17 +318,8 @@
                 <div class="filterOptions">
                   <mat-list-item *ngFor="let item of genderArray" role="listitem">
                     <!-- <mat-checkbox class="example-margin" [checked]="item.checkedStatus" (click)="setGenderFilter(item.id, item.name)"><small>{{item.name}}</small></mat-checkbox> -->
-                    <input type="checkbox" class="example-margin" [checked]="item.checkedStatus" [id]="item.id" (click)="setGenderFilter(item.id, item.name)" />&nbsp;&nbsp;<small>{{item.name}}</small>
-                  </mat-list-item>
-                </div>
-              </mat-list>
-              <mat-list role="list">
-                <h1 matSubheader>Price |&nbsp; <span (click)="clearSortingFilter()"> <kbd style="font-size:8px; border-radius:5px;">clear
-                      filter x</kbd></span></h1>
-                <div class="filterOptions">
-                  <mat-list-item *ngFor="let item of sortingArray" role="listitem">
                     <input type="checkbox" class="example-margin" [checked]="item.checkedStatus" [id]="item.id"
-                      (click)="setSortingfilter(item.id, item.name)" />&nbsp;&nbsp;<small>{{item.name}}</small>
+                      (click)="setGenderFilter(item.id, item.name)" />&nbsp;&nbsp;<small>{{item.name}}</small>
                   </mat-list-item>
                 </div>
               </mat-list>
@@ -373,9 +364,8 @@
           <div style="width:72%;">
             <div class="container">
               <div style="margin-left:30px">
-                <div class="location-heading">
+                <div class="location-heading mt-2">
                   <h5>Stays in {{currentLocation}}</h5>
-                  <p>Stays Available</p>
                 </div>
               </div>
             </div>
@@ -397,29 +387,33 @@
                         </div>
                       </div>
                       <div class="row">
-                        <div class="col-3">
+                        <div class="col-3 d-flex justify-content-start">
                           <div class="gender-d">
                             <div *ngIf="pg.gender=='male'" class="both-d">
                               <div class="male-d mr-10">
-                                <h6 style="font-size:11px;margin-top:5px;">Boys</h6>
+                                <h6 style="font-size:14px;margin-top:5px;"><i class="fa fa-male"
+                                    style="font-size:16px">&nbsp;Boys</i></h6>
                               </div>
                             </div>
                             <div *ngIf="pg.gender=='female'" class="both-d">
                               <div class="female-d">
-                                <h6 style="font-size:11px;margin-top:5px;">Girls</h6>
+                                <h6 style="font-size:14px;margin-top:5px;"><i class="fa fa-female"
+                                    style="font-size:16px">&nbsp;Girls</i></h6>
                               </div>
                             </div>
-                            <div *ngIf="pg.gender=='both'" class="both-d">
+                            <div *ngIf="pg.gender=='both'" class="both-d d-flex justify-content-around">
                               <div class="male-d mr-10">
-                                <h6 style="font-size:11px;margin-top:5px;">Boys</h6>
+                                <h6 style="font-size:14px;margin-top:5px;"><i class="fa fa-male"
+                                    style="font-size:16px">&nbsp;Boys</i></h6>
                               </div>
-                              <div class="female-d">
-                                <h6 style="font-size:11px;margin-top:5px;">Girls</h6>
+                              <div style="margin-left: 10px;" class="female-d">
+                                <h6 style="font-size:14px;margin-top:5px;"><i class="fa fa-female"
+                                    style="font-size:16px">&nbsp;Girls</i></h6>
                               </div>
                             </div>
                           </div>
                         </div>
-                        <div class="col-9" style="text-align:right; display: flex;">
+                        <div class="col-9 d-flex justify-content-end p-0">
                           <mat-icon aria-hidden="false" aria-label="Example home icon">star</mat-icon>
                           <mat-icon aria-hidden="false" aria-label="Example home icon">star</mat-icon>
                           <mat-icon aria-hidden="false" aria-label="Example home icon">star</mat-icon>
@@ -442,13 +436,14 @@
                             Whatsapp
                           </a>
                           &nbsp;
-                          <button style="font-size:11px; background:white; color: black; text-decoration:none;  border-radius:2px; width:70px; border:1px solid grey;"
+                          <button
+                            style="font-size:11px; background:white; color: black; text-decoration:none;  border-radius:2px; width:70px; border:1px solid grey;"
                             [routerLink]="['/pg/'+pg.pgId+'/'+pg.pgName]" routerLinkActive="router-link-active">
                             More info
                           </button>
                           <!-- <button [matMenuTriggerFor]="menu" #menuTrigger mat-raised-button>Contact</button>
                             <mat-menu id="matMenu" #menu="matMenu" yPosition="above" xPosition="before">
-                              
+
                               <a href="{{'sms:+918050163861?body='+'Hi, I am looking for PG : '+'http://localhost:4200/pg/'+pg.pgId+'/'+pg.pgName}}"
                                 mat-icon-button>
                                 <mat-icon>textsms</mat-icon>
@@ -531,9 +526,23 @@
                   </div>
               </div>-->
               </div>
+              <div *ngIf="ready == 'show'">
+                <div class="row">
+                  <div class="col-12">
+                    <img style="height: 80%; width: 100%; object-fit: cover; object-position: center center;" src="../../../assets/noData.png" alt="noData">
+                    <div style="background: #F7F7F7;" class="container text-center mb-10">
+                      <h6 style="color: #979797;">no stays found !!</h6>
+                      <h6 style="color:#979797;">try to search with a different location or options</h6>
+                    </div>
+                  </div>
+                </div>
+              </div>
 
             </div>
           </div>
         </div>
       </div>
     </div>
+  </div>
+</div>
+<app-footer></app-footer>

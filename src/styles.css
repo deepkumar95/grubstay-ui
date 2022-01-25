@@ -240,3 +240,15 @@ i{
 .mat-tooltip{
     background: #282727;
 }
+.theme-color{
+    color: #282727;
+}
+
+.mat-sort-header{
+    color: white;
+}
+.owl-theme .owl-nav.disabled+.owl-dots {
+    margin-top: -30px !important;
+    z-index: 999 !important;
+    position: relative !important;
+}

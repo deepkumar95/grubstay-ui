@@ -24,4 +24,8 @@ export class CityServiceService {
   public updateCityWithoutImage(data:any){
     return this._http.put(baseUrl+"city/updateCityWithoutImage", data);
   }
+
+  public getCitiesWithLocation(){
+    return this._http.get(baseUrl+"city/cityWithLocation");
+  }
 }

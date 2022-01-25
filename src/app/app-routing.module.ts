@@ -13,6 +13,7 @@ import { PgOperationComponent } from './pages/admin-dashboard/admin-components/p
 import { SubAdminComponent } from './pages/admin-dashboard/admin-components/sub-admin/sub-admin.component';
 import { TraverlNearByComponent } from './pages/admin-dashboard/admin-components/traverl-near-by/traverl-near-by.component';
 import { AdminGuard } from './admin.guard';
+import { CallbackComponent } from './pages/admin-dashboard/admin-components/callback/callback.component';
 
 const routes: Routes = [
   {
@@ -44,6 +45,10 @@ const routes: Routes = [
       {
         path:'',
         component:AdminMainComponent
+      },
+      {
+        path:'callback',
+        component:CallbackComponent
       },
       {
         path:'pg',

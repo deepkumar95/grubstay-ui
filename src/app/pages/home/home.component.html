@@ -19,7 +19,7 @@
           <mat-card id="adv1-card" class="adv1-card">
             <div class="adv1-content">
               <h5 class="text-center">Looking for Stay ?</h5>
-              <h6 class="text-center">Get the stay that are Affordabele with all
+              <h6 class="text-center">Get the stay that are Affordable with all
                 <br>
                 the Amenities so that you can enjoy
                 <br>
@@ -37,25 +37,96 @@
 </div>
 <!-- section-adv-1-end -->
 <app-stay-carousel></app-stay-carousel>
+<!-- work location -->
+<div class="work mt-20 p-2">
+  <div class="work1">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-8">
+          <div class="mt-2" *ngIf="(isHandset$ | async)">
+            <h5>Get Stay Near to</h5>
+            <h5>your Work Location</h5>
+            <span style="font-size: 75%; line-height: 16px; display:block">To get the details near to your work location just connect us on WhatsApp so according to that we will tell you</span>
+            <div class="mt-3 mb-3">
+              <a *ngIf="(isHandset$ | async)" href="https://wa.me/+918050163861/?text=Hi, I am looking for PG" style="background-color: #25D366; color: white;" mat-flat-button>WhatsApp</a>
+            </div>
+          </div>
+          <div class="mt-2" *ngIf="!(isHandset$ | async)">
+            <h2>Get Stay Near to</h2>
+            <h2>your Work Location</h2>
+            <span>To get the details near to your work location just connect us on WhatsApp <br> so according to that we will tell you</span>
+            <div class="mt-3 mb-3">
+              <a *ngIf="!(isHandset$ | async)" href="https://wa.me/+918050163861/?text=Hi, I am looking for PG" style="background-color: #25D366; color: white;" mat-flat-button target="_blank">WhatsApp</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-4">
+          <div *ngIf="!(isHandset$ | async)">
+            <img style="height:260px; width: 250px;" src="../../../assets/workLocation.png" alt="work">
+          </div>
+          <div *ngIf="(isHandset$ | async)">
+            <img style="height:170px; width: 130px;" src="../../../assets/workLocation.png" alt="work">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- end work location -->
+<app-travel-nearby></app-travel-nearby>
 <!-- section-refrel -->
 <div class="section-refrel">
   <div class="bootstrap-wrapper">
     <div class="container-fluid">
       <mat-card class="refrel-part">
-        <div class="row ">
-          <div class="col-md-6 col-6 col-sm-6 col-xs-6">
-            <div class="refrel-content">
-              <h1 *ngIf="!(isHandset$ | async)"  class="text-center">Refer A Friend</h1>
-              <h3 *ngIf="isHandset$ | async">Refer A Friend</h3>
-              <h3 *ngIf="!(isHandset$ | async)" class="text-center">Earn upto 5000</h3>
-              <h4 *ngIf="(isHandset$ | async)" class="text-center">Earn upto 5000</h4>
-              <h4 *ngIf="!(isHandset$ | async)" class="text-center">Terms and Conditions apply*</h4>
-              <p *ngIf="(isHandset$ | async)" class="text-center">Terms and Conditions apply*</p>
+        <div class="row">
+          <div class="p-2" *ngIf="(isHandset$ | async)">
+            <div class="container p-3">
+              <form (ngSubmit)="requestCall()">
+                <!-- username field -->
+                <div class="mb-3">
+                  <input name="name" type="text" class="form-control" id="exampleFormControlInput1" [(ngModel)]="request.name" placeholder="Full Name">
+                </div>
+                <div class="mb-3">
+                  <input name="email" type="email" class="form-control" id="exampleFormControlInput1" [(ngModel)]="request.email" placeholder="name@example.com">
+                </div>
+                <div class="mb-3">
+                  <input name="phone" type="number" class="form-control" id="exampleFormControlInput1" [(ngModel)]="request.phone" placeholder="Contact Number">
+                </div>
+                <div class="container">
+                    <div class="row">
+                        <button [disabled]="!request.name || !request.phone || !request.email" type="submit" mat-raised-button color="accent">Request Callback</button>
+                    </div>
+                </div>
+              </form>
             </div>
           </div>
-          <div class="col-md-6 col-6 col-sm-6 col-xs-6">
-            <div class="refrel-img">
-              <img src="../../../assets/imgs/refer-a-friend.png" alt="refrel">
+          <div class="p-2" *ngIf="!(isHandset$ | async)">
+            <div class="container p-3">
+                <div class="row">
+                  <div style="user-select: none;" class="col">
+                    <img style="max-height: 230px; user-select: none;" src="../../../assets/callback.png" alt="callback">
+                  </div>
+                  <div class="col">
+                    <form (ngSubmit)="requestCall()">
+                      <!-- username field -->
+                      <div class="mb-3">
+                        <input name="name" type="text" class="form-control" id="exampleFormControlInput1" [(ngModel)]="request.name" placeholder="Full Name">
+                      </div>
+                      <div class="mb-3">
+                        <input name="email" type="email" class="form-control" id="exampleFormControlInput1" [(ngModel)]="request.email" placeholder="name@example.com">
+                      </div>
+                      <div class="mb-3">
+                        <input name="phone" type="number" class="form-control" id="exampleFormControlInput1" [(ngModel)]="request.phone" placeholder="Contact Number">
+                      </div>
+                      <div class="container">
+                          <div class="row">
+                              <button [disabled]="!request.name || !request.phone || !request.email" type="submit" mat-raised-button color="accent">Request Callback</button>
+                          </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
             </div>
           </div>
         </div>
@@ -64,5 +135,31 @@
   </div>
 </div>
 <!-- section-refrel-end -->
-<app-travel-nearby></app-travel-nearby>
+<!-- accordian -->
+<div class="accordian mt-10">
+  <div>
+    <div [ngClass]="{'container-fluid': !(isHandset$ | async)}">
+      <div class="row">
+        <div class="col-12">
+          <mat-accordion>
+            <mat-expansion-panel *ngFor="let item of city" (opened)="panelOpenState = true"
+                                 (closed)="panelOpenState = false">
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  <h6>Stays in {{item.city_name}}</h6>
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+              <div *ngFor="let location of location">
+                <p *ngIf="item.city_id == location.city_id">
+                  <a style="text-align:left; padding-left:10px; color: #252323;" (click)=goTo(location) class="full-width" mat-button>PG in {{location.location_name}}</a>
+                </p>
+              </div>
+            </mat-expansion-panel>
+          </mat-accordion>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- end accordian -->
 <app-footer></app-footer>

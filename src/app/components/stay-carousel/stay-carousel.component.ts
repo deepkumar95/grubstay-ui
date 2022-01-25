@@ -45,10 +45,10 @@ export class StayCarouselComponent implements OnInit {
   // ];
 
   stayStore:any = [
-    {id:1,title:'Paying Guest', src:'../../../assets/imgs/stay/pg.jpg', alt:'pg'},
-    {id:2,title:'Flats', src:'../../../assets/imgs/stay/room.jpg', alt:'flat'},
-    {id:3,title:'Rooms', src:'../../../assets/imgs/stay/room.jpg', alt:'room'},
-    {id:4,title:'Weekend Stay', src:'../../../assets/imgs/stay/pg.jpg', alt:'wek_stay'}
+    {id:1,title:'HSR Layout', src:'../../../assets/imgs/stay/pg.jpg', alt:'pg'},
+    {id:2,title:'Koramangala', src:'../../../assets/imgs/stay/room.jpg', alt:'flat'},
+    {id:3,title:'HSR Layout', src:'../../../assets/imgs/stay/room.jpg', alt:'room'},
+    {id:4,title:'Koramangala', src:'../../../assets/imgs/stay/pg.jpg', alt:'wek_stay'}
   ];
 
   constructor() { }

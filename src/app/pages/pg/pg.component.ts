@@ -18,8 +18,9 @@ export interface PG {
   pgDoubleMemberPrice: number,
   pgDoublePriceAvail: boolean,
   pgTripleMemberPrice: number,
-  pgTriplePriceAvail: boolean
+  pgTriplePriceAvail: boolean,
   pgAbout: string,
+  pgGender:string,
   pgPrice: number
 }
 
@@ -66,6 +67,7 @@ export class PgComponent implements OnInit {
     pgTripleMemberPrice: 0,
     pgTriplePriceAvail: false,
     pgAbout: '',
+    pgGender:'',
     pgPrice: 0
   }
 
@@ -137,11 +139,14 @@ export class PgComponent implements OnInit {
   }
   pgCarousel: OwlOptions = {
     items: 1,
-    dots: false,
+    dots: true,
     nav: false,
     loop: true,
     autoplay:true,
     navSpeed: 700,
+    touchDrag:true,
+    mouseDrag:true,
+    pullDrag: true,
   }
   sanitizer;
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
@@ -180,6 +185,7 @@ export class PgComponent implements OnInit {
             this.pgDetails.pgName = pgData.pgName;
             this.pgDetails.pgAddress = pgData.pgAddress;
             this.pgDetails.pgAbout = pgData.pgDesc;
+            this.pgDetails.pgGender = pgData.pgGender;
             this.pgDetails.pgPrice = (pgData.singleMemPgPrc && pgData.singleMemPgPrc != 0) ? pgData.singleMemPgPrc : (pgData.doubleMemPgPrc && pgData.doubleMemPgPrc != 0) ? pgData.doubleMemPgPrc : pgData.tripleMemPgPrc;
             if (pgData.singleMemPgPrc && pgData.singleMemPgPrc != 0) {
               this.pgDetails.pgSingleMemberPrice = pgData.singleMemPgPrc;

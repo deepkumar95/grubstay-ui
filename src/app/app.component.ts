@@ -1,5 +1,8 @@
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-root',
@@ -9,7 +12,12 @@ import { ActivatedRoute } from '@angular/router';
 export class AppComponent implements OnInit {
   title = 'grubstay-ui';
   floatButton=true;
-  constructor(){
+
+  isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
+    .pipe(
+      map(result => result.matches)
+  );
+  constructor(private breakpointObserver:BreakpointObserver){
 
   }
   ngOnInit(): void {

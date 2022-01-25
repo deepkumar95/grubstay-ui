@@ -1,87 +1,20 @@
-.fab {
-    background-color: transparent;
-    height: 64px;
-    width: 64px;
-    border-radius: 32px;
-    transition: height 300ms;
-    transition-timing-function: ease;
-    position: absolute;
-    right: 25px;
-    bottom: 25px;
-    text-align: center;
-    overflow: hidden;
-  }
+.float{
+	position:fixed;
+	width:60px;
+	height:60px;
+	bottom:25px;
+	right:25px;
+	background-color:#25d366;
+	color:#FFF;
+	border-radius:50px;
+	text-align:center;
+  font-size:30px;
+	box-shadow: 2px 2px 3px #999;
+  z-index:100;
+}
+
+.my-float{
+	margin-top:16px;
+}
   
-  .fab:hover {
-    height: 185px;
-  }
-  
-  .fab:hover .mainop {
-    transform: rotate(360deg);
-  }
-  
-  .mainop {
-    margin: auto;
-    width: 64px;
-    height: 64px;
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    transition: transform 300ms;
-    background-color: #FF4081;
-    border-radius: 32px;
-    z-index: 6;
-  }
-  
-  .mainopShadow {
-    width: 64px;
-    height: 64px;
-    border-radius: 32px;
-    position: absolute;
-    right: 50px;
-    bottom: 50px;
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
-  }
-  
-  .mainop i {
-    margin-top: 16px;
-    font-size: 32px;
-    color: #fff;
-  }
-  
-  .minifab {
-    position: relative;
-    width: 48px;
-    height: 48px;
-    border-radius: 24px;
-    z-index: 5;
-    float: left;
-    margin-bottom: 8px;
-    margin-left: 8px;
-    margin-right: 8px;
-    background-color: transparent;
-    
-  }
-  
-  .minifabIcon {
-    margin-top: 12px;
-  }
-  input:checked + .fab-btn {
-    box-shadow: 0 0 2px 40px #811bff;
-  }
-  
-  input:checked + .fab-btn img {
-    transform: rotate(315deg);
-  }
-  
-  input:checked ~ .card-content {
-    opacity: 0.1;
-  }
-  /* .op1 {
-    background-color: #dd5145;
-  }
-  
-  .op1 {
-    background-color: #673ab7;
-  } */
   
