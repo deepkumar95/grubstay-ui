@@ -1,6 +1,6 @@
 <div *ngIf="isHandset$ | async">
   <div class="bootstrap-wrapper">
-    <div class="container-fluid">
+    <div class="container-fluid locationHeader">
       <!-- <div class="filter">
         filters
       </div> -->
@@ -17,7 +17,7 @@
         <button mat-button style="width:100%;" (click)="openSortDialog()">Sort</button>
       </div> -->
       <mat-accordion>
-        <mat-expansion-panel>
+        <mat-expansion-panel class="panelHeader">
           <mat-expansion-panel-header>
             <mat-panel-title>
               Filter / Sort
@@ -121,7 +121,7 @@
       </mat-accordion>
     </div>
     <mat-divider></mat-divider>
-    <div class="pg">
+    <div class="pg" style="margin-top:80px;">
       <div *ngFor="let pg of pgArray">
         <div style="padding:20px;">
           <mat-card class="example-card">
@@ -320,6 +320,16 @@
                     <!-- <mat-checkbox class="example-margin" [checked]="item.checkedStatus" (click)="setGenderFilter(item.id, item.name)"><small>{{item.name}}</small></mat-checkbox> -->
                     <input type="checkbox" class="example-margin" [checked]="item.checkedStatus" [id]="item.id"
                       (click)="setGenderFilter(item.id, item.name)" />&nbsp;&nbsp;<small>{{item.name}}</small>
+                  </mat-list-item>
+                </div>
+              </mat-list>
+              <mat-list role="list">
+                <h1 matSubheader>Price |&nbsp; <span (click)="clearSortingFilter()"> <kbd style="font-size:8px; border-radius:5px;">clear
+                      filter x</kbd></span></h1>
+                <div class="filterOptions">
+                  <mat-list-item *ngFor="let item of sortingArray" role="listitem">
+                    <input type="checkbox" class="example-margin" [checked]="item.checkedStatus" [id]="item.id"
+                      (click)="setSortingfilter(item.id, item.name)" />&nbsp;&nbsp;<small>{{item.name}}</small>
                   </mat-list-item>
                 </div>
               </mat-list>

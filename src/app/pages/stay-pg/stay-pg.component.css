@@ -4,7 +4,7 @@
     align-items:center;
 }
 .location-heading{
-    height: 30px;
+    height: 35px;
 }
 .stay-divider{
     margin: 0px;
@@ -138,3 +138,15 @@
 .card_content-m{
     margin-left:-15px;
 } 
+.locationHeader{
+    position: fixed;
+    z-index: 10;
+    background-color: white;
+    width: 98.7%;
+}
+.panelHeader{
+    position: fixed;
+    z-index: 10;
+    margin-top:35px;
+    width: 99.6%;
+}
