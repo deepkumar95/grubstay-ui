@@ -21,16 +21,20 @@ const routes: Routes = [
     component:HomeComponent
   },
   {
-    path:"stay-pg",
+    path:"stay/:cityName",
     component:StayPgComponent
   },
   {
-    path:"pg/:pgId/:pgName",
+    path:"stay/:cityName/:locationName",
+    component:StayPgComponent
+  },
+  {
+    path:"stay/:cityName/:locationName/:subLocationName",
+    component:StayPgComponent
+  },
+  {
+    path:"stay/:cityName/:locationName/:subLocationName/:pgName",
     component:PgComponent
-  },
-  {
-    path:"stay-pg/:cityId/:cityName/:locationId/:locationName",
-    component:StayPgComponent
   },
   {
     path:"search-stay",

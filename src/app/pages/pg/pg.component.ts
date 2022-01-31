@@ -159,12 +159,17 @@ export class PgComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    var self = this;
-    let pgId = this._route.snapshot.params.pgId;
-    if (pgId) {
-      this.loadPgData(pgId);
-      this.loadPgGallery(pgId);
-      this.loadLandMark(pgId);
+    var self = this
+    let data:any={};
+    let params:any=this._route.snapshot.params;
+    data.cityName=params.cityName.split('-').join(' ').toUpperCase();
+    data.locationName=params.locationName.split('-').join(' ').toUpperCase();
+    data.subLocationName=params.subLocationName.split('-').join(' ').toUpperCase();
+    data.pgName=params.pgName.split('-').join(' ').toUpperCase();
+    if (data) {
+      this.loadPgData(data);
+      this.loadPgGallery(data);
+      this.loadLandMark(data);
     }
   }
 
@@ -237,9 +242,9 @@ export class PgComponent implements OnInit {
         this._snackBarService.errorSnackBar("Something went wrong!");
       });
   }
-  loadPgGallery(pgId) {
+  loadPgGallery(data) {
     var self = this;
-    self._pgService.getGalleryByPgId(pgId).subscribe((response: any) => {
+    self._pgService.getGalleryByPgId(data).subscribe((response: any) => {
       if (response.error && response.error != '') {
         self._snackBarService.errorSnackBar("failed to load pg images...!");
         return;
@@ -254,8 +259,8 @@ export class PgComponent implements OnInit {
       return;
     })
   }
-  loadLandMark(pgId) {
-    this._pgService.loadLandMark(pgId).subscribe((response: any) => {
+  loadLandMark(data) {
+    this._pgService.loadLandMark(data).subscribe((response: any) => {
       if (response.error && response.error != '') {
         this._snackBarService.errorSnackBar("Something went wrong!");
         return;

@@ -18,7 +18,6 @@ export class AdminGuard implements CanActivate {
       return true;
     }
      this._shared.redirectTo('/');
-     this._snackBar.errorSnackBar("You are not authoriesd...");
      return false;
   } 
   

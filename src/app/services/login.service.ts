@@ -8,40 +8,50 @@ import { SharedService } from './helper/shared.service';
 })
 export class LoginService {
   public loginStatusSubject = new Subject<boolean>();
-  constructor(private _shared:SharedService) { }
-  
-  public isLoggedIn(){
+  constructor(private _shared: SharedService) { }
+
+  public isLoggedIn() {
     let userStr = localStorage.getItem("user");
-    if(userStr==undefined || userStr == '' || userStr == null){
+    if (userStr == undefined || userStr == '' || userStr == null) {
       return false;
     }
-    else{
+    else {
       return true;
     }
   }
 
-  public setUser(user:any){
+  public setUser(user: any) {
     localStorage.setItem('user', JSON.stringify(user));
   }
   //get user
-  public getUser(){
+  public getUser() {
     let userStr = localStorage.getItem("user");
-    if(userStr!=null){
+    if (userStr != null) {
       return JSON.parse(userStr);
     }
-    else{
+    else {
       this.logout();
       return null;
     }
   }
   // get user role
-  public getUserRole(){
+  public getUserRole() {
     let user = this.getUser();
     return user.authorities[0].authority;
   }
-  public logout(){
+  public setDefaultUser() {
+    let user: any = {};
+    user.username = 'GUEST';
+    user.password = 'guest';
+    let authorities: any = [];
+    authorities[0] = {authority:'NORMAL'};
+    user.authorities=authorities;
+    localStorage.setItem('user', JSON.stringify(user));
+  }
+  public logout() {
     localStorage.removeItem("user");
-    this._shared.redirectTo('/');
+    this.setDefaultUser();
+    this._shared.redirectTo('');
     return true;
   }
 }

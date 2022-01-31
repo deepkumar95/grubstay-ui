@@ -108,29 +108,58 @@ export class StayPgComponent implements OnInit {
 
   ngOnInit(): void {
     var self = this;
-    if (self._shared.sharedData.locationId) {
-      let data: any = self._shared.sharedData;
-      let locationId = data.locationId;
-      let locationName = data.location;
-      this.currentLocation = data.location;
-      if (locationId && locationId != 0 && locationName && locationName != '') {
-        this.loadPGData(data);
-      }
-    } else {
-      if (location.href.includes("All")) {
-        let cityId = this._path.snapshot.params.cityId;
-        this.loadAllPGDataInCity(cityId);
-      } else {
-        let data: any = {};
-        data.locationId = this._path.snapshot.params.locationId;
-        data.locationName = this._path.snapshot.params.locationName;
-        this.currentLocation = this._path.snapshot.params.locationName;
-        this.loadPGData(data);
-      }
+    // if (self._shared.sharedData.locationId) {
+    //   let data: any = self._shared.sharedData;
+    //   let locationId = data.locationId;
+    //   let locationName = data.location;
+    //   this.currentLocation = data.location;
+    //   if (locationId && locationId != 0 && locationName && locationName != '') {
+    //     this.loadPGData(data);
+    //   }
+    // } else {
+    //   if (location.href.includes("All")) {
+    //     let cityId = this._path.snapshot.params.cityId;
+    //     this.loadAllPGDataInCity(cityId);
+    //   } else {
+    //     let data: any = {};
+    //     data.locationId = this._path.snapshot.params.locationId;
+    //     data.locationName = this._path.snapshot.params.locationName;
+    //     this.currentLocation = this._path.snapshot.params.locationName;
+    //     this.loadPGData(data);
+    //   }
+    // }
+    let urlData:any=this._path.snapshot.params;
+    let cityName=urlData.cityName;
+    let locationName=urlData.locationName;
+    let subLocationName=urlData.subLocationName;
+    if(cityName && locationName && subLocationName){
+      cityName=urlData.cityName.split("-").join(" ").trim().toUpperCase();
+      locationName=urlData.locationName.split("-").join(" ").trim().toUpperCase();
+      subLocationName=urlData.subLocationName.split("-").join(" ").trim().toUpperCase();
+    }
+    else if(cityName && locationName){
+      let filterData:any={};
+      cityName=urlData.cityName.split("-").join(" ").trim().toUpperCase();
+      locationName=urlData.locationName.split("-").join(" ").trim().toUpperCase();
+      filterData.locationName = locationName;
+      filterData.locationId = 0;
+      filterData.stayType = '';
+      filterData.gender = '';
+      filterData.nearby = '';
+      filterData.stayPlan = '';
+      filterData.cityName = cityName;
+      this.loadPGData(filterData);
+    }
+    else if(cityName){
+      cityName=urlData.cityName.split("-").join(" ").trim().toUpperCase();
+      this.loadAllPGDataInCity(cityName);
+    }
+    else{
+      this._shared.redirectTo('');
     }
   }
-  public loadAllPGDataInCity(cityId) {
-    this._pgService.loadAllPGDataInCity(cityId).subscribe((response: any) => {
+  public loadAllPGDataInCity(cityName) {
+    this._pgService.loadAllPGDataInCity(cityName).subscribe((response: any) => {
       if (response.error && response.error != '') {
         this._snackBarService.successSnackBar("Something went wrong!");
         return;
@@ -146,8 +175,11 @@ export class StayPgComponent implements OnInit {
                 let pgData = element;
                 let data: any = {};
                 data.pgId = pgData.pgId;
-                data.pgName = pgData.pgName;
-                data.locationName = pgData.subLocation.location.locationName;
+                data.pgName = pgData.pgName
+                data.urlPgName = pgData.pgName.split(' ').join('-').trim().toLowerCase();
+                data.subLocationName=pgData.subLocation.subLocationName.split(' ').join('-').trim().toLowerCase();
+                data.cityName=cityName.split(' ').join('-').trim().toLowerCase();
+                data.locationName = pgData.subLocation.location.locationName.split(' ').join('-').trim().toLowerCase();
                 data.gender = pgData.pgGender;
                 data.distance = pgData.distFromSubLoc;
                 data.weekly = pgData.weekly;
@@ -197,7 +229,10 @@ export class StayPgComponent implements OnInit {
               let data: any = {};
               data.pgId = pgData.pgId;
               data.pgName = pgData.pgName;
-              data.locationName = pgData.subLocation.location.locationName;
+              data.urlPgName = pgData.pgName.split(' ').join('-').trim().toLowerCase();
+              data.subLocationName=pgData.subLocation.subLocationName.split(' ').join('-').trim().toLowerCase();
+              data.cityName=obj.cityName.split(' ').join('-').trim().toLowerCase();
+              data.locationName = pgData.subLocation.location.locationName.split(' ').join('-').trim().toLowerCase();
               data.gender = pgData.pgGender;
               data.distance = pgData.distFromSubLoc;
               data.weekly = pgData.weekly;

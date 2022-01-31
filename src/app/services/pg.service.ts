@@ -23,8 +23,8 @@ export class PgService {
     return this._http.get(this.pgBaseUrl);
   }
   
-  public getGalleryByPgId(pgId){
-    return this._http.get(this.pgBaseUrl+"pgGallery/"+pgId);
+  public getGalleryByPgId(data){
+    return this._http.post(this.pgBaseUrl+"pgGallery/"+data.pgName, data);
   }
 
   public updatePgData(data){
@@ -37,13 +37,13 @@ export class PgService {
   public getPGDataWithFilter(data:any){
     return this._http.post(this.pgBaseUrl+"pgfilterData", data);
   }
-  public loadPgData(pgId){
-    return this._http.get(this.pgBaseUrl+pgId);
+  public loadPgData(data){
+    return this._http.post(this.pgBaseUrl+data.pgName,data);
   }
-  public loadLandMark(pgId){
-    return this._http.get(this.pgBaseUrl+"landmarks/"+pgId)
+  public loadLandMark(data){
+    return this._http.post(this.pgBaseUrl+"landmarks/"+data.pgName, data);
   }
-  public loadAllPGDataInCity(pgId){
-    return this._http.get(this.pgBaseUrl+"loadAllPG/"+pgId);
+  public loadAllPGDataInCity(cityName){
+    return this._http.get(this.pgBaseUrl+"loadAllPG/"+cityName);
   }
 }

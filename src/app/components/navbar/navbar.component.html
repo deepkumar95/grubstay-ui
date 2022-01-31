@@ -22,11 +22,11 @@
           <div class="example-spacer"></div>
           <span style="user-select: none;"><a class="call d-inline-flex align-items-center theme-color" href="tel:+918050163861"><i class="fa fa-phone" aria-hidden="true"></i>&nbsp;<small>+91-8050163861</small></a></span>
         <div *ngIf="!(isHandset$ | async)">
-          <div *ngIf="isLoggedIn && user">
+          <div *ngIf="isLoggedIn && user && user.username!='GUEST'">
             <a mat-button (click)="redirectTo()">{{user.username}}</a>&nbsp;
             <a mat-flat-button color="accent" (click)="logout()">Logout</a>
           </div>
-          <div *ngIf="!isLoggedIn && !user">
+          <div *ngIf="isLoggedIn && user && user.username=='GUEST'">
             <a mat-button (click)="openLoginDialog()">Login</a>&nbsp;
             <a mat-flat-button color="accent" (click)="openSignUpDialog()">Sign Up</a>
           </div>

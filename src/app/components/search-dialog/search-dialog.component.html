@@ -33,31 +33,6 @@
                             </button>
                         </mat-action-list>
                     </mat-card>
-                    <mat-form-field *ngIf="itemSelected" class="full-width" appearance="outline" color="accent"
-                        autocomplete="off">
-                        <mat-label>Select Stay Type</mat-label>
-                        <mat-select autocomplete="off" name="stay-types" [(ngModel)]="search.stayType">
-                            <mat-option *ngFor="let stay of stayTypes" value="stay">{{stay}}</mat-option>
-                        </mat-select>
-                    </mat-form-field>
-                    <mat-form-field *ngIf="itemSelected" class="full-width" appearance="outline" color="accent"
-                        autocomplete="off">
-                        <mat-label>Select Gender</mat-label>
-                        <mat-select autocomplete="off" name="gender" [(ngModel)]="search.gender">
-                            <mat-option value="male">Boys</mat-option>
-                            <mat-option value="female">Girls</mat-option>
-                            <mat-option value="both">Both</mat-option>
-                        </mat-select>
-                    </mat-form-field>
-                    <mat-form-field *ngIf="itemSelected" class="full-width" appearance="outline" color="accent"
-                        autocomplete="off">
-                        <mat-label>Select Stay Plan</mat-label>
-                        <mat-select autocomplete="off" name="gender" [(ngModel)]="search.stayPlan">
-                            <mat-option value="Monthly">Monthly</mat-option>
-                            <mat-option value="Weekly">Weekly</mat-option>
-                            <mat-option value="Daily">Daily</mat-option>
-                        </mat-select>
-                    </mat-form-field>
                     <!-- <mat-form-field *ngIf="itemSelected" class="full-width" appearance="outline" color="accent">
                         <mat-label>Nearby Place</mat-label>
                         <input matInput autocomplete="off" placeholder="Type your nearby place" id="search-nearby" name="search-nearby"

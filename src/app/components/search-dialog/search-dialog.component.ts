@@ -170,12 +170,15 @@ export class SearchDialogComponent implements OnInit {
       filterData.gender = self.search.gender;
       filterData.nearby = self.search.nearby;
       filterData.stayPlan = self.search.stayPlan;
+      filterData.locationName = this.cityAndLocationSelected.locationName;
       self._shared.sharedData = filterData;
       let cityId=this.cityAndLocationSelected.cityId;
       let cityName=this.cityAndLocationSelected.cityName;
       let locationId=this.cityAndLocationSelected.locationId;
       let locationName=this.cityAndLocationSelected.locationName;
-      let navigateUrl="/stay-pg/"+cityId+"/"+cityName+"/"+locationId+"/"+locationName;
+      cityName=cityName.toLowerCase().split(" ").join("-");
+      locationName=locationName.toLowerCase().split(" ").join("-");
+      let navigateUrl="/stay/"+cityName+"/"+locationName;
       self.router.navigate([navigateUrl]);
     }
   }

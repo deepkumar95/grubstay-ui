@@ -125,11 +125,11 @@
       <div *ngFor="let pg of pgArray">
         <div style="padding:20px;">
           <mat-card class="example-card">
-            <img mat-card-image [routerLink]="['/pg/'+pg.pgId+'/'+pg.pgName]" routerLinkActive="router-link-active"
+            <img mat-card-image [routerLink]="['/stay/'+pg.cityName+'/'+pg.locationName+'/'+pg.subLocationName+'/'+pg.urlPgName]" routerLinkActive="router-link-active"
               [src]="_sanitizer.bypassSecurityTrustUrl(pg.pgImage)" [alt]="pg.pgImageName">
             <div class="col-md-12 col-sm-12 col-xs-12 card_content-m">
               <div class="pg-content-d">
-                <h6 style="cursor: pointer;height:5px; " [routerLink]="['/pg/'+pg.pgId+'/'+pg.pgName]"
+                <h6 style="cursor: pointer;height:5px; " [routerLink]="['/stay/'+pg.cityName+'/'+pg.locationName+'/'+pg.subLocationName+'/'+pg.urlPgName]"
                   routerLinkActive="router-link-active">{{pg.pgName}}</h6>
                 <small style="font-size:11px;">{{pg.locationName}}</small>
               </div>
@@ -383,15 +383,15 @@
             <div class="container" style="overflow: scroll; height: 80vh; overflow-x: hidden;">
               <div class="row" style="margin-left:20px;">
                 <div class="col-md-5 col-sm-6 col-xs-12 mt-1" *ngFor="let pg of pgArray">
-                  <mat-card class="example-card">
-                    <img mat-card-image [routerLink]="['/pg/'+pg.pgId+'/'+pg.pgName]" routerLinkActive="router-link-active"
+                  <mat-card class="example-card mb-3">
+                    <img mat-card-image [routerLink]="['/stay/'+pg.cityName+'/'+pg.locationName+'/'+pg.subLocationName+'/'+pg.urlPgName]" routerLinkActive="router-link-active"
                       [src]="_sanitizer.bypassSecurityTrustUrl(pg.pgImage)" [alt]="pg.pgImageName">
                     <!-- <mat-card-content>
                         </mat-card-content> -->
                     <div class="row">
                       <div class="col-md-12 col-sm-12 col-xs-12 card_content">
                         <div class="pg-content-d">
-                          <h6 style="cursor: pointer;height:5px; " [routerLink]="['/pg/'+pg.pgId+'/'+pg.pgName]"
+                          <h6 style="cursor: pointer;height:5px; " [routerLink]="['/stay/'+pg.cityName+'/'+pg.locationName+'/'+pg.subLocationName+'/'+pg.urlPgName]"
                             routerLinkActive="router-link-active">{{pg.pgName}}</h6>
                           <small style="font-size:11px;">{{pg.locationName}}</small>
                         </div>
