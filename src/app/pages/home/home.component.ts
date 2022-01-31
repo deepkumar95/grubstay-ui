@@ -7,6 +7,7 @@ import { map } from 'rxjs/operators';
 import { SearchDialogComponent } from 'src/app/components/search-dialog/search-dialog.component';
 import { CityServiceService } from 'src/app/services/city-service.service';
 import { CustomSnackBarService } from 'src/app/services/helper/custom-snack-bar.service';
+import { SharedService } from 'src/app/services/helper/shared.service';
 import { HomeService } from 'src/app/services/home.service';
 import { LocationService } from 'src/app/services/location.service';
 
@@ -30,7 +31,7 @@ export class HomeComponent implements OnInit {
 
   constructor(private breakpointObserver:BreakpointObserver, public dialog:MatDialog,
     private loader:NgxUiLoaderService,private _home:HomeService,
-    private _snackbarService:CustomSnackBarService,private _city:CityServiceService) { }
+    private _snackbarService:CustomSnackBarService,private _city:CityServiceService,private _shared:SharedService) { }
 
   ngOnInit(): void {
     this.getCitiesWithLocation();
@@ -112,7 +113,10 @@ export class HomeComponent implements OnInit {
   }
 
   goTo(location:any){
-    console.log(location)
+    let cityName = location.city_name.toLowerCase().split(' ').join('-').trim();
+    let locationName = location.location_name.toLowerCase().split(' ').join('-').trim();
+    let routeTo = '/stay/'+cityName+'/'+locationName;
+    this._shared.redirectTo(routeTo);
   }
 
 }

@@ -27,14 +27,14 @@
     /* height: 250px; */
     width: 100%;
     overflow: hidden;
-    border-radius: 3px;
+    border-radius: 8px;
 }
 
 .img-sec3 img{
     height: 100% !important;
     width: 100% !important;
     object-fit: cover;
-    border-radius: 3px;
+    border-radius: 8px;
 }
 
 .travel-nearby-name{
