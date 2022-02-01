@@ -146,12 +146,12 @@
                                  (closed)="panelOpenState = false">
               <mat-expansion-panel-header>
                 <mat-panel-title>
-                  <h6>Stays in {{item.city_name}}</h6>
+                  <h6>Stays in {{covertToCamelCase(item.city_name)}}</h6>
                 </mat-panel-title>
               </mat-expansion-panel-header>
               <div *ngFor="let location of location">
                 <p *ngIf="item.city_id == location.city_id">
-                  <a style="text-align:left; padding-left:10px; color: #252323;" (click)=goTo(location) class="full-width" mat-button>PG in {{location.location_name}}</a>
+                  <a style="text-align:left; padding-left:10px; color: #252323;" (click)=goTo(location) class="full-width" mat-button>PG in {{covertToCamelCase(location.location_name)}}</a>
                 </p>
               </div>
             </mat-expansion-panel>

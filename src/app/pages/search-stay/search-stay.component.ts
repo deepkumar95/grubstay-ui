@@ -6,6 +6,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { SearchDialogComponent } from '../../components/search-dialog/search-dialog.component';
 import { HomeService } from '../../services/home.service';
 import { LocationService } from '../../services/location.service';
+import * as _ from 'lodash';
 
 export interface Data {
   city: string,
@@ -33,12 +34,15 @@ export class SearchStayComponent implements OnInit {
     stayType:'',
     gender:'',
     nearby:'',
+    subLocation:'',
     stayPlan:''
   }
   cityAndLocationSelected: any = {};
 
   landMarkData: any = [];
   landMarkTotalData:any = [];
+  subLocationSelected:any='';
+  subLocationData:any =[];
 
 
   constructor(private _shared: SharedService, private router: Router, private _locationService: LocationService,
@@ -60,6 +64,7 @@ export class SearchStayComponent implements OnInit {
       this.loadNearByLocation(item.locationName, item.cityName, item.cityId, item.locationId);
     }
     this.itemSelected = true;
+    this.loadSubLocationByLocationId(item.locationId);
   }
   public selectLandMark(item: any) {
     this.search.nearby = item.landMarkName;
@@ -171,7 +176,16 @@ export class SearchStayComponent implements OnInit {
       let cityName=this.cityAndLocationSelected.cityName;
       let locationId=this.cityAndLocationSelected.locationId;
       let locationName=this.cityAndLocationSelected.locationName;
-      let navigateUrl="/stay-pg/"+cityId+"/"+cityName+"/"+locationId+"/"+locationName;
+      let subLocationName = this.search.subLocation;
+      cityName=cityName.toLowerCase().split(" ").join("-").trim();
+      locationName=locationName.toLowerCase().split(" ").join("-").trim();
+      subLocationName = subLocationName.toLowerCase().split(" ").join("-").trim();
+      let navigateUrl:any;
+      if(subLocationName && subLocationName != ''){
+        navigateUrl="/stay/"+cityName+"/"+locationName+'/'+subLocationName;
+      }else{
+        navigateUrl="/stay/"+cityName+"/"+locationName;
+      }
       self.router.navigate([navigateUrl]);
     }
   }
@@ -207,5 +221,34 @@ export class SearchStayComponent implements OnInit {
       (error: any) => {
 
       });
+  }
+
+  loadSubLocationByLocationId(locationId){
+    this._locationService.getSubLocationByLocationId(locationId).subscribe((response:any)=>{
+      if (response.error && response.error != '') {
+        this._snackBarService.errorSnackBar('Something went wrong!');
+        return;
+      }
+      else {
+        let responseData: any = response.data;
+        if (responseData.length > 0) {
+          responseData.forEach(element => {
+            let exist = _.find(this.subLocationData,item=>{
+              return item === element.subLocationName;
+            })
+            if(!exist){
+              this.subLocationData.push(element.subLocationName);
+            }
+            console.log(this.subLocationData)
+          });
+        }
+        else {
+          //this._snackBarService.successSnackBar('No Record Found!');
+          console.log('no record found for sublocations');
+        }
+      }
+    },(error:any)=>{
+
+    })
   }
 }

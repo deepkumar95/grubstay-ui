@@ -46,4 +46,8 @@ export class PgService {
   public loadAllPGDataInCity(cityName){
     return this._http.get(this.pgBaseUrl+"loadAllPG/"+cityName);
   }
+
+  public getPgUsingSubLocationLocationAndCity(data:any){
+    return this._http.get(this.pgBaseUrl+"getPgUsingSubLocationLocationAndCity/"+data.cityName+"/"+data.locationName+"/"+data.subLocationName);
+  }
 }

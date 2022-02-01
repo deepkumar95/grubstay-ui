@@ -36,6 +36,7 @@ export class StayPgComponent implements OnInit {
 
   fav: boolean = true;
   _sanitizer: any;
+  stayTitle:any="";
 
   // pgArray = [
   //   {heading:"Sri Sai Balaji PG for Men's", location:'Sector-6, HSR Layout', gender:'both', distance:'22km', reviews:'4.5', pgImg:'../../../assets/imgs/stay/pg.jpg',price:'5000'},
@@ -136,6 +137,13 @@ export class StayPgComponent implements OnInit {
       cityName=urlData.cityName.split("-").join(" ").trim().toUpperCase();
       locationName=urlData.locationName.split("-").join(" ").trim().toUpperCase();
       subLocationName=urlData.subLocationName.split("-").join(" ").trim().toUpperCase();
+      this.stayTitle = subLocationName;
+      let data:any = {
+        cityName : cityName,
+        locationName : locationName,
+        subLocationName : subLocationName
+      }
+      this.getPgUsingSubLocationLocationAndCity(data);
     }
     else if(cityName && locationName){
       let filterData:any={};
@@ -148,10 +156,12 @@ export class StayPgComponent implements OnInit {
       filterData.nearby = '';
       filterData.stayPlan = '';
       filterData.cityName = cityName;
+      this.stayTitle = locationName;
       this.loadPGData(filterData);
     }
     else if(cityName){
       cityName=urlData.cityName.split("-").join(" ").trim().toUpperCase();
+      this.stayTitle = cityName;
       this.loadAllPGDataInCity(cityName);
     }
     else{
@@ -199,11 +209,13 @@ export class StayPgComponent implements OnInit {
 
           }
           else {
-            this._snackBarService.errorSnackBar("No Record Found!")
+            //this._snackBarService.errorSnackBar("No Record Found!")
+            this.ready = totalPg > 0 ? 'hide' : 'show';
           }
         }
         else {
-          this._snackBarService.errorSnackBar("No Record Found!");
+          //this._snackBarService.errorSnackBar("No Record Found!");
+          this.ready = totalPg > 0 ? 'hide' : 'show';
         } 
       }
     },
@@ -447,11 +459,13 @@ export class StayPgComponent implements OnInit {
 
             }
             else {
-              this._snackBarService.errorSnackBar("No Record Found!")
+              //this._snackBarService.errorSnackBar("No Record Found!")
+              this.ready = totalPg > 0 ? 'hide' : 'show';
             }
           }
           else {
-            this._snackBarService.errorSnackBar("No Record Found!");
+            //this._snackBarService.errorSnackBar("No Record Found!");
+            this.ready = totalPg > 0 ? 'hide' : 'show';
           }
         }
       },
@@ -532,5 +546,72 @@ export class StayPgComponent implements OnInit {
       if(a.price == b.price)
         return 0;
     })
+  }
+
+  public covertToCamelCase(letters:string) {
+    const str = letters.toLowerCase();
+    const arr = str.split(" ");
+    for (var i = 0; i < arr.length; i++) {
+      arr[i] = arr[i].charAt(0).toUpperCase() + arr[i].slice(1);
+  
+    }
+    const str2 = arr.join(" ");
+    return str2;
+  }
+
+  public getPgUsingSubLocationLocationAndCity(datas:any){
+    this._pgService.getPgUsingSubLocationLocationAndCity(datas).subscribe((response: any) => {
+      if (response.error && response.error != '') {
+        this._snackBarService.successSnackBar("Something went wrong!");
+        return;
+      }
+      else {
+        let totalPg = response.total;
+        if (totalPg > 0) {
+          let fetchStatus = response.success;
+          if (fetchStatus == 'success') {
+            let responseData: any = response.data;
+            if (responseData) {
+              responseData.forEach(element => {
+                let pgData = element;
+                let data: any = {};
+                data.pgId = pgData.pgId;
+                data.pgName = pgData.pgName
+                data.urlPgName = pgData.pgName.split(' ').join('-').trim().toLowerCase();
+                data.subLocationName=pgData.subLocation.subLocationName.split(' ').join('-').trim().toLowerCase();
+                data.cityName=pgData.subLocation.location.city.cityName.split(' ').join('-').trim().toLowerCase();
+                data.locationName = pgData.subLocation.location.locationName.split(' ').join('-').trim().toLowerCase();
+                data.gender = pgData.pgGender;
+                data.distance = pgData.distFromSubLoc;
+                data.weekly = pgData.weekly;
+                data.monthly = pgData.monthly;
+                data.daily = pgData.daily;
+                data.singleMemPgPrc = pgData.singleMemPgPrc;
+                data.doubleMemPgPrc = pgData.doubleMemPgPrc;
+                data.tripleMemPgPrc = pgData.tripleMemPgPrc;
+                data.price = (pgData.tripleMemPgPrc && pgData.tripleMemPgPrc != 0) ? pgData.tripleMemPgPrc : (pgData.doubleMemPgPrc && pgData.doubleMemPgPrc != 0) ? pgData.doubleMemPgPrc : pgData.singleMemPgPrc;
+                data.pgImage = pgData.pgImage;
+                data.pgImageName = pgData.pgImageName;
+                this.pgArray.push(data);
+                this.pgData.push(data);
+              });
+              this.ready = responseData.length > 0 ? 'hide' : 'show';
+            }
+
+          }
+          else {
+            //this._snackBarService.successSnackBar("No Record Found!")
+            this.ready = totalPg > 0 ? 'hide' : 'show';
+          }
+        }
+        else {
+          //this._snackBarService.errorSnackBar("No Record Found!");
+          this.ready = totalPg > 0 ? 'hide' : 'show';
+        } 
+      }
+    },
+      (error) => {
+        this._snackBarService.errorSnackBar("Something went wrong!");
+      });
   }
 }

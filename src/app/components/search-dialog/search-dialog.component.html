@@ -19,7 +19,7 @@
                 <form class="search-form" (ngSubmit)="searchSubmit()">
                     <mat-form-field class="full-width" appearance="outline" color="accent">
                         <mat-label>Location</mat-label>
-                        <input required matInput autocomplete="off" placeholder="Search City | Locality" id="search-name"
+                        <input required matInput autocomplete="off" placeholder="Search City | Locaiton" id="search-name"
                             name="search-name" [(ngModel)]="search.name" (ngModelChange)="searchNameChange(search.name)">
                     </mat-form-field>
                     <mat-card style="max-height: 300px; overflow-y: scroll; scroll-behavior: smooth; z-index:10; position: absolute; width:94%;" *ngIf="search.name && !itemSelected"
@@ -46,7 +46,7 @@
                         </mat-select>
                     </mat-form-field> -->
 
-                    <mat-form-field class="full-width" appearance="outline" color="accent" *ngIf="itemSelected">
+                    <!-- <mat-form-field class="full-width" appearance="outline" color="accent" *ngIf="itemSelected">
                         <mat-label>Select Near By</mat-label>
                         <input matInput autocomplete="off" placeholder="Search PG | Landmark" id="search-name"
                             name="search-nearby" [(ngModel)]="search.nearby" (ngModelChange)="searchNearBy(search.nearby)">
@@ -61,7 +61,15 @@
                                     {{landmark.pgName}}</p>
                             </button>
                         </mat-action-list>
-                    </mat-card>
+                    </mat-card> -->
+
+                    <mat-form-field *ngIf="itemSelected" class="full-width" appearance="outline" color="accent"
+                        autocomplete="off">
+                        <mat-label>Select Locality | Optional</mat-label>
+                        <mat-select autocomplete="off" name="stay-types" [(ngModel)]="search.subLocation">
+                            <mat-option *ngFor="let subLocation of subLocationData" [value]="subLocation">{{subLocation}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
 
                     <div *ngIf="itemSelected" class="container text-center">
                         <button mat-raised-button color="accent" type="submit">Next</button>

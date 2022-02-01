@@ -23,4 +23,8 @@ export class LocationService {
   public deleteLocation(locationId){
     return this.http.delete(baseUrl+"location/"+locationId);
   }
+
+  public getSubLocationByLocationId(locationId:any){
+    return this.http.get(baseUrl+'location/subLocation/'+locationId);
+  }
 }
