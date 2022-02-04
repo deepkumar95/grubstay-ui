@@ -105,8 +105,8 @@ export class SublocationComponent implements OnInit {
     let self = this;
     self.loader.start();
     self._subLocationService.loadAllSubLocation().subscribe((response: any) => {
-      if (response.error && response.error == '') {
-        this._snackBarService.errorSnackBar('Something went wrong');
+      if (response.error && response.error != '') {
+        this._snackBarService.errorSnackBar(response.error);
         self.loader.stop();
         return;
       }
@@ -134,7 +134,7 @@ export class SublocationComponent implements OnInit {
           });
           this.dataSource = new MatTableDataSource(this.SUBLOCATION_DATA);
           self.loader.stop();
-}
+        }
         else {
           this._snackBarService.successSnackBar('No Record Found!');
           self.loader.stop();
@@ -147,6 +147,6 @@ export class SublocationComponent implements OnInit {
         this._snackBarService.errorSnackBar('Something went wrong');
         self.loader.stop();
         return;
-      });
+    });
   }
 }

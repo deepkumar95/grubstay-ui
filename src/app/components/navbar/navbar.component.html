@@ -6,11 +6,11 @@
         <span [routerLink]="['']" class="logo">GRUBSTAY</span>
       </mat-toolbar>
       <mat-list role="list">
-        <div *ngIf="isLoggedIn && user">
+        <div *ngIf="isLoggedIn && user && user.username!='GUEST'">
           <mat-list-item><a mat-button class="text-black">{{user.username}}</a></mat-list-item>
           <mat-list-item><a mat-flat-button color="accent" (click)="logout()">Logout</a></mat-list-item>
         </div>
-        <div *ngIf="!isLoggedIn && !user">
+        <div *ngIf="isLoggedIn && user && user.username=='GUEST'">
           <mat-list-item><a mat-button class="text-black" (click)="openLoginDialog()">Login</a></mat-list-item>
           <mat-list-item><a mat-flat-button color="accent" (click)="openSignUpDialog()">Sign Up</a></mat-list-item>
         </div>
