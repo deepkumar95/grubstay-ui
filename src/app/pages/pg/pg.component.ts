@@ -163,7 +163,7 @@ export class PgComponent implements OnInit {
     var self = this
     let data:any={};
     let params:any=this._route.snapshot.params;
-    this.whatsappLink = 'grubstay.com/stay/'+params.cityName+'/'+params.locationName+'/'+params.subLocationName+'/'+params.pgName;
+    this.whatsappLink = 'grubstay.com/pg/'+params.cityName+'/'+params.locationName+'/'+params.subLocationName+'/'+params.pgName;
     data.cityName=params.cityName.split('-').join(' ').toUpperCase();
     data.locationName=params.locationName.split('-').join(' ').toUpperCase();
     data.subLocationName=params.subLocationName.split('-').join(' ').toUpperCase();

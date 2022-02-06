@@ -21,19 +21,19 @@ const routes: Routes = [
     component:HomeComponent
   },
   {
-    path:"stay/:cityName",
+    path:"pg/:cityName",
     component:StayPgComponent
   },
   {
-    path:"stay/:cityName/:locationName",
+    path:"pg/:cityName/:locationName",
     component:StayPgComponent
   },
   {
-    path:"stay/:cityName/:locationName/:subLocationName",
+    path:"pg/:cityName/:locationName/:subLocationName",
     component:StayPgComponent
   },
   {
-    path:"stay/:cityName/:locationName/:subLocationName/:pgName",
+    path:"pg/:cityName/:locationName/:subLocationName/:pgName",
     component:PgComponent
   },
   {

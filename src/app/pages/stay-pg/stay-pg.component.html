@@ -125,11 +125,11 @@
       <div *ngFor="let pg of pgArray">
         <div style="padding:20px;">
           <mat-card class="example-card">
-            <img mat-card-image [routerLink]="['/stay/'+pg.cityName+'/'+pg.locationName+'/'+pg.subLocationName+'/'+pg.urlPgName]" routerLinkActive="router-link-active"
+            <img mat-card-image [routerLink]="['/pg/'+pg.cityName+'/'+pg.locationName+'/'+pg.subLocationName+'/'+pg.urlPgName]" routerLinkActive="router-link-active"
               [src]="_sanitizer.bypassSecurityTrustUrl(pg.pgImage)" [alt]="pg.pgImageName">
             <div class="col-md-12 col-sm-12 col-xs-12 card_content-m">
               <div class="pg-content-d">
-                <h6 style="cursor: pointer;height:5px; " [routerLink]="['/stay/'+pg.cityName+'/'+pg.locationName+'/'+pg.subLocationName+'/'+pg.urlPgName]"
+                <h6 style="cursor: pointer;height:5px; " [routerLink]="['/pg/'+pg.cityName+'/'+pg.locationName+'/'+pg.subLocationName+'/'+pg.urlPgName]"
                   routerLinkActive="router-link-active">{{pg.pgName}}</h6>
                 <small style="font-size:11px;">{{pg.locationName}}</small>
               </div>
@@ -179,13 +179,13 @@
                 </div>
                 <div class="contact-d">
                   <a style="font-size:14px; background:#25D366; color: white; text-decoration:none; padding:3px; border-radius:2px;"
-                    href="{{'https://wa.me/+918050163861/?text=Hi, I am looking for PG : '+'grubstay.com/stay/'+pg.cityName+'/'+pg.locationName+'/'+pg.subLocationName+'/'+pg.urlPgName}}">
+                    href="{{'https://wa.me/+918050163861/?text=Hi, I am looking for PG : '+'grubstay.com/pg/'+pg.cityName+'/'+pg.locationName+'/'+pg.subLocationName+'/'+pg.urlPgName}}">
                     WhatsApp
                   </a>
                   &nbsp;
                   <button
                     style="font-size:11px; background:white; color: black; text-decoration:none;  border-radius:2px; width:70px; border:1px solid grey;"
-                    [routerLink]="['/stay/'+pg.cityName+'/'+pg.locationName+'/'+pg.subLocationName+'/'+pg.urlPgName]" routerLinkActive="router-link-active">
+                    [routerLink]="['/pg/'+pg.cityName+'/'+pg.locationName+'/'+pg.subLocationName+'/'+pg.urlPgName]" routerLinkActive="router-link-active">
                     More info
                   </button>
                   <!-- <button [matMenuTriggerFor]="menu" #menuTrigger mat-raised-button>Contact</button>
@@ -384,14 +384,14 @@
               <div class="row" style="margin-left:20px;">
                 <div class="col-md-5 col-sm-6 col-xs-12 mt-1" *ngFor="let pg of pgArray">
                   <mat-card class="example-card mb-3">
-                    <img mat-card-image [routerLink]="['/stay/'+pg.cityName+'/'+pg.locationName+'/'+pg.subLocationName+'/'+pg.urlPgName]" routerLinkActive="router-link-active"
+                    <img mat-card-image [routerLink]="['/pg/'+pg.cityName+'/'+pg.locationName+'/'+pg.subLocationName+'/'+pg.urlPgName]" routerLinkActive="router-link-active"
                       [src]="_sanitizer.bypassSecurityTrustUrl(pg.pgImage)" [alt]="pg.pgImageName">
                     <!-- <mat-card-content>
                         </mat-card-content> -->
                     <div class="row">
                       <div class="col-md-12 col-sm-12 col-xs-12 card_content">
                         <div class="pg-content-d">
-                          <h6 style="cursor: pointer;height:5px; " [routerLink]="['/stay/'+pg.cityName+'/'+pg.locationName+'/'+pg.subLocationName+'/'+pg.urlPgName]"
+                          <h6 style="cursor: pointer;height:5px; " [routerLink]="['/pg/'+pg.cityName+'/'+pg.locationName+'/'+pg.subLocationName+'/'+pg.urlPgName]"
                             routerLinkActive="router-link-active">{{pg.pgName}}</h6>
                           <small style="font-size:11px;">{{pg.locationName}}</small>
                         </div>
@@ -442,13 +442,13 @@
                         </div>
                         <div class="contact-d">
                           <a style="font-size:14px; background:#25D366; color: white; text-decoration:none; padding:3px; border-radius:2px;"
-                          href="{{'https://wa.me/+918050163861/?text=Hi, I am looking for PG : '+'grubstay.com/stay/'+pg.cityName+'/'+pg.locationName+'/'+pg.subLocationName+'/'+pg.urlPgName}}">
+                          href="{{'https://wa.me/+918050163861/?text=Hi, I am looking for PG : '+'grubstay.com/pg/'+pg.cityName+'/'+pg.locationName+'/'+pg.subLocationName+'/'+pg.urlPgName}}">
                             WhatsApp
                           </a>
                           &nbsp;
                           <button
                             style="font-size:11px; background:white; color: black; text-decoration:none;  border-radius:2px; width:70px; border:1px solid grey;"
-                            [routerLink]="['/stay/'+pg.cityName+'/'+pg.locationName+'/'+pg.subLocationName+'/'+pg.urlPgName]" routerLinkActive="router-link-active">
+                            [routerLink]="['/pg/'+pg.cityName+'/'+pg.locationName+'/'+pg.subLocationName+'/'+pg.urlPgName]" routerLinkActive="router-link-active">
                             More info
                           </button>
                           <!-- <button [matMenuTriggerFor]="menu" #menuTrigger mat-raised-button>Contact</button>

@@ -6,10 +6,10 @@
               <ng-template [width]="100" carouselSlide [id]="slide.id">
                 <mat-card class="example-card">
                     <div class="img-sec">
-                        <img  [routerLink]="['stay/'+slide.title.toLowerCase().split(' ').join('-').trim()]" [src]="sanitizer.bypassSecurityTrustUrl(slide.src)" *ngIf="slide.stayNo > 0" [alt]="slide.alt" [title]="slide.title" style="cursor:pointer;">
+                        <img  [routerLink]="['pg/'+slide.title.toLowerCase().split(' ').join('-').trim()]" [src]="sanitizer.bypassSecurityTrustUrl(slide.src)" *ngIf="slide.stayNo > 0" [alt]="slide.alt" [title]="slide.title" style="cursor:pointer;">
                         <img [src]="sanitizer.bypassSecurityTrustUrl(slide.src)" *ngIf="slide.stayNo == 0" [alt]="slide.alt" [title]="slide.title">
                     </div>
-                    <h6 class="text-center city-name"><a [routerLink]="['stay/'+slide.title.toLowerCase().split(' ').join('-').trim()]" *ngIf="slide.stayNo > 0" routerLinkActive="router-link-active"  style="text-decoration:none; color: black;">{{slide.title}}</a></h6>
+                    <h6 class="text-center city-name"><a [routerLink]="['pg/'+slide.title.toLowerCase().split(' ').join('-').trim()]" *ngIf="slide.stayNo > 0" routerLinkActive="router-link-active"  style="text-decoration:none; color: black;">{{slide.title}}</a></h6>
                     <h6 class="text-center city-name"><a *ngIf="slide.stayNo == 0" routerLinkActive="router-link-active"  style="text-decoration:none; color: black;">{{slide.title}}</a></h6>
                     <p class="text-center stays-no">{{slide.stayNo}} Stays</p>
                 </mat-card>

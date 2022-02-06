@@ -186,9 +186,9 @@ export class SearchDialogComponent implements OnInit {
       subLocationName = subLocationName.toLowerCase().split(" ").join("-").trim();
       let navigateUrl:any;
       if(subLocationName && subLocationName != ''){
-        navigateUrl="/stay/"+cityName+"/"+locationName+'/'+subLocationName;
+        navigateUrl="/pg/"+cityName+"/"+locationName+'/'+subLocationName;
       }else{
-        navigateUrl="/stay/"+cityName+"/"+locationName;
+        navigateUrl="/pg/"+cityName+"/"+locationName;
       }
       self.router.navigate([navigateUrl]);
     }

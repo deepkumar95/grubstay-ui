@@ -45,10 +45,12 @@ export class StayCarouselComponent implements OnInit {
   // ];
 
   stayStore:any = [
-    {id:1,title:'HSR Layout', src:'../../../assets/imgs/stay/pg.jpg', alt:'pg'},
-    {id:2,title:'Koramangala', src:'../../../assets/imgs/stay/room.jpg', alt:'flat'},
-    {id:3,title:'HSR Layout', src:'../../../assets/imgs/stay/room.jpg', alt:'room'},
-    {id:4,title:'Koramangala', src:'../../../assets/imgs/stay/pg.jpg', alt:'wek_stay'}
+    {id:1,title:'HSR Layout', src:'../../../assets/imgs/stay/hsr-layout.jpg', alt:'hsr-layout.jpg', href:'https://grubstay.com/pg/bangalore/hsr-layout'},
+    {id:2,title:'Koramangala', src:'../../../assets/imgs/stay/koramangala.jpeg', alt:'koramangala.jpeg',href:'https://grubstay.com/pg/bangalore/koramangala'},
+    {id:3,title:'Electronic City', src:'../../../assets/imgs/stay/Electronic-city.jpg', alt:'Electronic-city.jpg',href:'https://grubstay.com/pg/bangalore/electronic-city'},
+    {id:4,title:'Bellandur', src:'../../../assets/imgs/stay/bellandur.jpeg', alt:'bellandur.jpeg',href:'https://grubstay.com/pg/bangalore/bellandur'},
+    {id:4,title:'Marathahalli', src:'../../../assets/imgs/stay/marathahalli.jpg', alt:'marathahalli.jpg',href:'https://grubstay.com/pg/bangalore/marathahalli'},
+    {id:4,title:'Whitefield', src:'../../../assets/imgs/stay/Whitefield-bangalore.jpg', alt:'whitefield.jpg',href:'https://grubstay.com/pg/bangalore/whitefield'}
   ];
 
   constructor() { }

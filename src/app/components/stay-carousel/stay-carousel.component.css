@@ -31,7 +31,7 @@
 }
 
 .img-sec2 img{
-    height: 100% !important;
+    height: 170px !important;
     width: 100% !important;
     object-fit: cover;
 }
@@ -47,5 +47,10 @@
     .states-slider2{
         /* margin-top: 2em; */
         padding: 0em 1em;
+    }
+    .img-sec2 img{
+        height: 120px !important;
+        width: 100% !important;
+        object-fit: cover;
     }
 }
