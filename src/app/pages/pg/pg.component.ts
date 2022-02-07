@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { PgService } from '../../services/pg.service';
 import { CustomSnackBarService } from '../../services/helper/custom-snack-bar.service';
-import { DomSanitizer } from '@angular/platform-browser';
+import { DomSanitizer, Title } from '@angular/platform-browser';
 import { NumberFormatStyle } from '@angular/common';
 
 export interface PG {
@@ -155,8 +155,9 @@ export class PgComponent implements OnInit {
       map(result => result.matches)
     );
 
-  constructor(private breakpointObserver: BreakpointObserver, private _route: ActivatedRoute, private _pgService: PgService, private _snackBarService: CustomSnackBarService, private _sanitizer: DomSanitizer) {
+  constructor(private breakpointObserver: BreakpointObserver, private _route: ActivatedRoute, private _pgService: PgService, private _snackBarService: CustomSnackBarService, private _sanitizer: DomSanitizer,private title:Title) {
     this.sanitizer = _sanitizer;
+    this.setTitle('Grubstay - Paying Guest');
   }
 
   ngOnInit(): void {
@@ -297,6 +298,10 @@ export class PgComponent implements OnInit {
 
   public sharePg() {
     var self = this;
+  }
+
+  public setTitle(newTitle:string){
+    this.title.setTitle(newTitle);
   }
 
 }

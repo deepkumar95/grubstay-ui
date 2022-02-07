@@ -1,6 +1,7 @@
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { Title } from '@angular/platform-browser';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -31,7 +32,13 @@ export class HomeComponent implements OnInit {
 
   constructor(private breakpointObserver:BreakpointObserver, public dialog:MatDialog,
     private loader:NgxUiLoaderService,private _home:HomeService,
-    private _snackbarService:CustomSnackBarService,private _city:CityServiceService,private _shared:SharedService) { }
+    private _snackbarService:CustomSnackBarService,private _city:CityServiceService,private _shared:SharedService,private title:Title) {
+      this.setTitle('Grubstay - Home Page');
+     }
+
+     public setTitle(newTitle:string){
+       this.title.setTitle(newTitle);
+     }
 
   ngOnInit(): void {
     this.getCitiesWithLocation();

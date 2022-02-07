@@ -6,7 +6,7 @@ import { SharedService } from 'src/app/services/helper/shared.service';
 import { PgService } from 'src/app/services/pg.service';
 import { CustomSnackBarService } from '../../services/helper/custom-snack-bar.service';
 import { ActivatedRoute } from '@angular/router';
-import { DomSanitizer } from '@angular/platform-browser';
+import { DomSanitizer, Title } from '@angular/platform-browser';
 import { MatMenuTrigger } from '@angular/material/menu';
 import { MatDialog } from '@angular/material/dialog';
 import * as _ from 'lodash';
@@ -103,7 +103,7 @@ export class StayPgComponent implements OnInit {
     );
   currentLocation: any;
 
-  constructor(private breakpointObserver: BreakpointObserver, private _shared: SharedService, private _pgService: PgService, private _snackBarService: CustomSnackBarService, private _path: ActivatedRoute, private sanitizer: DomSanitizer, private dialog: MatDialog, private loader: NgxUiLoaderService) {
+  constructor(private breakpointObserver: BreakpointObserver, private _shared: SharedService, private _pgService: PgService, private _snackBarService: CustomSnackBarService, private _path: ActivatedRoute, private sanitizer: DomSanitizer, private dialog: MatDialog, private loader: NgxUiLoaderService,private title:Title) {
     this._sanitizer = sanitizer;
   }
 
@@ -167,6 +167,7 @@ export class StayPgComponent implements OnInit {
     else{
       this._shared.redirectTo('');
     }
+    this.setTitle('PG in '+this.covertToCamelCase(this.stayTitle));
   }
   public loadAllPGDataInCity(cityName) {
     this._pgService.loadAllPGDataInCity(cityName).subscribe((response: any) => {
@@ -613,5 +614,9 @@ export class StayPgComponent implements OnInit {
       (error) => {
         this._snackBarService.errorSnackBar("Something went wrong!");
       });
+  }
+
+  public setTitle(title:string){
+    this.title.setTitle(title);
   }
 }
