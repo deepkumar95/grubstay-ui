@@ -66,6 +66,7 @@ import { AdminDialogComponent } from './pages/admin-dashboard/admin-components/s
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatExpansionModule} from '@angular/material/expansion';
 import { CallbackComponent } from './pages/admin-dashboard/admin-components/callback/callback.component';
+import {MatTabsModule} from '@angular/material/tabs';
 
 const ngxUiLoaderConfig:NgxUiLoaderConfig =
   {
@@ -170,7 +171,8 @@ const ngxUiLoaderConfig:NgxUiLoaderConfig =
     MatNativeDateModule,
     MatMenuModule,
     MatTooltipModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatTabsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

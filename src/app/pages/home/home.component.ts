@@ -22,6 +22,27 @@ export class HomeComponent implements OnInit {
   request:any={};
   city:any = [];
   location:any = [];
+  bangLorelocation:any = [];
+  delhiLocation:any = [];
+  mumbaiLocation:any = [];
+  hyderabadLocation:any = [];
+  puneLocation:any = [];
+  bangPart1:any = 0;
+  bangPart2:any = 0;
+  
+  delPart1:any = 0;
+  delPart2:any = 0;
+
+  mumPart1:any = 0;
+  mumPart2:any = 0;
+
+  punPart1:any = 0;
+  punPart2:any = 0;
+
+  hydPart1:any = 0;
+  hydPart2:any = 0;
+
+  
 
   panelOpenState = false;
 
@@ -103,6 +124,12 @@ export class HomeComponent implements OnInit {
         } else {
           let responseData: any = response.data;
           this.location = responseData;
+          this.bangLorelocation = this.location.filter(item => item.city_name == 'BANGALORE');
+          this.delhiLocation = this.location.filter(item => item.city_name == 'DELHI');
+          this.mumbaiLocation = this.location.filter(item => item.city_name == 'MUMBAI');
+          this.hyderabadLocation = this.location.filter(item => item.city_name == 'HYDERABAD');
+          this.puneLocation = this.location.filter(item => item.city_name == 'PUNE');
+          this.setParts();
           let tempCity = [];
           responseData.forEach(element => {
             let data:any = {}
@@ -122,7 +149,7 @@ export class HomeComponent implements OnInit {
   goTo(location:any){
     let cityName = location.city_name.toLowerCase().split(' ').join('-').trim();
     let locationName = location.location_name.toLowerCase().split(' ').join('-').trim();
-    let routeTo = '/stay/'+cityName+'/'+locationName;
+    let routeTo = '/pg/'+cityName+'/'+locationName;
     this._shared.redirectTo(routeTo);
   }
 
@@ -135,6 +162,29 @@ export class HomeComponent implements OnInit {
     }
     const str2 = arr.join(" ");
     return str2;
+  }
+
+  public setParts(){
+    if(this.bangLorelocation.length > 0){
+      this.bangPart1 = Math.ceil(this.bangLorelocation.length / 3);
+      this.bangPart2 = this.bangPart1 * 2
+    }
+    if(this.mumbaiLocation.length > 0){
+      this.mumPart1 = Math.ceil(this.bangLorelocation.length / 3);
+      this.mumPart2 = this.bangPart1 * 2
+    }
+    if(this.delhiLocation.length > 0){
+      this.delPart1 = Math.ceil(this.bangLorelocation.length / 3);
+      this.delPart2 = this.bangPart1 * 2
+    }
+    if(this.puneLocation.length > 0){
+      this.punPart1 = Math.ceil(this.bangLorelocation.length / 3);
+      this.punPart2 = this.bangPart1 * 2
+    }
+    if(this.hyderabadLocation.length > 0){
+      this.hydPart1 = Math.ceil(this.bangLorelocation.length / 3);
+      this.hydPart2 = this.bangPart1 * 2
+    }
   }
 
 }

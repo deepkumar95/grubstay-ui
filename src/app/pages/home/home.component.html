@@ -136,7 +136,7 @@
 </div>
 <!-- section-refrel-end -->
 <!-- accordian -->
-<div class="accordian mt-10">
+<div *ngIf="(isHandset$ | async)" class="accordian mt-10">
   <div>
     <div [ngClass]="{'container-fluid': !(isHandset$ | async)}">
       <div class="row">
@@ -162,4 +162,155 @@
   </div>
 </div>
 <!-- end accordian -->
+<!-- start tabs  -->
+<div style="padding: 20px;" *ngIf="!(isHandset$ | async)">
+  <mat-tab-group>
+    <mat-tab label="Banglore"> 
+      <div class="container-fluid mt-2 mr-2 ml-2">
+        <div class="row">
+          <div class="col-3">
+            <ul type="none">
+              <li><h6>Top Searches</h6></li>
+              <li><a href="pg/bangalore">PG in Banglore</a></li>
+              <li><a href="pg/bangalore">PG in Banglore for Mens</a></li>
+              <li><a href="pg/bangalore">PG in Banglore for Womens/Girls</a></li>
+            </ul>
+          </div>
+          <div *ngIf="bangLorelocation.length > 0" class="col-3">
+            <ul type="none">
+              <li *ngFor="let location of bangLorelocation.slice(0,bangPart1)"><a (click)=goTo(location) class="btn">PG in {{covertToCamelCase(location.location_name)}}</a></li>
+            </ul>
+          </div>
+          <div class="col-3">
+            <ul type="none">
+              <li *ngFor="let location of bangLorelocation.slice(bangPart1,bangPart2)"><a (click)=goTo(location) class="btn">PG in {{covertToCamelCase(location.location_name)}}</a></li>
+            </ul>
+          </div>
+          <div class="col-3">
+            <ul type="none">
+              <li *ngFor="let location of bangLorelocation.slice(bangPart2)"><a (click)=goTo(location) class="btn">PG in {{covertToCamelCase(location.location_name)}}</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </mat-tab>
+    <mat-tab label="Mumbai"> 
+      <div class="container-fluid mt-2 mr-2 ml-2">
+        <div class="row">
+          <div class="col-3">
+            <ul type="none">
+              <li><h6>Top Searches</h6></li>
+              <li><a href="pg/mumbai">PG in Mumbai</a></li>
+              <li><a href="pg/mumbai">PG in Mumbai for Mens</a></li>
+              <li><a href="pg/mumbai">PG in Mumbai for Womens/Girls</a></li>
+            </ul>
+          </div>
+          <div *ngIf="mumbaiLocation.length > 0" class="col-3">
+            <ul type="none">
+              <li *ngFor="let location of mumbaiLocation.slice(0,mumPart1)"><a (click)=goTo(location) class="btn">PG in {{covertToCamelCase(location.location_name)}}</a></li>
+            </ul>
+          </div>
+          <div class="col-3">
+            <ul type="none">
+              <li *ngFor="let location of mumbaiLocation.slice(mumPart1,mumPart2)"><a (click)=goTo(location) class="btn">PG in {{covertToCamelCase(location.location_name)}}</a></li>
+            </ul>
+          </div>
+          <div class="col-3">
+            <ul type="none">
+              <li *ngFor="let location of mumbaiLocation.slice(mumPart2)"><a (click)=goTo(location) class="btn">PG in {{covertToCamelCase(location.location_name)}}</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </mat-tab>
+    <mat-tab label="Delhi"> 
+      <div class="container-fluid mt-2 mr-2 ml-2">
+        <div class="row">
+          <div class="col-3">
+            <ul type="none">
+              <li><h6>Top Searches</h6></li>
+              <li><a href="pg/delhi">PG in Delhi</a></li>
+              <li><a href="pg/delhi">PG in Delhi for Mens</a></li>
+              <li><a href="pg/delhi">PG in Delhi for Womens/Girls</a></li>
+            </ul>
+          </div>
+          <div *ngIf="delhiLocation.length > 0" class="col-3">
+            <ul type="none">
+              <li *ngFor="let location of delhiLocation.slice(0,delPart1)"><a (click)=goTo(location) class="btn">PG in {{covertToCamelCase(location.location_name)}}</a></li>
+            </ul>
+          </div>
+          <div class="col-3">
+            <ul type="none">
+              <li *ngFor="let location of delhiLocation.slice(delPart1,delPart2)"><a (click)=goTo(location) class="btn">PG in {{covertToCamelCase(location.location_name)}}</a></li>
+            </ul>
+          </div>
+          <div class="col-3">
+            <ul type="none">
+              <li *ngFor="let location of delhiLocation.slice(delPart2)"><a (click)=goTo(location) class="btn">PG in {{covertToCamelCase(location.location_name)}}</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </mat-tab>
+    <mat-tab label="Pune"> 
+      <div class="container-fluid mt-2 mr-2 ml-2">
+        <div class="row">
+          <div class="col-3">
+            <ul type="none">
+              <li><h6>Top Searches</h6></li>
+              <li><a href="pg/pune">PG in Pune</a></li>
+              <li><a href="pg/pune">PG in Pune for Mens</a></li>
+              <li><a href="pg/pune">PG in Pune for Womens/Girls</a></li>
+            </ul>
+          </div>
+          <div *ngIf="puneLocation.length > 0" class="col-3">
+            <ul type="none">
+              <li *ngFor="let location of puneLocation.slice(0,punPart1)"><a (click)=goTo(location) class="btn">PG in {{covertToCamelCase(location.location_name)}}</a></li>
+            </ul>
+          </div>
+          <div class="col-3">
+            <ul type="none">
+              <li *ngFor="let location of puneLocation.slice(punPart1,punPart2)"><a (click)=goTo(location) class="btn">PG in {{covertToCamelCase(location.location_name)}}</a></li>
+            </ul>
+          </div>
+          <div class="col-3">
+            <ul type="none">
+              <li *ngFor="let location of puneLocation.slice(punPart2)"><a (click)=goTo(location) class="btn">PG in {{covertToCamelCase(location.location_name)}}</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </mat-tab>
+    <mat-tab label="Hyderabad"> 
+      <div class="container-fluid mt-2 mr-2 ml-2">
+        <div class="row">
+          <div class="col-3">
+            <ul type="none">
+              <li><h6>Top Searches</h6></li>
+              <li><a href="pg/hyderabad">PG in Hyderabad</a></li>
+              <li><a href="pg/hyderabad">PG in Hyderabad for Mens</a></li>
+              <li><a href="pg/hyderabad">PG in Hyderabad for Womens/Girls</a></li>
+            </ul>
+          </div>
+          <div *ngIf="hyderabadLocation.length > 0" class="col-3">
+            <ul type="none">
+              <li *ngFor="let location of hyderabadLocation.slice(0,hydPart1)"><a (click)=goTo(location) class="btn">PG in {{covertToCamelCase(location.location_name)}}</a></li>
+            </ul>
+          </div>
+          <div class="col-3">
+            <ul type="none">
+              <li *ngFor="let location of hyderabadLocation.slice(hydPart1,hydPart2)"><a (click)=goTo(location) class="btn">PG in {{covertToCamelCase(location.location_name)}}</a></li>
+            </ul>
+          </div>
+          <div class="col-3">
+            <ul type="none">
+              <li *ngFor="let location of hyderabadLocation.slice(hydPart2)"><a (click)=goTo(location) class="btn">PG in {{covertToCamelCase(location.location_name)}}</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </mat-tab>
+  </mat-tab-group>
+</div>
+<!-- end of tabs -->
 <app-footer></app-footer>
