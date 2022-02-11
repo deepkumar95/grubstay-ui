@@ -37,6 +37,7 @@ export class StayPgComponent implements OnInit {
   fav: boolean = true;
   _sanitizer: any;
   stayTitle:any="";
+  stayType:any = "";
 
   // pgArray = [
   //   {heading:"Sri Sai Balaji PG for Men's", location:'Sector-6, HSR Layout', gender:'both', distance:'22km', reviews:'4.5', pgImg:'../../../assets/imgs/stay/pg.jpg',price:'5000'},
@@ -133,6 +134,7 @@ export class StayPgComponent implements OnInit {
     let cityName=urlData.cityName;
     let locationName=urlData.locationName;
     let subLocationName=urlData.subLocationName;
+    this.stayType = this._path.snapshot.url[0].path.toUpperCase();
     if(cityName && locationName && subLocationName){
       cityName=urlData.cityName.split("-").join(" ").trim().toUpperCase();
       locationName=urlData.locationName.split("-").join(" ").trim().toUpperCase();
