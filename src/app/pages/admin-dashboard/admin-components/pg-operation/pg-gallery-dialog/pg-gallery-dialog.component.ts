@@ -31,7 +31,7 @@ export class PgGalleryDialogComponent implements OnInit {
   loadPgGallery(pgId){
     var self = this;
     self.loader.start();
-    self._pg.getGalleryByPgId(pgId).subscribe((response:any)=>{
+    self._pg.getGalleryByPgId2(pgId).subscribe((response:any)=>{
       if(response.error && response.error!=''){
         self._snackBar.errorSnackBar("failed to load pg images...!");
         self.loader.stop();

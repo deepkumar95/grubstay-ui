@@ -27,6 +27,10 @@ export class PgService {
     return this._http.post(this.pgBaseUrl+"pgGallery/"+data.pgName, data);
   }
 
+  public getGalleryByPgId2(pgId:any){
+    return this._http.get(this.pgBaseUrl+"pgGallery/"+pgId);
+  }
+
   public updatePgData(data){
     return this._http.put(this.pgBaseUrl,data);
   }
