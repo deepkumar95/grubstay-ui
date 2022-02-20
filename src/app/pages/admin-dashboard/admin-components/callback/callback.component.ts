@@ -22,7 +22,7 @@ export interface Request {
 export class CallbackComponent implements OnInit {
 
   REQUEST_DATA: Request[] = [];
-  displayedColumns: string[] = ['status', 'date', 'name', 'phone', 'email'];
+  displayedColumns: string[] = ['status', 'date', 'name', 'phone', 'email','action'];
   dataSource = new MatTableDataSource(this.REQUEST_DATA);
 
   constructor(private _snackbarService: CustomSnackBarService, 
@@ -91,6 +91,36 @@ export class CallbackComponent implements OnInit {
         this.loader.stop();
         return;
       });
+  }
+
+  deleteCallStatus(requestId:any){
+    var self = this;
+    let confirm = window.confirm("Are you sure want to delete status of callback request ?");
+    if(confirm){
+      self.loader.start();
+      this._admin.deleteCallStatus(requestId).subscribe(
+        (response: any) => {
+          if (response.erorr && response.error != '') {
+            this._snackbarService.errorSnackBar("Status deletion failed!...Please Try Again");
+            this.loadAllRequests();
+            this.loader.stop();
+            return;
+          } else {
+            let responseData = response;
+            if(responseData.success == 'deleted'){
+              this._snackbarService.successSnackBar("Status deleted successfully..");
+              this.loadAllRequests();
+            }
+            this.loader.stop();
+          }
+        },
+        (error: any) => {
+          this._snackbarService.errorSnackBar("Status deletion failed!...Please Try Again");
+          this.loadAllRequests();
+          this.loader.stop();
+          return;
+        });
+    }
   }
 
 }

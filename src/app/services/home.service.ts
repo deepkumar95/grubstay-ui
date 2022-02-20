@@ -28,6 +28,10 @@ export class HomeService {
     return this._httpService.put(baseUrl+'admin/updateRequest/',data);
   }
 
+  public deleteCallStatus(requestId:any){
+    return this._httpService.delete(baseUrl+'admin/deleteRequest/'+requestId);
+  }
+
   public login(user:any){
     return this._httpService.post(baseUrl+'login/',user);
   }

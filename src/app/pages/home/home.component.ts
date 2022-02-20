@@ -54,7 +54,7 @@ export class HomeComponent implements OnInit {
   constructor(private breakpointObserver:BreakpointObserver, public dialog:MatDialog,
     private loader:NgxUiLoaderService,private _home:HomeService,
     private _snackbarService:CustomSnackBarService,private _city:CityServiceService,private _shared:SharedService,private title:Title) {
-      this.setTitle('Grubstay - Home Page');
+      this.setTitle('GRUBSTAY - Get your best next place');
      }
 
      public setTitle(newTitle:string){
