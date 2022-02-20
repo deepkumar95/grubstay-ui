@@ -90,7 +90,7 @@ export class SignupDialogComponent implements OnInit {
       return;
     }
     self.checkPhone(self.user.phone);
-    self.checkPhone(self.user.whatsapp);
+    self.checkWhatsapp(self.user.whatsapp);
     self.checkPassword(self.user.password);
     self.checkUsername(self.user.username);
     return this.formIsValid;

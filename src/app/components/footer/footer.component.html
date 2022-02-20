@@ -50,6 +50,12 @@
           <span class="logo-sm">Contact Us</span>
           <ul class="list-unstyled mt-20">
             <li>
+              <div class="lookContainer"> 
+                <i class="fa fa-external-link icon"></i>
+                <span [routerLink]="['/stay-form']" style="cursor: pointer;" routerLinkActive="router-link-active"  class="number">Looking for Stay ?</span>
+              </div>
+            </li>
+            <li>
               <div class="phoneContainer">
                 <i class="fa fa-phone icon"></i>
                 <span class="number">+80501-63861</span>
@@ -121,6 +127,8 @@
         <h6>Contact us</h6>
         <small>
           <p style="color: grey;">
+            <span [routerLink]="['/stay-form']" style="cursor: pointer; text-decoration: underline;" routerLinkActive="router-link-active" >Looking for stay ?</span>
+            <br>
             +91-8050163861
             <br>
             info@grubstay.com

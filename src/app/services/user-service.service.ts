@@ -31,4 +31,8 @@ export class UserServiceService {
   public loadAllAdmin(){
     return this._http.get(baseUrl+"admin/all");
   }
+  
+  public registerStayForm(stayForm:any){
+    return this._http.post(baseUrl+"user/stay-form",stayForm);
+  }
 }
