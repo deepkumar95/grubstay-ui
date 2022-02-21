@@ -35,7 +35,7 @@
                                 <!-- whatsapp field -->
                                 <mat-form-field appearance="standard" class="full-width">
                                     <mat-label>Whatsapp number</mat-label>
-                                    <input id="whatsapp" matInput type='text' autocomplete="new_whatsapp_number" name='whatsapp'
+                                    <input id="whatsapp" matInput type='number' autocomplete="new_whatsapp_number" name='whatsapp'
                                         [(ngModel)]="stayForm.whatsapp" placeholder="optional" (blur)="checkWhatsapp(stayForm.whatsapp)" required>
                                     <mat-hint>Make sure you are putting correct number to receive updates via call or text
                                         or WhatsApp</mat-hint>
@@ -76,7 +76,7 @@
                                 <mat-form-field appearance="standard" class="full-width">
                                     <mat-label>REFERRAL CODE ( "Use referral code to get discount in your rent ")</mat-label>
                                     <input matInput type='text' autocomplete="off" name='firstName' [(ngModel)]="stayForm.refrel"
-                                        placeholder="Enter your refrel code" >
+                                        placeholder="Enter your refrel code | optional" >
                                 </mat-form-field>
                                 <div class="mt-2">
                                     <button type="submit" color="accent" mat-flat-button>Submit</button>
@@ -106,7 +106,7 @@
                          <p>A Company that will help you find the perfect stay for you near to your company location or near to college.</p>
                          <p>Get well maintained PG, Flats and Co-living spaces for you.</p>
                          <div class="stay-form-container">
-                            <form (ngSubmit)="register()">
+                            <form (ngSubmit)="registerStayForm()">
                                 <!-- first name field -->
                                 <mat-form-field appearance="standard" class="full-width">
                                     <mat-label>Name</mat-label>
@@ -131,7 +131,7 @@
                                 <!-- whatsapp field -->
                                 <mat-form-field appearance="standard" class="full-width mb-5">
                                     <mat-label>Whatsapp number</mat-label>
-                                    <input id="whatsapp" matInput type='text' autocomplete="new_whatsapp_number" name='whatsapp'
+                                    <input id="whatsapp" matInput type='number' autocomplete="new_whatsapp_number" name='whatsapp'
                                         [(ngModel)]="stayForm.whatsapp" placeholder="optional" (blur)="checkWhatsapp(stayForm.whatsapp)" required>
                                     <mat-hint>Make sure you are putting correct number to receive updates via call or text
                                         or WhatsApp</mat-hint>
@@ -172,7 +172,7 @@
                                 <mat-form-field appearance="standard" class="full-width">
                                     <label>REFERRAL CODE ( "Use referral code to get discount in your rent ")</label>
                                     <input style="margin-top: 10px;" matInput type='text' autocomplete="off" name='firstName' [(ngModel)]="stayForm.refrel"
-                                        placeholder="Enter your refrel code" >
+                                        placeholder="Enter your refrel code | optional" >
                                 </mat-form-field>
 
                                 <div class="mt-2">
