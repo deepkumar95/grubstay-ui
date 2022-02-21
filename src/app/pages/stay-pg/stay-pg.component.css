@@ -133,7 +133,7 @@
     color:gold;
 }
 .mat-card-image{
-    height: 150px !important; 
+    height: 170px !important; 
 }
 .card_content-m{
     margin-left:-15px;
@@ -149,4 +149,18 @@
     z-index: 10;
     margin-top:35px;
     width: 99.6%;
+}
+.mat-card>.mat-card-actions:last-child{
+    margin-bottom: -20px !important;
+}
+.mat-card-actions{
+    padding: 0px !important;
+}
+.mat-card{
+    border-radius: 10px !important;
+}
+.jumb-content{
+    text-align: justify;
+  text-justify: inter-word;
+  line-height: 1.3;
 }
