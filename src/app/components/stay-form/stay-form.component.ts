@@ -105,6 +105,7 @@ export class StayFormComponent implements OnInit {
     let self=this;
     let check = self.checkForm();
     if(self.formIsValid){
+      self.stayForm.shiftDate = self.formatDate(self.stayForm.shiftDate);
       self._user.registerStayForm(self.stayForm).subscribe((response:any)=>{
         if(response.error && response.error != ''){
           self.snackBar.errorSnackBar("Registration failed.. try again !");
@@ -121,6 +122,20 @@ export class StayFormComponent implements OnInit {
         return;
       })
     }
+  }
+
+  formatDate(date) {
+    var d = new Date(date),
+        month = '' + (d.getMonth() + 1),
+        day = '' + d.getDate(),
+        year = d.getFullYear();
+
+    if (month.length < 2) 
+        month = '0' + month;
+    if (day.length < 2) 
+        day = '0' + day;
+
+    return [year, month, day].join('-');
   }
 
 }

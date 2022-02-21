@@ -243,12 +243,16 @@ i{
 .theme-color{
     color: #282727;
 }
-
-.mat-sort-header{
-    color: white;
-}
 .owl-theme .owl-nav.disabled+.owl-dots {
     margin-top: -30px !important;
     z-index: 999 !important;
     position: relative !important;
+}
+
+.mat-sort-header-arrow {
+    color: white;
+}
+
+.mat-sort-header-stem {
+    background: white;
 }

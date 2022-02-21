@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTableDataSource } from '@angular/material/table';
@@ -11,6 +11,8 @@ import { SharedService } from 'src/app/services/helper/shared.service';
 import { PgService } from 'src/app/services/pg.service';
 import { PgGalleryDialogComponent } from './pg-gallery-dialog/pg-gallery-dialog.component';
 import { PgOpDialogComponent } from './pg-op-dialog/pg-op-dialog.component';
+import {MatPaginator} from '@angular/material/paginator';
+import {MatSort} from '@angular/material/sort';
 
 export interface PG {
   pgId:string;
@@ -30,11 +32,15 @@ export interface PG {
   templateUrl: './pg-operation.component.html',
   styleUrls: ['./pg-operation.component.css']
 })
-export class PgOperationComponent implements OnInit {
+export class PgOperationComponent implements OnInit,AfterViewInit {
 
   PG_DATA:PG[]=[];
   displayedColumns: string[] = ['actions', 'subLocation', 'pgName', 'pgAddress','singleMemPgPrc','doubleMemPgPrc','tripleMemPgPrc','distFromSubLoc','service'];
   dataSource = new MatTableDataSource(this.PG_DATA);
+
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
+
   public sanitizer;
 
   constructor(private dialog: MatDialog, private _cityService: CityServiceService, 
@@ -47,6 +53,11 @@ export class PgOperationComponent implements OnInit {
   ngOnInit(): void {
       var self = this;
       self.loadAllPgData();
+  }
+
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
   }
 
   public editItem(pgId) {
@@ -108,6 +119,9 @@ export class PgOperationComponent implements OnInit {
   filterPg(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
   }
 
   loadAllPgData(){
@@ -132,6 +146,8 @@ export class PgOperationComponent implements OnInit {
           }
           self.PG_DATA = responseData;
           self.dataSource = new MatTableDataSource(this.PG_DATA);
+          this.dataSource.paginator = this.paginator;
+          this.dataSource.sort = this.sort;
           self.loader.stop();
       }
     },(error:any)=>{

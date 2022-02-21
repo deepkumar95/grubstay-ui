@@ -10,7 +10,7 @@
     </mat-form-field>
     <div class="container-fluid">
         <div class="row mt-2" style="max-height: 62vh; overflow: scroll; overflow-x: hidden">
-            <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+            <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort>
 
                 <!--- Note that these columns can be defined in any order.
                                       The actual rendered columns are set as a property on the row definition" -->
@@ -31,13 +31,13 @@
 
                 <!-- Sub Location -->
                 <ng-container matColumnDef="subLocation">
-                    <th mat-header-cell *matHeaderCellDef> Sub Location </th>
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Sub Location </th>
                     <td mat-cell *matCellDef="let pg"> {{pg.subLocation.subLocationName}} </td>
                 </ng-container>
 
                 <!-- Name Column -->
                 <ng-container matColumnDef="pgName">
-                    <th mat-header-cell *matHeaderCellDef> PG Name </th>
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> PG Name </th>
                     <td mat-cell *matCellDef="let pg"> {{pg.pgName}} </td>
                 </ng-container>
 
@@ -49,25 +49,25 @@
 
                  <!--  Single member price column-->
                  <ng-container matColumnDef="singleMemPgPrc">
-                    <th mat-header-cell *matHeaderCellDef> S.M Price </th>
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> S.M Price </th>
                     <td mat-cell *matCellDef="let pg"> {{pg.singleMemPgPrc}} </td>
                 </ng-container>
 
                  <!--  Double member price column-->
                  <ng-container matColumnDef="doubleMemPgPrc">
-                    <th mat-header-cell *matHeaderCellDef> D.M Price </th>
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> D.M Price </th>
                     <td mat-cell *matCellDef="let pg"> {{pg.doubleMemPgPrc}} </td>
                 </ng-container>
 
                 <!--  Triple member price column-->
                 <ng-container matColumnDef="tripleMemPgPrc">
-                    <th mat-header-cell *matHeaderCellDef> T.M Price </th>
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> T.M Price </th>
                     <td mat-cell *matCellDef="let pg"> {{pg.tripleMemPgPrc}} </td>
                 </ng-container>
 
                 <!--  Distance form sub location column-->
                 <ng-container matColumnDef="distFromSubLoc">
-                    <th mat-header-cell *matHeaderCellDef> Distance </th>
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Distance </th>
                     <td mat-cell *matCellDef="let pg"> {{pg.distFromSubLoc}} </td>
                 </ng-container>
 
@@ -85,6 +85,9 @@
                     <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
                 </tr>
             </table>
+            <mat-paginator [pageSizeOptions]="[5, 8, 10, 25, 100]" 
+                    showFirstLastButtons
+                    aria-label="Select page of enquiries"></mat-paginator>
         </div>
     </div>
 </div>

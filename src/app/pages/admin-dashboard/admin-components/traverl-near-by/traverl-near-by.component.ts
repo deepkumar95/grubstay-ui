@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
 import { TravelNearByDialogComponent } from './travel-near-by-components/travel-near-by-dialog/travel-near-by-dialog.component';
@@ -7,6 +7,8 @@ import { CustomSnackBarService } from '../../../../services/helper/custom-snack-
 import { DomSanitizer } from '@angular/platform-browser';
 import * as _ from 'lodash';
 import { SharedService } from '../../../../services/helper/shared.service';
+import {MatPaginator} from '@angular/material/paginator';
+import {MatSort} from '@angular/material/sort';
 
 export interface TraverlNearBy {
   cityName: string,
@@ -29,18 +31,25 @@ export interface TraverlNearBy {
   templateUrl: './traverl-near-by.component.html',
   styleUrls: ['./traverl-near-by.component.css']
 })
-export class TraverlNearByComponent implements OnInit {
+export class TraverlNearByComponent implements OnInit,AfterViewInit {
 
   sanitizer;
   TRAVEL_NEARBY_DATA: TraverlNearBy[] = [];
   columns: string[] = ["actions", "position", "landMarkImage", "landmarkName", "pgName", "subLocationName"];
   dataSource = new MatTableDataSource(this.TRAVEL_NEARBY_DATA);
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
 
   constructor(private _matDialog: MatDialog, private _landMarkService: LandMarkService, private _snackBarService: CustomSnackBarService, private _sanitizer: DomSanitizer,
     private _sharedService: SharedService) { }
   ngOnInit(): void {
     this.sanitizer = this._sanitizer;
     this.loadAllLandMarks();
+  }
+
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
   }
 
   loadAllLandMarks() {
@@ -77,6 +86,8 @@ export class TraverlNearByComponent implements OnInit {
               this.TRAVEL_NEARBY_DATA.push(rowData);
             });
             this.dataSource = new MatTableDataSource(this.TRAVEL_NEARBY_DATA);
+            this.dataSource.paginator = this.paginator;
+            this.dataSource.sort = this.sort;
             this._snackBarService.successSnackBar("Successfully Fetched!");
           }
           else {
@@ -146,5 +157,8 @@ export class TraverlNearByComponent implements OnInit {
   filterSubLocation(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
   }
 }

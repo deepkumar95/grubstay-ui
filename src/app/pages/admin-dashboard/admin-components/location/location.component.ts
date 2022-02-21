@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { LocationDialogComponent } from './location-components/location-dialog/location-dialog.component';
@@ -7,6 +7,8 @@ import { CustomSnackBarService } from '../../../../services/helper/custom-snack-
 import * as _ from 'lodash';
 import { SharedService } from '../../../../services/helper/shared.service';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
+import {MatPaginator} from '@angular/material/paginator';
+import {MatSort} from '@angular/material/sort';
 
 export interface Location {
   locationId: number;
@@ -27,10 +29,13 @@ export interface Location {
 })
 
 
-export class LocationComponent implements OnInit {
+export class LocationComponent implements OnInit,AfterViewInit {
   LOCATION_DATA: Location[] = [];
   displayedColumns: string[] = ['actions', 'position', 'cityName', 'locationName', 'service'];
   dataSource = new MatTableDataSource(this.LOCATION_DATA);
+
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
 
   constructor(private matDialog: MatDialog, private _locationService: LocationService, 
     private _snackbarService: CustomSnackBarService, 
@@ -39,6 +44,12 @@ export class LocationComponent implements OnInit {
   ngOnInit(): void {
     this.loadLocationsData();
   }
+
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+  }
+
   public editItem(locationId) {
     let self = this;
     let locationData = _.find(self.LOCATION_DATA, (item) => {
@@ -94,6 +105,9 @@ export class LocationComponent implements OnInit {
   filterLocation(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
   }
 
   addLocation() {
@@ -133,6 +147,8 @@ export class LocationComponent implements OnInit {
             }
           });
           self.dataSource = new MatTableDataSource(self.LOCATION_DATA);
+          this.dataSource.paginator = this.paginator;
+          this.dataSource.sort = this.sort;
           //this._snackbarService.successSnackBar('Successfully Fetched!');
           self.laoder.stop();
         }

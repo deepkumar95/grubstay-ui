@@ -21,6 +21,10 @@ export class HomeService {
     return this._httpService.get(baseUrl+'admin/callRequests/');
   }
 
+  public loadAllEnquiries(){
+    return this._httpService.get(baseUrl+'admin/stay-form/');
+  }
+
   public sendCallRequest(data:any){
     return this._httpService.post(baseUrl+'admin/sendRequest/',data);
   }
@@ -30,6 +34,10 @@ export class HomeService {
 
   public deleteCallStatus(requestId:any){
     return this._httpService.delete(baseUrl+'admin/deleteRequest/'+requestId);
+  }
+  
+  public deleteEnquiry(enquiryId:any){
+    return this._httpService.delete(baseUrl+'admin/deleteEnquiry/'+enquiryId);
   }
 
   public login(user:any){

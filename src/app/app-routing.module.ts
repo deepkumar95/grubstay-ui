@@ -14,6 +14,8 @@ import { SubAdminComponent } from './pages/admin-dashboard/admin-components/sub-
 import { TraverlNearByComponent } from './pages/admin-dashboard/admin-components/traverl-near-by/traverl-near-by.component';
 import { AdminGuard } from './admin.guard';
 import { CallbackComponent } from './pages/admin-dashboard/admin-components/callback/callback.component';
+import { StayFormComponent } from './components/stay-form/stay-form.component';
+import { ViewFormEquiriesComponent } from './pages/admin-dashboard/admin-components/view-form-equiries/view-form-equiries.component';
 
 const routes: Routes = [
   {
@@ -84,10 +86,20 @@ const routes: Routes = [
       }
     ]
   },
+  {
+    path:'stay-form',
+    component: StayFormComponent
+  },
+  {
+    path:'view-form-enquiries',
+    component: ViewFormEquiriesComponent
+  }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, {
+    initialNavigation: 'enabled'
+})],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

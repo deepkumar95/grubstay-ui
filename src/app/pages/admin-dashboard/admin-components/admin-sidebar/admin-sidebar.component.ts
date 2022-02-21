@@ -27,5 +27,8 @@ export class AdminSidebarComponent implements OnInit {
   newTabHome(){
     window.open('https://grubstay.com/','_blank');
   }
+  viewFormEnquiries(){
+    window.open('/view-form-enquiries','_blank');
+  }
 
 }

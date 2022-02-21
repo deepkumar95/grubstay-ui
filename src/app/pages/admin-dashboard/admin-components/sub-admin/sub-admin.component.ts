@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import * as _ from 'lodash';
@@ -6,7 +6,8 @@ import { CustomSnackBarService } from 'src/app/services/helper/custom-snack-bar.
 import { AdminDialogComponent } from './admin-dialog/admin-dialog.component';
 import { UserServiceService } from '../../../../services/user-service.service';
 import { SharedService } from '../../../../services/helper/shared.service';
-
+import {MatPaginator} from '@angular/material/paginator';
+import {MatSort} from '@angular/material/sort';
 
 
 export interface User {
@@ -28,17 +29,25 @@ export interface User {
   templateUrl: './sub-admin.component.html',
   styleUrls: ['./sub-admin.component.css']
 })
-export class SubAdminComponent implements OnInit {
+export class SubAdminComponent implements OnInit,AfterViewInit {
 
   USER_DATA: User[] = [];
   displayedColumns: string[] = ['actions', 'username', 'email', 'phone', 'gender', 'firstName', 'lastName', 'dob', 'roles'];
   dataSource = new MatTableDataSource(this.USER_DATA);
+
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
 
   constructor(private _snackBar: CustomSnackBarService, private dialog: MatDialog, private userService: UserServiceService, private _sharedService:SharedService) { }
 
   ngOnInit(): void {
     var self = this;
     self.loadAllAdmins();
+  }
+
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
   }
 
   public editItem(userId) {
@@ -97,6 +106,9 @@ export class SubAdminComponent implements OnInit {
   filterAdmin(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
   }
 
   loadAllAdmins() {
@@ -114,6 +126,8 @@ export class SubAdminComponent implements OnInit {
             this.USER_DATA.push(element);
           });
           this.dataSource = new MatTableDataSource(this.USER_DATA);
+          this.dataSource.paginator = this.paginator;
+          this.dataSource.sort = this.sort;
         }
         else {
           this._snackBar.errorSnackBar("No Record Found!");

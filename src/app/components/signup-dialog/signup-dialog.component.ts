@@ -33,6 +33,7 @@ export class SignupDialogComponent implements OnInit {
     let self=this;
     let check = self.checkForm();
     if(self.formIsValid){
+      self.user.dob = self.formatDate(self.user.dob);
       self._user.createUser(self.user).subscribe((response:any)=>{
         if(response.error && response.error != ''){
           self.snackBar.errorSnackBar("Signup failed.. try again !");
@@ -150,6 +151,20 @@ export class SignupDialogComponent implements OnInit {
         return;
       })
     }
+  }
+
+  formatDate(date) {
+    var d = new Date(date),
+        month = '' + (d.getMonth() + 1),
+        day = '' + d.getDate(),
+        year = d.getFullYear();
+
+    if (month.length < 2) 
+        month = '0' + month;
+    if (day.length < 2) 
+        day = '0' + day;
+
+    return [year, month, day].join('-');
   }
 
 }

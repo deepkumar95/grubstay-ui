@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
 import { SublocationDialogComponent } from './sublocation-components/sublocation-dialog/sublocation-dialog.component';
@@ -7,6 +7,8 @@ import { CustomSnackBarService } from '../../../../services/helper/custom-snack-
 import * as _ from 'lodash';
 import { SharedService } from '../../../../services/helper/shared.service';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
+import {MatPaginator} from '@angular/material/paginator';
+import {MatSort} from '@angular/material/sort';
 
 export interface SubLocation {
   subLocationId: number;
@@ -27,11 +29,14 @@ export interface SubLocation {
   templateUrl: './sublocation.component.html',
   styleUrls: ['./sublocation.component.css']
 })
-export class SublocationComponent implements OnInit {
+export class SublocationComponent implements OnInit,AfterViewInit {
 
   SUBLOCATION_DATA: SubLocation[]=[];
   columns:string[]=["actions", "position", "cityName", "locationName", "subLocationName", "service"];
   dataSource=new MatTableDataSource(this.SUBLOCATION_DATA);
+
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
 
   constructor(private matDialog:MatDialog, private _subLocationService:SubLocationService, private _snackBarService:CustomSnackBarService,
     private _sharedService:SharedService,private loader:NgxUiLoaderService) { }
@@ -39,6 +44,13 @@ export class SublocationComponent implements OnInit {
   ngOnInit(): void {
     this.loadAllSubLocationData();
   }
+
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+  }
+
+
   addSubLocation() {
     this.matDialog.open(SublocationDialogComponent, {
       height:'500px',
@@ -99,6 +111,9 @@ export class SublocationComponent implements OnInit {
   filterSubLocation(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
   }
 
   loadAllSubLocationData() {
@@ -133,6 +148,8 @@ export class SublocationComponent implements OnInit {
             }
           });
           this.dataSource = new MatTableDataSource(this.SUBLOCATION_DATA);
+          this.dataSource.paginator = this.paginator;
+          this.dataSource.sort = this.sort;
           self.loader.stop();
         }
         else {

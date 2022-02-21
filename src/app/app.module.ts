@@ -67,6 +67,12 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatExpansionModule} from '@angular/material/expansion';
 import { CallbackComponent } from './pages/admin-dashboard/admin-components/callback/callback.component';
 import {MatTabsModule} from '@angular/material/tabs';
+import { StayFormComponent } from './components/stay-form/stay-form.component';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
+import { ViewFormEquiriesComponent } from './pages/admin-dashboard/admin-components/view-form-equiries/view-form-equiries.component';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatSortModule} from '@angular/material/sort';
+import { MatTableExporterModule } from 'mat-table-exporter';
 
 const ngxUiLoaderConfig:NgxUiLoaderConfig =
   {
@@ -135,10 +141,12 @@ const ngxUiLoaderConfig:NgxUiLoaderConfig =
     TraverlNearByComponent,
     TravelNearByDialogComponent,
     AdminDialogComponent,
-    CallbackComponent
+    CallbackComponent,
+    StayFormComponent,
+    ViewFormEquiriesComponent
   ],
   imports: [
-    BrowserModule,
+    BrowserModule.withServerTransition({ appId: 'serverApp' }),
     AppRoutingModule,
     BrowserAnimationsModule,
     MatToolbarModule,
@@ -172,7 +180,11 @@ const ngxUiLoaderConfig:NgxUiLoaderConfig =
     MatMenuModule,
     MatTooltipModule,
     MatExpansionModule,
-    MatTabsModule
+    MatTabsModule,
+    MatProgressBarModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatTableExporterModule
   ],
   providers: [],
   bootstrap: [AppComponent]

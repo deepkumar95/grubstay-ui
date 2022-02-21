@@ -1,9 +1,11 @@
 import { LiveAnnouncer } from '@angular/cdk/a11y';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
 import { CustomSnackBarService } from 'src/app/services/helper/custom-snack-bar.service';
 import { HomeService } from 'src/app/services/home.service';
+import {MatPaginator} from '@angular/material/paginator';
+import {MatSort} from '@angular/material/sort';
 
 export interface Request {
   id: number;
@@ -19,11 +21,14 @@ export interface Request {
   templateUrl: './callback.component.html',
   styleUrls: ['./callback.component.css']
 })
-export class CallbackComponent implements OnInit {
+export class CallbackComponent implements OnInit,AfterViewInit {
 
   REQUEST_DATA: Request[] = [];
   displayedColumns: string[] = ['status', 'date', 'name', 'phone', 'email','action'];
   dataSource = new MatTableDataSource(this.REQUEST_DATA);
+
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
 
   constructor(private _snackbarService: CustomSnackBarService, 
     private loader:NgxUiLoaderService,private _admin:HomeService) { }
@@ -33,9 +38,17 @@ export class CallbackComponent implements OnInit {
     this.loadAllRequests();
   }
 
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+  }
+
   filterRequest(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
   }
 
   updateStatus(request:any){
@@ -81,6 +94,8 @@ export class CallbackComponent implements OnInit {
           if (responseData) {
             this.REQUEST_DATA = responseData;
             this.dataSource = new MatTableDataSource(this.REQUEST_DATA);
+            this.dataSource.paginator = this.paginator;
+            this.dataSource.sort = this.sort;
           }
           this.loader.stop();
           //this._snackbarService.successSnackBar("Successfully Fetched!");

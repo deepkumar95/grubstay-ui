@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
 import { CityDialogComponent } from '../../admin-components/city/city-components/city-dialog/city-dialog.component';
@@ -9,6 +9,8 @@ import * as _ from 'lodash';
 import { DomSanitizer } from '@angular/platform-browser';
 import { SharedService } from '../../../../services/helper/shared.service';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
+import {MatPaginator} from '@angular/material/paginator';
+import {MatSort} from '@angular/material/sort';
 
 export interface City {
   cityId: number;
@@ -28,10 +30,15 @@ export interface City {
 })
 
 
-export class CityComponent implements OnInit {
+export class CityComponent implements OnInit,AfterViewInit {
   CITY_DATA: City[] = [];
   displayedColumns: string[] = ['actions', 'position', 'cityImage', 'cityName', 'service'];
   dataSource = new MatTableDataSource(this.CITY_DATA);
+
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
+
+
   public sanitizer;
 
   constructor(private dialog: MatDialog, private _cityService: CityServiceService, private _snackbarService: CustomSnackBarService, private snackBar: MatSnackBar, private domSanitier: DomSanitizer, private _sharedService: SharedService, private loader: NgxUiLoaderService) {
@@ -40,6 +47,11 @@ export class CityComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadCityData();
+  }
+
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
   }
 
   public editItem(cityId) {
@@ -99,6 +111,9 @@ export class CityComponent implements OnInit {
   filterCity(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
   }
   loadCityData() {
     this.loader.start();
@@ -121,6 +136,8 @@ export class CityComponent implements OnInit {
             });
             this.CITY_DATA = responseData;
             this.dataSource = new MatTableDataSource(this.CITY_DATA);
+            this.dataSource.paginator = this.paginator;
+            this.dataSource.sort = this.sort;
           }
           this.loader.stop();
           //this._snackbarService.successSnackBar("Successfully Fetched!");
