@@ -130,6 +130,53 @@
           <small>Pick your location then choose your best Sharing PG which suits your budget. The facilities which is needed are Geyser, washing machine, locker, regular cleaning, RO water, security guard, CCTV, and TV these are the basic facilities required for your daily needs. Other than this we provide you top-class facilities like GYM, Indoor Games and Lift. These are the facilities that GRUBSTAY provides for your safety and daily needs. You are at the right place in choosing your best PG accommodation rooms.</small><br>
         </div>
       </div>
+      <div *ngIf="loaderStatus" class="row">
+        <div *ngFor="let temp of tempList">
+          <div style="padding:20px;">
+          <mat-card class="example-card mb-3">
+            <img mat-card-image class="skeleton">
+            <div class="row">
+              <div class="col-md-12 col-sm-12 col-xs-12 card_content">
+                <div class="pg-content-d">
+                  <div class="skeleton sk-heading"></div>
+                  <div class="skeleton sk-text"></div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-3 d-flex justify-content-start">
+                  <div class="gender-d" style="margin-left:3px;">
+                    <div class="both-d d-flex justify-content-around">
+                      <div class="male-d mr-10">
+                        <div class="skeleton sk-gender"></div>
+                      </div>
+                      <div style="margin-left: 10px;" class="female-d">
+                        <div class="skeleton sk-gender"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-9 d-flex justify-content-end p-0">
+                  <div class="skeleton sk-rating"></div>
+                </div>
+              </div>
+            </div>
+            <mat-card-actions style="margin-bottom: 6px !important;">
+              <div class="price-sec-d" style="padding:7px;">
+                <div class="price-d">
+                  <div class="skeleton sk-pricing" style="margin-bottom: 3px;"></div>
+                  <div class="skeleton sk-text"></div>
+                </div>
+                <div class="contact-d">
+                  <div class="skeleton sk-btn btn"></div>
+                  <div class="skeleton sk-btn btn" style="margin-left: 2px;"></div>
+                </div>
+              </div>
+
+            </mat-card-actions>
+          </mat-card>
+        </div>
+        </div> 
+      </div>
       <div *ngFor="let pg of pgArray">
         <div style="padding:20px;">
           <mat-card class="example-card">
@@ -391,13 +438,58 @@
             <div class="container" style="overflow: scroll; height: 80vh; overflow-x: hidden;">
               <div class="jumbotron jumbotron-fluid">
                 <div class="container jumb-content">
-                  <small><b>GRUBSTAY</b> shows you the best PGs near to your work location or college area's, you will get well maintained and furnished PGs with all the facilities at an affordable prices. If you are new to the city now you don't need to worry about your stay in PG. To know the details of PGs we came up with a solution, we will provide you the list of best PGs in hsr layout near to your work location or college area and provide you the list to top-class facilities PGs which is affordable.</small>
+                  <small><b>GRUBSTAY</b> shows you the best PGs near to your work location or college area's, you will get well maintained and furnished PGs with all the facilities at an affordable prices. If you are new to the city now you don't need to worry about your stay in PG. To know the details of PGs we came up with a solution, we will provide you the list of best {{stayType}}s in {{covertToCamelCase(stayTitle)}} near to your work location or college area and provide you the list to top-class facilities PGs which is affordable.</small>
                   <br><br>
                   <small>How to choose the best sharing PG and what are the required facilities?</small><br>
                   <small>Pick your location then choose your best Sharing PG which suits your budget. The facilities which is needed are Geyser, washing machine, locker, regular cleaning, RO water, security guard, CCTV, and TV these are the basic facilities required for your daily needs. Other than this we provide you top-class facilities like GYM, Indoor Games and Lift. These are the facilities that GRUBSTAY provides for your safety and daily needs. You are at the right place in choosing your best PG accommodation rooms.</small><br><br>
                 </div>
               </div>
               <div class="row" style="margin-left:20px;">
+                <div *ngIf="loaderStatus" class="row">
+                  <div class="col-md-5 col-sm-6 col-xs-12 mt-1" *ngFor="let temp of tempList">
+                    <mat-card class="example-card mb-3">
+                      <img mat-card-image class="skeleton">
+                      <div class="row">
+                        <div class="col-md-12 col-sm-12 col-xs-12 card_content">
+                          <div class="pg-content-d">
+                            <div class="skeleton sk-heading"></div>
+                            <div class="skeleton sk-text"></div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-3 d-flex justify-content-start">
+                            <div class="gender-d" style="margin-left:3px;">
+                              <div class="both-d d-flex justify-content-around">
+                                <div class="male-d mr-10">
+                                  <div class="skeleton sk-gender"></div>
+                                </div>
+                                <div style="margin-left: 10px;" class="female-d">
+                                  <div class="skeleton sk-gender"></div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-9 d-flex justify-content-end p-0">
+                            <div class="skeleton sk-rating"></div>
+                          </div>
+                        </div>
+                      </div>
+                      <mat-card-actions style="margin-bottom: 6px !important;">
+                        <div class="price-sec-d" style="padding:7px;">
+                          <div class="price-d">
+                            <div class="skeleton sk-pricing" style="margin-bottom: 3px;"></div>
+                            <div class="skeleton sk-text"></div>
+                          </div>
+                          <div class="contact-d">
+                            <div class="skeleton sk-btn btn"></div>
+                            <div class="skeleton sk-btn btn" style="margin-left: 2px;"></div>
+                          </div>
+                        </div>
+  
+                      </mat-card-actions>
+                    </mat-card>
+                  </div> 
+                </div>
                 <div class="col-md-5 col-sm-6 col-xs-12 mt-1" *ngFor="let pg of pgArray">
                   <mat-card class="example-card mb-3">
                     <img mat-card-image [routerLink]="['/pg/'+pg.cityName+'/'+pg.locationName+'/'+pg.subLocationName+'/'+pg.urlPgName]" routerLinkActive="router-link-active"

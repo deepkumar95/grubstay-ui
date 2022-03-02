@@ -98,6 +98,9 @@ export class StayPgComponent implements OnInit {
     { id: 'st2', name: 'Low to High', value: 'asc', checkedStatus: false },
   ]
 
+  loaderStatus:boolean = false;
+  tempList = [1,1,1,1,1,1,1]
+
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
       map(result => result.matches)
@@ -172,9 +175,11 @@ export class StayPgComponent implements OnInit {
     this.setTitle('PG in '+this.covertToCamelCase(this.stayTitle));
   }
   public loadAllPGDataInCity(cityName) {
+    this.loaderStatus = true;
     this._pgService.loadAllPGDataInCity(cityName).subscribe((response: any) => {
       if (response.error && response.error != '') {
         this._snackBarService.successSnackBar("Something went wrong!");
+        this.loaderStatus = false;
         return;
       }
       else {
@@ -215,23 +220,28 @@ export class StayPgComponent implements OnInit {
             //this._snackBarService.errorSnackBar("No Record Found!")
             this.ready = totalPg > 0 ? 'hide' : 'show';
           }
+          this.loaderStatus = false;
         }
         else {
           //this._snackBarService.errorSnackBar("No Record Found!");
           this.ready = totalPg > 0 ? 'hide' : 'show';
+          this.loaderStatus = false;
         } 
       }
     },
       (error) => {
         this._snackBarService.errorSnackBar("Something went wrong!");
+        this.loaderStatus = false;
       });
   }
 
   private loadPGData(obj: any) {
     var self = this;
+    this.loaderStatus = true;
     self._pgService.getPGDataWithFilter(obj).subscribe((response: any) => {
       if (response.error && response.error != '') {
         this._snackBarService.errorSnackBar("Something went wrong!");
+        this.loaderStatus = false;
         return;
       }
       else {
@@ -272,15 +282,19 @@ export class StayPgComponent implements OnInit {
               this.pgData.push(data);
             });
             this.ready = responseData.length > 0 ? 'hide' : 'show';
+            this.loaderStatus = false;
           }
+          this.loaderStatus = false;
         }
         else {
           this._snackBarService.errorSnackBar("Something went wrong!");
+          this.loaderStatus = false;
           return;
         }
       }
     }, (error: any) => {
       this._snackBarService.errorSnackBar("Something went wrong!");
+      this.loaderStatus = false;
       return;
     })
   }
@@ -563,9 +577,11 @@ export class StayPgComponent implements OnInit {
   }
 
   public getPgUsingSubLocationLocationAndCity(datas:any){
+    this.loaderStatus = true;
     this._pgService.getPgUsingSubLocationLocationAndCity(datas).subscribe((response: any) => {
       if (response.error && response.error != '') {
         this._snackBarService.successSnackBar("Something went wrong!");
+        this.loaderStatus = false;
         return;
       }
       else {
@@ -599,22 +615,27 @@ export class StayPgComponent implements OnInit {
                 this.pgData.push(data);
               });
               this.ready = responseData.length > 0 ? 'hide' : 'show';
+              this.loaderStatus = false;
             }
 
           }
           else {
             //this._snackBarService.successSnackBar("No Record Found!")
             this.ready = totalPg > 0 ? 'hide' : 'show';
+            this.loaderStatus = false;
           }
+          this.loaderStatus = false;
         }
         else {
           //this._snackBarService.errorSnackBar("No Record Found!");
           this.ready = totalPg > 0 ? 'hide' : 'show';
+          this.loaderStatus = false;
         } 
       }
     },
       (error) => {
         this._snackBarService.errorSnackBar("Something went wrong!");
+        this.loaderStatus = false;
       });
   }
 
