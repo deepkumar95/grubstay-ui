@@ -6,13 +6,21 @@
         <span [routerLink]="['']" class="logo">GRUBSTAY</span>
       </mat-toolbar>
       <mat-list role="list">
-        <div *ngIf="isLoggedIn && user && user.username!='GUEST'">
-          <mat-list-item><a mat-button class="text-black">{{user.username}}</a></mat-list-item>
-          <mat-list-item><a mat-flat-button color="accent" (click)="logout()">Logout</a></mat-list-item>
-        </div>
-        <div *ngIf="isLoggedIn && user && user.username=='GUEST'">
-          <mat-list-item><a mat-button class="text-black" (click)="openLoginDialog()">Login</a></mat-list-item>
-          <mat-list-item><a mat-flat-button color="accent" (click)="openSignUpDialog()">Sign Up</a></mat-list-item>
+        <div class="container">
+          <div class="mobile-menus">
+            <mat-list-item><a (click)="goTo('home')" mat-button class="text-black">Home</a></mat-list-item>
+            <mat-list-item><a (click)="goTo('about')" mat-button class="text-black">About</a></mat-list-item>
+            <mat-list-item><a (click)="goTo('guest_policy')" mat-button class="text-black">Guest Policy</a></mat-list-item>
+          </div>
+          <div *ngIf="isLoggedIn && user && user.username!='GUEST'">
+            <mat-list-item *ngIf="user.username!='admin'"><a mat-button (click)="goTo('raise_queries')" class="text-black">Raise Queries ?</a></mat-list-item>
+            <mat-list-item><a mat-button class="text-black">{{user.username}}</a></mat-list-item>
+            <mat-list-item><a mat-flat-button color="accent" (click)="logout()">Logout</a></mat-list-item>
+          </div>
+          <div *ngIf="isLoggedIn && user && user.username=='GUEST'">
+            <mat-list-item><a mat-button class="text-black" (click)="openLoginDialog()">Login</a></mat-list-item>
+            <mat-list-item><a mat-flat-button color="accent" (click)="openSignUpDialog()">Sign Up</a></mat-list-item>
+          </div>
         </div>
       </mat-list>
     </mat-sidenav>
@@ -23,10 +31,17 @@
           <span style="user-select: none;"><a class="call d-inline-flex align-items-center theme-color" href="tel:+918050163861"><i class="fa fa-phone" aria-hidden="true"></i>&nbsp;<small>+91-8050163861</small></a></span>
         <div *ngIf="!(isHandset$ | async)">
           <div *ngIf="isLoggedIn && user && user.username!='GUEST'">
+            <a (click)="goTo('home')" mat-button class="text-black">Home</a>
+            <a (click)="goTo('about')" mat-button class="text-black">About</a>
+            <a (click)="goTo('guest_policy')" mat-button class="text-black">Guest Policy</a>
+            <a *ngIf="user.username!='admin'" mat-button (click)="goTo('raise_queries')" class="text-black">Raise Queries ?</a>
             <a mat-button (click)="redirectTo()">{{user.username}}</a>&nbsp;
             <a mat-flat-button color="accent" (click)="logout()">Logout</a>
           </div>
           <div *ngIf="isLoggedIn && user && user.username=='GUEST'">
+            <a (click)="goTo('home')" mat-button class="text-black">Home</a>
+            <a (click)="goTo('about')" mat-button class="text-black">About</a>
+            <a (click)="goTo('guest_policy')" mat-button class="text-black">Guest Policy</a>
             <a mat-button (click)="openLoginDialog()">Login</a>&nbsp;
             <a mat-flat-button color="accent" (click)="openSignUpDialog()">Sign Up</a>
           </div>

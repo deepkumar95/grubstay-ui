@@ -23,6 +23,10 @@ const routes: Routes = [
     component:HomeComponent
   },
   {
+    path:"home",
+    redirectTo:''
+  },
+  {
     path:"pg/:cityName",
     component:StayPgComponent
   },
@@ -93,6 +97,13 @@ const routes: Routes = [
   {
     path:'view-form-enquiries',
     component: ViewFormEquiriesComponent
+  },
+  { path: 'about', loadChildren: () => import('./about/about.module').then(m => m.AboutModule) },
+  { path: 'guest-policy', loadChildren: () => import('./guest-policy/guest-policy.module').then(m => m.GuestPolicyModule) },
+  { path: 'raise-query', loadChildren: () => import('./raise-query/raise-query.module').then(m => m.RaiseQueryModule) },
+  {
+    path:'**',
+    redirectTo:''
   }
 ];
 

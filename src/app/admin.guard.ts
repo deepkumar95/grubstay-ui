@@ -17,7 +17,7 @@ export class AdminGuard implements CanActivate {
     if(this._login.isLoggedIn() && (this._login.getUserRole()== 'ADMIN' || this._login.getUserRole()=='SUB-ADMIN')){
       return true;
     }
-     this._shared.redirectTo('/');
+     this._shared.redirectTo('/home');
      return false;
   } 
   

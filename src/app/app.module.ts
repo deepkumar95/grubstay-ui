@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NavbarComponent } from './components/navbar/navbar.component';
-import { FooterComponent } from './components/footer/footer.component';
+
 import { HomeComponent } from './pages/home/home.component';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatButtonModule} from '@angular/material/button';
@@ -73,6 +73,7 @@ import { ViewFormEquiriesComponent } from './pages/admin-dashboard/admin-compone
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatSortModule} from '@angular/material/sort';
 import { MatTableExporterModule } from 'mat-table-exporter';
+import { SharedModule } from './shared/shared.module';
 
 const ngxUiLoaderConfig:NgxUiLoaderConfig =
   {
@@ -110,7 +111,6 @@ const ngxUiLoaderConfig:NgxUiLoaderConfig =
   declarations: [
     AppComponent,
     NavbarComponent,
-    FooterComponent,
     HomeComponent,
     LoginDialogComponent,
     SignupDialogComponent,
@@ -143,7 +143,7 @@ const ngxUiLoaderConfig:NgxUiLoaderConfig =
     AdminDialogComponent,
     CallbackComponent,
     StayFormComponent,
-    ViewFormEquiriesComponent
+    ViewFormEquiriesComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
@@ -184,7 +184,8 @@ const ngxUiLoaderConfig:NgxUiLoaderConfig =
     MatProgressBarModule,
     MatPaginatorModule,
     MatSortModule,
-    MatTableExporterModule
+    MatTableExporterModule,
+    SharedModule
   ],
   providers: [],
   bootstrap: [AppComponent]

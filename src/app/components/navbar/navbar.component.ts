@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -7,7 +7,7 @@ import { LoginDialogComponent } from '../login-dialog/login-dialog.component';
 import { SignupDialogComponent } from '../signup-dialog/signup-dialog.component';
 import { SharedService } from 'src/app/services/helper/shared.service';
 import { LoginService } from 'src/app/services/login.service';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+import { MatDrawer } from '@angular/material/sidenav';
 
 @Component({
   selector: 'app-navbar',
@@ -15,6 +15,7 @@ import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
+  @ViewChild('drawer') drawer : MatDrawer;
 
   isLoggedIn = false;
   user:any = {};
@@ -37,6 +38,7 @@ export class NavbarComponent implements OnInit {
   }
 
   openLoginDialog(): void {
+    this.drawer.close();
     const dialogRef = this.dialog.open(LoginDialogComponent, {
       width: '440px',
       height: '500px',
@@ -45,6 +47,7 @@ export class NavbarComponent implements OnInit {
   }
 
   openSignUpDialog(): void {
+    this.drawer.close();
     const dialogRef = this.dialog.open(SignupDialogComponent, {
       width: '500px',
       height: '600px',
@@ -53,15 +56,34 @@ export class NavbarComponent implements OnInit {
   }
   
   logout(){
-    this._login.logout();
-    window.location.reload();
+    let status = this._login.logout();
+    if(status){window.location.reload();}
   }
 
   redirectTo(){
     if(this._login.getUserRole() == 'ADMIN' || this._login.getUserRole() == 'SUB-ADMIN'){
       this._shared.redirectTo('/admin');
     }else{
-      this._shared.redirectTo('/');
+      return;
+    }
+  }
+
+  goTo(item:string){
+    if(item === 'home'){
+      this.drawer.close();
+      this._shared.redirectTo('/home');
+    }
+    if(item === 'guest_policy'){
+      this.drawer.close();
+      this._shared.redirectTo('/guest-policy');
+    }
+    if(item === 'about'){
+      this.drawer.close();
+      this._shared.redirectTo('/about');
+    }
+    if(item === 'raise_queries'){
+      this.drawer.close();
+      this._shared.redirectTo('raise-query');
     }
   }
 

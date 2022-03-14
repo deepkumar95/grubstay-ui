@@ -51,7 +51,7 @@ export class LoginService {
   public logout() {
     localStorage.removeItem("user");
     this.setDefaultUser();
-    this._shared.redirectTo('');
+    this._shared.redirectTo('/home');
     return true;
   }
 }
