@@ -37,6 +37,7 @@ export class PgOpDialogComponent implements OnInit {
     singleMemPgPrc: '',
     doubleMemPgPrc: '',
     tripleMemPgPrc: '',
+    fourMemPgPrc: '',
     distFromSubLoc: '',
     operation: '',
     cityId: '',
@@ -114,7 +115,7 @@ export class PgOpDialogComponent implements OnInit {
       this._snackBar.errorSnackBar('Atleast one stay plan should be selected !');
       return;
     }
-    if (self.pg.singleMemPgPrc == '' && self.pg.doubleMemPgPrc == '' && self.pg.tripleMemPgPrc == '') {
+    if (!self.pg.singleMemPgPrc && !self.pg.doubleMemPgPrc && !self.pg.tripleMemPgPrc && !self.pg.fourMemPgPrc) {
       this._snackBar.errorSnackBar('Atleast one occupency should given!');
       return;
     }
@@ -178,6 +179,7 @@ export class PgOpDialogComponent implements OnInit {
     pgForm.append('singleMemPgPrc', self.pg.singleMemPgPrc ? self.pg.singleMemPgPrc : 0);
     pgForm.append('doubleMemPgPrc', self.pg.doubleMemPgPrc ? self.pg.doubleMemPgPrc : 0);
     pgForm.append('tripleMemPgPrc', self.pg.tripleMemPgPrc ? self.pg.tripleMemPgPrc : 0);
+    pgForm.append('fourMemPgPrc', self.pg.fourMemPgPrc ? self.pg.fourMemPgPrc : 0);
     pgForm.append('distFromSubLoc', self.pg.distFromSubLoc ? self.pg.distFromSubLoc : 0);
     pgForm.append('status', self.pg.status);
     if (self.pg.operation == 'edit') {
