@@ -37,12 +37,11 @@
         <div class="col-md-4 col-sm-6 col-xs-12 mt-20 text-center">
           <span class="logo-sm">Company Information</span>
           <ul class="list-unstyled" style="margin-top:20px;">
-            <li>About us</li>
-            <li>Contact us</li>
+            <li [routerLink]="['/about']">About us</li>
             <li>Careers</li>
             <li>Blog</li>
             <li>FAQ's</li>
-            <li>Privacy Policy</li>
+            <li [routerLink]="['/guest-policy']">Guest Policy</li>
             <li><a style="text-decoration: none;color: inherit;" href="https://grubstay.com/assets/sitemap.xml" target="_blank">Sitemaps</a></li>
           </ul>
         </div>
@@ -117,9 +116,9 @@
         <h6>Company Information</h6>
         <small>
           <p class="footer-links">
-            <a href="#">About us</a> | <a href="#">Contact us</a> | <a href="#">Careers</a> | <a href="#">Blog</a> |
+            <a [routerLink]="['/about']">About us</a> | <a href="#">Careers</a> | <a href="#">Blog</a> |
             <br>
-            <a href="#">FAQ's</a> | <a href="#">Privacy Policy</a> | <a style="text-decoration: none;color: inherit;" href="https://grubstay.com/assets/sitemap.xml" target="_blank">Sitemaps</a>
+            <a href="#">FAQ's</a> | <a [routerLink]="['/guest-policy']">Guest Policy</a> | <a style="text-decoration: none;color: inherit;" href="https://grubstay.com/assets/sitemap.xml" target="_blank">Sitemaps</a>
           </p>
         </small>
       </div>

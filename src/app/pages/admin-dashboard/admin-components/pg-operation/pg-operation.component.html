@@ -65,11 +65,17 @@
                     <td mat-cell *matCellDef="let pg"> {{pg.tripleMemPgPrc}} </td>
                 </ng-container>
 
+                 <!--  Four member price column-->
+                 <ng-container matColumnDef="fourMemPgPrc">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> F.M Price </th>
+                    <td mat-cell *matCellDef="let pg"> {{pg.fourMemPgPrc}} </td>
+                </ng-container>
+
                 <!--  Distance form sub location column-->
-                <ng-container matColumnDef="distFromSubLoc">
+                <!-- <ng-container matColumnDef="distFromSubLoc">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> Distance </th>
                     <td mat-cell *matCellDef="let pg"> {{pg.distFromSubLoc}} </td>
-                </ng-container>
+                </ng-container> -->
 
                 <!--  Service column-->
                 <ng-container matColumnDef="service">

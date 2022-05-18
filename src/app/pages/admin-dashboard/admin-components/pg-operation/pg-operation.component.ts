@@ -22,7 +22,7 @@ export interface PG {
   singleMemPgPrc:string;
   doubleMemPgPrc: string;
   tripleMemPgPrc: string;
-  distFromSubLoc:string;
+  fourMemPgPrc: string;
   operation:string;
   subLocation:object;
 }
@@ -35,7 +35,7 @@ export interface PG {
 export class PgOperationComponent implements OnInit,AfterViewInit {
 
   PG_DATA:PG[]=[];
-  displayedColumns: string[] = ['actions', 'subLocation', 'pgName', 'pgAddress','singleMemPgPrc','doubleMemPgPrc','tripleMemPgPrc','distFromSubLoc','service'];
+  displayedColumns: string[] = ['actions', 'subLocation', 'pgName', 'pgAddress','singleMemPgPrc','doubleMemPgPrc','tripleMemPgPrc','fourMemPgPrc','service'];
   dataSource = new MatTableDataSource(this.PG_DATA);
 
   @ViewChild(MatPaginator) paginator: MatPaginator;

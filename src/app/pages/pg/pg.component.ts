@@ -19,6 +19,8 @@ export interface PG {
   pgDoublePriceAvail: boolean,
   pgTripleMemberPrice: number,
   pgTriplePriceAvail: boolean,
+  pgFourMemberPrice: number,
+  pgFourPriceAvail: boolean,
   pgAbout: string,
   pgGender:string,
   pgPrice: number
@@ -67,6 +69,8 @@ export class PgComponent implements OnInit {
     pgDoublePriceAvail: false,
     pgTripleMemberPrice: 0,
     pgTriplePriceAvail: false,
+    pgFourMemberPrice: 0,
+    pgFourPriceAvail: false,
     pgAbout: '',
     pgGender:'',
     pgPrice: 0
@@ -206,6 +210,10 @@ export class PgComponent implements OnInit {
             if (pgData.tripleMemPgPrc && pgData.tripleMemPgPrc != 0) {
               this.pgDetails.pgTripleMemberPrice = pgData.tripleMemPgPrc;
               this.pgDetails.pgTriplePriceAvail = true;
+            }
+            if (pgData.fourMemPgPrc && pgData.fourMemPgPrc != 0) {
+              this.pgDetails.pgFourMemberPrice = pgData.fourMemPgPrc;
+              this.pgDetails.pgFourPriceAvail = true;
             }
           }
           if (amenitiesData) {
