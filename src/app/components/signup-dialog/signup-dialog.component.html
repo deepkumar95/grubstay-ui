@@ -54,7 +54,14 @@
                             <mat-form-field appearance="standard" class="full-width" style="margin-top:12px;">
                                 <mat-label>Password*</mat-label>
                                 <input id="password" matInput type='password' autocomplete="new_password" name='password' [(ngModel)]="user.password"
-                                    placeholder="Placeholder" (blur)="checkPassword(user.password)">
+                                    placeholder="Placeholder" (blur)="checkPasswordStrength(user.password)">
+                            </mat-form-field>
+
+                            <!-- password name field -->
+                            <mat-form-field appearance="standard" class="full-width" style="margin-top:12px;">
+                                <mat-label>Confirm Password*</mat-label>
+                                <input id="confirmPassword" matInput type='password' autocomplete="confirm_password" name='confirmPassword' [(ngModel)]="user.confirmPassword"
+                                    placeholder="Placeholder" (blur)="checkPasswordStrength(user.confirmPassword)">
                             </mat-form-field>
             
                             <!-- email id field -->

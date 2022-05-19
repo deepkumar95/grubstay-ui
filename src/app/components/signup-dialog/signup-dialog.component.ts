@@ -19,6 +19,7 @@ export class SignupDialogComponent implements OnInit {
     username:'',
     email:'',
     password:'',
+    confirmPassword:'',
     dob:'',
     gender:''
   }
@@ -39,6 +40,7 @@ export class SignupDialogComponent implements OnInit {
       self.user.firstName = firstLastNameArray[0];
       self.user.lastName = firstLastNameArray[firstLastNameArray.length-1];
       delete self.user.fullName;
+      delete self.user.confirmPassword;
       self._user.createUser(self.user).subscribe((response:any)=>{
         if(response.error && response.error != ''){
           self.snackBar.errorSnackBar("Signup failed.. try again !");
@@ -97,8 +99,9 @@ export class SignupDialogComponent implements OnInit {
     // }
     self.checkPhone(self.user.phone);
     //self.checkWhatsapp(self.user.whatsapp);
-    self.checkPassword(self.user.password);
+    self.checkPasswordStrength(self.user.password);
     self.checkUsername(self.user.username);
+    self.matchPasswordConfirmPassword(self.user.password, self.user.confirmPassword);
     return this.formIsValid;
   }
 
@@ -124,7 +127,7 @@ export class SignupDialogComponent implements OnInit {
     }
   }
 
-  checkPassword(password){
+  checkPasswordStrength(password){
     if(password){
       if(password.length < 5){
         this.snackBar.errorSnackBar("Password must be at least 4 characters in length");
@@ -132,6 +135,15 @@ export class SignupDialogComponent implements OnInit {
         this.formIsValid = false;
         return;
       }
+    }
+  }
+
+  matchPasswordConfirmPassword(password, confirmPassword){
+    if(password!=confirmPassword){
+      this.snackBar.errorSnackBar("Password and Confirm Password must be same!");
+      document.getElementById('confirmPassword').focus();
+      this.formIsValid = false;
+      return;
     }
   }
 
