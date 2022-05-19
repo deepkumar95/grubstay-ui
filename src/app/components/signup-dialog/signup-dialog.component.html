@@ -14,17 +14,17 @@
                         <form (ngSubmit)="register()">
                             <!-- first name field -->
                             <mat-form-field appearance="standard" class="full-width">
-                                <mat-label>First name*</mat-label>
-                                <input matInput type='text' autocomplete="off" name='firstName' [(ngModel)]="user.firstName"
-                                    placeholder="Enter your first name" onkeypress="return (event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122)">
+                                <mat-label>Full name*</mat-label>
+                                <input matInput type='text' autocomplete="off" name='firstName' [(ngModel)]="user.fullName"
+                                    placeholder="Enter your full name">
                             </mat-form-field>
                             <!-- lastName field -->
-                            <mat-form-field appearance="standard" class="full-width">
+                            <!-- <mat-form-field appearance="standard" class="full-width">
                                 <mat-label>Last name*</mat-label>
                                 <input matInput type='text' autocomplete="last_name" name='lastName' [(ngModel)]="user.lastName"
                                     placeholder="Entery your lastname" onkeypress="return (event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122)">
                                 <mat-hint>Make sure your name matches to your government ID card.</mat-hint>
-                            </mat-form-field><br>
+                            </mat-form-field><br> -->
 
                             <!-- phone field -->
                             <mat-form-field appearance="standard" class="full-width" style="margin-top:12px;">
@@ -34,13 +34,13 @@
                             </mat-form-field>
 
                             <!-- whatsapp field -->
-                            <mat-form-field appearance="standard" class="full-width">
+                            <!-- <mat-form-field appearance="standard" class="full-width">
                                 <mat-label>Whatsapp number</mat-label>
                                 <input id="whatsapp" matInput type='text' autocomplete="new_whatsapp_number" name='whatsapp'
                                     [(ngModel)]="user.whatsapp" placeholder="optional" (blur)="checkWhatsapp(user.whatsapp)">
                                 <mat-hint>Make sure you are putting correct number to receive updates via call or text
                                     or WhatsApp</mat-hint>
-                            </mat-form-field>
+                            </mat-form-field> -->
 
                             <!-- email field -->
                             <mat-form-field appearance="standard" class="full-width" style="margin-top:16px;">
@@ -50,7 +50,7 @@
                                 <mat-hint>*you can use username for login</mat-hint>
                             </mat-form-field>
 
-                            <!-- First name field -->
+                            <!-- password name field -->
                             <mat-form-field appearance="standard" class="full-width" style="margin-top:12px;">
                                 <mat-label>Password*</mat-label>
                                 <input id="password" matInput type='password' autocomplete="new_password" name='password' [(ngModel)]="user.password"
@@ -58,14 +58,14 @@
                             </mat-form-field>
             
                             <!-- email id field -->
-                            <mat-form-field appearance="standard" class="full-width">
+                            <!-- <mat-form-field appearance="standard" class="full-width">
                                 <mat-label>Email</mat-label>
                                 <input matInput type='email' autocomplete="new_user-email" name='email' [(ngModel)]="user.email"
                                     placeholder="Email | Optional">
-                            </mat-form-field>
+                            </mat-form-field> -->
 
                             <!-- date of birth field -->
-                            <div class="row">
+                            <!-- <div class="row">
                                 <div class="col-6">
                                     <mat-form-field appearance="standard" class="full-width">
                                         <mat-label>Choose a DOB*</mat-label>
@@ -83,7 +83,7 @@
                                           </mat-select>
                                       </mat-form-field>
                                 </div>
-                            </div>
+                            </div> -->
                             
                             <h6 class="text-center" style="margin-top:8px; font-size:12px;">You will receive updates
                                 and offer's on your mail</h6>

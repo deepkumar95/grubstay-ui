@@ -11,6 +11,7 @@ import { UserServiceService } from 'src/app/services/user-service.service';
 export class SignupDialogComponent implements OnInit {
 
   user={
+    fullName:'',
     firstName:'',
     lastName:'',
     phone:'',
@@ -33,7 +34,11 @@ export class SignupDialogComponent implements OnInit {
     let self=this;
     let check = self.checkForm();
     if(self.formIsValid){
-      self.user.dob = self.formatDate(self.user.dob);
+      // self.user.dob = self.formatDate(self.user.dob);
+      let firstLastNameArray=self.user.fullName.trim().split(' ');
+      self.user.firstName = firstLastNameArray[0];
+      self.user.lastName = firstLastNameArray[firstLastNameArray.length-1];
+      delete self.user.fullName;
       self._user.createUser(self.user).subscribe((response:any)=>{
         if(response.error && response.error != ''){
           self.snackBar.errorSnackBar("Signup failed.. try again !");
@@ -55,16 +60,16 @@ export class SignupDialogComponent implements OnInit {
   checkForm(){
     var self = this;
     this.formIsValid = true;
-    if(!self.user.firstName && self.user.firstName == ''){
-      self.snackBar.errorSnackBar("First Name is required !");
+    if(!self.user.fullName && self.user.fullName == ''){
+      self.snackBar.errorSnackBar("FullName Name is required !");
       this.formIsValid = false;
       return;
     }
-    if(!self.user.lastName && self.user.lastName == ''){
-      self.snackBar.errorSnackBar("Last Name is required !");
-      this.formIsValid = false;
-      return;
-    }
+    // if(!self.user.lastName && self.user.lastName == ''){
+    //   self.snackBar.errorSnackBar("Last Name is required !");
+    //   this.formIsValid = false;
+    //   return;
+    // }
     if(self.user.phone=='' && !self.user.phone){
       self.snackBar.errorSnackBar("Phone number is required !");
       this.formIsValid = false;
@@ -80,18 +85,18 @@ export class SignupDialogComponent implements OnInit {
       this.formIsValid = false;
       return;
     }
-    if(!self.user.dob && self.user.dob == ''){
-      self.snackBar.errorSnackBar("Date of Birth is required !");
-      this.formIsValid = false;
-      return;
-    }
-    if(self.user.gender==''){
-      self.snackBar.errorSnackBar("please select gender..!");
-      this.formIsValid = false;
-      return;
-    }
+    // if(!self.user.dob && self.user.dob == ''){
+    //   self.snackBar.errorSnackBar("Date of Birth is required !");
+    //   this.formIsValid = false;
+    //   return;
+    // }
+    // if(self.user.gender==''){
+    //   self.snackBar.errorSnackBar("please select gender..!");
+    //   this.formIsValid = false;
+    //   return;
+    // }
     self.checkPhone(self.user.phone);
-    self.checkWhatsapp(self.user.whatsapp);
+    //self.checkWhatsapp(self.user.whatsapp);
     self.checkPassword(self.user.password);
     self.checkUsername(self.user.username);
     return this.formIsValid;
