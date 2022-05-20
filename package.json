@@ -28,6 +28,7 @@
     "jquery": "^3.6.0",
     "lodash": "^4.17.21",
     "mat-table-exporter": "^10.2.4",
+    "moment": "^2.29.3",
     "ng-lazyload-image": "^9.1.0",
     "ngx-owl-carousel-o": "^5.1.1",
     "ngx-ui-loader": "^11.0.0",

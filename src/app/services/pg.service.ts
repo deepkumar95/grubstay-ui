@@ -54,4 +54,8 @@ export class PgService {
   public getPgUsingSubLocationLocationAndCity(data:any){
     return this._http.get(this.pgBaseUrl+"getPgUsingSubLocationLocationAndCity/"+data.cityName+"/"+data.locationName+"/"+data.subLocationName);
   }
+
+  public reservePgNow(data:any){
+    return this._http.post(this.pgBaseUrl+"reservePg", data);
+  }
 }

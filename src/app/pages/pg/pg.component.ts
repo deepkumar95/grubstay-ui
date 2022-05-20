@@ -7,7 +7,7 @@ import { map } from 'rxjs/operators';
 import { PgService } from '../../services/pg.service';
 import { CustomSnackBarService } from '../../services/helper/custom-snack-bar.service';
 import { DomSanitizer, Title } from '@angular/platform-browser';
-import { NumberFormatStyle } from '@angular/common';
+import * as moment from 'moment';
 
 export interface PG {
   pgId: string,
@@ -58,6 +58,20 @@ export class PgComponent implements OnInit {
   pgId: any;
   fav: boolean = true;
   whatsappLink:any = '';
+  minDate = moment(new Date()).format("YYYY-MM-DD");
+  maxDate = moment(new Date()).add(5,"days").format("YYYY-MM-DD");
+  reserve:any = {
+    fullName:"",
+    phoneNo:"",
+    email:"",
+    bookingDate:this.minDate,
+    reserveDate:"",
+    sharingType:"",
+    pgName:"",
+    pgId:""
+  };
+
+  
 
   pgDetails: PG = {
     pgId: '',
@@ -178,6 +192,8 @@ export class PgComponent implements OnInit {
       this.loadPgGallery(data);
       this.loadLandMark(data);
     }
+    console.log(this.minDate);
+    console.log(this.maxDate);
   }
 
   public loadPgData(pgId) {
@@ -310,6 +326,44 @@ export class PgComponent implements OnInit {
 
   public setTitle(newTitle:string){
     this.title.setTitle(newTitle);
+  }
+
+  public focusReservePg(){
+    var elem = document.getElementById("reservePg");
+    elem.scrollIntoView({ behavior: 'smooth', block: 'center' })
+  }
+
+  public reservePg(){
+    if(this.reserve.fullName && this.reserve.email && this.reserve.phoneNo && this.reserve.sharingType 
+      && this.reserve.reserveDate){
+        if(this.reserve.phoneNo.length!="10"){
+          this._snackBarService.errorSnackBar("Mobile number must be of 10 digit!");
+          return;
+        }
+        this.reserve.pgName = this.pgDetails.pgName;
+        this.reserve.pgId = this.pgDetails.pgId;
+        this._pgService.reservePgNow(this.reserve).subscribe((response: any) => {
+          if (response.error && response.error != '') {
+            this._snackBarService.errorSnackBar(response.error);
+            return;
+          }
+          else {
+            let total = response.total;
+            if (total > 0) {
+              let responseData: any = response.data;
+              if (responseData) {
+                console.log("booking confirmed... redirecting to order status page")
+              }
+            }
+          }
+        },
+          (error) => {
+            this._snackBarService.errorSnackBar(error);
+          })
+      }else{
+        this._snackBarService.errorSnackBar("All fields are required!");
+        return;
+      }
   }
 
 }
