@@ -16,101 +16,106 @@ import { AdminGuard } from './admin.guard';
 import { CallbackComponent } from './pages/admin-dashboard/admin-components/callback/callback.component';
 import { StayFormComponent } from './components/stay-form/stay-form.component';
 import { ViewFormEquiriesComponent } from './pages/admin-dashboard/admin-components/view-form-equiries/view-form-equiries.component';
+import { BookingComponent } from './pages/admin-dashboard/admin-components/booking-components/booking.component';
 
 const routes: Routes = [
   {
-    path:"",
-    component:HomeComponent
+    path: "",
+    component: HomeComponent
   },
   {
-    path:"home",
-    redirectTo:''
+    path: "home",
+    redirectTo: ''
   },
   {
-    path:"pg/:cityName",
-    component:StayPgComponent
+    path: "pg/:cityName",
+    component: StayPgComponent
   },
   {
-    path:"pg/:cityName/:locationName",
-    component:StayPgComponent
+    path: "pg/:cityName/:locationName",
+    component: StayPgComponent
   },
   {
-    path:"pg/:cityName/:locationName/:subLocationName",
-    component:StayPgComponent
+    path: "pg/:cityName/:locationName/:subLocationName",
+    component: StayPgComponent
   },
   {
-    path:"pg/:cityName/:locationName/:subLocationName/:pgName",
-    component:PgComponent
+    path: "pg/:cityName/:locationName/:subLocationName/:pgName",
+    component: PgComponent
   },
   {
-    path:"search-stay",
-    component:SearchStayComponent,
-    pathMatch:'full'
+    path: "search-stay",
+    component: SearchStayComponent,
+    pathMatch: 'full'
   },
   {
-    path:"admin",
-    component:AdminDashboardComponent,
-    canActivate:[AdminGuard],
-    children:[
+    path: "admin",
+    component: AdminDashboardComponent,
+    canActivate: [AdminGuard],
+    children: [
       {
-        path:'',
-        component:AdminMainComponent
+        path: '',
+        component: AdminMainComponent
       },
       {
-        path:'callback',
-        component:CallbackComponent
+        path: 'callback',
+        component: CallbackComponent
       },
       {
-        path:'pg',
-        component:PgOperationComponent
+        path: 'pg',
+        component: PgOperationComponent
       },
       {
-        path:'view-pg',
-        component:PgOperationComponent
+        path: 'view-pg',
+        component: PgOperationComponent
       },
       {
-        path:'city',
-        component:CityComponent
+        path: 'city',
+        component: CityComponent
       },
       {
-        path:'location',
-        component:LocationComponent
+        path: 'location',
+        component: LocationComponent
       },
       {
-        path:'sub-location',
-        component:SublocationComponent
+        path: 'sub-location',
+        component: SublocationComponent
       },
       {
-        path:'sub-admin',
-        component:SubAdminComponent
+        path: 'sub-admin',
+        component: SubAdminComponent
       },
       {
-        path:'traverl-nearby',
-        component:TraverlNearByComponent 
+        path: 'traverl-nearby',
+        component: TraverlNearByComponent
       }
     ]
   },
   {
-    path:'stay-form',
+    path: 'stay-form',
     component: StayFormComponent
   },
   {
-    path:'view-form-enquiries',
+    path: 'view-form-enquiries',
     component: ViewFormEquiriesComponent
+  },
+  {
+    path: 'booking',
+    component: BookingComponent
   },
   { path: 'about', loadChildren: () => import('./about/about.module').then(m => m.AboutModule) },
   { path: 'guest-policy', loadChildren: () => import('./guest-policy/guest-policy.module').then(m => m.GuestPolicyModule) },
   { path: 'raise-query', loadChildren: () => import('./raise-query/raise-query.module').then(m => m.RaiseQueryModule) },
   {
-    path:'**',
-    redirectTo:''
+    path: '**',
+    redirectTo: ''
   }
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes, {
     initialNavigation: 'enabled'
-})],
+  })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

@@ -74,6 +74,7 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatSortModule} from '@angular/material/sort';
 import { MatTableExporterModule } from 'mat-table-exporter';
 import { SharedModule } from './shared/shared.module';
+import { BookingComponent } from './pages/admin-dashboard/admin-components/booking-components/booking.component';
 
 const ngxUiLoaderConfig:NgxUiLoaderConfig =
   {
@@ -144,6 +145,7 @@ const ngxUiLoaderConfig:NgxUiLoaderConfig =
     CallbackComponent,
     StayFormComponent,
     ViewFormEquiriesComponent,
+    BookingComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),

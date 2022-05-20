@@ -43,4 +43,7 @@ export class HomeService {
   public login(user:any){
     return this._httpService.post(baseUrl+'login/',user);
   }
+  public loadAllBookings(){
+    return this._httpService.get(baseUrl+'booking/getAllBookings/');
+  }
 }
