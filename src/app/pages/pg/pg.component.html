@@ -433,7 +433,7 @@
                       <div class="input-group-prepend">
                         <div class="input-group-text"><img src="https://www.primepgs.in/public/new_design/img/contact/indian_flag-logo.svg" class="flag img-fluid" alt="img"> +91</div>
                       </div>
-                      <input name="phone" pattern="^\d{10}$" type="number" class="form-control" id="exampleFormControlInput1" [(ngModel)]="reserve.phoneNo" placeholder="Contact Number" required>
+                      <input name="phone" pattern="^\d{10}$" type="number" class="form-control" id="exampleFormControlInput1" [(ngModel)]="reserve.phoneNo" placeholder="Contact Number" minlength="10" maxlength="10" required>
                     </div>
                   </div>
                   <div class="mb-3">
@@ -441,11 +441,13 @@
                   </div>
                   <div class="mb-3">
                     <select name="sharingType" class="custom-select custom-select-lg form-control" [(ngModel)]="reserve.sharingType" required>
-                      <option selected>Select-Sharing-Type</option>
-                      <option *ngIf="pgDetails.pgSingleMemberPrice" value="Single Sharing">Single Sharing</option>
-                      <option *ngIf="pgDetails.pgDoubleMemberPrice" value="Twin Sharing">Twin Sharing</option>
-                      <option *ngIf="pgDetails.pgTripleMemberPrice" value="Tripple Sharing">Tripple Sharing</option>
-                      <option *ngIf="pgDetails.pgFourMemberPrice" value="Four Sharing">Four Sharing</option>
+                      <select name="sharingType" class="custom-select custom-select-lg form-control" [(ngModel)]="reserve.sharingType" required>
+                        <option selected>Select-Sharing-Type</option>
+                        <option *ngIf="pgDetails.pgSingleMemberPrice" value="Single Sharing">Single Sharing - &#8377; {{pgDetails.pgSingleMemberPrice}} /-</option>
+                        <option *ngIf="pgDetails.pgDoubleMemberPrice" value="Twin Sharing">Twin Sharing - &#8377; {{pgDetails.pgDoubleMemberPrice}} /-</option>
+                        <option *ngIf="pgDetails.pgTripleMemberPrice" value="Tripple Sharing">Tripple Sharing - &#8377; {{pgDetails.pgTripleMemberPrice}} /-</option>
+                        <option *ngIf="pgDetails.pgFourMemberPrice" value="Four Sharing">Four Sharing - &#8377; {{pgDetails.pgFourMemberPrice}} /-</option>
+                      </select>
                     </select>
                   </div>
                   <div class="mb-3">
@@ -482,7 +484,7 @@
                             <div class="input-group-prepend">
                               <div class="input-group-text"><img src="https://www.primepgs.in/public/new_design/img/contact/indian_flag-logo.svg" class="flag img-fluid" alt="img"> +91</div>
                             </div>
-                            <input name="phone" pattern="^\d{10}$" type="number" class="form-control" id="exampleFormControlInput1" [(ngModel)]="reserve.phoneNo" placeholder="Contact Number" required>
+                            <input name="number" pattern="^\d{10}$" type="number" class="form-control" id="exampleFormControlInput1" [(ngModel)]="reserve.phoneNo" placeholder="Contact Number" minlength="10" maxlength="10" required>
                           </div>
                         </div>
                         <div class="mb-3">
@@ -491,10 +493,10 @@
                         <div class="mb-3">
                           <select name="sharingType" class="custom-select custom-select-lg form-control" [(ngModel)]="reserve.sharingType" required>
                             <option selected>Select-Sharing-Type</option>
-                            <option *ngIf="pgDetails.pgSingleMemberPrice" value="Single Sharing">Single Sharing</option>
-                            <option *ngIf="pgDetails.pgDoubleMemberPrice" value="Twin Sharing">Twin Sharing</option>
-                            <option *ngIf="pgDetails.pgTripleMemberPrice" value="Tripple Sharing">Tripple Sharing</option>
-                            <option *ngIf="pgDetails.pgFourMemberPrice" value="Four Sharing">Four Sharing</option>
+                            <option *ngIf="pgDetails.pgSingleMemberPrice" value="Single Sharing">Single Sharing - &#8377; {{pgDetails.pgSingleMemberPrice}} /-</option>
+                            <option *ngIf="pgDetails.pgDoubleMemberPrice" value="Twin Sharing">Twin Sharing - &#8377; {{pgDetails.pgDoubleMemberPrice}} /-</option>
+                            <option *ngIf="pgDetails.pgTripleMemberPrice" value="Tripple Sharing">Tripple Sharing - &#8377; {{pgDetails.pgTripleMemberPrice}} /-</option>
+                            <option *ngIf="pgDetails.pgFourMemberPrice" value="Four Sharing">Four Sharing - &#8377; {{pgDetails.pgFourMemberPrice}} /-</option>
                           </select>
                         </div>
                         <div class="mb-3">

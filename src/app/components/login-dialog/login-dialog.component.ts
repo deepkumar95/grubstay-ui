@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 import { CustomSnackBarService } from 'src/app/services/helper/custom-snack-bar.service';
 import { SharedService } from 'src/app/services/helper/shared.service';
 import { HomeService } from 'src/app/services/home.service';
@@ -19,7 +19,7 @@ export class LoginDialogComponent implements OnInit {
     password:''
   };
   globalUser:any = {};
-  constructor(public dialogRef: MatDialogRef<LoginDialogComponent>, private snackBar:CustomSnackBarService,private dialog:MatDialog,private _home:HomeService,private _shared:SharedService,private _login:LoginService) { }
+  constructor(public dialogRef: MatDialogRef<LoginDialogComponent>, private snackBar:CustomSnackBarService,private dialog:MatDialog,private _home:HomeService,private _shared:SharedService,private _login:LoginService,private _route:Router) { }
 
   ngOnInit(): void {
   }
@@ -56,7 +56,11 @@ export class LoginDialogComponent implements OnInit {
              if(authority == 'ADMIN' || authority == 'SUB-ADMIN'){
               self._shared.redirectTo('/admin');
               this._login.loginStatusSubject.next(true);
-             }else{
+             }else if(this._route.url.includes("/pg/")){
+              self._shared.redirectTo(this._route.url.substring(1));
+              this._login.loginStatusSubject.next(true);
+             }
+             else{
               self._shared.redirectTo('/');
               this._login.loginStatusSubject.next(true);
              }

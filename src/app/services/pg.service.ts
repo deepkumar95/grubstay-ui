@@ -56,6 +56,18 @@ export class PgService {
   }
 
   public reservePgNow(data:any){
-    return this._http.post(this.pgBaseUrl+"reservePg", data);
+    return this._http.post(baseUrl+"booking/reservePg", data);
+  }
+
+  public updateBooking(data:any){
+    return this._http.post(baseUrl+"booking/update-status", data);
+  }
+
+  public getBookingHistoryByUsername(username:string){
+    return this._http.post(baseUrl+"booking/my-bookings",username);
+  }
+
+  public cancelBookingByOrderId(orderId:string){
+    return this._http.post(baseUrl+"booking/cancel-booking",orderId);
   }
 }

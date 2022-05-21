@@ -106,6 +106,7 @@ const routes: Routes = [
   { path: 'about', loadChildren: () => import('./about/about.module').then(m => m.AboutModule) },
   { path: 'guest-policy', loadChildren: () => import('./guest-policy/guest-policy.module').then(m => m.GuestPolicyModule) },
   { path: 'raise-query', loadChildren: () => import('./raise-query/raise-query.module').then(m => m.RaiseQueryModule) },
+  { path: 'my-bookings', loadChildren: () => import('./my-bookings/my-bookings.module').then(m => m.MyBookingsModule) },
   {
     path: '**',
     redirectTo: ''
