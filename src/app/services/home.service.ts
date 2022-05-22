@@ -46,4 +46,7 @@ export class HomeService {
   public loadAllBookings(){
     return this._httpService.get(baseUrl+'booking/getAllBookings/');
   }
+  public updateBooking(bookingData:any){
+    return this._httpService.post(baseUrl+'booking/updateBooking/',bookingData);
+  }
 }

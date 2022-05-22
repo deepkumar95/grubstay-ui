@@ -35,7 +35,7 @@ export interface Booking {
 export class BookingComponent implements OnInit,AfterViewInit {
 
   BOOKING_DATA: Booking[] = [];
-  displayedColumns: string[] = ['orderID', 'amount', 'paymentID', 'recipt', 'status','username','fullname','email','phoneNo','bookingDate','reserveDate','sharingType','pgName','bookingStatus','bookingStatusReference'];
+  displayedColumns: string[] = ['orderID', 'amount', 'paymentID', 'recipt', 'bookingStatus','username','fullname','email','phoneNo','bookingDate','reserveDate','sharingType','pgName','status','bookingStatusReference', 'action'];
   dataSource = new MatTableDataSource(this.BOOKING_DATA);
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -86,5 +86,30 @@ export class BookingComponent implements OnInit,AfterViewInit {
         this.loader.stop();
         return;
       });
+  }
+
+  updateBooking(booking:any){
+    console.log(`Updating Booking ${booking}`);
+    this.loader.start();
+    this._admin.updateBooking(booking).subscribe((response:any)=> {
+      if(response.error && response.error!=''){
+        this._snackbarService.errorSnackBar("Something went wrong!...Please Try Again");
+        this.loader.stop();
+        return;
+      }else{
+        let updateStatus=response.success;
+        if(updateStatus=='BOOKING_UPDATED'){
+          this._snackbarService.successSnackBar("Booking Updated Successfully!");
+          this.loadAllBookings();
+          this.loader.stop();
+          return;
+        }
+      }
+    },
+    (error:any)=>{
+      this._snackbarService.errorSnackBar("Something went wrong!...Please Try Again");
+      this.loader.stop();
+      return;
+    })
   }
 }
