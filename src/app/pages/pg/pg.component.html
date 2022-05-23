@@ -441,13 +441,11 @@
                   </div>
                   <div class="mb-3">
                     <select name="sharingType" class="custom-select custom-select-lg form-control" [(ngModel)]="reserve.sharingType" required>
-                      <select name="sharingType" class="custom-select custom-select-lg form-control" [(ngModel)]="reserve.sharingType" required>
-                        <option selected>Select-Sharing-Type</option>
-                        <option *ngIf="pgDetails.pgSingleMemberPrice" value="Single Sharing">Single Sharing - &#8377; {{pgDetails.pgSingleMemberPrice}} /-</option>
-                        <option *ngIf="pgDetails.pgDoubleMemberPrice" value="Twin Sharing">Twin Sharing - &#8377; {{pgDetails.pgDoubleMemberPrice}} /-</option>
-                        <option *ngIf="pgDetails.pgTripleMemberPrice" value="Tripple Sharing">Tripple Sharing - &#8377; {{pgDetails.pgTripleMemberPrice}} /-</option>
-                        <option *ngIf="pgDetails.pgFourMemberPrice" value="Four Sharing">Four Sharing - &#8377; {{pgDetails.pgFourMemberPrice}} /-</option>
-                      </select>
+                      <option selected>Select-Sharing-Type</option>
+                      <option *ngIf="pgDetails.pgSingleMemberPrice" value="Single Sharing">Single Sharing - &#8377; {{pgDetails.pgSingleMemberPrice}} /-</option>
+                      <option *ngIf="pgDetails.pgDoubleMemberPrice" value="Twin Sharing">Twin Sharing - &#8377; {{pgDetails.pgDoubleMemberPrice}} /-</option>
+                      <option *ngIf="pgDetails.pgTripleMemberPrice" value="Tripple Sharing">Tripple Sharing - &#8377; {{pgDetails.pgTripleMemberPrice}} /-</option>
+                      <option *ngIf="pgDetails.pgFourMemberPrice" value="Four Sharing">Four Sharing - &#8377; {{pgDetails.pgFourMemberPrice}} /-</option>
                     </select>
                   </div>
                   <div class="mb-3">
