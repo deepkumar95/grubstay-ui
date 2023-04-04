@@ -89,6 +89,10 @@ export class NavbarComponent implements OnInit {
       this.drawer.close();
       this._shared.redirectTo('my-bookings');
     }
+    if(item === 'termsandconditions'){
+      this.drawer.close();
+      this._shared.redirectTo('termsandconditions');
+    }
   }
 
 }

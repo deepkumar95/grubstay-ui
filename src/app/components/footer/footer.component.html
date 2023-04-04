@@ -38,10 +38,11 @@
           <span class="logo-sm">Company Information</span>
           <ul class="list-unstyled" style="margin-top:20px;">
             <li [routerLink]="['/about']">About us</li>
-            <li>Careers</li>
+            <li [routerLink]="['/careers']">Careers</li>
             <li>Blog</li>
-            <li>FAQ's</li>
-            <li [routerLink]="['/guest-policy']">Guest Policy</li>
+            <li [routerLink]="['/faqs']">FAQ's</li>
+            <li [routerLink]="['/guest-policy']">Privacy and Policy</li>
+            <li [routerLink]="['/termsandconditions']">Terms and Conditions</li>
             <li><a style="text-decoration: none;color: inherit;" href="https://grubstay.com/assets/sitemap.xml" target="_blank">Sitemaps</a></li>
           </ul>
         </div>
@@ -116,9 +117,9 @@
         <h6>Company Information</h6>
         <small>
           <p class="footer-links">
-            <a [routerLink]="['/about']">About us</a> | <a href="#">Careers</a> | <a href="#">Blog</a> |
+            <a [routerLink]="['/about']">About us</a> | <a [routerLink]="['/careers']">Careers</a> | <a href="#">Blog</a> |
             <br>
-            <a href="#">FAQ's</a> | <a [routerLink]="['/guest-policy']">Guest Policy</a> | <a style="text-decoration: none;color: inherit;" href="https://grubstay.com/assets/sitemap.xml" target="_blank">Sitemaps</a>
+            <a [routerLink]="['/faqs']">FAQ's</a> | <a [routerLink]="['/guest-policy']">Privacy and Policy</a> | <a [routerLink]="['/termsandconditions']">Terms and Conditions</a> | <a style="text-decoration: none;color: inherit;" href="https://grubstay.com/assets/sitemap.xml" target="_blank">Sitemaps</a>
           </p>
         </small>
       </div>
