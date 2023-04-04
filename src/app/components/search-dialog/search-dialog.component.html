@@ -1,0 +1,81 @@
+<div class="bootstrap-wrapper">
+    <div class="container-fluid">
+        <div class="row dialog-header">
+            <!-- <div class="col-11" style="margin-top:30px;">
+                <h3 style="margin-left:25px">Select Your Options</h3>
+            </div>
+            <div class="col-1" style="margin-top:7px;">
+                <mat-icon mat-dialog-close class="class_button  " style="float:right;">close</mat-icon>
+            </div> -->
+            <div class="col-12 mt-1">
+                <mat-icon mat-dialog-close class="class_button" style="float:right;">close</mat-icon>
+                <h3 style="margin-top:10px;">Select Your Options</h3>
+            </div>
+        </div>
+    </div>
+    <div class="container mt-10">
+        <div class="row">
+            <div class="col-12">
+                <form class="search-form" (ngSubmit)="searchSubmit()">
+                    <mat-form-field class="full-width" appearance="outline" color="accent">
+                        <mat-label>Location</mat-label>
+                        <input required matInput autocomplete="off" placeholder="Search City | Locaiton" id="search-name"
+                            name="search-name" [(ngModel)]="search.name" (ngModelChange)="searchNameChange(search.name)">
+                    </mat-form-field>
+                    <mat-card style="max-height: 300px; overflow-y: scroll; scroll-behavior: smooth; z-index:10; position: absolute; width:94%;" *ngIf="search.name && !itemSelected"
+                        id="search-content">
+                        <mat-action-list class="result-content" *ngFor="let result of searchResult">
+                            <button mat-list-item (click)="selectItem(result)">
+                                <img [src]="sanitizer.bypassSecurityTrustUrl(result.citypic)" alt="result.citypic">
+                                <button></button>
+                                <p (onclick)="selectItem(result)"><strong>{{result.cityName}}</strong>&nbsp;&nbsp;|&nbsp;
+                                    {{result.locationName}}</p>
+                            </button>
+                        </mat-action-list>
+                    </mat-card>
+                    <!-- <mat-form-field *ngIf="itemSelected" class="full-width" appearance="outline" color="accent">
+                        <mat-label>Nearby Place</mat-label>
+                        <input matInput autocomplete="off" placeholder="Type your nearby place" id="search-nearby" name="search-nearby"
+                            [(ngModel)]="search.nearby" autocomplete="off">
+                    </mat-form-field> -->
+                    <!-- <mat-form-field *ngIf="itemSelected" class="full-width" appearance="outline" color="accent"
+                        autocomplete="off">
+                        <mat-label>Select Near By</mat-label>
+                        <mat-select autocomplete="off" name="landMarks" [(ngModel)]="search.nearby">
+                            <mat-option *ngFor="let landMark of landMarkData" [value]="landMark.landMarkName">{{landMark.landMarkName}}</mat-option>
+                        </mat-select>
+                    </mat-form-field> -->
+
+                    <!-- <mat-form-field class="full-width" appearance="outline" color="accent" *ngIf="itemSelected">
+                        <mat-label>Select Near By</mat-label>
+                        <input matInput autocomplete="off" placeholder="Search PG | Landmark" id="search-name"
+                            name="search-nearby" [(ngModel)]="search.nearby" (ngModelChange)="searchNearBy(search.nearby)">
+                    </mat-form-field>
+                    <mat-card style="max-height: 300px; overflow-y: scroll; scroll-behavior: smooth; z-index:10; position: absolute; width:94%; " *ngIf="search.nearby && !nearbySelected"
+                        id="search-content">
+                        <mat-action-list class="result-content" *ngFor="let landmark of landMarkData">
+                            <button mat-list-item (click)="selectLandMark(landmark)">
+                                <img [src]="sanitizer.bypassSecurityTrustUrl(landmark.landMarkImage)" alt="landmark.langMarkImageName">
+                                <button></button>
+                                <p (onclick)="selectLandMark(landmark)"><strong>{{landmark.landMarkName}}</strong>&nbsp;&nbsp;|&nbsp;
+                                    {{landmark.pgName}}</p>
+                            </button>
+                        </mat-action-list>
+                    </mat-card> -->
+
+                    <mat-form-field *ngIf="itemSelected" class="full-width" appearance="outline" color="accent"
+                        autocomplete="off">
+                        <mat-label>Select Locality | Optional</mat-label>
+                        <mat-select autocomplete="off" name="stay-types" [(ngModel)]="search.subLocation">
+                            <mat-option *ngFor="let subLocation of subLocationData" [value]="subLocation">{{subLocation}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+
+                    <div *ngIf="itemSelected" class="container text-center">
+                        <button mat-raised-button color="accent" type="submit">Next</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

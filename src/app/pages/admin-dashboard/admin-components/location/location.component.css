@@ -1,0 +1,15 @@
+.mat-column-actions{
+    width: 150px;
+}
+table {
+    width: 100%;
+  }
+  
+  th.mat-sort-header-sorted {
+    color: black;
+  }
+
+  .mat-form-field {
+    font-size: 12px;
+    width: 100%;
+}

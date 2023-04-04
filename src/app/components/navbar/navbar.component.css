@@ -1,0 +1,58 @@
+
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+.bg-black {
+  background: white !important;
+  color: black;
+}
+
+.sidenav {
+  width: 200px;
+  height: 100%;
+  background: white !important;
+}
+
+.sidenav-container {
+  height: 100%;
+}
+
+.text-white {
+  color: white !important;
+}
+.text-black{
+    color: black;
+}
+
+.logo {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 24px;
+  transition: all 0.1s ease;
+  cursor: pointer;
+}
+
+@media only screen and (max-width: 768px) {
+    .logo {
+        font-weight: 600;
+        font-size: 22px;
+      }
+}
+
+@media only screen and (max-width: 320px) {
+    .logo {
+        font-weight: 600;
+        font-size: 20px;
+      }
+}
+.call{
+  text-decoration: none;
+  user-select: none;
+  font-size: medium;
+  color: black;
+  margin-right: 5px;
+}
+.call :hover{
+  color: rgb(61, 55, 55);
+}

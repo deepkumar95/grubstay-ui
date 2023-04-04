@@ -1,0 +1,91 @@
+.pg-slider{
+    width: 100%;
+    height: 250px;
+}
+.pg-slider img{
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+}
+.favorite{
+    color: red;
+}
+.pg-fac{
+    background-color: #DCDADC;
+    width: 70px;
+    height: 70px;
+}
+.pg-fac-name{
+    line-height: 1.0;
+    font-size: 10px;
+    padding: 4px;
+    text-align: center;
+    font-weight: bold;
+}
+.pg-price-card{
+    background-color: #DCDADC;
+    width: 70px;
+    height: 70px;
+}
+.nearby-card{
+    /* height: 200px; */
+    width:100%;
+    margin: auto;
+    padding: 0;
+    border: none;
+    outline: none;
+    background: none;
+    box-shadow: none;
+}
+.travel-nearby-name{
+    margin-top: .5em;
+    white-space: nowrap;
+}
+.travel-nearby-name-m{
+    margin-top: .5em;
+    white-space: nowrap;
+    font-size:10px; 
+}
+.nearby-img-sec{
+    height: 200px;
+    width: 100%;
+    overflow: hidden;
+    border-radius: 3px;
+}
+.nearby-img-sec img{
+    height: 100% !important;
+    width: 100% !important;
+    object-fit: cover;
+}
+.nearby-img-sec-m{
+    height: 70px;
+    width: 100%;
+    overflow: hidden;
+    border-radius: 3px;
+}
+.nearby-img-sec-m img{
+    height: 100% !important;
+    width: 100% !important;
+    object-fit: cover;
+}
+
+.pg-slider-d{
+    width: 100%;
+    height: 400px;
+}
+
+.pg-slider-d img{
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+}
+
+.section-reserve-pg{
+    margin-top: 1em;
+  } 
+  .reserve-part{
+    background-color: #e2e2e2;
+    border-radius: 4px;
+    color: white;
+    border-radius: 20px 20px 20px 20px;
+  }

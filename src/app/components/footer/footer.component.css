@@ -1,0 +1,50 @@
+.footer-section{
+    height:300px;
+}
+.wordspace5{
+    word-spacing: 2px;
+}
+.line{
+    height: 2px;
+    background:#E91E63;
+    width:50px;
+}
+.list-unstyled li{
+  cursor: pointer;
+}
+.suscribe-button{
+    background-color: #E91E63;
+}
+.blank-space{
+    height:100px;
+}
+.footer-links a{
+    text-decoration: none;
+    color: grey;
+}
+.icon{
+  font-size:20px !important;
+  margin-right:10px;
+}
+.phoneContainer{
+  margin-left:25px;
+}
+.emailContainer{
+  margin-left:62px;
+  margin-top:5px;
+}
+.wordspace6{
+  margin-left: 10px;
+}
+.socialIconContainer{
+  margin-left:75px;
+  margin-top: 20px;
+}
+.socialIcon{
+  height:42px;
+  width: 42px;
+}
+.lookContainer{
+  margin-left: 50px;
+  margin-bottom: 10px;
+}

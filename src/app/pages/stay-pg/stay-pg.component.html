@@ -1,0 +1,667 @@
+<div *ngIf="isHandset$ | async">
+  <div class="bootstrap-wrapper">
+    <div class="container-fluid locationHeader">
+      <!-- <div class="filter">
+        filters
+      </div> -->
+      <div class="location-heading mt-1">
+        <h5>{{stayType}} in {{covertToCamelCase(stayTitle)}}</h5>
+      </div>
+    </div>
+    <mat-divider> </mat-divider>
+    <div class="row">
+      <!-- <div class="col-6">
+        <button mat-button style="width:100%;" (click)="openFilterDialog()">Filter</button>
+      </div>
+      <div class="col-6">
+        <button mat-button style="width:100%;" (click)="openSortDialog()">Sort</button>
+      </div> -->
+      <mat-accordion>
+        <mat-expansion-panel class="panelHeader">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Filter / Sort
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <div>
+            <mat-action-list>
+              <h1 matSubheader>Filter/Sort PG</h1>
+            </mat-action-list>
+            <div class="row">
+              <div class="col-sm-6 col-xs-6">
+                <mat-list role="list">
+                  <h1 matSubheader>OCCUPANCY |&nbsp; <span (click)="clearOccupancyFilter()"> <kbd style="font-size:8px; border-radius:5px;">clear
+                        filter x</kbd></span></h1>
+                  <div class="filterOptions">
+                    <mat-list-item *ngFor="let item of occupencyArray" role="listitem">
+                      <input type="checkbox" class="example-margin" [checked]="item.checkedStatus" [id]="item.id"
+                        (click)="setOccupancyfilter(item.id, item.name)" />&nbsp;&nbsp;<small>{{item.name}}</small>
+                    </mat-list-item>
+                  </div>
+                </mat-list>
+              </div>
+              <div class="col-sm-6 col-xs-6">
+                <mat-list role="list">
+                  <h1 matSubheader>GENDER |&nbsp; <span (click)="cleanGenderFilter()"><kbd style="font-size:8px;">clear
+                        filter x</kbd></span></h1>
+                  <div class="filterOptions">
+                    <mat-list-item *ngFor="let item of genderArray" role="listitem">
+                      <!-- <mat-checkbox class="example-margin" [checked]="item.checkedStatus" (click)="setGenderFilter(item.id, item.name)"><small>{{item.name}}</small></mat-checkbox> -->
+                      <input type="checkbox" class="example-margin" [checked]="item.checkedStatus" [id]="item.id"
+                        (click)="setGenderFilter(item.id, item.name)" />&nbsp;&nbsp;<small>{{item.name}}</small>
+                    </mat-list-item>
+                  </div>
+                </mat-list>
+              </div>
+              <div class="col-sm-6 col-xs-6">
+                <mat-list role="list">
+                  <h1 matSubheader>BUDGET |&nbsp; <span (click)="clearBudgetFilter()"><kbd style="font-size:8px;">clear
+                        filter x</kbd></span></h1>
+                  <div class="filterOptions">
+                    <mat-list-item *ngFor="let item of budgetArray" role="listitem">
+                      <input type="checkbox" class="example-margin" [checked]="item.checkedStatus" [id]="item.id"
+                        (click)="setBudgetfilter(item.id, item.name)" />&nbsp;&nbsp;<small>{{item.name}}</small>
+                    </mat-list-item>
+                  </div>
+                </mat-list>
+              </div>
+              <div class="col-sm-6 col-xs-6">
+                <mat-list role="list">
+                  <h1 matSubheader>Price |&nbsp; <span (click)="clearSortingFilter()"> <kbd style="font-size:8px; border-radius:5px;">clear
+                        filter x</kbd></span></h1>
+                  <div class="filterOptions">
+                    <mat-list-item *ngFor="let item of sortingArray" role="listitem">
+                      <input type="checkbox" class="example-margin" [checked]="item.checkedStatus" [id]="item.id"
+                        (click)="setSortingfilter(item.id, item.name)" />&nbsp;&nbsp;<small>{{item.name}}</small>
+                    </mat-list-item>
+                  </div>
+                </mat-list>
+              </div>
+            </div>
+            <mat-list role="list" *ngIf="false">
+              <h1 matSubheader>RATING</h1>
+              <div class="filterOptions">
+                <mat-list-item *ngFor="let item of ratingArray" role="listitem">
+                  <mat-checkbox class="example-margin" [checked]="item.checkedStatus" (click)="setRatingFilter(item.id, item.name)">
+                    <div *ngIf="item.numberOfStar==5">
+                      <mat-icon aria-hidden="false" aria-label="Example home icon">star</mat-icon>
+                      <mat-icon aria-hidden="false" aria-label="Example home icon">star</mat-icon>
+                      <mat-icon aria-hidden="false" aria-label="Example home icon">star</mat-icon>
+                      <mat-icon aria-hidden="false" aria-label="Example home icon">star</mat-icon>
+                      <mat-icon aria-hidden="false" aria-label="Example home icon">star</mat-icon>
+                    </div>
+                    <div *ngIf="item.numberOfStar==4">
+                      <mat-icon aria-hidden="false" aria-label="Example home icon">star</mat-icon>
+                      <mat-icon aria-hidden="false" aria-label="Example home icon">star</mat-icon>
+                      <mat-icon aria-hidden="false" aria-label="Example home icon">star</mat-icon>
+                      <mat-icon aria-hidden="false" aria-label="Example home icon">star</mat-icon>
+                    </div>
+                    <div *ngIf="item.numberOfStar==3">
+                      <mat-icon aria-hidden="false" aria-label="Example home icon">star</mat-icon>
+                      <mat-icon aria-hidden="false" aria-label="Example home icon">star</mat-icon>
+                      <mat-icon aria-hidden="false" aria-label="Example home icon">star</mat-icon>
+                    </div>
+                    <div *ngIf="item.numberOfStar==2">
+                      <mat-icon aria-hidden="false" aria-label="Example home icon">star</mat-icon>
+                      <mat-icon aria-hidden="false" aria-label="Example home icon">star</mat-icon>
+                    </div>
+                    <div *ngIf="item.numberOfStar==1">
+                      <mat-icon aria-hidden="false" aria-label="Example home icon">star</mat-icon>
+                    </div>
+                  </mat-checkbox>
+                </mat-list-item>
+              </div>
+              <div style="float:right; padding-bottom:10px;">
+                <button mat-raised-button (click)="filterData()">Filter Data</button>
+                <button mat-raised-button mat-dialog-close>Cancel</button>
+              </div>
+            </mat-list>
+          </div>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </div>
+    <mat-divider></mat-divider>
+    <div class="pg" style="margin-top:80px;">
+      <div class="jumbotron jumbotron-fluid">
+        <div class="container jumb-content">
+          <small></small><br>
+          <small><b>GRUBSTAY</b> shows you the best PGs near to your work location or college area's, you will get well maintained and furnished PGs with all the facilities at an affordable prices. If you are new to the city now you don't need to worry about your stay in PG. To know the details of PGs we came up with a solution, we will provide you the list of best {{stayType}}s in {{covertToCamelCase(stayTitle)}} near to your work location or college area and provide you the list to top-class facilities PGs which is affordable.</small>
+          <br><br>
+          <small>How to choose the best sharing PG and what are the required facilities?</small><br>
+          <small>Pick your location then choose your best Sharing PG which suits your budget. The facilities which is needed are Geyser, washing machine, locker, regular cleaning, RO water, security guard, CCTV, and TV these are the basic facilities required for your daily needs. Other than this we provide you top-class facilities like GYM, Indoor Games and Lift. These are the facilities that GRUBSTAY provides for your safety and daily needs. You are at the right place in choosing your best PG accommodation rooms.</small><br>
+        </div>
+      </div>
+      <div *ngIf="loaderStatus" class="row">
+        <div *ngFor="let temp of tempList">
+          <div style="padding:20px;">
+          <mat-card class="example-card mb-3">
+            <img mat-card-image class="skeleton">
+            <div class="row">
+              <div class="col-md-12 col-sm-12 col-xs-12 card_content">
+                <div class="pg-content-d">
+                  <div class="skeleton sk-heading"></div>
+                  <div class="skeleton sk-text"></div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-3 d-flex justify-content-start">
+                  <div class="gender-d" style="margin-left:3px;">
+                    <div class="both-d d-flex justify-content-around">
+                      <div class="male-d mr-10">
+                        <div class="skeleton sk-gender"></div>
+                      </div>
+                      <div style="margin-left: 10px;" class="female-d">
+                        <div class="skeleton sk-gender"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-9 d-flex justify-content-end p-0">
+                  <div class="skeleton sk-rating"></div>
+                </div>
+              </div>
+            </div>
+            <mat-card-actions style="margin-bottom: 6px !important;">
+              <div class="price-sec-d" style="padding:7px;">
+                <div class="price-d">
+                  <div class="skeleton sk-pricing" style="margin-bottom: 3px;"></div>
+                  <div class="skeleton sk-text"></div>
+                </div>
+                <div class="contact-d">
+                  <div class="skeleton sk-btn btn"></div>
+                  <div class="skeleton sk-btn btn" style="margin-left: 2px;"></div>
+                </div>
+              </div>
+
+            </mat-card-actions>
+          </mat-card>
+        </div>
+        </div> 
+      </div>
+      <div *ngFor="let pg of pgArray">
+        <div style="padding:20px;">
+          <mat-card class="example-card">
+            <img mat-card-image [routerLink]="['/pg/'+pg.cityName+'/'+pg.locationName+'/'+pg.subLocationName+'/'+pg.urlPgName]" routerLinkActive="router-link-active"
+              [src]="_sanitizer.bypassSecurityTrustUrl(pg.pgImage)" [alt]="pg.pgImageName">
+            <div class="col-md-12 col-sm-12 col-xs-12 card_content-m">
+              <div class="pg-content-d">
+                <h6 style="cursor: pointer;height:5px; " [routerLink]="['/pg/'+pg.cityName+'/'+pg.locationName+'/'+pg.subLocationName+'/'+pg.urlPgName]"
+                  routerLinkActive="router-link-active">{{pg.pgName}}</h6>
+                <small style="font-size:11px;">{{pg.locationName}}</small>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-3 d-flex justify-content-start">
+                <div class="gender-d">
+                  <div *ngIf="pg.gender=='male'" class="both-d">
+                    <div class="male-d mr-10">
+                      <h6 style="font-size:14px;margin-top:5px;"><i class="fa fa-male"
+                          style="font-size:16px">&nbsp;Boys</i></h6>
+                    </div>
+                  </div>
+                  <div *ngIf="pg.gender=='female'" class="both-d">
+                    <div class="female-d">
+                      <h6 style="font-size:14px;margin-top:5px;"><i class="fa fa-female"
+                          style="font-size:16px">&nbsp;Girls</i></h6>
+                    </div>
+                  </div>
+                  <div *ngIf="pg.gender=='both'" class="both-d">
+                    <div class="male-d mr-10">
+                      <h6 style="font-size:14px;margin-top:5px;"><i class="fa fa-male"
+                          style="font-size:16px">&nbsp;Boys</i></h6>
+                    </div>
+                    <div style="margin-left: 10px;" class="female-d">
+                      <h6 style="font-size:14px;margin-top:5px;"><i class="fa fa-female"
+                          style="font-size:16px">&nbsp;Girls</i></h6>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-9 d-flex justify-content-end pr-5">
+                <mat-icon aria-hidden="false" aria-label="Example home icon">star</mat-icon>
+                <mat-icon aria-hidden="false" aria-label="Example home icon">star</mat-icon>
+                <mat-icon aria-hidden="false" aria-label="Example home icon">star</mat-icon>
+                <mat-icon aria-hidden="false" aria-label="Example home icon">star</mat-icon>
+                <mat-icon aria-hidden="false" aria-label="Example home icon">star</mat-icon>
+                &nbsp;&nbsp;
+                <span style="margin-top:4px; font-size:13px;"><b>7 Review</b></span>
+              </div>
+            </div>
+            <mat-card-actions>
+              <div class="price-sec-d" style="padding:7px;">
+                <div class="price-d">
+                  <h6 style="height:9px; font-size:12px;">Starting From*</h6>
+                  <h6 style="font-size:11px;">{{pg.price}} /monthly</h6>
+                </div>
+                <div class="contact-d">
+                  <a style="font-size:14px; background:#25D366; color: white; text-decoration:none; padding:3px; border-radius:2px;"
+                    href="{{'https://wa.me/+918050163861/?text=Hi, I am looking for PG : '+'grubstay.com/pg/'+pg.cityName+'/'+pg.locationName+'/'+pg.subLocationName+'/'+pg.urlPgName}}">
+                    WhatsApp
+                  </a>
+                  &nbsp;
+                  <button
+                    style="font-size:11px; background:#ff4081; color: white; text-decoration:none;  border-radius:2px; width:70px; border:1px solid #ff4081;"
+                    [routerLink]="['/pg/'+pg.cityName+'/'+pg.locationName+'/'+pg.subLocationName+'/'+pg.urlPgName]" routerLinkActive="router-link-active">
+                    Book Now
+                  </button>
+                  <!-- <button [matMenuTriggerFor]="menu" #menuTrigger mat-raised-button>Contact</button>
+                        <mat-menu id="matMenu" #menu="matMenu" yPosition="above" xPosition="before">
+
+                          <a href="{{'sms:+918050163861?body='+'Hi, I am looking for PG : '+'http://localhost:4200/pg/'+pg.pgId+'/'+pg.pgName}}"
+                            mat-icon-button>
+                            <mat-icon>textsms</mat-icon>
+                          </a>
+                        </mat-menu> -->
+                </div>
+              </div>
+            </mat-card-actions>
+          </mat-card>
+        </div>
+        <!-- <div class="container-fluid">
+          <div class="pg-card">
+            <div class="row">
+              <div class="col-4 col-md-4 col-sm-4 col-xs-4">
+                <div class="pg-img">
+                  <img [routerLink]="['/pg/'+pg.pgId+'/'+pg.pgName]" routerLinkActive="router-link-active" [src]="_sanitizer.bypassSecurityTrustUrl(pg.pgImage)"
+                    [alt]="pg.pgImageName">
+                </div>
+              </div>
+              <div class="col-6 col-md-6 col-sm-6 col-xs-6">
+                <div class="pg-content">
+                  <h6 [routerLink]="['/pg/'+pg.pgId+'/'+pg.pgName]" routerLinkActive="router-link-active">{{pg.pgName}}</h6>
+                  <p>{{pg.locationName}}</p>
+                </div>
+                <div class="gender">
+                  <div *ngIf="pg.gender=='male'" class="both">
+                    <div class="male mr-10">Boys</div>
+                  </div>
+                  <div *ngIf="pg.gender=='female'" class="both">
+                    <div class="female">Girls</div>
+                  </div>
+                  <div *ngIf="pg.gender=='both'" class="both">
+                    <div class="male mr-10">Boys</div>
+                    <div class="female">Girls</div>
+                  </div>
+                </div>
+                <div class="distance">
+                  <h7>Distance {{pg.distance}}</h7>
+                </div>
+                <div class="reviews">
+                  <h7>Reviews {{pg.reviews}} <mat-icon style="color: #FFC83D;">star</mat-icon>
+                  </h7>
+                </div>
+              </div>
+              <div class="col-2 col-md-2 col-sm-2 col-xs-2">
+                <div class="fav-icon" *ngIf="false">
+                  <button mat-icon-button (click)="toggleFav()">
+                    <mat-icon *ngIf="!fav">favorite_border</mat-icon>
+                    <mat-icon class="favorite" *ngIf="fav">favorite</mat-icon>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="price-sec">
+          <div class="price">
+            <h6>Starting From*</h6>
+            <h7>{{pg.price}} /monthly</h7>
+          </div>
+          <div class="contact">
+            <button [matMenuTriggerFor]="menu" #menuTrigger mat-raised-button>Contact</button>
+            <mat-menu #menu="matMenu" yPosition="above" xPosition="before">
+              <a href="{{'https://wa.me/+918050163861/?text=Hi, I am looking for PG : '+'http://localhost:4200/pg/'+pg.pgId+'/'+pg.pgName}}"
+                mat-icon-button>
+                <mat-icon>whatsapp</mat-icon>
+              </a>
+              <a href="{{'sms:+918050163861&body='+'Hi, I am looking for PG : '+'http://localhost:4200/pg/'+pg.pgId+'/'+pg.pgName}}"
+                mat-icon-button>
+                <mat-icon>textsms</mat-icon>
+              </a>
+            </mat-menu>
+          </div>
+        </div> -->
+      </div>
+      <div *ngIf="ready == 'show'">
+        <div class="row">
+          <div class="col-12">
+            <img style="height: 80%; width: 100%; object-fit: cover; object-position: center center;" src="../../../assets/noData.png" alt="noData">
+            <div style="background: #F7F7F7;" class="container text-center mb-10">
+              <h6 style="color: #979797;">no stays found !!</h6>
+              <h6 style="color:#979797;">try to search with a different location or options</h6>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div *ngIf="!(isHandset$ | async)">
+  <div class="bootstrap-wrapper">
+    <mat-divider></mat-divider>
+    <div class="pg-d">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="mt-1" style="width:28%;">
+            <mat-card style="overflow: scroll; height: 89vh; overflow-x: hidden;">
+              <mat-action-list>
+                <h1 matSubheader>Filter PG</h1>
+              </mat-action-list>
+              <mat-list role="list">
+                <h1 matSubheader>OCCUPANCY |&nbsp; <span (click)="clearOccupancyFilter()"> <kbd
+                      style="font-size:8px; border-radius:5px;">clear
+                      filter x</kbd></span></h1>
+                <div class="filterOptions">
+                  <mat-list-item *ngFor="let item of occupencyArray" role="listitem">
+                    <input type="checkbox" class="example-margin" [checked]="item.checkedStatus" [id]="item.id"
+                      (click)="setOccupancyfilter(item.id, item.name)" />&nbsp;&nbsp;<small>{{item.name}}</small>
+                  </mat-list-item>
+                </div>
+              </mat-list>
+              <mat-list role="list">
+                <h1 matSubheader>BUDGET |&nbsp; <span (click)="clearBudgetFilter()"><kbd style="font-size:8px;">clear
+                      filter x</kbd></span></h1>
+                <div class="filterOptions">
+                  <mat-list-item *ngFor="let item of budgetArray" role="listitem">
+                    <input type="checkbox" class="example-margin" [checked]="item.checkedStatus" [id]="item.id"
+                      (click)="setBudgetfilter(item.id, item.name)" />&nbsp;&nbsp;<small>{{item.name}}</small>
+                  </mat-list-item>
+                </div>
+              </mat-list>
+              <mat-list role="list">
+                <h1 matSubheader>GENDER |&nbsp; <span (click)="cleanGenderFilter()"><kbd style="font-size:8px;">clear
+                      filter x</kbd></span></h1>
+                <div class="filterOptions">
+                  <mat-list-item *ngFor="let item of genderArray" role="listitem">
+                    <!-- <mat-checkbox class="example-margin" [checked]="item.checkedStatus" (click)="setGenderFilter(item.id, item.name)"><small>{{item.name}}</small></mat-checkbox> -->
+                    <input type="checkbox" class="example-margin" [checked]="item.checkedStatus" [id]="item.id"
+                      (click)="setGenderFilter(item.id, item.name)" />&nbsp;&nbsp;<small>{{item.name}}</small>
+                  </mat-list-item>
+                </div>
+              </mat-list>
+              <mat-list role="list">
+                <h1 matSubheader>Price |&nbsp; <span (click)="clearSortingFilter()"> <kbd style="font-size:8px; border-radius:5px;">clear
+                      filter x</kbd></span></h1>
+                <div class="filterOptions">
+                  <mat-list-item *ngFor="let item of sortingArray" role="listitem">
+                    <input type="checkbox" class="example-margin" [checked]="item.checkedStatus" [id]="item.id"
+                      (click)="setSortingfilter(item.id, item.name)" />&nbsp;&nbsp;<small>{{item.name}}</small>
+                  </mat-list-item>
+                </div>
+              </mat-list>
+              <mat-list role="list" *ngIf="false">
+                <h1 matSubheader>RATING |&nbsp; <span (click)="clickRatingFilter()"><kbd style="font-size:8px;">clear
+                      filter x</kbd></span></h1>
+                <div class="filterOptions">
+                  <mat-list-item *ngFor="let item of ratingArray" role="listitem">
+                    <mat-checkbox class="example-margin" [checked]="item.checkedStatus" (click)="setRatingFilter(item.id, item.name)">
+                      <div *ngIf="item.numberOfStar==5">
+                        <mat-icon aria-hidden="false" aria-label="Example home icon">star</mat-icon>
+                        <mat-icon aria-hidden="false" aria-label="Example home icon">star</mat-icon>
+                        <mat-icon aria-hidden="false" aria-label="Example home icon">star</mat-icon>
+                        <mat-icon aria-hidden="false" aria-label="Example home icon">star</mat-icon>
+                        <mat-icon aria-hidden="false" aria-label="Example home icon">star</mat-icon>
+                      </div>
+                      <div *ngIf="item.numberOfStar==4">
+                        <mat-icon aria-hidden="false" aria-label="Example home icon">star</mat-icon>
+                        <mat-icon aria-hidden="false" aria-label="Example home icon">star</mat-icon>
+                        <mat-icon aria-hidden="false" aria-label="Example home icon">star</mat-icon>
+                        <mat-icon aria-hidden="false" aria-label="Example home icon">star</mat-icon>
+                      </div>
+                      <div *ngIf="item.numberOfStar==3">
+                        <mat-icon aria-hidden="false" aria-label="Example home icon">star</mat-icon>
+                        <mat-icon aria-hidden="false" aria-label="Example home icon">star</mat-icon>
+                        <mat-icon aria-hidden="false" aria-label="Example home icon">star</mat-icon>
+                      </div>
+                      <div *ngIf="item.numberOfStar==2">
+                        <mat-icon aria-hidden="false" aria-label="Example home icon">star</mat-icon>
+                        <mat-icon aria-hidden="false" aria-label="Example home icon">star</mat-icon>
+                      </div>
+                      <div *ngIf="item.numberOfStar==1">
+                        <mat-icon aria-hidden="false" aria-label="Example home icon">star</mat-icon>
+                      </div>
+                    </mat-checkbox>
+                  </mat-list-item>
+                </div>
+              </mat-list>
+              <!-- <button mat-raised-button color="accent" (click)="filterData()" style="width:100%;">Filter Data</button> -->
+            </mat-card>
+          </div>
+          <div style="width:72%;">
+            <div class="container">
+              <div style="margin-left:30px">
+                <div class="location-heading mt-2">
+                  <h5>{{stayType}} in {{covertToCamelCase(stayTitle)}}</h5>
+                </div>
+              </div>
+            </div>
+            <mat-divider></mat-divider>
+            <div class="container" style="overflow: scroll; height: 80vh; overflow-x: hidden;">
+              <div class="jumbotron jumbotron-fluid">
+                <div class="container jumb-content">
+                  <small><b>GRUBSTAY</b> shows you the best PGs near to your work location or college area's, you will get well maintained and furnished PGs with all the facilities at an affordable prices. If you are new to the city now you don't need to worry about your stay in PG. To know the details of PGs we came up with a solution, we will provide you the list of best {{stayType}}s in {{covertToCamelCase(stayTitle)}} near to your work location or college area and provide you the list to top-class facilities PGs which is affordable.</small>
+                  <br><br>
+                  <small>How to choose the best sharing PG and what are the required facilities?</small><br>
+                  <small>Pick your location then choose your best Sharing PG which suits your budget. The facilities which is needed are Geyser, washing machine, locker, regular cleaning, RO water, security guard, CCTV, and TV these are the basic facilities required for your daily needs. Other than this we provide you top-class facilities like GYM, Indoor Games and Lift. These are the facilities that GRUBSTAY provides for your safety and daily needs. You are at the right place in choosing your best PG accommodation rooms.</small><br><br>
+                </div>
+              </div>
+              <div class="row" style="margin-left:20px;">
+                <div *ngIf="loaderStatus" class="row">
+                  <div class="col-md-5 col-sm-6 col-xs-12 mt-1" *ngFor="let temp of tempList">
+                    <mat-card class="example-card mb-3">
+                      <img mat-card-image class="skeleton">
+                      <div class="row">
+                        <div class="col-md-12 col-sm-12 col-xs-12 card_content">
+                          <div class="pg-content-d">
+                            <div class="skeleton sk-heading"></div>
+                            <div class="skeleton sk-text"></div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-3 d-flex justify-content-start">
+                            <div class="gender-d" style="margin-left:3px;">
+                              <div class="both-d d-flex justify-content-around">
+                                <div class="male-d mr-10">
+                                  <div class="skeleton sk-gender"></div>
+                                </div>
+                                <div style="margin-left: 10px;" class="female-d">
+                                  <div class="skeleton sk-gender"></div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-9 d-flex justify-content-end p-0">
+                            <div class="skeleton sk-rating"></div>
+                          </div>
+                        </div>
+                      </div>
+                      <mat-card-actions style="margin-bottom: 6px !important;">
+                        <div class="price-sec-d" style="padding:7px;">
+                          <div class="price-d">
+                            <div class="skeleton sk-pricing" style="margin-bottom: 3px;"></div>
+                            <div class="skeleton sk-text"></div>
+                          </div>
+                          <div class="contact-d">
+                            <div class="skeleton sk-btn btn"></div>
+                            <div class="skeleton sk-btn btn" style="margin-left: 2px;"></div>
+                          </div>
+                        </div>
+  
+                      </mat-card-actions>
+                    </mat-card>
+                  </div> 
+                </div>
+                <div class="col-md-5 col-sm-6 col-xs-12 mt-1" *ngFor="let pg of pgArray">
+                  <mat-card class="example-card mb-3">
+                    <img mat-card-image [routerLink]="['/pg/'+pg.cityName+'/'+pg.locationName+'/'+pg.subLocationName+'/'+pg.urlPgName]" routerLinkActive="router-link-active"
+                      [src]="_sanitizer.bypassSecurityTrustUrl(pg.pgImage)" [alt]="pg.pgImageName">
+                    <!-- <mat-card-content>
+                        </mat-card-content> -->
+                    <div class="row">
+                      <div class="col-md-12 col-sm-12 col-xs-12 card_content">
+                        <div class="pg-content-d">
+                          <h6 style="cursor: pointer;height:5px; " [routerLink]="['/pg/'+pg.cityName+'/'+pg.locationName+'/'+pg.subLocationName+'/'+pg.urlPgName]"
+                            routerLinkActive="router-link-active">{{pg.pgName}}</h6>
+                          <small style="font-size:11px;">{{pg.locationName}}</small>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-3 d-flex justify-content-start">
+                          <div class="gender-d">
+                            <div *ngIf="pg.gender=='male'" class="both-d">
+                              <div class="male-d mr-10">
+                                <h6 style="font-size:14px;margin-top:5px;"><i class="fa fa-male"
+                                    style="font-size:16px">&nbsp;Boys</i></h6>
+                              </div>
+                            </div>
+                            <div *ngIf="pg.gender=='female'" class="both-d">
+                              <div class="female-d">
+                                <h6 style="font-size:14px;margin-top:5px;"><i class="fa fa-female"
+                                    style="font-size:16px">&nbsp;Girls</i></h6>
+                              </div>
+                            </div>
+                            <div *ngIf="pg.gender=='both'" class="both-d d-flex justify-content-around">
+                              <div class="male-d mr-10">
+                                <h6 style="font-size:14px;margin-top:5px;"><i class="fa fa-male"
+                                    style="font-size:16px">&nbsp;Boys</i></h6>
+                              </div>
+                              <div style="margin-left: 10px;" class="female-d">
+                                <h6 style="font-size:14px;margin-top:5px;"><i class="fa fa-female"
+                                    style="font-size:16px">&nbsp;Girls</i></h6>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-9 d-flex justify-content-end p-0">
+                          <mat-icon aria-hidden="false" aria-label="Example home icon">star</mat-icon>
+                          <mat-icon aria-hidden="false" aria-label="Example home icon">star</mat-icon>
+                          <mat-icon aria-hidden="false" aria-label="Example home icon">star</mat-icon>
+                          <mat-icon aria-hidden="false" aria-label="Example home icon">star</mat-icon>
+                          <mat-icon aria-hidden="false" aria-label="Example home icon">star</mat-icon>
+                          &nbsp;&nbsp;
+                          <span style="margin-top:4px; font-size:13px;"><b>7 Review</b></span>
+                        </div>
+                      </div>
+                    </div>
+                    <mat-card-actions>
+                      <div class="price-sec-d" style="padding:7px;">
+                        <div class="price-d">
+                          <h6 style="height:9px; font-size:12px;">Starting From*</h6>
+                          <h6 style="font-size:11px;">{{pg.price}} /monthly</h6>
+                        </div>
+                        <div class="contact-d">
+                          <a style="font-size:14px; background:#25D366; color: white; text-decoration:none; padding:3px; border-radius:2px;"
+                          href="{{'https://wa.me/+918050163861/?text=Hi, I am looking for PG : '+'grubstay.com/pg/'+pg.cityName+'/'+pg.locationName+'/'+pg.subLocationName+'/'+pg.urlPgName}}">
+                            WhatsApp
+                          </a>
+                          &nbsp;
+                          <button
+                            style="font-size:11px; background:#ff4081; color: white; text-decoration:none;  border-radius:2px; width:70px; border:1px solid #ff4081;"
+                            [routerLink]="['/pg/'+pg.cityName+'/'+pg.locationName+'/'+pg.subLocationName+'/'+pg.urlPgName]" routerLinkActive="router-link-active">
+                            Book Now
+                          </button>
+                          <!-- <button [matMenuTriggerFor]="menu" #menuTrigger mat-raised-button>Contact</button>
+                            <mat-menu id="matMenu" #menu="matMenu" yPosition="above" xPosition="before">
+
+                              <a href="{{'sms:+918050163861?body='+'Hi, I am looking for PG : '+'http://localhost:4200/pg/'+pg.pgId+'/'+pg.pgName}}"
+                                mat-icon-button>
+                                <mat-icon>textsms</mat-icon>
+                              </a>
+                            </mat-menu> -->
+                        </div>
+                      </div>
+
+                    </mat-card-actions>
+                  </mat-card>
+                </div>
+                <!-- <div class="col-4 col-md-4 col-sm-4 col-xs-4">
+                      <div class="pg-img-d">
+                        <img [routerLink]="['/pg/'+pg.pgId+'/'+pg.pgName]" routerLinkActive="router-link-active" [src]="_sanitizer.bypassSecurityTrustUrl(pg.pgImage)"
+                          [alt]="pg.pgImageName">
+                      </div>
+                    </div>
+                    <div class="col-6 col-md-6 col-sm-6 col-xs-6">
+                      <div class="pg-content-d">
+                        <h5 style="cursor: pointer;" [routerLink]="['/pg/'+pg.pgId+'/'+pg.pgName]" routerLinkActive="router-link-active">{{pg.pgName}}</h5>
+                        <small>{{pg.locationName}}</small>
+                      </div>
+                      <div class="gender-d">
+                        <div *ngIf="pg.gender=='male'" class="both-d">
+                          <div class="male-d mr-10">
+                            <h5>Boys</h5>
+                          </div>
+                        </div>
+                        <div *ngIf="pg.gender=='female'" class="both-d">
+                          <div class="female-d">
+                            <h5>Girls</h5>
+                          </div>
+                        </div>
+                        <div *ngIf="pg.gender=='both'" class="both-d">
+                          <div class="male-d mr-10">
+                            <h5>Boys</h5>
+                          </div>
+                          <div class="female-d">
+                            <h5>Girls</h5>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="distance-d">
+                        <h7>Distance {{pg.distance}}</h7>
+                      </div>
+                      <div class="reviews-d">
+                        <h7>Reviews {{pg.reviews}} <mat-icon style="color: #FFC83D;">star</mat-icon>
+                        </h7>
+                      </div>
+                    </div>
+                    <div class="col-2 col-md-2 col-sm-2 col-xs-2">
+                      <div class="fav-icon-d" *ngIf="false" style="font-size: 40px;">
+                        <button mat-icon-button (click)="toggleFav()">
+                          <mat-icon *ngIf="!fav">favorite_border</mat-icon>
+                          <mat-icon class="favorite" *ngIf="fav">favorite</mat-icon>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="container">
+                <div class="price-sec-d">
+                  <div class="price-d">
+                    <h6>Starting From*</h6>
+                    <h7>{{pg.price}} /monthly</h7>
+                  </div>
+                  <div class="contact-d">
+                    <button [matMenuTriggerFor]="menu" #menuTrigger mat-raised-button>Contact</button>
+                    <mat-menu id="matMenu" #menu="matMenu" yPosition="above" xPosition="before">
+                      <a href="{{'https://wa.me/+918050163861/?text=Hi, I am looking for PG : '+'http://localhost:4200/pg/'+pg.pgId+'/'+pg.pgName}}"
+                        mat-icon-button>
+                        <mat-icon>whatsapp</mat-icon>
+                      </a>
+                      <a href="{{'sms:+918050163861?body='+'Hi, I am looking for PG : '+'http://localhost:4200/pg/'+pg.pgId+'/'+pg.pgName}}"
+                        mat-icon-button>
+                        <mat-icon>textsms</mat-icon>
+                      </a>
+                    </mat-menu>
+                  </div>
+              </div>-->
+              </div>
+              <div *ngIf="ready == 'show'">
+                <div class="row">
+                  <div class="col-12">
+                    <img style="height: 80%; width: 100%; object-fit: cover; object-position: center center;" src="../../../assets/noData.png" alt="noData">
+                    <div style="background: #F7F7F7;" class="container text-center mb-10">
+                      <h6 style="color: #979797;">no stays found !!</h6>
+                      <h6 style="color:#979797;">try to search with a different location or options</h6>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<app-footer></app-footer>

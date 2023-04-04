@@ -1,0 +1,54 @@
+/* .main-content{
+    height: 200px;
+    width: 300px;
+} */
+
+.states-slider{
+    margin-top: 2em;
+    padding: 0em 5em;
+}
+
+.states-slider h2{
+    margin-bottom: 1em;
+}
+
+.example-card{
+    /* height: 200px; */
+    width:100%;
+    margin: auto;
+    padding: 0;
+    border: none;
+    outline: none;
+    background: none;
+    box-shadow: none;
+}
+
+.img-sec{
+    width: 100%;
+    height:125px;
+    overflow: hidden;
+    border-radius: 8px;
+}
+
+.img-sec img{
+    height: 100% !important;
+    width: 100% !important;
+    object-fit: cover;
+}
+
+.city-name{
+    text-transform: uppercase;
+    margin-top: 1em;
+}
+
+.stays-no{
+    white-space: nowrap;
+}
+
+@media screen and (max-width:688px) {
+
+    .states-slider{
+        /* margin-top: 2em; */
+        padding: 0em 1em;
+    }
+}

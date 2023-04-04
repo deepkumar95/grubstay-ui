@@ -1,0 +1,91 @@
+<div class="bootstrap-wrapper">
+    <div class="container-fluid">
+        <div class="row dialog-header">
+            <div class="col-11" style="margin-top:30px;">
+                <h3 style="margin-left:25px">Add Sub Admin</h3>
+            </div>
+            <div class="col-1" style="margin-top:7px;">
+                <mat-icon mat-dialog-close class="class_button  " style="float:right;">close</mat-icon>
+            </div>
+        </div>
+        <div class="container text-center">
+            <div class="row">
+                <div style="padding:20px;">
+                    <form (ngSubmit)="addSubAdmin()">
+                        <mat-form-field appearance="standard" class="full-width">
+                            <mat-label>First name*</mat-label>
+                            <input matInput type='text' autocomplete="off" name='firstName' [(ngModel)]="user.firstName"
+                                placeholder="Enter your first name" onkeypress="return (event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122)">
+                        </mat-form-field>
+                        <!-- lastName field -->
+                        <mat-form-field appearance="standard" class="full-width">
+                            <mat-label>Last name*</mat-label>
+                            <input matInput type='text' autocomplete="last_name" name='lastName' [(ngModel)]="user.lastName"
+                                placeholder="Entery your lastname" onkeypress="return (event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122)">
+                            <mat-hint>Make sure your name matches to your government ID card.</mat-hint>
+                        </mat-form-field><br>
+
+                        <!-- phone field -->
+                        <mat-form-field appearance="standard" class="full-width" style="margin-top:12px;">
+                            <mat-label>Phone number*</mat-label>
+                            <input id="phone" matInput type='number' autocomplete="new_contact_number" name='phone'
+                                [(ngModel)]="user.phone" placeholder="Phone | Contact" (blur)="checkPhone(user.phone)">
+                        </mat-form-field>
+
+                        <!-- email field -->
+                        <mat-form-field appearance="standard" class="full-width">
+                            <mat-label>Username*</mat-label>
+                            <input id="username" matInput type='text' autocomplete="new_username" name='username' [(ngModel)]="user.username" [disabled]="user.operation=='edit'"
+                                placeholder="Placeholder" (blur)="checkUsername(user.username)" onkeypress="return (event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122) || (event.charCode >= 48  && event.charCode <= 57)">
+                            <mat-hint>*you can use username for login</mat-hint>
+                        </mat-form-field>
+
+                        <!-- First name field -->
+                        <mat-form-field appearance="standard" class="full-width" style="margin-top:12px;">
+                            <mat-label>Password*</mat-label>
+                            <input id="password" matInput type='password' autocomplete="new_password" name='password' [(ngModel)]="user.password"
+                                placeholder="Placeholder" (blur)="checkPassword(user.password)">
+                        </mat-form-field>
+        
+                        <!-- email id field -->
+                        <mat-form-field appearance="standard" class="full-width">
+                            <mat-label>Email</mat-label>
+                            <input matInput type='email' autocomplete="new_user-email" name='email' [(ngModel)]="user.email"
+                                placeholder="Email | Optional">
+                        </mat-form-field>
+
+                        <!-- date of birth field -->
+                        <div class="row">
+                            <div class="col-6">
+                                <mat-form-field appearance="standard" class="full-width">
+                                    <mat-label>Choose a DOB*</mat-label>
+                                    <input name="dob" placeholder="Eg: dd/mm/yyyy" [(ngModel)]="user.dob" matInput [matDatepicker]="picker" onkeypress="return event.charCode >= 47 && event.charCode <= 57">
+                                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                    <mat-datepicker #picker></mat-datepicker>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-6">
+                                <mat-form-field appearance="standard" class="full-width">
+                                    <mat-label>Select Gender</mat-label>
+                                    <mat-select name="gender" [(ngModel)]="user.gender">
+                                        <mat-option value="male">Male</mat-option>
+                                        <mat-option value="female">Female</mat-option>
+                                      </mat-select>
+                                  </mat-form-field>
+                            </div>
+                        </div>
+                        
+                        <h6 class="text-center" style="margin-top:8px; font-size:12px;">You will receive updates
+                            and offer's on your mail</h6>
+                        <button class="text-center" type="submit" mat-raised-button color="accent" *ngIf="user.operation!='edit'">Add Sub Admin</button>
+                        <button class="text-center" type="submit" mat-raised-button color="accent" *ngIf="user.operation=='edit'">Update Sub Admin</button>
+                        <h6 class="text-center" style="margin-top:8px; font-size:12px;">By selecting agree and
+                            continue, I agree the terms and conditions of
+                            <span class="logo-sm">GRUBSTAY</span>.</h6>
+
+                   </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

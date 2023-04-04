@@ -1,0 +1,70 @@
+<div class="bootstrap-wrapper">
+    <button mat-raised-button color="primary" (click)="openCityDialog()">
+        <mat-icon>add</mat-icon>
+        Add City
+    </button><br>
+    <mat-form-field appearance="standard" class="full-width">
+        <mat-label>Search City</mat-label>
+        <input matInput name="filter" autocomplete="off" (keyup)="filterCity($event)" placeholder="Search City..."
+            #input>
+    </mat-form-field>
+    <div class="container-fluid">
+        <div class="row mt-2" style="max-height: 62vh; overflow: scroll; overflow-x: hidden">
+            <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort>
+
+                <!--- Note that these columns can be defined in any order.
+                                      The actual rendered columns are set as a property on the row definition" -->
+                <ng-container matColumnDef="actions">
+                    <th mat-header-cell *matHeaderCellDef> Actions </th>
+                    <td mat-cell *matCellDef="let city">
+                        <button mat-icon-button (click)="editItem(city.cityId)">
+                            <mat-icon mat-fav-icon>edit</mat-icon>
+                        </button>
+                        <button mat-icon-button (click)="deleteItem(city.cityId)">
+                            <mat-icon mat-fav-icon>delete</mat-icon>
+                        </button>
+                    </td>
+                </ng-container>
+
+                <!-- Position Column -->
+                <ng-container matColumnDef="position">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> No. </th>
+                    <td mat-cell *matCellDef="let city"> {{city.cityId}} </td>
+                </ng-container>
+
+                <!-- Symbol Column -->
+                <ng-container matColumnDef="cityImage">
+                    <th mat-header-cell *matHeaderCellDef> Picture </th>
+                    <td mat-cell *matCellDef="let city">
+                        <div mat-card-avatar>
+                            <img class="example-header-image-location" [src]="sanitizer.bypassSecurityTrustUrl(city.cityImage)" alt="">
+                        </div>
+                    </td>
+                </ng-container>
+
+                <!-- Name Column -->
+                <ng-container matColumnDef="cityName">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
+                    <td mat-cell *matCellDef="let city"> {{city.cityName}} </td>
+                </ng-container>
+
+                <!-- Name Column -->
+                <ng-container matColumnDef="service">
+                    <th mat-header-cell *matHeaderCellDef> Service </th>
+                    <td mat-cell *matCellDef="let city"> {{city.status?'Active':'Inactive'}} </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns;sticky:true"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+                <!-- message shown when no record found -->
+                <tr class="mat-row" *matNoDataRow>
+                    <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+                </tr>
+            </table>
+            <mat-paginator [pageSizeOptions]="[5, 8, 10, 25, 100]" 
+            showFirstLastButtons
+            aria-label="Select page of enquiries"></mat-paginator>
+        </div>
+    </div>
+</div>

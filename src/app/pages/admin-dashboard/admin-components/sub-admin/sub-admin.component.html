@@ -1,0 +1,91 @@
+<div class="bootstrap-wrapper">
+    <button mat-raised-button color="primary" (click)="openPgDialog()">
+        <mat-icon>add</mat-icon>
+        Add Sub-Admin
+    </button><br>
+    <mat-form-field appearance="standard" class="full-width">
+        <mat-label>Search Admins</mat-label>
+        <input matInput name="filter" autocomplete="off" (keyup)="filterAdmin($event)" placeholder="Search Admins..."
+            #input>
+    </mat-form-field>
+    <div class="container-fluid">
+        <div class="row mt-2" style="max-height: 62vh; overflow: scroll; overflow-x: hidden">
+            <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort>
+
+                <!--- Note that these columns can be defined in any order.
+                                      The actual rendered columns are set as a property on the row definition" -->
+                <ng-container matColumnDef="actions">
+                    <th mat-header-cell *matHeaderCellDef> Actions </th>
+                    <td mat-cell *matCellDef="let admin">
+                        <button mat-icon-button (click)="editItem(admin.userId)">
+                            <mat-icon mat-fav-icon>edit</mat-icon>
+                        </button>
+                        <button mat-icon-button (click)="deletePg(admin.userId)">
+                            <mat-icon mat-fav-icon>delete</mat-icon>
+                        </button>
+                    </td>
+                </ng-container>
+
+                <!-- username -->
+                <ng-container matColumnDef="username">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Username </th>
+                    <td mat-cell *matCellDef="let admin"> {{admin.username}} </td>
+                </ng-container>
+
+                <!-- email -->
+                <ng-container matColumnDef="email">
+                    <th mat-header-cell *matHeaderCellDef> Email Address </th>
+                    <td mat-cell *matCellDef="let admin"> {{admin.email}} </td>
+                </ng-container>
+
+                <!--  phone-->
+                <ng-container matColumnDef="phone">
+                    <th mat-header-cell *matHeaderCellDef> Phone </th>
+                    <td mat-cell *matCellDef="let admin"> {{admin.phone}} </td>
+                </ng-container>
+
+                 <!--  gender-->
+                 <ng-container matColumnDef="gender">
+                    <th mat-header-cell *matHeaderCellDef> Gender </th>
+                    <td mat-cell *matCellDef="let admin"> {{admin.gender}} </td>
+                </ng-container>
+
+                 <!-- firstname-->
+                 <ng-container matColumnDef="firstName">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> First Name </th>
+                    <td mat-cell *matCellDef="let admin"> {{admin.firstName}} </td>
+                </ng-container>
+
+                <!--  lastName-->
+                <ng-container matColumnDef="lastName">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Last Name </th>
+                    <td mat-cell *matCellDef="let admin"> {{admin.lastName}} </td>
+                </ng-container>
+
+                <!--  Dob-->
+                <ng-container matColumnDef="dob">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> DOB </th>
+                    <td mat-cell *matCellDef="let admin"> {{admin.dob}} </td>
+                </ng-container>
+
+                <!--  role-->
+                <ng-container matColumnDef="roles">
+                    <th mat-header-cell *matHeaderCellDef> Role </th>
+                    <td mat-cell *matCellDef="let admin"> {{admin.roles}} </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns;sticky:true"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+                <!-- message shown when no record found -->
+                <tr class="mat-row" *matNoDataRow>
+                    <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+                </tr>
+            </table>
+            <mat-paginator [pageSizeOptions]="[5, 8, 10, 25, 100]" 
+            showFirstLastButtons
+            aria-label="Select page of enquiries"></mat-paginator>
+        </div>
+    </div>
+</div>
+
