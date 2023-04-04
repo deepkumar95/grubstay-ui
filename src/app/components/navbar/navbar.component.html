@@ -10,7 +10,8 @@
           <div class="mobile-menus">
             <mat-list-item><a (click)="goTo('home')" mat-button class="text-black">Home</a></mat-list-item>
             <mat-list-item><a (click)="goTo('about')" mat-button class="text-black">About</a></mat-list-item>
-            <mat-list-item><a (click)="goTo('guest_policy')" mat-button class="text-black">Guest Policy</a></mat-list-item>
+            <mat-list-item><a (click)="goTo('guest_policy')" mat-button class="text-black">Privacy and Policy</a></mat-list-item>
+            <mat-list-item><a (click)="goTo('termsandconditions')" mat-button class="text-black">Terms and Conditions</a></mat-list-item>
           </div>
           <div *ngIf="isLoggedIn && user && user.username!='GUEST'">
             <!-- <mat-list-item *ngIf="user.username!='admin'"><a mat-button (click)="goTo('raise_queries')" class="text-black">Raise Queries ?</a></mat-list-item> -->
@@ -34,7 +35,8 @@
           <div *ngIf="isLoggedIn && user && user.username!='GUEST'">
             <a (click)="goTo('home')" mat-button class="text-black">Home</a>
             <a (click)="goTo('about')" mat-button class="text-black">About</a>
-            <a (click)="goTo('guest_policy')" mat-button class="text-black">Guest Policy</a>
+            <a (click)="goTo('guest_policy')" mat-button class="text-black">Privacy and Policy</a>
+            <a [routerLink]="['/termsandconditions']" mat-button class="text-black">Terms and Conditions</a>
             <!-- <a *ngIf="user.username!='admin'" mat-button (click)="goTo('raise_queries')" class="text-black">Raise Queries ?</a> -->
             <a *ngIf="user.username!='admin'" mat-button (click)="goTo('my-bookings')" class="text-black">My Bookings</a>
             <a mat-button (click)="redirectTo()">{{user.username}}</a>&nbsp;
@@ -43,7 +45,8 @@
           <div *ngIf="isLoggedIn && user && user.username=='GUEST'">
             <a (click)="goTo('home')" mat-button class="text-black">Home</a>
             <a (click)="goTo('about')" mat-button class="text-black">About</a>
-            <a (click)="goTo('guest_policy')" mat-button class="text-black">Guest Policy</a>
+            <a (click)="goTo('guest_policy')" mat-button class="text-black">Privacy and Policy</a>
+            <a [routerLink]="['/termsandconditions']" mat-button class="text-black">Terms and Conditions</a>
             <a mat-button (click)="openLoginDialog()">Login</a>&nbsp;
             <a mat-flat-button color="accent" (click)="openSignUpDialog()">Sign Up</a>
           </div>

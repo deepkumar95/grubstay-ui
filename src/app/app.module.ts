@@ -75,6 +75,9 @@ import {MatSortModule} from '@angular/material/sort';
 import { MatTableExporterModule } from 'mat-table-exporter';
 import { SharedModule } from './shared/shared.module';
 import { BookingComponent } from './pages/admin-dashboard/admin-components/booking-components/booking.component';
+import { FaqsComponent } from './faqs/faqs.component';
+import { CareersComponent } from './careers/careers.component';
+import { TermsConditionsComponent } from './terms-conditions/terms-conditions.component';
 
 const ngxUiLoaderConfig:NgxUiLoaderConfig =
   {
@@ -145,7 +148,10 @@ const ngxUiLoaderConfig:NgxUiLoaderConfig =
     CallbackComponent,
     StayFormComponent,
     ViewFormEquiriesComponent,
-    BookingComponent
+    BookingComponent,
+    FaqsComponent,
+    CareersComponent,
+    TermsConditionsComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
